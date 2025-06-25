@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem "devise", "~> 4.9"
 gem "importmap-rails"
 gem "jbuilder"
 gem "propshaft"
