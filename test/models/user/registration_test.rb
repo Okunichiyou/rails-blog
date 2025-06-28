@@ -51,6 +51,14 @@ class User::RegistrationTest < ActiveSupport::TestCase
   end
 
   # =====================================
+  # 確認メール有効期限テスト
+  # =====================================
+
+  test "Deviseの確認メール有効期限が30分に設定されている" do
+    assert_equal 30.minutes, Devise.confirm_within
+  end
+
+  # =====================================
   # データベース制約
   # =====================================
 

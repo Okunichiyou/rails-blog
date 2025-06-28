@@ -57,6 +57,34 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form", count: 1
   end
 
+  test "GET /registrations/confirmation 30分経過したトークンは無効" do
+    User::Registration.create!(
+      unconfirmed_email: "expired30@example.com",
+      confirmation_token: "expired_30min_token",
+      confirmation_sent_at: 30.minutes.ago
+    )
+
+    get registration_confirmation_path, params: { confirmation_token: "expired_30min_token" }
+
+    # Deviseの期限チェックにより、期限切れトークンは見つからず確認画面が表示される
+    assert_response :success
+    assert_select "form", count: 1
+  end
+
+  test "GET /registrations/confirmation 31分経過したトークンは無効" do
+    User::Registration.create!(
+      unconfirmed_email: "expired31@example.com",
+      confirmation_token: "expired_31min_token",
+      confirmation_sent_at: 31.minutes.ago
+    )
+
+    get registration_confirmation_path, params: { confirmation_token: "expired_31min_token" }
+
+    # Deviseの期限チェックにより、期限切れトークンは見つからず確認画面が表示される
+    assert_response :success
+    assert_select "form", count: 1
+  end
+
   # =====================================
   # finishアクション（登録完了）
   # =====================================
@@ -111,7 +139,7 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     User::Registration.create!(
       unconfirmed_email: "mismatch@example.com",
       confirmation_token: "mismatch_token",
-      confirmation_sent_at: 1.hour.ago
+      confirmation_sent_at: 10.minutes.ago
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
@@ -134,7 +162,7 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     User::Registration.create!(
       unconfirmed_email: "short@example.com",
       confirmation_token: "short_token",
-      confirmation_sent_at: 1.hour.ago
+      confirmation_sent_at: 10.minutes.ago
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
@@ -154,7 +182,7 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     User::Registration.create!(
       unconfirmed_email: "missing@example.com",
       confirmation_token: "missing_token",
-      confirmation_sent_at: 1.hour.ago
+      confirmation_sent_at: 10.minutes.ago
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
@@ -174,7 +202,7 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     User::Registration.create!(
       unconfirmed_email: "missing@example.com",
       confirmation_token: "missing_token",
-      confirmation_sent_at: 1.hour.ago
+      confirmation_sent_at: 10.minutes.ago
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
@@ -194,7 +222,7 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     User::Registration.create!(
       unconfirmed_email: "missing@example.com",
       confirmation_token: "missing_token",
-      confirmation_sent_at: 1.hour.ago
+      confirmation_sent_at: 10.minutes.ago
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
@@ -208,5 +236,45 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :unprocessable_entity
+  end
+
+  test "POST /registration/finish 30分経過したトークンでの登録は失敗" do
+    User::Registration.create!(
+      unconfirmed_email: "expired30finish@example.com",
+      confirmation_token: "expired_30min_finish_token",
+      confirmation_sent_at: 30.minutes.ago
+    )
+
+    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
+      post finish_user_registration_path, params: {
+        confirmation_token: "expired_30min_finish_token",
+        name: "Test User",
+        email: "expired30finish@example.com",
+        password: "password123",
+        password_confirmation: "password123"
+      }
+    end
+
+    assert_response :not_found
+  end
+
+  test "POST /registration/finish 31分経過したトークンでの登録は失敗" do
+    User::Registration.create!(
+      unconfirmed_email: "expired31finish@example.com",
+      confirmation_token: "expired_31min_finish_token",
+      confirmation_sent_at: 31.minutes.ago
+    )
+
+    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
+      post finish_user_registration_path, params: {
+        confirmation_token: "expired_31min_finish_token",
+        name: "Test User",
+        email: "expired31finish@example.com",
+        password: "password123",
+        password_confirmation: "password123"
+      }
+    end
+
+    assert_response :not_found
   end
 end
