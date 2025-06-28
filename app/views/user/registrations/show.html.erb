@@ -1,0 +1,37 @@
+<h2>Registration Form</h2>
+
+<%= form_tag(finish_user_registration_path) do %>
+  <%= render "user/registrations/shared/error_messages", resource: @user %>
+  <%= render "user/registrations/shared/error_messages", resource: @user_database_authentication %>
+  <%= render "user/registrations/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <p>
+    <%= label_tag "name" %>
+    <%= text_field_tag :name %>
+    </p>
+
+    <p>
+    <%= label_tag "email" %>
+    <%= email_field_tag :email, resource.email, autocomplete: "email" %>
+    </p>
+
+    <p>
+    <%= label_tag "password" %>
+    <%= password_field_tag :password %>
+    </p>
+
+    <p>
+    <%= label_tag "password_confirmation" %>
+    <%= password_field_tag :password_confirmation %>
+    </p>
+
+    <p>
+    <%= hidden_field_tag :confirmation_token, resource.confirmation_token %>
+    </p>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "Submit" %>
+  </div>
+<% end %>
