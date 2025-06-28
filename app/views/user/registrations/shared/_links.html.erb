@@ -1,0 +1,11 @@
+<%- if controller_name != 'database_authentication_sessions' %>
+  <%= link_to "Log in", new_database_authentication_session_path %><br />
+<% end %>
+
+<%- if controller_name != 'registrations' %>
+  <%= link_to "Sign up", new_registration_confirmation_path %><br />
+<% end %>
+
+<%- if controller_name != 'registrations' %>
+  <%= link_to "Didn't receive confirmation instructions?", new_registration_confirmation_path %><br />
+<% end %>
