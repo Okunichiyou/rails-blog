@@ -9,6 +9,7 @@ gem "rails", "~> 8.0.2"
 gem "sqlite3", ">= 2.1"
 gem "stimulus-rails"
 gem "turbo-rails"
+gem "view_component"
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
