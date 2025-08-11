@@ -5,6 +5,15 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 Bundler/OrderedGems:
   Enabled: true
 
+# Enforce consistent parameter indentation
+Layout/FirstParameterIndentation:
+  Enabled: true
+  EnforcedStyle: consistent
+
+Layout/ParameterAlignment:
+  Enabled: true
+  EnforcedStyle: with_fixed_indentation
+
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
