@@ -1,4 +1,4 @@
-@scope (button.button-component) {
+@scope (button.ui-button-component) {
   :scope {
     border: none;
     cursor: pointer;
