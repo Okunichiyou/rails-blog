@@ -1,4 +1,4 @@
-@scope (.sample-component) {
+@scope (.sample-component) to ([data-scope]) {
   :scope {
     background-color: var(--color-background-default);
     color: var(--color-text-default);

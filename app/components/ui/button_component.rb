@@ -28,11 +28,10 @@ module Ui
     def build_html_options(html_options)
       options = html_options.merge({ class: button_classes })
       options.merge!({ type: @type.to_s })
-      super(options)
     end
 
     def button_classes
-      classes = [ "button-component" ]
+      classes = []
       classes.push(@category.to_s)
       classes.concat(@button_class)
       classes.push(@size.to_s)
