@@ -5,7 +5,15 @@
     </div>
     <div class="action-area">
       <button id="theme-toggle-button" data-controller="theme-toggle" data-action="click->theme-toggle#toggle">
-        🌙
+        <%# HTMLパース中に実行することで、ロード時にアイコンの切り替えのチラつきが生じないようにする %>
+        <script>
+          (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            // 任意のスクリプトは埋め込めないようにする
+            const icon = (theme === 'dark') ? '☀️' : '🌙';
+            document.write(icon);
+          })();
+        </script>
       </button>
       <button class="hamburger-menu-button" data-controller="hamburger-menu" data-action="click->hamburger-menu#toggle">
       </button>
