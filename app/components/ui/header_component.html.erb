@@ -1,0 +1,21 @@
+<header <%= tag.attributes(@html_options) %>>
+  <div class="header-container">
+    <div class="logo">
+      <%= link_to "奥日曜のWebサイト", root_path %>
+    </div>
+    <div class="action-area">
+      <button id="theme-toggle-button" data-controller="theme-toggle" data-action="click->theme-toggle#toggle">
+        🌙
+      </button>
+      <button class="hamburger-menu-button" data-controller="hamburger-menu" data-action="click->hamburger-menu#toggle">
+      </button>
+      <nav class="hamburger-menu">
+        <% if @login_user.present? %>
+          <%= link_to "ログアウト", destroy_database_authentication_session_path, data: { "turbo-method": :delete } %>
+        <% else %>
+          <%= link_to "ログイン", new_database_authentication_session_path %>
+        <% end %>
+      </nav>
+    </div>
+  </div>
+</header>

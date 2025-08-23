@@ -23,6 +23,7 @@
   </head>
 
   <body>
+    <%= render Ui::HeaderComponent.new(login_user: current_user) %>
     <%= yield %>
   </body>
 </html>
