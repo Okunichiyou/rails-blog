@@ -23,15 +23,26 @@
 
   .action-area {
     display: flex;
-    gap: 4px;
+    gap: 8px;
     position: relative;
   }
 
   #theme-toggle-button {
     height: 100%;
-    font-size: 2rem;
     border: none;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .theme-icon {
+    width: 30px;
+    height: 30px;
+    stroke: var(--color-text-primary-button);
+    transition: opacity 0.2s ease;
   }
 
   .hamburger-menu-button {

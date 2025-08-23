@@ -14,7 +14,7 @@ class HeaderComponentTest < ViewComponent::TestCase
     assert_selector(".logo a[href='/']", text: "奥日曜のWebサイト")
 
     # テーマ切り替えボタンの確認
-    assert_selector("#theme-toggle-button[data-controller='theme-toggle'][data-action='click->theme-toggle#toggle']", text: "🌙")
+    assert_selector("#theme-toggle-button[data-controller='theme-toggle'][data-action='click->theme-toggle#toggle']")
 
     # ハンバーガーメニューボタンの確認
     assert_selector(".hamburger-menu-button[data-controller='hamburger-menu'][data-action='click->hamburger-menu#toggle']")

@@ -7,6 +7,16 @@ export default class extends Controller {
     
     document.documentElement.style.colorScheme = newTheme;
     localStorage.setItem('theme', newTheme);
-    this.element.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+
+    const moonIcon = this.element.querySelector('.moon-icon');
+    const sunIcon = this.element.querySelector('.sun-icon');
+    
+    if (newTheme === 'dark') {
+      moonIcon.style.display = 'none';
+      sunIcon.style.display = 'block';
+    } else {
+      moonIcon.style.display = 'block';
+      sunIcon.style.display = 'none';
+    }
   }
 }
