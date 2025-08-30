@@ -33,6 +33,8 @@
 
   <body>
     <%= render Ui::HeaderComponent.new(login_user: current_user) %>
-    <%= yield %>
+    <div class="content-area">
+      <%= yield %>
+    </div>
   </body>
 </html>
