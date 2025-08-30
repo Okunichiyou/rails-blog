@@ -1,17 +1,23 @@
-<h2>Log in</h2>
-
-<%= form_for(@resource, as: @resource_name, url: @session_path) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+<div <%= tag.attributes(@html_options) %> >
+  <% flash.each do |type, message| %>
+    <div class="flash flash-<%= type %>">
+      <%= message %>
+    </div>
+  <% end %>
+  
+  <%= form_for(@resource, as: @resource_name, url: @session_path, html: { class: "database-authentication-form" }) do |f| %>
+    <div>
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+  
+    <div>
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "current-password" %>
+    </div>
+  
+    <div class="actions">
+      <%= render Ui::ButtonComponent.new(category: :primary, size: :medium, type: :submit, text: "ログイン") %>
+    </div>
+  <% end %>
+</div>
