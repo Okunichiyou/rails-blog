@@ -8,7 +8,7 @@
   <%= form_for(@resource, as: @resource_name, url: @session_path, html: { class: "database-authentication-form" }) do |f| %>
     <div>
       <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= render Ui::EmailFieldComponent.new(builder: f, method: :email, size: :medium, html_options: { autofocus: true, autocomplete: "email" }) %>
     </div>
   
     <div>
