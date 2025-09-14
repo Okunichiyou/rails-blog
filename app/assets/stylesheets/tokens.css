@@ -46,7 +46,8 @@
   --font-weight-body-bold: 700;
 
   /* シャドウ */
-  --shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+  --shadow-color: light-dark(rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.1));
+  --shadow: 0px 4px 8px 3px var(--shadow-color), 0px 1px 3px 0px var(--shadow-color);
 
   /* コンテンツの最長幅 */
   --max-content-width: 1200px;

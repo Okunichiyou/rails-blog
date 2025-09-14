@@ -97,7 +97,6 @@
     background-color: var(--color-background-surface);
     border: 1px solid var(--color-border);
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     min-width: 120px;
     display: none;
     z-index: 1000;
