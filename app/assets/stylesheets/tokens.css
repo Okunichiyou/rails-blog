@@ -54,6 +54,9 @@
 
   /* ヘッダーやコンテントなど、一番外側のコンテントのpadding */
   --layout-content-padding: 20px;
+
+  /* ボーダーラディウス */
+  --border-radius-medium: 8px;
 }
 
 @media screen and (max-width: 768px) {
