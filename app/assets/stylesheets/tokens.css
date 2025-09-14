@@ -17,6 +17,7 @@
   /* テキスト色 */
   --color-text-default: light-dark(rgba(11, 49, 76, 1), rgba(228, 230, 239, 1));
   --color-text-secondary: light-dark(rgba(50, 82, 96, 1), rgba(206, 208, 217, 1));
+  --color-text-placeholder: light-dark(rgba(120, 120, 120, 1), rgba(160, 160, 160, 1));
   --color-text-link: light-dark(rgba(12, 123, 187, 1), rgba(155, 213, 250, 1));
   --color-text-info: light-dark(rgba(44, 64, 76, 1), rgba(218, 232, 240, 1));
   --color-text-success: light-dark(rgba(43, 53, 44, 1), rgba(0, 0, 0, 1));
