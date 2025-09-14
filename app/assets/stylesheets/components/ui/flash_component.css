@@ -1,6 +1,6 @@
 @scope (.ui-flash-component) to ([data-scope]) {
   :scope {
-    border-radius: 4px;
+    border-radius: var(--border-radius-small);
     padding: 1rem;
   }
 

@@ -56,7 +56,9 @@
   --layout-content-padding: 20px;
 
   /* ボーダーラディウス */
+  --border-radius-small: 4px;
   --border-radius-medium: 8px;
+  --border-radius-large: 16px;
 }
 
 @media screen and (max-width: 768px) {

@@ -2,7 +2,7 @@
   :scope {
     background-color: var(--color-background-surface);
     box-shadow: var(--shadow);
-    border-radius: 16px;
+    border-radius: var(--border-radius-large);
     padding: 16px;
   }
 
