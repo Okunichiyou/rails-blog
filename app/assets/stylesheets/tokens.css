@@ -2,6 +2,7 @@
   /* 背景色 */
   --color-background-default: light-dark(rgba(245, 246, 246, 1), rgba(29, 32, 32, 1));
   --color-background-surface: light-dark(rgba(255, 255, 255, 1), rgba(47, 50, 50, 1));
+  --color-background-surface-hover: light-dark(rgba(12, 123, 187, 0.08), rgba(12, 123, 187, 0.15));
   --color-background-info: light-dark(rgba(219, 235, 248, 1), rgba(32, 76, 110, 1));
   --color-background-notice: light-dark(rgba(223, 244, 224, 1), rgba(22, 48, 28, 1));
   --color-background-warn: light-dark(rgba(247, 243, 195, 1), rgba(64, 58, 24, 1));
