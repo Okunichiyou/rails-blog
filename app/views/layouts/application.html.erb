@@ -17,12 +17,24 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+    <%# ロード時に画面のチラつきを無くすためのスクリプト %>
+    <script>
+      (function() {
+        const storedTheme = localStorage.getItem('theme') || 'light';
+        const theme = (storedTheme === 'dark') ? 'dark' : 'light';
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
+
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <%= render Ui::HeaderComponent.new(login_user: current_user) %>
+    <div class="content-area">
+      <%= yield %>
+    </div>
   </body>
 </html>

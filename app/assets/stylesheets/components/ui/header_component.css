@@ -1,0 +1,134 @@
+@scope (header.ui-header-component) to ([data-scope]) {
+  :scope {
+    background-color: var(--color-background-primary);
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    max-width: var(--max-content-width);
+    margin-inline: auto;
+    padding-inline: var(--layout-content-padding);
+  }
+
+  .logo {
+    color: var(--color-text-primary-button);
+    display: flex;
+    height: 100%;
+    align-items: center;
+    font-family: 'Yomogi', cursive;
+    font-size: 1.2rem;
+  }
+
+  .action-area {
+    display: flex;
+    gap: 8px;
+    position: relative;
+  }
+
+  #theme-toggle-button {
+    height: 100%;
+    border: none;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .theme-icon {
+    width: 30px;
+    height: 30px;
+    stroke: var(--color-text-primary-button);
+    transition: opacity 0.2s ease;
+  }
+
+  .hamburger-menu-button {
+    position: relative;
+    height: 100%;
+    border: none;
+    width: 60px;
+    cursor: pointer;
+  }
+
+  /* メニューバーの上下の線 */
+  .hamburger-menu-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 3px;
+    background-color: var(--color-text-primary-button);
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 -8px 0 var(--color-text-primary-button), 0 8px 0 var(--color-text-primary-button);
+  }
+
+  /* メニューバーの中央の線 */
+  .hamburger-menu-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 3px;
+    background-color: var(--color-text-primary-button);
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    opacity: 0;
+  }
+
+  .hamburger-menu-button.open::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+    box-shadow: none;
+  }
+
+  .hamburger-menu-button.open::after {
+    opacity: 1;
+  }
+
+  .hamburger-menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: var(--color-background-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-medium);
+    min-width: 120px;
+    display: none;
+    z-index: 1000;
+  }
+
+  .hamburger-menu.show {
+    display: block;
+    box-shadow: var(--shadow);
+  }
+
+  .hamburger-menu a {
+    display: block;
+    padding: 12px 16px;
+    color: var(--color-text-default);
+    text-decoration: none;
+    font-size: var(--font-size-body);
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color 0.2s ease;
+  }
+
+  .hamburger-menu a:first-child {
+    border-top-left-radius: var(--border-radius-medium);
+    border-top-right-radius: var(--border-radius-medium);
+  }
+
+  .hamburger-menu a:last-child {
+    border-bottom: none;
+    border-bottom-left-radius: var(--border-radius-medium);
+    border-bottom-right-radius: var(--border-radius-medium);
+  }
+
+  .hamburger-menu a:hover {
+    background-color: var(--color-background-surface-hover);
+  }
+}

@@ -1,6 +1,4 @@
 <div class="sample-component">
-  <header>タイトル</header>
-  <%= render Ui::ButtonComponent.new(category: :primary, size: :medium, text: "🌙", html_options: { id: "theme-toggle" }) %>
   <p>サンプルの文章</p>
   <p>文中の<a href="#">リンク</a>のサンプル</p>
   <div class="info-box">メッセージブロック</div>
@@ -29,24 +27,4 @@
     <%= render Ui::ButtonComponent.new(category: :primary, size: :medium, variant: :danger, text: "danger", html_options: { disabled: true })%>
   <%= render Ui::ButtonComponent.new(category: :secondary, size: :medium, variant: :danger, text: "danger", html_options: { disabled: true })%>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const themeToggle = document.getElementById('theme-toggle');
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    
-    // 初期テーマの設定
-    document.documentElement.style.colorScheme = currentTheme;
-    themeToggle.querySelector('.glass-text').textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-    
-    themeToggle.addEventListener('click', function() {
-      const currentTheme = document.documentElement.style.colorScheme;
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      
-      document.documentElement.style.colorScheme = newTheme;
-      localStorage.setItem('theme', newTheme);
-      themeToggle.querySelector('.glass-text').textContent = newTheme === 'dark' ? '☀️' : '🌙';
-    });
-  });
-</script>
 

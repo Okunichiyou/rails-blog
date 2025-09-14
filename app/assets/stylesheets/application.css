@@ -9,6 +9,9 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
+/* ロゴ用のフォント */
+@import url('https://fonts.googleapis.com/css2?family=Yomogi&display=swap');
+
 h1 {
   font-size: var(--font-size-h1);
 }
@@ -45,4 +48,10 @@ h6 {
 body {
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-body);
+  background-color: var(--color-background-default);
+}
+
+/* reset css的な役割で配置。reset.cssはkiso.cssをそのまま配置したいのでここに記載 */
+button {
+  padding: 0px;
 }

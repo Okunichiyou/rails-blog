@@ -2,13 +2,15 @@
   /* 背景色 */
   --color-background-default: light-dark(rgba(245, 246, 246, 1), rgba(29, 32, 32, 1));
   --color-background-surface: light-dark(rgba(255, 255, 255, 1), rgba(47, 50, 50, 1));
+  --color-background-surface-hover: light-dark(rgba(12, 123, 187, 0.08), rgba(12, 123, 187, 0.15));
   --color-background-info: light-dark(rgba(219, 235, 248, 1), rgba(32, 76, 110, 1));
-  --color-background-success: light-dark(rgba(223, 244, 224, 1), rgba(0, 0, 0, 1));
-  --color-background-warn: light-dark(rgba(247, 243, 195, 1), rgba(0, 0, 0, 1));
-  --color-background-alert: light-dark(rgba(244, 223, 232, 1), rgba(0, 0, 0, 1));
+  --color-background-notice: light-dark(rgba(223, 244, 224, 1), rgba(22, 48, 28, 1));
+  --color-background-warn: light-dark(rgba(247, 243, 195, 1), rgba(64, 58, 24, 1));
+  --color-background-alert: light-dark(rgba(244, 223, 232, 1), rgba(64, 28, 38, 1));
+  --color-background-primary: light-dark(rgba(12, 123, 187, 1), rgba(12, 123, 187, 1));
 
   /* ボタン背景色 */
-  --color-background-primary-button: light-dark(rgba(12, 123, 187, 1), rgba(12, 123, 187, 1));
+  --color-background-primary-button: var(--color-background-primary);
   --color-background-secondary-button: light-dark(rgba(237, 237, 237, 0.25), rgba(255, 255, 255, 0.25));
   --color-background-primary-danger-button: light-dark(rgba(201, 73, 81, 1), rgba(201, 73, 81, 1));
   --color-background-secondary-danger-button: light-dark(rgba(249, 206, 224, 1), rgba(238, 192, 210, 1));
@@ -16,11 +18,12 @@
   /* テキスト色 */
   --color-text-default: light-dark(rgba(11, 49, 76, 1), rgba(228, 230, 239, 1));
   --color-text-secondary: light-dark(rgba(50, 82, 96, 1), rgba(206, 208, 217, 1));
+  --color-text-placeholder: light-dark(rgba(120, 120, 120, 1), rgba(160, 160, 160, 1));
   --color-text-link: light-dark(rgba(12, 123, 187, 1), rgba(155, 213, 250, 1));
-  --color-text-info: light-dark(rgba(44, 64, 76, 1), rgba(218, 232, 240, 1));
-  --color-text-success: light-dark(rgba(43, 53, 44, 1), rgba(0, 0, 0, 1));
-  --color-text-warn: light-dark(rgba(39, 39, 22, 1), rgba(0, 0, 0, 1));
-  --color-text-alert: light-dark(rgba(96, 27, 38, 1), rgba(0, 0, 0, 1));
+  --color-text-info: light-dark(rgba(44, 64, 76, 1), rgba(200, 241, 254, 1));
+  --color-text-notice: light-dark(rgba(43, 53, 44, 1), rgba(180, 230, 190, 1));
+  --color-text-warn: light-dark(rgba(39, 39, 22, 1), rgba(240, 220, 140, 1));
+  --color-text-alert: light-dark(rgba(96, 27, 38, 1), rgba(255, 180, 195, 1));
 
   /* ボタンテキスト色 */
   --color-text-primary-button: light-dark(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1));
@@ -41,6 +44,21 @@
   --font-weight-heading: 700;
   --font-weight-body: 400;
   --font-weight-body-bold: 700;
+
+  /* シャドウ */
+  --shadow-color: light-dark(rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.1));
+  --shadow: 0px 4px 8px 3px var(--shadow-color), 0px 1px 3px 0px var(--shadow-color);
+
+  /* コンテンツの最長幅 */
+  --max-content-width: 1200px;
+
+  /* ヘッダーやコンテントなど、一番外側のコンテントのpadding */
+  --layout-content-padding: 20px;
+
+  /* ボーダーラディウス */
+  --border-radius-small: 4px;
+  --border-radius-medium: 8px;
+  --border-radius-large: 16px;
 }
 
 @media screen and (max-width: 768px) {
