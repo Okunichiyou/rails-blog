@@ -13,7 +13,7 @@
   
     <div>
       <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
+      <%= render Ui::PasswordFieldComponent.new(builder: f, method: :password, size: :medium, html_options: { autocomplete: "current-password" }) %>
     </div>
   
     <div class="actions">
