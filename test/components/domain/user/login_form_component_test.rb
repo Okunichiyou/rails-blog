@@ -10,7 +10,7 @@ class Domain::User::LoginFormComponentTest < ViewComponent::TestCase
 
     render_inline(component)
 
-    assert_selector(".flash.flash-notice", text: "ログインしてください")
+    assert_selector(".ui-flash-component.notice", text: "ログインしてください")
   end
 
   test "database-authentication-formの要素があること" do
