@@ -6,9 +6,10 @@
   --color-background-success: light-dark(rgba(223, 244, 224, 1), rgba(0, 0, 0, 1));
   --color-background-warn: light-dark(rgba(247, 243, 195, 1), rgba(0, 0, 0, 1));
   --color-background-alert: light-dark(rgba(244, 223, 232, 1), rgba(0, 0, 0, 1));
+  --color-background-primary: light-dark(rgba(12, 123, 187, 1), rgba(12, 123, 187, 1));
 
   /* ボタン背景色 */
-  --color-background-primary-button: light-dark(rgba(12, 123, 187, 1), rgba(12, 123, 187, 1));
+  --color-background-primary-button: var(--color-background-primary);
   --color-background-secondary-button: light-dark(rgba(237, 237, 237, 0.25), rgba(255, 255, 255, 0.25));
   --color-background-primary-danger-button: light-dark(rgba(201, 73, 81, 1), rgba(201, 73, 81, 1));
   --color-background-secondary-danger-button: light-dark(rgba(249, 206, 224, 1), rgba(238, 192, 210, 1));

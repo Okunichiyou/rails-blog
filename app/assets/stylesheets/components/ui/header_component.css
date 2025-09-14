@@ -1,6 +1,6 @@
 @scope (header.ui-header-component) to ([data-scope]) {
   :scope {
-    background-color: var(--color-background-primary-button);
+    background-color: var(--color-background-primary);
   }
 
   .header-container {

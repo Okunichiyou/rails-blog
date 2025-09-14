@@ -7,7 +7,7 @@
   }
 
   header {
-    background-color: var(--color-background-primary-button);
+    background-color: var(--color-background-primary);
     color: var(--color-text-primary-button);
     font-size: 24px;
     font-weight: bold;
