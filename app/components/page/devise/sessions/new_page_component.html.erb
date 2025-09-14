@@ -1,7 +1,7 @@
 <div <%= tag.attributes(@html_options) %> >
   <%= render Ui::PanelComponent.new(size: :medium) do |panel| %>
     <%- panel.with_panel_content do %>
-      <h1>Log in</h1>
+      <h1>ログイン</h1>
 
       <%= render Domain::User::LoginFormComponent.new(
         resource: @resource,
