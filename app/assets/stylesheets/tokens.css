@@ -3,9 +3,9 @@
   --color-background-default: light-dark(rgba(245, 246, 246, 1), rgba(29, 32, 32, 1));
   --color-background-surface: light-dark(rgba(255, 255, 255, 1), rgba(47, 50, 50, 1));
   --color-background-info: light-dark(rgba(219, 235, 248, 1), rgba(32, 76, 110, 1));
-  --color-background-success: light-dark(rgba(223, 244, 224, 1), rgba(0, 0, 0, 1));
-  --color-background-warn: light-dark(rgba(247, 243, 195, 1), rgba(0, 0, 0, 1));
-  --color-background-alert: light-dark(rgba(244, 223, 232, 1), rgba(0, 0, 0, 1));
+  --color-background-notice: light-dark(rgba(223, 244, 224, 1), rgba(22, 48, 28, 1));
+  --color-background-warn: light-dark(rgba(247, 243, 195, 1), rgba(64, 58, 24, 1));
+  --color-background-alert: light-dark(rgba(244, 223, 232, 1), rgba(64, 28, 38, 1));
   --color-background-primary: light-dark(rgba(12, 123, 187, 1), rgba(12, 123, 187, 1));
 
   /* ボタン背景色 */
@@ -19,10 +19,10 @@
   --color-text-secondary: light-dark(rgba(50, 82, 96, 1), rgba(206, 208, 217, 1));
   --color-text-placeholder: light-dark(rgba(120, 120, 120, 1), rgba(160, 160, 160, 1));
   --color-text-link: light-dark(rgba(12, 123, 187, 1), rgba(155, 213, 250, 1));
-  --color-text-info: light-dark(rgba(44, 64, 76, 1), rgba(218, 232, 240, 1));
-  --color-text-success: light-dark(rgba(43, 53, 44, 1), rgba(0, 0, 0, 1));
-  --color-text-warn: light-dark(rgba(39, 39, 22, 1), rgba(0, 0, 0, 1));
-  --color-text-alert: light-dark(rgba(96, 27, 38, 1), rgba(0, 0, 0, 1));
+  --color-text-info: light-dark(rgba(44, 64, 76, 1), rgba(200, 241, 254, 1));
+  --color-text-notice: light-dark(rgba(43, 53, 44, 1), rgba(180, 230, 190, 1));
+  --color-text-warn: light-dark(rgba(39, 39, 22, 1), rgba(240, 220, 140, 1));
+  --color-text-alert: light-dark(rgba(96, 27, 38, 1), rgba(255, 180, 195, 1));
 
   /* ボタンテキスト色 */
   --color-text-primary-button: light-dark(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1));
