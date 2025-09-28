@@ -9,7 +9,7 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :email, "Email" %><br />
+      <%= f.label :email, "Email" %>
       <%= render Ui::EmailFieldComponent.new(builder: f, method: :email, size: :medium, html_options: { autofocus: true, autocomplete: "email" }) %>
     </div>
 

@@ -4,4 +4,8 @@
     flex-direction: column;
     row-gap: 16px;
   }
+
+  label {
+    display: block;
+  }
 }
