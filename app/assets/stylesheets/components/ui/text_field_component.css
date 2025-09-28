@@ -32,5 +32,9 @@
     &.small {
       width: 10rem;
     }
+
+    &.alert {
+      border-color: var(--color-text-alert-inline);
+    }
   }
 }

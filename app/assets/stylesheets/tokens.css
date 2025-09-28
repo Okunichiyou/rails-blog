@@ -24,6 +24,7 @@
   --color-text-notice: light-dark(rgba(43, 53, 44, 1), rgba(180, 230, 190, 1));
   --color-text-warn: light-dark(rgba(39, 39, 22, 1), rgba(240, 220, 140, 1));
   --color-text-alert: light-dark(rgba(96, 27, 38, 1), rgba(255, 180, 195, 1));
+  --color-text-alert-inline: light-dark(rgba(148, 18, 38, 1), rgba(255, 180, 195, 1));
 
   /* ボタンテキスト色 */
   --color-text-primary-button: light-dark(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1));
