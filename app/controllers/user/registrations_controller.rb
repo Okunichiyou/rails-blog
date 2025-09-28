@@ -4,7 +4,7 @@ class User::RegistrationsController < Devise::ConfirmationsController
     if user_registration.save
       super do
         flash[:notice] = "Sending an email confirmation instruction"
-        return render :create
+        return redirect_to new_registration_confirmation_path
       end
     else
       respond_with(user_registration)
