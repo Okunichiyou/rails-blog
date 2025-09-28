@@ -8,13 +8,13 @@ class Ui::FieldErrorsComponentTest < ViewComponent::TestCase
   end
 
   test "単一のエラーメッセージが表示されること" do
-    render_inline(Ui::FieldErrorsComponent.new(error_messages: ["Email can't be blank"]))
+    render_inline(Ui::FieldErrorsComponent.new(error_messages: [ "Email can't be blank" ]))
 
     assert_selector("ul li", text: "Email can't be blank")
   end
 
   test "複数のエラーメッセージがリストで表示されること" do
-    error_messages = ["Email can't be blank", "Email is invalid"]
+    error_messages = [ "Email can't be blank", "Email is invalid" ]
     render_inline(Ui::FieldErrorsComponent.new(error_messages: error_messages))
 
     assert_selector("ul li", count: 2)
@@ -23,7 +23,7 @@ class Ui::FieldErrorsComponentTest < ViewComponent::TestCase
   end
 
   test "data-scopeが適用されること" do
-    render_inline(Ui::FieldErrorsComponent.new(error_messages: ["Email can't be blank"]))
+    render_inline(Ui::FieldErrorsComponent.new(error_messages: [ "Email can't be blank" ]))
 
     assert_selector("ul[data-scope]")
   end
