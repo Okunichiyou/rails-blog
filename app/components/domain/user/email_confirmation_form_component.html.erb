@@ -1,5 +1,5 @@
 <div <%= tag.attributes(@html_options) %> >
-  <%= form_for(@resource, as: @resource_name, url: @confirmation_path, html: { method: :post, class: "email-confirmation-form" }) do |f| %>
+  <%= form_with(model: @form, url: @confirmation_path, as: @resource_name, html: { method: :post, class: "email-confirmation-form" }) do |f| %>
     <% flash.each do |type, message| %>
       <%= render Ui::FlashComponent.new(flash_type: type.to_sym) do |c| %>
         <%- c.with_flash_content do %>
@@ -9,8 +9,8 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :email %><br />
-      <%= render Ui::EmailFieldComponent.new(builder: f, method: :email, size: :medium, html_options: { autofocus: true, autocomplete: "email", value: (@resource.pending_reconfirmation? ? @resource.unconfirmed_email : @resource.email) }) %>
+      <%= f.label :email, "Email" %><br />
+      <%= render Ui::EmailFieldComponent.new(builder: f, method: :email, size: :medium, html_options: { autofocus: true, autocomplete: "email" }) %>
     </div>
 
     <div class="actions">

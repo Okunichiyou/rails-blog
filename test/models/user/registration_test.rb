@@ -34,6 +34,14 @@ class User::RegistrationTest < ActiveSupport::TestCase
     assert_equal "trimmed@example.com", registration.email
   end
 
+  test "unconfirmed_emailの前後空白がトリミングされる" do
+    registration = User::Registration.new
+    registration.unconfirmed_email = "  trimmed@example.com  "
+    registration.valid?
+
+    assert_equal "trimmed@example.com", registration.unconfirmed_email
+  end
+
   test "confirmed_atが設定できる" do
     registration = User::Registration.new
     time = Time.current

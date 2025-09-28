@@ -1,10 +1,10 @@
 module Domain
   module User
     class EmailConfirmationFormComponent < Domain::Base
-      def initialize(resource:, resource_name:, confirmation_path:)
-        @resource = resource
-        @resource_name = resource_name
+      def initialize(form:, confirmation_path:, resource_name:)
+        @form = form
         @confirmation_path = confirmation_path
+        @resource_name = resource_name
       end
     end
   end

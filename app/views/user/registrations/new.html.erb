@@ -1,5 +1,5 @@
 <%= render Page::User::Registrations::NewPageComponent.new(
-  resource:,
-  resource_name:,
-  confirmation_path: confirmation_path(resource_name)
+  form: @form,
+  confirmation_path: registration_confirmation_path,
+  resource_name: resource_name
 ) %>
