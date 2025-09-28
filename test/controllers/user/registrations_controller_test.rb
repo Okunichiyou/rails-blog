@@ -12,8 +12,7 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
       post registration_confirmation_path, params: { registration: { email: email } }
     end
 
-    assert_response :success
-    assert_equal "Sending an email confirmation instruction", flash[:notice]
+    assert_redirected_to registration_confirmation_sent_path
 
     registration = User::Registration.find_by(unconfirmed_email: email)
     assert_not_nil registration
@@ -30,8 +29,7 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
       post registration_confirmation_path, params: { registration: { email: "existing@example.com" } }
     end
 
-    assert_response :success
-    assert_equal "Sending an email confirmation instruction", flash[:notice]
+    assert_redirected_to registration_confirmation_sent_path
   end
 
   # =====================================

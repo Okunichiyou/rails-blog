@@ -3,8 +3,7 @@ class User::RegistrationsController < Devise::ConfirmationsController
     user_registration = User::Registration.find_or_initialize_by(unconfirmed_email: params[:registration][:email])
     if user_registration.save
       super do
-        flash[:notice] = "Sending an email confirmation instruction"
-        return redirect_to new_registration_confirmation_path
+        return redirect_to registration_confirmation_sent_path
       end
     else
       respond_with(user_registration)
@@ -17,6 +16,9 @@ class User::RegistrationsController < Devise::ConfirmationsController
       @user_database_authentication = User::DatabaseAuthentication.new
       return render :show
     end
+  end
+
+  def sent
   end
 
   def finish

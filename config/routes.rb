@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     confirmations: "user/registrations"
   }
   devise_scope :registration do
+    get "/registrations/confirmation/sent", to: "user/registrations#sent", as: "registration_confirmation_sent"
     post "/registration/finish", to: "user/registrations#finish",  as: "finish_user_registration"
   end
   devise_for :users
