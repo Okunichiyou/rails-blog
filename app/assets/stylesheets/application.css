@@ -51,7 +51,18 @@ body {
   background-color: var(--color-background-default);
 }
 
-/* reset css的な役割で配置。reset.cssはkiso.cssをそのまま配置したいのでここに記載 */
+/* ここより下の記載は、reset css的な役割で配置している。reset.cssはkiso.cssをそのまま配置したいのでここに記載 */
 button {
   padding: 0px;
+}
+
+a {
+  color: var(--color-text-link);
+  text-decoration: underline;
+  text-underline-offset: auto;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
