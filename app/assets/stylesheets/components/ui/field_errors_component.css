@@ -4,7 +4,7 @@
     list-style-position: inside;
     margin: 4px 0 0 0;
     color: var(--color-text-alert-inline);
-    font-size: 14px;
+    font-size: var(--font-size-note);
   }
 
   li {
