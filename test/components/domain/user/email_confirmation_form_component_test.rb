@@ -49,4 +49,39 @@ class Domain::User::EmailConfirmationFormComponentTest < ViewComponent::TestCase
     assert_selector("input[name*='email']")
     assert_selector("label", text: "Email")
   end
+
+  test "バリデーションエラーがある場合、入力フィールドがalert状態になること" do
+    form = User::EmailConfirmationForm.new(email: "")
+    form.valid? # バリデーションを実行してエラーを生成
+
+    render_inline(Domain::User::EmailConfirmationFormComponent.new(form: form, confirmation_path: "/users/confirmation", resource_name: :registration))
+
+    assert_selector("input.text-field-component.alert")
+  end
+
+  test "バリデーションエラーがある場合、エラーメッセージが表示されること" do
+    form = User::EmailConfirmationForm.new(email: "")
+    form.valid? # バリデーションを実行してエラーを生成
+
+    render_inline(Domain::User::EmailConfirmationFormComponent.new(form: form, confirmation_path: "/users/confirmation", resource_name: :registration))
+
+    assert_selector("ul[data-scope] li", text: /Email can't be blank/)
+  end
+
+  test "バリデーションエラーがない場合、入力フィールドがdefault状態になること" do
+    form = User::EmailConfirmationForm.new(email: "valid@example.com")
+
+    render_inline(Domain::User::EmailConfirmationFormComponent.new(form: form, confirmation_path: "/users/confirmation", resource_name: :registration))
+
+    assert_selector("input.text-field-component.default")
+    assert_no_selector("input.text-field-component.alert")
+  end
+
+  test "バリデーションエラーがない場合、エラーメッセージが表示されないこと" do
+    form = User::EmailConfirmationForm.new(email: "valid@example.com")
+
+    render_inline(Domain::User::EmailConfirmationFormComponent.new(form: form, confirmation_path: "/users/confirmation", resource_name: :registration))
+
+    assert_no_selector("ul[data-scope]")
+  end
 end

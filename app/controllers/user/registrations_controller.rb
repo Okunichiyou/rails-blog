@@ -5,14 +5,13 @@ class User::RegistrationsController < Devise::ConfirmationsController
   end
 
   def create
-    form = User::EmailConfirmationForm.new(params.require(:registration).permit(:email))
-
-    if form.call
+    @form = User::EmailConfirmationForm.new(params.require(:registration).permit(:email))
+    if @form.call
       super do
         return redirect_to registration_confirmation_sent_path
       end
     else
-      respond_with(form)
+      render :new, status: :unprocessable_entity
     end
   end
 

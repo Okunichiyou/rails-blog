@@ -32,6 +32,22 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to registration_confirmation_sent_path
   end
 
+  test "POST /registrations/confirmation 空のメールアドレスでバリデーションエラー" do
+    assert_no_difference "User::Registration.count" do
+      post registration_confirmation_path, params: { registration: { email: "" } }
+    end
+
+    assert_response :unprocessable_entity
+  end
+
+  test "POST /registrations/confirmation 無効な形式のメールアドレスでバリデーションエラー" do
+    assert_no_difference "User::Registration.count" do
+      post registration_confirmation_path, params: { registration: { email: "invalid-email" } }
+    end
+
+    assert_response :unprocessable_entity
+  end
+
   # =====================================
   # showアクション（確認完了画面）
   # =====================================
