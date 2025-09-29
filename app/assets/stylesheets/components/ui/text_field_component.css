@@ -1,7 +1,7 @@
 @scope (.text-field-component) to ([data-scope]) {
   :scope {
     box-sizing: border-box;
-    border: 1.5px solid var(--color-text-default);
+    border: 1.5px solid var(--color-border-default);
     border-radius: var(--border-radius-small);
     font-size: var(--font-size-body);
     font-weight: var(--font-weight-body);
@@ -34,7 +34,7 @@
     }
 
     &.alert {
-      border-color: var(--color-text-alert-inline);
+      border-color: var(--color-border-alert);
     }
   }
 }

@@ -32,6 +32,10 @@
   --color-text-primary-danger-button: light-dark(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1));
   --color-text-secondary-danger-button: light-dark(rgba(131, 13, 38, 1), rgba(82, 15, 32, 1));
 
+  /* ボーダー色 */
+  --color-border-default: var(--color-text-default);
+  --color-border-alert: var(--color-text-alert-inline);
+
   /* フォントサイズ */
   --font-size-h1: 2.25rem;
   --font-size-h2: 1.875rem;
