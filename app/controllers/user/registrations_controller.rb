@@ -1,13 +1,17 @@
 class User::RegistrationsController < Devise::ConfirmationsController
+  def new
+    @form = User::EmailConfirmationForm.new
+    respond_with(@form)
+  end
+
   def create
-    user_registration = User::Registration.find_or_initialize_by(unconfirmed_email: params[:registration][:email])
-    if user_registration.save
+    @form = User::EmailConfirmationForm.new(params.require(:registration).permit(:email))
+    if @form.call
       super do
-        flash[:notice] = "Sending an email confirmation instruction"
-        return render :create
+        return redirect_to registration_confirmation_sent_path
       end
     else
-      respond_with(user_registration)
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -17,6 +21,9 @@ class User::RegistrationsController < Devise::ConfirmationsController
       @user_database_authentication = User::DatabaseAuthentication.new
       return render :show
     end
+  end
+
+  def sent
   end
 
   def finish

@@ -1,0 +1,7 @@
+<% if @error_messages.any? %>
+  <ul <%= tag.attributes(@html_options) %>>
+    <% @error_messages.each do |error_message| %>
+      <li><%= error_message %></li>
+    <% end %>
+  </ul>
+<% end %>

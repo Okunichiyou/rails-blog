@@ -24,12 +24,17 @@
   --color-text-notice: light-dark(rgba(43, 53, 44, 1), rgba(180, 230, 190, 1));
   --color-text-warn: light-dark(rgba(39, 39, 22, 1), rgba(240, 220, 140, 1));
   --color-text-alert: light-dark(rgba(96, 27, 38, 1), rgba(255, 180, 195, 1));
+  --color-text-alert-inline: light-dark(rgba(148, 18, 38, 1), rgba(255, 180, 195, 1));
 
   /* ボタンテキスト色 */
   --color-text-primary-button: light-dark(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1));
   --color-text-secondary-button: light-dark(rgba(11, 49, 76, 1), rgba(228, 230, 239, 1));
   --color-text-primary-danger-button: light-dark(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1));
   --color-text-secondary-danger-button: light-dark(rgba(131, 13, 38, 1), rgba(82, 15, 32, 1));
+
+  /* ボーダー色 */
+  --color-border-default: var(--color-text-default);
+  --color-border-alert: var(--color-text-alert-inline);
 
   /* フォントサイズ */
   --font-size-h1: 2.25rem;
@@ -39,6 +44,7 @@
   --font-size-h5: 1.125rem;
   --font-size-h6: 1rem;
   --font-size-body: 1rem;
+  --font-size-note: 0.875rem;
 
   /* フォントウェイト */
   --font-weight-heading: 700;

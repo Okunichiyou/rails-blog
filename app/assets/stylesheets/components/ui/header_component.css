@@ -19,6 +19,11 @@
     align-items: center;
     font-family: 'Yomogi', cursive;
     font-size: 1.2rem;
+
+    a {
+      color: var(--color-text-primary-button);
+      text-decoration: none;
+    }
   }
 
   .action-area {

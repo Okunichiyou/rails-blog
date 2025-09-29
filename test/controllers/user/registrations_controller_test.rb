@@ -12,8 +12,7 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
       post registration_confirmation_path, params: { registration: { email: email } }
     end
 
-    assert_response :success
-    assert_equal "Sending an email confirmation instruction", flash[:notice]
+    assert_redirected_to registration_confirmation_sent_path
 
     registration = User::Registration.find_by(unconfirmed_email: email)
     assert_not_nil registration
@@ -30,8 +29,23 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
       post registration_confirmation_path, params: { registration: { email: "existing@example.com" } }
     end
 
-    assert_response :success
-    assert_equal "Sending an email confirmation instruction", flash[:notice]
+    assert_redirected_to registration_confirmation_sent_path
+  end
+
+  test "POST /registrations/confirmation 空のメールアドレスでバリデーションエラー" do
+    assert_no_difference "User::Registration.count" do
+      post registration_confirmation_path, params: { registration: { email: "" } }
+    end
+
+    assert_response :unprocessable_entity
+  end
+
+  test "POST /registrations/confirmation 無効な形式のメールアドレスでバリデーションエラー" do
+    assert_no_difference "User::Registration.count" do
+      post registration_confirmation_path, params: { registration: { email: "invalid-email" } }
+    end
+
+    assert_response :unprocessable_entity
   end
 
   # =====================================

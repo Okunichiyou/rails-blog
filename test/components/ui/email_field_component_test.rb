@@ -42,4 +42,28 @@ class Ui::EmailFieldComponentTest < ViewComponent::TestCase
       Ui::EmailFieldComponent.new(builder: form_builder, method: :email, size: :invalid)
     end
   end
+
+  test "variant: defaultが適用されること" do
+    render_inline(Ui::EmailFieldComponent.new(builder: form_builder, method: :email, size: :medium, variant: :default))
+
+    assert_selector("input.text-field-component.medium.default")
+  end
+
+  test "variant: alertが適用されること" do
+    render_inline(Ui::EmailFieldComponent.new(builder: form_builder, method: :email, size: :medium, variant: :alert))
+
+    assert_selector("input.text-field-component.medium.alert")
+  end
+
+  test "variantのデフォルト値はdefaultであること" do
+    render_inline(Ui::EmailFieldComponent.new(builder: form_builder, method: :email, size: :medium))
+
+    assert_selector("input.text-field-component.medium.default")
+  end
+
+  test "不適切なvariantを適用したらエラーが出ること" do
+    assert_raises(ArgumentError, "Invalid attribute value: 'invalid'. Must be one of default, alert.") do
+      Ui::EmailFieldComponent.new(builder: form_builder, method: :email, size: :medium, variant: :invalid)
+    end
+  end
 end

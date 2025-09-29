@@ -1,0 +1,11 @@
+@scope (.domain-user-email-confirmation-form-component) to ([data-scope]) {
+  .email-confirmation-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
+
+  label {
+    display: block;
+  }
+}

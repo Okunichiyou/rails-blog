@@ -1,0 +1,20 @@
+<div <%= tag.attributes(@html_options) %> >
+  <%= render Ui::PanelComponent.new(size: :medium) do |panel| %>
+    <%- panel.with_panel_content do %>
+      <h2>確認メールを送信しました</h2>
+
+      <p>
+        ご入力いただいたメールアドレスに確認メールを送信しました。<br>
+        メール内のリンクをクリックして、登録を完了してください。
+      </p>
+
+      <p>
+        メールが届かない場合は、迷惑メールフォルダもご確認ください。
+      </p>
+
+      <div class="actions">
+        <%= link_to "別のメールアドレスで再送信", new_registration_confirmation_path %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
