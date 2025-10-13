@@ -8,6 +8,8 @@ class User::DatabaseAuthenticationRegistrationForm
   attribute :password_confirmation, :string
   attribute :confirmation_token, :string
 
+  attr_reader :user, :user_database_authentication
+
   # Userモデル属性からフォーム属性へのマッピング
   USER_ATTR_TRANSFORM_MAP = {
     name: :user_name
@@ -22,14 +24,6 @@ class User::DatabaseAuthenticationRegistrationForm
     return false unless validate_all_models
 
     save_models
-  end
-
-  def user
-    @user
-  end
-
-  def user_database_authentication
-    @user_database_authentication
   end
 
   private
