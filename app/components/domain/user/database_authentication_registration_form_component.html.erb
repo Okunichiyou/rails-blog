@@ -1,0 +1,54 @@
+<div <%= tag.attributes(@html_options) %> >
+  <%= form_with(model: @form, url: @finish_user_registration_path, html: { method: :post, class: "database-authentication-registration-form" }) do |f| %>
+    <div class="field">
+      <%= f.label :user_name %>
+      <%= render Ui::TextFieldComponent.new(
+        builder: f,
+        method: :user_name,
+        size: :medium,
+        variant: @form.errors[:user_name].any? ? :alert : :default
+      ) %>
+      <%= render Ui::FieldErrorsComponent.new(error_messages: @form.errors.full_messages_for(:user_name)) %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %>
+      <%= render Ui::EmailFieldComponent.new(
+        builder: f,
+        method: :email,
+        size: :medium,
+        variant: @form.errors[:email].any? ? :alert : :default,
+        html_options: { autocomplete: "email" }
+      ) %>
+      <%= render Ui::FieldErrorsComponent.new(error_messages: @form.errors.full_messages_for(:email)) %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password %>
+      <%= render Ui::PasswordFieldComponent.new(
+        builder: f,
+        method: :password,
+        size: :medium,
+        variant: @form.errors[:password].any? ? :alert : :default
+      ) %>
+      <%= render Ui::FieldErrorsComponent.new(error_messages: @form.errors.full_messages_for(:password)) %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation %>
+      <%= render Ui::PasswordFieldComponent.new(
+        builder: f,
+        method: :password_confirmation,
+        size: :medium,
+        variant: @form.errors[:password_confirmation].any? ? :alert : :default
+      ) %>
+      <%= render Ui::FieldErrorsComponent.new(error_messages: @form.errors.full_messages_for(:password_confirmation)) %>
+    </div>
+
+    <%= f.hidden_field :confirmation_token %>
+
+    <div class="actions">
+      <%= render Ui::ButtonComponent.new(category: :primary, size: :medium, type: :submit, text: "Submit") %>
+    </div>
+  <% end %>
+</div>
