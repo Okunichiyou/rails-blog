@@ -39,9 +39,9 @@ class User::DatabaseAuthenticationRegistrationForm
   end
 
   def validate_all_models
-    user_valid = validate_user
-    auth_valid = validate_database_authentication
-    user_valid && auth_valid
+    is_user_valid = validate_user
+    is_auth_valid = validate_database_authentication
+    is_user_valid && is_auth_valid
   end
 
   def validate_user
