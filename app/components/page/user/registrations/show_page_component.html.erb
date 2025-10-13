@@ -1,0 +1,12 @@
+<div <%= tag.attributes(@html_options) %> >
+  <%= render Ui::PanelComponent.new(size: :medium) do |panel| %>
+    <%- panel.with_panel_content do %>
+      <h2>Registration Form</h2>
+
+      <%= render Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
+        form: @form,
+        finish_user_registration_path: @finish_user_registration_path
+      ) %>
+    <% end %>
+  <% end %>
+</div>

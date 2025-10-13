@@ -1,5 +1,5 @@
 module Ui
-  class PasswordFieldComponent < Ui::Base
+  class TextFieldComponent < Ui::Base
     SIZE_OPTIONS = %i[full large medium small].freeze
     VARIANT_OPTIONS = %i[default alert].freeze
 
@@ -20,10 +20,10 @@ module Ui
     private
 
     def build_html_options(html_options)
-      html_options.merge({ class: password_field_classes(html_options) })
+      html_options.merge({ class: text_field_classes(html_options) })
     end
 
-    def password_field_classes(html_options)
+    def text_field_classes(html_options)
       classes = []
       classes.push("text-field-component")
       classes.push(@size.to_s)

@@ -14,7 +14,13 @@ class Ui::PasswordFieldComponentTest < ViewComponent::TestCase
   test "size のクラスが設定されること" do
     render_inline(Ui::PasswordFieldComponent.new(builder: form_builder, method: :password, size: :large))
 
-    assert_selector("input.text-field-component.large")
+    assert_selector("input.text-field-component.large.default")
+  end
+
+  test "variant のクラスが設定されること" do
+    render_inline(Ui::PasswordFieldComponent.new(builder: form_builder, method: :password, size: :medium, variant: :alert))
+
+    assert_selector("input.text-field-component.medium.alert")
   end
 
   test "html_options が適用されること" do
@@ -32,7 +38,7 @@ class Ui::PasswordFieldComponentTest < ViewComponent::TestCase
     # autocomplete属性があることを確認
     assert_selector("input[autocomplete='current-password']")
     # classがマージされていることを確認
-    assert_selector("input.text-field-component.medium")
+    assert_selector("input.text-field-component.medium.default")
     # custom-classも含まれていることを確認
     assert_selector("input.custom-class")
   end
@@ -40,6 +46,12 @@ class Ui::PasswordFieldComponentTest < ViewComponent::TestCase
   test "不適切なsizeを適用したらエラーが出ること" do
     assert_raises(ArgumentError, "Invalid attribute value: 'invalid'. Must be one of full, large, medium, small.") do
       Ui::PasswordFieldComponent.new(builder: form_builder, method: :password, size: :invalid)
+    end
+  end
+
+  test "不適切なvariantを適用したらエラーが出ること" do
+    assert_raises(ArgumentError, "Invalid attribute value: 'invalid'. Must be one of default, alert.") do
+      Ui::PasswordFieldComponent.new(builder: form_builder, method: :password, size: :medium, variant: :invalid)
     end
   end
 end

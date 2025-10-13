@@ -114,11 +114,13 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_difference [ "User.count", "User::DatabaseAuthentication.count" ], 1 do
       assert_difference "User::Registration.count", -1 do
         post finish_user_registration_path, params: {
-          confirmation_token: "finish_token",
-          name: "Test User",
-          email: "finish@example.com",
-          password: "password123",
-          password_confirmation: "password123"
+          registration: {
+            confirmation_token: "finish_token",
+            user_name: "Test User",
+            email: "finish@example.com",
+            password: "password123",
+            password_confirmation: "password123"
+          }
         }
       end
     end
@@ -138,11 +140,13 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "POST /registration/finish 無効なトークンでエラー" do
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Registration.count" ] do
       post finish_user_registration_path, params: {
-        confirmation_token: "invalid_token",
-        name: "Test User",
-        email: "test@example.com",
-        password: "password123",
-        password_confirmation: "password123"
+        registration: {
+          confirmation_token: "invalid_token",
+          user_name: "Test User",
+          email: "test@example.com",
+          password: "password123",
+          password_confirmation: "password123"
+        }
       }
     end
 
@@ -159,11 +163,13 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
       assert_no_difference "User::Registration.count" do
         post finish_user_registration_path, params: {
-          confirmation_token: "mismatch_token",
-          name: "Test User",
-          email: "mismatch@example.com",
-          password: "password123",
-          password_confirmation: "different_password"
+          registration: {
+            confirmation_token: "mismatch_token",
+            user_name: "Test User",
+            email: "mismatch@example.com",
+            password: "password123",
+            password_confirmation: "different_password"
+          }
         }
       end
     end
@@ -181,11 +187,13 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
       post finish_user_registration_path, params: {
-        confirmation_token: "short_token",
-        name: "Test User",
-        email: "short@example.com",
-        password: "123",
-        password_confirmation: "123"
+        registration: {
+          confirmation_token: "short_token",
+          user_name: "Test User",
+          email: "short@example.com",
+          password: "123",
+          password_confirmation: "123"
+        }
       }
     end
 
@@ -201,11 +209,13 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
       post finish_user_registration_path, params: {
-        confirmation_token: "missing_token",
-        name: "",
-        email: "missing@example.com",
-        password: "password123",
-        password_confirmation: "password123"
+        registration: {
+          confirmation_token: "missing_token",
+          user_name: "",
+          email: "missing@example.com",
+          password: "password123",
+          password_confirmation: "password123"
+        }
       }
     end
 
@@ -221,11 +231,13 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
       post finish_user_registration_path, params: {
-        confirmation_token: "missing_token",
-        name: "user",
-        email: "",
-        password: "password123",
-        password_confirmation: "password123"
+        registration: {
+          confirmation_token: "missing_token",
+          user_name: "user",
+          email: "",
+          password: "password123",
+          password_confirmation: "password123"
+        }
       }
     end
 
@@ -241,11 +253,13 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
       post finish_user_registration_path, params: {
-        confirmation_token: "missing_token",
-        name: "user",
-        email: "missing@example.com",
-        password: "",
-        password_confirmation: ""
+        registration: {
+          confirmation_token: "missing_token",
+          user_name: "user",
+          email: "missing@example.com",
+          password: "",
+          password_confirmation: ""
+        }
       }
     end
 
@@ -261,11 +275,13 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
       post finish_user_registration_path, params: {
-        confirmation_token: "expired_30min_finish_token",
-        name: "Test User",
-        email: "expired30finish@example.com",
-        password: "password123",
-        password_confirmation: "password123"
+        registration: {
+          confirmation_token: "expired_30min_finish_token",
+          user_name: "Test User",
+          email: "expired30finish@example.com",
+          password: "password123",
+          password_confirmation: "password123"
+        }
       }
     end
 
@@ -281,11 +297,13 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
       post finish_user_registration_path, params: {
-        confirmation_token: "expired_31min_finish_token",
-        name: "Test User",
-        email: "expired31finish@example.com",
-        password: "password123",
-        password_confirmation: "password123"
+        registration: {
+          confirmation_token: "expired_31min_finish_token",
+          user_name: "Test User",
+          email: "expired31finish@example.com",
+          password: "password123",
+          password_confirmation: "password123"
+        }
       }
     end
 
