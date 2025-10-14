@@ -30,7 +30,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
     assert_selector("input[type=text][name='registration[user_name]'][id='registration_user_name']")
   end
 
-  test "emailのラベルとinput要素があること" do
+  test "emailのラベルとテキスト表示があること" do
     form = User::DatabaseAuthenticationRegistrationForm.new(
       email: "test@example.com",
       confirmation_token: "token123"
@@ -42,7 +42,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
     ))
 
     assert_selector("label[for='registration_email']", text: "Email")
-    assert_selector("input[type=email][name='registration[email]'][id='registration_email'][value='test@example.com']")
+    assert_selector("p", text: "test@example.com")
   end
 
   test "passwordのラベルとinput要素があること" do

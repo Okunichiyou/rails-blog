@@ -105,7 +105,7 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
   test "POST /registration/finish 正常な登録完了フロー" do
     User::Registration.create!(
-      unconfirmed_email: "finish@example.com",
+      email: "finish@example.com",
       confirmation_token: "finish_token",
       confirmation_sent_at: 1.hour.ago,
       confirmed_at: 30.minutes.ago
@@ -308,5 +308,38 @@ class User::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :not_found
+  end
+
+  test "POST /registration/finish リクエストで別のemailを送信しても確認済みのemailで登録される" do
+    User::Registration.create!(
+      email: "confirmed@example.com",
+      confirmation_token: "test_token",
+      confirmation_sent_at: 1.hour.ago,
+      confirmed_at: 30.minutes.ago
+    )
+
+    assert_difference [ "User.count", "User::DatabaseAuthentication.count" ], 1 do
+      assert_difference "User::Registration.count", -1 do
+        post finish_user_registration_path, params: {
+          registration: {
+            confirmation_token: "test_token",
+            user_name: "Test User",
+            email: "malicious@example.com", # 悪意のあるユーザーが別のemailを送信
+            password: "password123",
+            password_confirmation: "password123"
+          }
+        }
+      end
+    end
+
+    assert_redirected_to root_path
+
+    # 確認済みのemailで登録されていることを確認
+    db_auth = User::DatabaseAuthentication.find_by(email: "confirmed@example.com")
+    assert_not_nil db_auth, "confirmed@example.comで登録されるべき"
+
+    # 悪意のあるemailでは登録されていないことを確認
+    malicious_db_auth = User::DatabaseAuthentication.find_by(email: "malicious@example.com")
+    assert_nil malicious_db_auth, "malicious@example.comでは登録されないべき"
   end
 end
