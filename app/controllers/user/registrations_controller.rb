@@ -46,7 +46,8 @@ class User::RegistrationsController < Devise::ConfirmationsController
       return render :show, status: :unprocessable_entity
     end
 
-    form_params = params.require(:registration).permit(:user_name, :email, :password, :password_confirmation, :confirmation_token)
+    form_params = params.require(:registration).permit(:user_name, :password, :password_confirmation, :confirmation_token)
+    form_params[:email] = resource.email
     @form = User::DatabaseAuthenticationRegistrationForm.new(form_params)
 
     if @form.call

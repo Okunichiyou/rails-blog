@@ -54,7 +54,7 @@ class Page::User::Registrations::ShowPageComponentTest < ViewComponent::TestCase
       finish_user_registration_path: "/users/finish_registration"
     ))
 
-    assert_selector("input[name='registration[email]'][value='test@example.com']")
+    assert_selector("p", text: "test@example.com")
     assert_selector("input[name='registration[confirmation_token]'][value='token123']", visible: false)
   end
 end
