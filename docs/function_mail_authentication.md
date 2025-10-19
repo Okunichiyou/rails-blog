@@ -5,7 +5,7 @@
 
 ## ER図
 
-- user_registrations
+- user_confirmations
   - 認証が完了したらすぐに破棄するのでusersテーブルとは紐付けない
   - unconfirmed_emailはメールの認証がされると、deviseの処理の中でnilとして保存され直すのでnullableになっている
 - ユーザーは複数の認証手段を用意する想定なので、database_authenticationとusersテーブルは分離している
@@ -28,7 +28,7 @@
           DATETIME updated_at "NOT NULL"
       }
 
-      user_registrations {
+      user_confirmations {
           INTEGER id PK
           STRING confirmation_token UK "NOT NULL"
           DATETIME confirmed_at
@@ -59,15 +59,15 @@ sequenceDiagram
 
     User->>Browser: メールアドレス・パスワード入力
     Browser->>App: POST /users/sign_up
-    App->>DB: user_registrationsテーブルに仮登録
+    App->>DB: user_confirmationsテーブルに仮登録
     App->>Mailer: 確認メール送信
     Mailer-->>User: 確認メール受信
     User->>Browser: 確認メール内のURLクリック
     Browser->>App: GET /users/confirmation?confirmation_token=xxx
-    App->>DB: user_registrationsから該当レコード取得
+    App->>DB: user_confirmationsから該当レコード取得
     App->>DB: usersテーブルにユーザー作成
     App->>DB: user_database_authenticationsテーブルに認証情報作成
-    App->>DB: user_registrationsレコード削除
+    App->>DB: user_confirmationsレコード削除
     App-->>Browser: 認証完了・ログイン状態
 ```
 
