@@ -1,6 +1,6 @@
 module Page
   module User
-    module Registrations
+    module Confirmations
       class SentPageComponent < Page::Base
         def initialize
         end

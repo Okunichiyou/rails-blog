@@ -1,5 +1,5 @@
 <div <%= tag.attributes(@html_options) %> >
-  <%= form_with(model: @form, url: @finish_user_registration_path, html: { method: :post, class: "database-authentication-registration-form" }) do |f| %>
+  <%= form_with(model: @form, url: @create_database_authentication_path, html: { method: :post, class: "database-authentication-registration-form" }) do |f| %>
     <div class="field">
       <%= f.label :user_name %>
       <%= render Ui::TextFieldComponent.new(

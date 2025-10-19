@@ -6,12 +6,16 @@ Rails.application.routes.draw do
   devise_for :database_authentications, class_name: "User::DatabaseAuthentication", controllers: {
     sessions: "user/database_authentication/sessions"
   }
-  devise_for :registrations, class_name: "User::Registration", controllers: {
-    confirmations: "user/registrations"
+  devise_for :confirmations, class_name: "User::Confirmation", controllers: {
+    confirmations: "user/confirmations"
   }
-  devise_scope :registration do
-    get "/registrations/confirmation/sent", to: "user/registrations#sent", as: "registration_confirmation_sent"
-    post "/registration/finish", to: "user/registrations#finish",  as: "finish_user_registration"
+  devise_scope :confirmation do
+    get "/confirmations/sent", to: "user/confirmations#sent", as: "email_confirmation_sent"
   end
+
+  namespace :user do
+    resources :database_authentications, only: [ :new, :create ]
+  end
+
   devise_for :users
 end

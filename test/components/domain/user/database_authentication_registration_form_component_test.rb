@@ -9,10 +9,10 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
       form: form,
-      finish_user_registration_path: "/users/finish_registration"
+      create_database_authentication_path: "/user/database_authentications"
     ))
 
-    assert_selector("form[action='/users/finish_registration'][method=post]")
+    assert_selector("form[action='/user/database_authentications'][method=post]")
   end
 
   test "nameのラベルとinput要素があること" do
@@ -23,11 +23,11 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
       form: form,
-      finish_user_registration_path: "/users/finish_registration"
+      create_database_authentication_path: "/user/database_authentications"
     ))
 
-    assert_selector("label[for='registration_user_name']", text: "User name")
-    assert_selector("input[type=text][name='registration[user_name]'][id='registration_user_name']")
+    assert_selector("label[for='confirmation_user_name']", text: "User name")
+    assert_selector("input[type=text][name='confirmation[user_name]'][id='confirmation_user_name']")
   end
 
   test "emailのラベルとテキスト表示があること" do
@@ -38,10 +38,10 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
       form: form,
-      finish_user_registration_path: "/users/finish_registration"
+      create_database_authentication_path: "/user/database_authentications"
     ))
 
-    assert_selector("label[for='registration_email']", text: "Email")
+    assert_selector("label[for='confirmation_email']", text: "Email")
     assert_selector("p", text: "test@example.com")
   end
 
@@ -53,11 +53,11 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
       form: form,
-      finish_user_registration_path: "/users/finish_registration"
+      create_database_authentication_path: "/user/database_authentications"
     ))
 
-    assert_selector("label[for='registration_password']", text: "Password")
-    assert_selector("input[type=password][name='registration[password]'][id='registration_password']")
+    assert_selector("label[for='confirmation_password']", text: "Password")
+    assert_selector("input[type=password][name='confirmation[password]'][id='confirmation_password']")
   end
 
   test "password_confirmationのラベルとinput要素があること" do
@@ -68,11 +68,11 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
       form: form,
-      finish_user_registration_path: "/users/finish_registration"
+      create_database_authentication_path: "/user/database_authentications"
     ))
 
-    assert_selector("label[for='registration_password_confirmation']", text: "Password confirmation")
-    assert_selector("input[type=password][name='registration[password_confirmation]'][id='registration_password_confirmation']")
+    assert_selector("label[for='confirmation_password_confirmation']", text: "Password confirmation")
+    assert_selector("input[type=password][name='confirmation[password_confirmation]'][id='confirmation_password_confirmation']")
   end
 
   test "confirmation_tokenのhidden fieldがあること" do
@@ -83,10 +83,10 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
       form: form,
-      finish_user_registration_path: "/users/finish_registration"
+      create_database_authentication_path: "/user/database_authentications"
     ))
 
-    assert_selector("input[type=hidden][name='registration[confirmation_token]']", visible: false)
+    assert_selector("input[type=hidden][name='confirmation[confirmation_token]']", visible: false)
     assert_selector("input[value='token123']", visible: false)
   end
 
@@ -98,7 +98,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
       form: form,
-      finish_user_registration_path: "/users/finish_registration"
+      create_database_authentication_path: "/user/database_authentications"
     ))
 
     assert_selector("button[type=submit]", text: "Submit")
