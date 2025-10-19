@@ -9,7 +9,9 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     email = "new@example.com"
 
     assert_difference "User::Confirmation.count", 1 do
-      post confirmation_confirmation_path, params: { confirmation: { email: email } }
+      assert_emails 1 do
+        post confirmation_confirmation_path, params: { confirmation: { email: email } }
+      end
     end
 
     assert_redirected_to email_confirmation_sent_path
@@ -17,6 +19,11 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     confirmation = User::Confirmation.find_by(unconfirmed_email: email)
     assert_not_nil confirmation
     assert_not_nil confirmation.confirmation_token
+
+    # 送信されたメールの内容を確認
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal [ email ], mail.to
+    assert_match /Confirmation/, mail.subject
   end
 
   test "POST /confirmations/confirmation 既存の未確認メールアドレスで再送信" do
@@ -26,15 +33,24 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     )
 
     assert_no_difference "User::Confirmation.count" do
-      post confirmation_confirmation_path, params: { confirmation: { email: "existing@example.com" } }
+      assert_emails 1 do
+        post confirmation_confirmation_path, params: { confirmation: { email: "existing@example.com" } }
+      end
     end
 
     assert_redirected_to email_confirmation_sent_path
+
+    # 送信されたメールの内容を確認
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal [ "existing@example.com" ], mail.to
+    assert_match /Confirmation/, mail.subject
   end
 
   test "POST /confirmations/confirmation 空のメールアドレスでバリデーションエラー" do
     assert_no_difference "User::Confirmation.count" do
-      post confirmation_confirmation_path, params: { confirmation: { email: "" } }
+      assert_no_emails do
+        post confirmation_confirmation_path, params: { confirmation: { email: "" } }
+      end
     end
 
     assert_response :unprocessable_entity
@@ -42,7 +58,9 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
 
   test "POST /confirmations/confirmation 無効な形式のメールアドレスでバリデーションエラー" do
     assert_no_difference "User::Confirmation.count" do
-      post confirmation_confirmation_path, params: { confirmation: { email: "invalid-email" } }
+      assert_no_emails do
+        post confirmation_confirmation_path, params: { confirmation: { email: "invalid-email" } }
+      end
     end
 
     assert_response :unprocessable_entity
