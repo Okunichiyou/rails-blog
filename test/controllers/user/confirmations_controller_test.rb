@@ -71,7 +71,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
   # =====================================
 
   test "GET /confirmations/confirmation 有効なトークンで確認画面へリダイレクト" do
-    User::Confirmation.create!(
+    confirmation = User::Confirmation.create!(
       unconfirmed_email: "confirm@example.com",
       confirmation_token: "valid_token"
     )
@@ -79,6 +79,11 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     get confirmation_confirmation_path, params: { confirmation_token: "valid_token" }
 
     assert_redirected_to new_user_database_authentication_path(confirmation_token: "valid_token")
+
+    # メールアドレスの確認が完了している
+    confirmation.reload
+    assert_not_nil confirmation.confirmed_at
+    assert_equal "valid_token", confirmation.confirmation_token
   end
 
   test "GET /confirmations/confirmation 無効なトークンでもリダイレクト" do
@@ -88,29 +93,49 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
-  test "GET /confirmations/confirmation 30分経過したトークンでもリダイレクト" do
-    User::Confirmation.create!(
-      unconfirmed_email: "expired30@example.com",
-      confirmation_token: "expired_30min_token",
-      confirmation_sent_at: 30.minutes.ago
-    )
+  test "GET /confirmations/confirmation 30分丁度のトークンは有効（境界値を含む）" do
+    travel_to Time.current do
+      confirmation = User::Confirmation.create!(
+        unconfirmed_email: "valid30@example.com",
+        confirmation_token: "valid_30min_token",
+        confirmation_sent_at: Time.current
+      )
 
-    get confirmation_confirmation_path, params: { confirmation_token: "expired_30min_token" }
+      # ちょうど30分後に移動
+      travel 30.minutes
 
-    # Deviseは期限切れトークンでも新しいトークンを生成してリダイレクトする
-    assert_response :redirect
+      get confirmation_confirmation_path, params: { confirmation_token: "valid_30min_token" }
+
+      assert_redirected_to new_user_database_authentication_path(confirmation_token: "valid_30min_token")
+
+      # メールアドレスの確認が完了している（30分丁度は有効）
+      confirmation.reload
+      assert_not_nil confirmation.confirmed_at
+      assert_equal "valid_30min_token", confirmation.confirmation_token
+    end
   end
 
-  test "GET /confirmations/confirmation 31分経過したトークンでもリダイレクト" do
-    User::Confirmation.create!(
-      unconfirmed_email: "expired31@example.com",
-      confirmation_token: "expired_31min_token",
-      confirmation_sent_at: 31.minutes.ago
-    )
+  test "GET /confirmations/confirmation 30分1秒経過したトークンは無効" do
+    travel_to Time.current do
+      confirmation = User::Confirmation.create!(
+        unconfirmed_email: "expired30@example.com",
+        confirmation_token: "expired_30min_1sec_token",
+        confirmation_sent_at: Time.current
+      )
 
-    get confirmation_confirmation_path, params: { confirmation_token: "expired_31min_token" }
+      # 30分1秒後に移動
+      travel 30.minutes + 1.second
 
-    # Deviseは期限切れトークンでも新しいトークンを生成してリダイレクトする
-    assert_response :redirect
+      get confirmation_confirmation_path, params: { confirmation_token: "expired_30min_1sec_token" }
+
+      # リダイレクトはされる（古いトークンがそのまま渡される）
+      assert_redirected_to new_user_database_authentication_path(confirmation_token: "expired_30min_1sec_token")
+
+      # メールアドレスの確認は完了していない
+      confirmation.reload
+      assert_nil confirmation.confirmed_at
+      # トークンはそのまま（期限切れの場合は新しいトークンは生成されない）
+      assert_equal "expired_30min_1sec_token", confirmation.confirmation_token
+    end
   end
 end
