@@ -16,9 +16,8 @@ class User::ConfirmationsController < Devise::ConfirmationsController
   end
 
   def show
-    super do
-      return redirect_to new_user_database_authentication_path(confirmation_token: resource.confirmation_token)
-    end
+    self.resource = resource_class.confirm_by_token(params[:confirmation_token])
+    redirect_to new_user_database_authentication_path(confirmation_token: resource.confirmation_token)
   end
 
   def sent
