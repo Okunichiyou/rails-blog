@@ -11,14 +11,14 @@ class User::EmailConfirmationForm
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email.present? }
 
   def model_name
-    ActiveModel::Name.new(self, nil, "Registration")
+    ActiveModel::Name.new(self, nil, "Confirmation")
   end
 
   def call
     return false unless valid?
 
-    user_registration = User::Registration.find_or_initialize_by(unconfirmed_email: email)
-    user_registration.save
+    user_confirmation = User::Confirmation.find_or_initialize_by(unconfirmed_email: email)
+    user_confirmation.save
   end
 
   private

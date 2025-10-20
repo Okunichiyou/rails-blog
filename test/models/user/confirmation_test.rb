@@ -1,12 +1,12 @@
 require "test_helper"
 
-class User::RegistrationTest < ActiveSupport::TestCase
+class User::ConfirmationTest < ActiveSupport::TestCase
   # =====================================
   # Deviseモジュールテスト
   # =====================================
 
   test "confirmableモジュールが含まれている" do
-    assert User::Registration.devise_modules.include?(:confirmable)
+    assert User::Confirmation.devise_modules.include?(:confirmable)
   end
 
   # =====================================
@@ -14,48 +14,48 @@ class User::RegistrationTest < ActiveSupport::TestCase
   # =====================================
 
   test "emailなしでもインスタンス作成できる" do
-    registration = User::Registration.new
+    confirmation = User::Confirmation.new
 
-    assert_kind_of User::Registration, registration
+    assert_kind_of User::Confirmation, confirmation
   end
 
   test "emailが設定できる" do
-    registration = User::Registration.new
-    registration.email = "test@example.com"
+    confirmation = User::Confirmation.new
+    confirmation.email = "test@example.com"
 
-    assert_equal "test@example.com", registration.email
+    assert_equal "test@example.com", confirmation.email
   end
 
   test "emailの前後空白がトリミングされる" do
-    registration = User::Registration.new
-    registration.email = "  trimmed@example.com  "
-    registration.valid?
+    confirmation = User::Confirmation.new
+    confirmation.email = "  trimmed@example.com  "
+    confirmation.valid?
 
-    assert_equal "trimmed@example.com", registration.email
+    assert_equal "trimmed@example.com", confirmation.email
   end
 
   test "unconfirmed_emailの前後空白がトリミングされる" do
-    registration = User::Registration.new
-    registration.unconfirmed_email = "  trimmed@example.com  "
-    registration.valid?
+    confirmation = User::Confirmation.new
+    confirmation.unconfirmed_email = "  trimmed@example.com  "
+    confirmation.valid?
 
-    assert_equal "trimmed@example.com", registration.unconfirmed_email
+    assert_equal "trimmed@example.com", confirmation.unconfirmed_email
   end
 
   test "confirmed_atが設定できる" do
-    registration = User::Registration.new
+    confirmation = User::Confirmation.new
     time = Time.current
-    registration.confirmed_at = time
+    confirmation.confirmed_at = time
 
-    assert_equal time.to_i, registration.confirmed_at.to_i
+    assert_equal time.to_i, confirmation.confirmed_at.to_i
   end
 
   test "confirmation_tokenが設定できる" do
-    registration = User::Registration.new
+    confirmation = User::Confirmation.new
     token = "test_token"
-    registration.confirmation_token = token
+    confirmation.confirmation_token = token
 
-    assert_equal token, registration.confirmation_token
+    assert_equal token, confirmation.confirmation_token
   end
 
   # =====================================
@@ -72,8 +72,8 @@ class User::RegistrationTest < ActiveSupport::TestCase
 
   test "データベースレベルでconfirmation_tokenのNOT NULL制約が働く" do
     assert_raises ActiveRecord::NotNullViolation do
-      User::Registration.connection.execute(
-        "INSERT INTO user_registrations (email, confirmation_token, created_at, updated_at) VALUES ('null_token@example.com', NULL, datetime('now'), datetime('now'))"
+      User::Confirmation.connection.execute(
+        "INSERT INTO user_confirmations (email, confirmation_token, created_at, updated_at) VALUES ('null_token@example.com', NULL, datetime('now'), datetime('now'))"
       )
     end
   end

@@ -1,4 +1,4 @@
-class User::Registration < ApplicationRecord
+class User::Confirmation < ApplicationRecord
   devise :confirmable
 
   before_validation :trim_email, :trim_unconfirmed_email

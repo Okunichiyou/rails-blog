@@ -1,9 +1,9 @@
 module Domain
   module User
     class DatabaseAuthenticationRegistrationFormComponent < Domain::Base
-      def initialize(form:, finish_user_registration_path:)
+      def initialize(form:, create_database_authentication_path:)
         @form = form
-        @finish_user_registration_path = finish_user_registration_path
+        @create_database_authentication_path = create_database_authentication_path
       end
     end
   end

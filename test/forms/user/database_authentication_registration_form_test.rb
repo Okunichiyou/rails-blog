@@ -10,7 +10,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
       confirmation_token: "valid_token"
     }
 
-    @registration = User::Registration.create!(
+    @confirmation = User::Confirmation.create!(
       unconfirmed_email: "test@example.com",
       confirmation_token: "valid_token",
       confirmation_sent_at: 10.minutes.ago,
@@ -22,7 +22,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
     form = User::DatabaseAuthenticationRegistrationForm.new(@valid_attributes)
 
     assert_difference [ "User.count", "User::DatabaseAuthentication.count" ], 1 do
-      assert_difference "User::Registration.count", -1 do
+      assert_difference "User::Confirmation.count", -1 do
         assert form.call
       end
     end
@@ -34,8 +34,8 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
     assert_not_nil auth
     assert_equal user, auth.user
 
-    # User::Registrationが削除されていることを確認
-    assert_nil User::Registration.find_by(confirmation_token: "valid_token")
+    # User::Confirmationが削除されていることを確認
+    assert_nil User::Confirmation.find_by(confirmation_token: "valid_token")
   end
 
   test "User名が不正でもDatabaseAuthenticationのバリデーションも実行され、UserとDatabaseAuthenticationのエラーが両方とも格納される" do
@@ -83,7 +83,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
       confirmation_token: "valid_token"
     )
 
-    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Registration.count" ] do
+    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
       assert_not form.call
     end
 
@@ -99,7 +99,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
       confirmation_token: "valid_token"
     )
 
-    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Registration.count" ] do
+    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
       assert_not form.call
     end
 
@@ -115,7 +115,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
       confirmation_token: "valid_token"
     )
 
-    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Registration.count" ] do
+    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
       assert_not form.call
     end
 
@@ -131,7 +131,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
       confirmation_token: "valid_token"
     )
 
-    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Registration.count" ] do
+    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
       assert_not form.call
     end
 
@@ -147,7 +147,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
       confirmation_token: "valid_token"
     )
 
-    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Registration.count" ] do
+    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
       assert_not form.call
     end
 
@@ -165,7 +165,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
       confirmation_token: "valid_token"
     )
 
-    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Registration.count" ] do
+    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
       assert_not form.call
     end
 

@@ -16,7 +16,7 @@ class User::DatabaseAuthenticationRegistrationForm
   }.freeze
 
   def model_name
-    ActiveModel::Name.new(self, nil, "Registration")
+    ActiveModel::Name.new(self, nil, "Confirmation")
   end
 
   def call
@@ -68,7 +68,7 @@ class User::DatabaseAuthenticationRegistrationForm
       @user.save!
       @user_database_authentication.save!
 
-      resource = User::Registration.find_by_confirmation_token(confirmation_token)
+      resource = User::Confirmation.find_by_confirmation_token(confirmation_token)
       resource&.destroy!
 
       true
