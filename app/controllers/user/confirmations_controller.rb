@@ -15,6 +15,9 @@ class User::ConfirmationsController < Devise::ConfirmationsController
     end
   end
 
+  def sent
+  end
+
   def show
     self.resource = resource_class.confirm_by_token(params[:confirmation_token])
 
@@ -23,8 +26,5 @@ class User::ConfirmationsController < Devise::ConfirmationsController
     else
       respond_with(resource, status: :unprocessable_entity)
     end
-  end
-
-  def sent
   end
 end
