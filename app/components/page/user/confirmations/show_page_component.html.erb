@@ -1,0 +1,25 @@
+<div <%= tag.attributes(@html_options) %> >
+  <%= render Ui::PanelComponent.new(size: :medium) do |panel| %>
+    <%- panel.with_panel_content do %>
+      <h2>メールアドレスの確認に失敗しました</h2>
+
+      <% if @resource.errors.any? %>
+        <%- @resource.errors.full_messages.each do |message| %>
+          <%= render Ui::FlashComponent.new(flash_type: :alert) do |c| %>
+            <%- c.with_flash_content do %>
+              <%= message %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <p>
+        確認メールを再送信する場合は、下記のリンクをクリックしてください。
+      </p>
+
+      <div class="actions">
+        <%= link_to "確認メールを再送信", new_confirmation_confirmation_path %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

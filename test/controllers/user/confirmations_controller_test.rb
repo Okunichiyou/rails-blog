@@ -86,11 +86,13 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "valid_token", confirmation.confirmation_token
   end
 
-  test "GET /confirmations/confirmation 無効なトークンでもリダイレクト" do
+  test "GET /confirmations/confirmation 無効なトークンでエラーメッセージ表示" do
     get confirmation_confirmation_path, params: { confirmation_token: "invalid_token" }
 
-    # Deviseは無効なトークンでも新しいトークンを生成してリダイレクトする
-    assert_response :redirect
+    # 無効なトークンの場合はエラーメッセージを表示
+    assert_response :unprocessable_entity
+    assert_select "h2", text: "メールアドレスの確認に失敗しました"
+    assert_select "div.alert", text: /Confirmation token is invalid/
   end
 
   test "GET /confirmations/confirmation 30分丁度のトークンは有効（境界値を含む）" do
@@ -115,7 +117,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "GET /confirmations/confirmation 30分1秒経過したトークンは無効" do
+  test "GET /confirmations/confirmation 30分1秒経過したトークンは無効でエラーメッセージ表示" do
     travel_to Time.current do
       confirmation = User::Confirmation.create!(
         unconfirmed_email: "expired30@example.com",
@@ -128,8 +130,10 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
 
       get confirmation_confirmation_path, params: { confirmation_token: "expired_30min_1sec_token" }
 
-      # リダイレクトはされる（古いトークンがそのまま渡される）
-      assert_redirected_to new_user_database_authentication_path(confirmation_token: "expired_30min_1sec_token")
+      # 期限切れの場合はエラーメッセージを表示
+      assert_response :unprocessable_entity
+      assert_select "h2", text: "メールアドレスの確認に失敗しました"
+      assert_select "div.alert", text: /needs to be confirmed within/
 
       # メールアドレスの確認は完了していない
       confirmation.reload
