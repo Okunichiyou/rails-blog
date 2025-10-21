@@ -1,14 +1,18 @@
 require "test_helper"
 
 class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewComponent::TestCase
-  test "registration formの要素があること" do
-    form = User::DatabaseAuthenticationRegistrationForm.new(
+  def setup
+    confirmation = User::Confirmation.create!(
       email: "test@example.com",
-      confirmation_token: "token123"
+      confirmation_token: "test_token_123",
+      confirmed_at: Time.current
     )
+    @form = User::DatabaseAuthenticationRegistrationForm.new(confirmation_token: confirmation.confirmation_token)
+  end
 
+  test "registration formの要素があること" do
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: form,
+      form: @form,
       create_database_authentication_path: "/user/database_authentications"
     ))
 
@@ -16,13 +20,8 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
   end
 
   test "nameのラベルとinput要素があること" do
-    form = User::DatabaseAuthenticationRegistrationForm.new(
-      email: "test@example.com",
-      confirmation_token: "token123"
-    )
-
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: form,
+      form: @form,
       create_database_authentication_path: "/user/database_authentications"
     ))
 
@@ -31,13 +30,8 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
   end
 
   test "emailのラベルとテキスト表示があること" do
-    form = User::DatabaseAuthenticationRegistrationForm.new(
-      email: "test@example.com",
-      confirmation_token: "token123"
-    )
-
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: form,
+      form: @form,
       create_database_authentication_path: "/user/database_authentications"
     ))
 
@@ -46,13 +40,8 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
   end
 
   test "passwordのラベルとinput要素があること" do
-    form = User::DatabaseAuthenticationRegistrationForm.new(
-      email: "test@example.com",
-      confirmation_token: "token123"
-    )
-
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: form,
+      form: @form,
       create_database_authentication_path: "/user/database_authentications"
     ))
 
@@ -61,13 +50,8 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
   end
 
   test "password_confirmationのラベルとinput要素があること" do
-    form = User::DatabaseAuthenticationRegistrationForm.new(
-      email: "test@example.com",
-      confirmation_token: "token123"
-    )
-
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: form,
+      form: @form,
       create_database_authentication_path: "/user/database_authentications"
     ))
 
@@ -76,28 +60,18 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
   end
 
   test "confirmation_tokenのhidden fieldがあること" do
-    form = User::DatabaseAuthenticationRegistrationForm.new(
-      email: "test@example.com",
-      confirmation_token: "token123"
-    )
-
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: form,
+      form: @form,
       create_database_authentication_path: "/user/database_authentications"
     ))
 
     assert_selector("input[type=hidden][name='confirmation[confirmation_token]']", visible: false)
-    assert_selector("input[value='token123']", visible: false)
+    assert_selector("input[value='test_token_123']", visible: false)
   end
 
   test "submitボタンがあること" do
-    form = User::DatabaseAuthenticationRegistrationForm.new(
-      email: "test@example.com",
-      confirmation_token: "token123"
-    )
-
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: form,
+      form: @form,
       create_database_authentication_path: "/user/database_authentications"
     ))
 

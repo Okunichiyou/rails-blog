@@ -3,7 +3,6 @@ class User::DatabaseAuthenticationRegistrationForm
   include ActiveModel::Attributes
 
   attribute :user_name, :string
-  attribute :email, :string
   attribute :password, :string
   attribute :password_confirmation, :string
   attribute :confirmation_token, :string
@@ -17,6 +16,10 @@ class User::DatabaseAuthenticationRegistrationForm
 
   def model_name
     ActiveModel::Name.new(self, nil, "Confirmation")
+  end
+
+  def email
+    confirmation_resource&.email
   end
 
   def call
@@ -68,12 +71,15 @@ class User::DatabaseAuthenticationRegistrationForm
       @user.save!
       @user_database_authentication.save!
 
-      resource = User::Confirmation.find_by_confirmation_token(confirmation_token)
-      resource&.destroy!
+      confirmation_resource&.destroy!
 
       true
     end
   rescue ActiveRecord::RecordInvalid
     false
+  end
+
+  def confirmation_resource
+    @confirmaition_resource ||= User::Confirmation.find_by(confirmation_token:)
   end
 end

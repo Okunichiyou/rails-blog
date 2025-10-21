@@ -13,10 +13,7 @@ class User::DatabaseAuthenticationsController < ApplicationController
       return
     end
 
-    @form = User::DatabaseAuthenticationRegistrationForm.new(
-      email: found_resource.email,
-      confirmation_token: found_resource.confirmation_token
-    )
+    @form = User::DatabaseAuthenticationRegistrationForm.new(confirmation_token: found_resource.confirmation_token)
   end
 
   def create
@@ -29,15 +26,11 @@ class User::DatabaseAuthenticationsController < ApplicationController
     end
 
     unless found_resource.confirmed?
-      @form = User::DatabaseAuthenticationRegistrationForm.new(
-        email: found_resource.email,
-        confirmation_token: found_resource.confirmation_token
-      )
+      @form = User::DatabaseAuthenticationRegistrationForm.new(confirmation_token: found_resource.confirmation_token)
       return render :new, status: :unprocessable_entity
     end
 
     form_params = params.require(:confirmation).permit(:user_name, :password, :password_confirmation, :confirmation_token)
-    form_params[:email] = found_resource.email
     @form = User::DatabaseAuthenticationRegistrationForm.new(form_params)
 
     if @form.call
