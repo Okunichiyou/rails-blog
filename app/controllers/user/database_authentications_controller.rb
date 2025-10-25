@@ -3,25 +3,12 @@ class User::DatabaseAuthenticationsController < ApplicationController
     confirmation_token = params[:confirmation_token]
     @form = User::DatabaseAuthenticationRegistrationForm.new(confirmation_token:)
 
-    case @form.validate_token
-    when :not_found
-      head :not_found
-    when :unprocessable_entity
-      head :unprocessable_entity
-    end
+    return if @form.valid?
+
+    render :new, status: :unprocessable_entity
   end
 
   def create
-    confirmation_token = params.dig(:confirmation, :confirmation_token)
-    @form = User::DatabaseAuthenticationRegistrationForm.new(confirmation_token:)
-
-    case @form.validate_token
-    when :not_found
-      return head :not_found
-    when :unprocessable_entity
-      return render :new, status: :unprocessable_entity
-    end
-
     form_params = params.require(:confirmation).permit(:user_name, :password, :password_confirmation, :confirmation_token)
     @form = User::DatabaseAuthenticationRegistrationForm.new(form_params)
 

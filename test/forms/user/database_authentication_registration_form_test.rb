@@ -167,4 +167,38 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
     assert form.errors[:password].any?, "Passwordのエラーが格納されていない"
     assert form.errors[:password_confirmation].any?, "Password confirmationのエラーが格納されていない"
   end
+
+  # =====================================
+  # トークン検証
+  # =====================================
+
+  test "無効なトークンの場合、confirmation_tokenにエラーが格納される" do
+    form = User::DatabaseAuthenticationRegistrationForm.new(
+      user_name: "testuser",
+      password: "password123",
+      password_confirmation: "password123",
+      confirmation_token: "invalid_token"
+    )
+
+    assert_not form.valid?
+    assert form.errors[:confirmation_token].any?, "confirmation_tokenのエラーが格納されていない"
+  end
+
+  test "未確認のトークンの場合、confirmation_tokenにエラーが格納される" do
+    User::Confirmation.create!(
+      unconfirmed_email: "unconfirmed@example.com",
+      confirmation_token: "unconfirmed_token",
+      confirmation_sent_at: 10.minutes.ago
+    )
+
+    form = User::DatabaseAuthenticationRegistrationForm.new(
+      user_name: "testuser",
+      password: "password123",
+      password_confirmation: "password123",
+      confirmation_token: "unconfirmed_token"
+    )
+
+    assert_not form.valid?
+    assert form.errors[:confirmation_token].any?, "confirmation_tokenのエラーが格納されていない"
+  end
 end

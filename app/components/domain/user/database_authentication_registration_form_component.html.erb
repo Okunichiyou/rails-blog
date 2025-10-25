@@ -1,5 +1,13 @@
 <div <%= tag.attributes(@html_options) %> >
   <%= form_with(model: @form, url: @create_database_authentication_path, html: { method: :post, class: "database-authentication-registration-form" }) do |f| %>
+    <% if @form.errors[:confirmation_token].any? %>
+      <%= render Ui::FlashComponent.new(flash_type: :alert) do |c| %>
+        <%- c.with_flash_content do %>
+          <%= @form.errors.full_messages_for(:confirmation_token).join(", ") %>
+        <% end %>
+      <% end %>
+    <% end %>
+
     <div class="field">
       <%= f.label :user_name %>
       <%= render Ui::TextFieldComponent.new(
