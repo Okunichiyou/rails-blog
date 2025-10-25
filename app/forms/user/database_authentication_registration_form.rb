@@ -9,6 +9,7 @@ class User::DatabaseAuthenticationRegistrationForm
 
   attr_reader :user, :user_database_authentication
 
+  validate :validate_token
   validate :validate_user
   validate :validate_database_authentication
 
@@ -36,14 +37,14 @@ class User::DatabaseAuthenticationRegistrationForm
     found_resource = User::Confirmation.find_by(confirmation_token:)
 
     if found_resource.nil?
-      return :not_found
+      errors.add(:confirmation_token, :not_found, message: "が見つかりません")
+      return
     end
 
     unless found_resource.confirmed?
-      return :unprocessable_entity
+      errors.add(:confirmation_token, :not_confirmed, message: "が確認されていません")
+      nil
     end
-
-    nil
   end
 
   private
@@ -59,6 +60,7 @@ class User::DatabaseAuthenticationRegistrationForm
   end
 
   def validate_user
+    return unless @user # モデルが構築されていない場合はスキップ
     return if user.valid?
 
     user.errors.each do |error|
@@ -68,6 +70,7 @@ class User::DatabaseAuthenticationRegistrationForm
   end
 
   def validate_database_authentication
+    return unless @user_database_authentication # モデルが構築されていない場合はスキップ
     return if user_database_authentication.valid?
 
     user_database_authentication.errors.each do |error|

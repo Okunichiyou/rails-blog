@@ -22,7 +22,8 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
   test "GET /user/database_authentications/new 無効なトークンでエラー" do
     get new_user_database_authentication_path(confirmation_token: "invalid_token")
 
-    assert_response :not_found
+    assert_response :unprocessable_entity
+    assert_select "form", count: 1
   end
 
   test "GET /user/database_authentications/new 未確認のトークンでエラー" do
@@ -35,6 +36,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     get new_user_database_authentication_path(confirmation_token: "unconfirmed_token")
 
     assert_response :unprocessable_entity
+    assert_select "form", count: 1
   end
 
   # =====================================
@@ -88,7 +90,8 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       }
     end
 
-    assert_response :not_found
+    assert_response :unprocessable_entity
+    assert_select "form", count: 1
   end
 
   test "POST /user/database_authentications パスワード不一致でエラー" do
@@ -209,6 +212,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     end
 
     assert_response :unprocessable_entity
+    assert_select "form", count: 1
   end
 
   test "POST /user/database_authentications リクエストで別のemailを送信しても確認済みのemailで登録される" do

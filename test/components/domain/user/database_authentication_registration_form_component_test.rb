@@ -77,4 +77,15 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
     assert_selector("button[type=submit]", text: "Submit")
   end
+
+  test "confirmation_tokenにエラーがある場合、FlashComponentでエラーメッセージが表示されること" do
+    @form.errors.add(:confirmation_token, :not_found, message: "が見つかりません")
+
+    render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
+      form: @form,
+      create_database_authentication_path: "/user/database_authentications"
+    ))
+
+    assert_selector(".alert", text: "Confirmation token が見つかりません")
+  end
 end
