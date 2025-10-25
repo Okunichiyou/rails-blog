@@ -9,6 +9,9 @@ class User::DatabaseAuthenticationRegistrationForm
 
   attr_reader :user, :user_database_authentication
 
+  validate :validate_user
+  validate :validate_database_authentication
+
   # Userモデル属性からフォーム属性へのマッピング
   USER_ATTR_TRANSFORM_MAP = {
     name: :user_name
@@ -24,9 +27,23 @@ class User::DatabaseAuthenticationRegistrationForm
 
   def call
     build_models
-    return false unless validate_all_models
+    return false unless valid?
 
     save_models
+  end
+
+  def validate_token
+    found_resource = User::Confirmation.find_by(confirmation_token:)
+
+    if found_resource.nil?
+      return :not_found
+    end
+
+    unless found_resource.confirmed?
+      return :unprocessable_entity
+    end
+
+    nil
   end
 
   private
@@ -41,29 +58,21 @@ class User::DatabaseAuthenticationRegistrationForm
     )
   end
 
-  def validate_all_models
-    is_user_valid = validate_user
-    is_auth_valid = validate_database_authentication
-    is_user_valid && is_auth_valid
-  end
-
   def validate_user
-    return true if @user.valid?
+    return if @user.valid?
 
     @user.errors.each do |error|
       attribute = USER_ATTR_TRANSFORM_MAP[error.attribute] || error.attribute
       errors.add(attribute, error.type, message: error.message)
     end
-    false
   end
 
   def validate_database_authentication
-    return true if @user_database_authentication.valid?
+    return if @user_database_authentication.valid?
 
     @user_database_authentication.errors.each do |error|
       errors.add(error.attribute, error.type, message: error.message)
     end
-    false
   end
 
   def save_models
@@ -80,6 +89,6 @@ class User::DatabaseAuthenticationRegistrationForm
   end
 
   def confirmation_resource
-    @confirmaition_resource ||= User::Confirmation.find_by(confirmation_token:)
+    @confirmation_resource ||= User::Confirmation.find_by(confirmation_token:)
   end
 end
