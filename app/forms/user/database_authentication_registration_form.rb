@@ -51,7 +51,7 @@ class User::DatabaseAuthenticationRegistrationForm
   def build_models
     @user = User.new(name: user_name)
     @user_database_authentication = User::DatabaseAuthentication.new(
-      user: @user,
+      user: user,
       email: email,
       password: password,
       password_confirmation: password_confirmation
@@ -59,26 +59,26 @@ class User::DatabaseAuthenticationRegistrationForm
   end
 
   def validate_user
-    return if @user.valid?
+    return if user.valid?
 
-    @user.errors.each do |error|
+    user.errors.each do |error|
       attribute = USER_ATTR_TRANSFORM_MAP[error.attribute] || error.attribute
       errors.add(attribute, error.type, message: error.message)
     end
   end
 
   def validate_database_authentication
-    return if @user_database_authentication.valid?
+    return if user_database_authentication.valid?
 
-    @user_database_authentication.errors.each do |error|
+    user_database_authentication.errors.each do |error|
       errors.add(error.attribute, error.type, message: error.message)
     end
   end
 
   def save_models
     ActiveRecord::Base.transaction do
-      @user.save!
-      @user_database_authentication.save!
+      user.save!
+      user_database_authentication.save!
 
       confirmation_resource&.destroy!
 
