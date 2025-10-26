@@ -57,18 +57,32 @@ sequenceDiagram
     participant DB as データベース
     participant Mailer as メール送信機構
 
-    User->>Browser: メールアドレス・パスワード入力
-    Browser->>App: POST /users/sign_up
+    User->>Browser: メールアドレス入力
+    Browser->>App: POST /confirmations
     App->>DB: user_confirmationsテーブルに仮登録
     App->>Mailer: 確認メール送信
+    App-->>Browser: GET /confirmations/sent にリダイレクト
+    Browser->>App: GET /confirmations/sent
+    App-->>Browser: 確認メール送信完了画面表示
     Mailer-->>User: 確認メール受信
     User->>Browser: 確認メール内のURLクリック
-    Browser->>App: GET /users/confirmation?confirmation_token=xxx
+    Browser->>App: GET /confirmations/confirmation?confirmation_token=xxx
     App->>DB: user_confirmationsから該当レコード取得
-    App->>DB: usersテーブルにユーザー作成
-    App->>DB: user_database_authenticationsテーブルに認証情報作成
-    App->>DB: user_confirmationsレコード削除
-    App-->>Browser: 認証完了・ログイン状態
+    App->>App: トークン検証
+    alt トークン有効
+        App-->>Browser: GET /user/database_authentications/new?confirmation_token=xxx にリダイレクト
+        Browser->>App: GET /user/database_authentications/new?confirmation_token=xxx
+        App-->>Browser: ユーザー名・パスワード入力画面表示
+        User->>Browser: ユーザー名・パスワード入力
+        Browser->>App: POST /user/database_authentications
+        App->>DB: usersテーブルにユーザー作成
+        App->>DB: user_database_authenticationsテーブルに認証情報作成
+        App->>DB: user_confirmationsレコード削除
+        App->>App: セッション作成
+        App-->>Browser: 認証完了・ログイン状態・root_pathにリダイレクト
+    else トークン無効
+        App-->>Browser: エラーメッセージ表示 (422)
+    end
 ```
 
 ### Sign In (ログイン)
