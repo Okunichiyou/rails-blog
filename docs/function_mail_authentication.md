@@ -5,10 +5,12 @@
 
 ## ER図
 
-- user_confirmations
-  - 認証が完了したらすぐに破棄するのでusersテーブルとは紐付けない
+- user_confirmationsについて
+  - 認証が完了したら使う用途がないデータなので、すぐに破棄する
   - unconfirmed_emailはメールの認証がされると、deviseの処理の中でnilとして保存され直すのでnullableになっている
-- ユーザーは複数の認証手段を用意する想定なので、database_authenticationとusersテーブルは分離している
+- database_authenticationとusersテーブルは分離している理由について
+  - 認証方法としてソーシャルログインも加えるため、メールアドレス認証を利用しないユーザーもいる
+  - 現状はuserとdatabase_authenticationは1:1の関係だが、1:多にしたくなるかもしれないので予めテーブルを分離しておく
 
 ```mermaid
   erDiagram
@@ -119,7 +121,7 @@ sequenceDiagram
 - アカウントロック → 連続ログイン失敗（実装予定）
 
 ### 確認メール関連のエラー
-- トークン期限切れ → `confirmation_sent_at`から一定時間経過
+- トークン期限切れ → `confirmation_sent_at`から指定した有効期限を過ぎるとトークン期限切れになる
 - 無効なトークン → `confirmation_token`が存在しない
 
 ## セキュリティ仕様
