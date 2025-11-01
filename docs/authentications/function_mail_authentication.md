@@ -13,41 +13,41 @@
   - 現状はuserとdatabase_authenticationは1:1の関係だが、1:多にしたくなるかもしれないので予めテーブルを分離しておく
 
 ```mermaid
-  erDiagram
-      users {
-          INTEGER id PK
-          STRING name UK "NOT NULL"
-          DATETIME created_at "NOT NULL"
-          DATETIME updated_at "NOT NULL"
-      }
+erDiagram
+  users {
+      INTEGER id PK
+      STRING name UK "NOT NULL"
+      DATETIME created_at "NOT NULL"
+      DATETIME updated_at "NOT NULL"
+  }
 
-      user_database_authentications {
-          INTEGER id PK
-          INTEGER user_id FK "NOT NULL"
-          STRING email UK "NOT NULL"
-          STRING encrypted_password "NOT NULL"
-          DATETIME created_at "NOT NULL"
-          DATETIME updated_at "NOT NULL"
-      }
+  user_database_authentications {
+      INTEGER id PK
+      INTEGER user_id FK "NOT NULL"
+      STRING email UK "NOT NULL"
+      STRING encrypted_password "NOT NULL"
+      DATETIME created_at "NOT NULL"
+      DATETIME updated_at "NOT NULL"
+  }
 
-      user_confirmations {
-          INTEGER id PK
-          STRING confirmation_token UK "NOT NULL"
-          DATETIME confirmed_at
-          DATETIME confirmation_sent_at
-          STRING unconfirmed_email UK
-          STRING email
-          DATETIME created_at "NOT NULL"
-          DATETIME updated_at "NOT NULL"
-      }
+  user_confirmations {
+      INTEGER id PK
+      STRING confirmation_token UK "NOT NULL"
+      DATETIME confirmed_at
+      DATETIME confirmation_sent_at
+      STRING unconfirmed_email UK
+      STRING email
+      DATETIME created_at "NOT NULL"
+      DATETIME updated_at "NOT NULL"
+  }
 
-      users ||--o| user_database_authentications : "has"
+  users ||--o| user_database_authentications : "has"
 ```
-
 
 ## シーケンス図
 
 ### Sign Up (新規登録)
+
 - 「メール送信機構」はActionMailerやSMTPサーバーなどメール送信に関わるもの
   - フローに含めると煩雑になるのでひとまとめにしている
 
@@ -111,24 +111,29 @@ sequenceDiagram
 ## エラーハンドリング
 
 ### Sign Up時のエラー
+
 - メールアドレス重複 → `user_database_authentications.email`のユニーク制約違反
 - バリデーションエラー → パスワード要件未満、メール形式不正
 - メール送信失敗 → SMTP設定エラー、ネットワーク障害
 
 ### Sign In時のエラー
+
 - メールアドレス未登録 → `user_database_authentications`テーブルにレコード不存在
 - パスワード不一致 → `encrypted_password`との照合失敗
 - アカウントロック → 連続ログイン失敗（実装予定）
 
 ### 確認メール関連のエラー
+
 - トークン期限切れ → `confirmation_sent_at`から指定した有効期限を過ぎるとトークン期限切れになる
 - 無効なトークン → `confirmation_token`が存在しない
 
 ## セキュリティ仕様
 
 ### パスワード要件
+
 - 最小6文字以上
 
 ### 確認トークン
+
 - 確認トークン有効期限：30分
   - メールアドレス認証は確認メール送信から30分を超えるとトークンが無効になる
