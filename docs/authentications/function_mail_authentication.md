@@ -41,7 +41,7 @@
           DATETIME updated_at "NOT NULL"
       }
 
-      users ||--|| user_database_authentications : "has"
+      users ||--o| user_database_authentications : "has"
 ```
 
 
