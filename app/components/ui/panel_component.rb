@@ -1,29 +1,42 @@
 module Ui
-  class PanelComponent < Ui::Base
+  class PanelComponent < ApplicationComponent
     renders_one :panel_content
 
     SIZE_OPTIONS = %i[full large medium small].freeze
 
     def initialize(
       size:,
-      panel_class: "",
-      html_options: {}
+      **html_options
     )
       @size = filter_attribute(value: size, white_list: SIZE_OPTIONS)
-      @panel_class = panel_class.split
-      @html_options = build_html_options(html_options)
+      @html_options = html_options.merge(class: panel_classes(html_options[:class]))
     end
 
     private
 
-    def build_html_options(html_options)
-      html_options.merge({ class: panel_classes })
+    def panel_classes(extra_classes)
+      classes = [
+        "bg-[var(--color-bg-surface)]",
+        "rounded-[var(--radius-lg)]",
+        "p-4",
+        "shadow-[var(--shadow)]",
+        size_class,
+        extra_classes
+      ].compact
+      classes.join(" ")
     end
 
-    def panel_classes
-      classes = []
-      classes.push(@size.to_s)
-      classes.concat(@panel_class)
+    def size_class
+      case @size
+      when :full
+        "w-full"
+      when :large
+        "w-[800px]"
+      when :medium
+        "w-[400px]"
+      when :small
+        "w-[200px]"
+      end
     end
   end
 end

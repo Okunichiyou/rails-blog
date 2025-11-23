@@ -21,10 +21,4 @@ class Ui::FieldErrorsComponentTest < ViewComponent::TestCase
     assert_selector("ul li", text: "Email can't be blank")
     assert_selector("ul li", text: "Email is invalid")
   end
-
-  test "data-scopeが適用されること" do
-    render_inline(Ui::FieldErrorsComponent.new(error_messages: [ "Email can't be blank" ]))
-
-    assert_selector("ul[data-scope]")
-  end
 end

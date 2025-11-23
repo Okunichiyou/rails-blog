@@ -1,6 +1,0 @@
-@scope (.page-user-confirmations-show-page-component) to ([data-scope]) {
-  :scope {
-    display: flex;
-    justify-content: center;
-  }
-}

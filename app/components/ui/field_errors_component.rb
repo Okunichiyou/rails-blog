@@ -1,8 +1,18 @@
 module Ui
-  class FieldErrorsComponent < Ui::Base
-    def initialize(error_messages:)
+  class FieldErrorsComponent < ApplicationComponent
+    def initialize(error_messages:, **html_options)
       @error_messages = error_messages
-      @html_options = {}
+      @html_options = html_options.merge(class: error_classes(html_options[:class]))
+    end
+
+    private
+
+    def error_classes(extra_classes)
+      classes = [
+        "list-disc list-inside mt-1 mb-0 text-[var(--color-text-alert-inline)] text-[length:var(--font-size-note)] [&>li]:my-[2px]",
+        extra_classes
+      ].compact
+      classes.join(" ")
     end
   end
 end

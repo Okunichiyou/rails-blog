@@ -1,6 +1,6 @@
 module Domain
   module User
-    class LoginFormComponent < Domain::Base
+    class LoginFormComponent < ApplicationComponent
       def initialize(resource:, resource_name:, login_path:)
         @resource = resource
         @resource_name = resource_name

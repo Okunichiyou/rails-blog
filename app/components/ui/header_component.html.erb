@@ -1,16 +1,21 @@
-<header <%= tag.attributes(@html_options) %>>
-  <div class="header-container">
-    <div class="logo">
-      <%= link_to "奥日曜のWebサイト", root_path %>
+<%
+  base_classes = "bg-[var(--color-bg-primary)]"
+  merged_classes = [@html_options[:class], base_classes].compact.join(" ")
+  html_attrs = @html_options.merge(class: merged_classes)
+%>
+<header <%= tag.attributes(html_attrs) %>>
+  <div class="flex justify-between h-[60px] max-w-[var(--max-content-width)] mx-auto px-[var(--layout-content-padding)]">
+    <div class="logo text-[var(--color-text-primary-button)] flex h-full items-center font-['Yomogi',cursive] text-[1.2rem]">
+      <%= link_to "奥日曜のWebサイト", root_path, class: "text-[var(--color-text-primary-button)] no-underline" %>
     </div>
-    <div class="action-area">
-      <button id="theme-toggle-button" data-controller="theme-toggle" data-action="click->theme-toggle#toggle">
+    <div class="flex gap-2 relative">
+      <button id="theme-toggle-button" data-controller="theme-toggle" data-action="click->theme-toggle#toggle" class="h-full border-none box-border flex items-center justify-center cursor-pointer bg-transparent">
         <%# ライトモード時のアイコン: 月 %>
-        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="w-[30px] h-[30px] stroke-[var(--color-text-primary-button)] transition-opacity duration-200 ease-in-out moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
         <%# ダークモード時のアイコン: 太陽 %>
-        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="w-[30px] h-[30px] stroke-[var(--color-text-primary-button)] transition-opacity duration-200 ease-in-out sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="5"></circle>
           <line x1="12" y1="1" x2="12" y2="3"></line>
           <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -21,7 +26,7 @@
           <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
         </svg>
-        
+
         <%# 初期表示の時にアイコンを設定する。Stimulusのconnect()だと一瞬誤ったボタンが表示されてしまうため、scriptタグで実行 %>
         <script>
           (function() {
@@ -29,7 +34,7 @@
             const button = document.currentScript.parentElement;
             const moonIcon = button.querySelector('.moon-icon');
             const sunIcon = button.querySelector('.sun-icon');
-            
+
             if (theme === 'dark') {
               moonIcon.style.display = 'none';
               sunIcon.style.display = 'block';
@@ -40,9 +45,12 @@
           })();
         </script>
       </button>
-      <button class="hamburger-menu-button" data-controller="hamburger-menu" data-action="click->hamburger-menu#toggle">
+      <button class="hamburger-menu-button relative h-full border-none w-[60px] cursor-pointer flex flex-col items-center justify-center gap-1.5" data-controller="hamburger-menu" data-action="click->hamburger-menu#toggle">
+        <span class="hamburger-line w-6 h-[3px] bg-[var(--color-text-primary-button)] transition-all duration-300 ease-in-out"></span>
+        <span class="hamburger-line w-6 h-[3px] bg-[var(--color-text-primary-button)] transition-all duration-300 ease-in-out"></span>
+        <span class="hamburger-line w-6 h-[3px] bg-[var(--color-text-primary-button)] transition-all duration-300 ease-in-out"></span>
       </button>
-      <nav class="hamburger-menu">
+      <nav class="hamburger-menu absolute top-[60px] right-0 bg-[var(--color-bg-surface)] border border-[var(--color-border-default)] rounded-[var(--radius-md)] min-w-[120px] z-[1000] hidden [&>a]:block [&>a]:py-3 [&>a]:px-4 [&>a]:text-[var(--color-text-default)] [&>a]:no-underline [&>a]:text-[length:var(--font-size-body)] [&>a]:border-b [&>a]:border-[var(--color-border-default)] [&>a]:transition-colors [&>a]:duration-200 [&>a]:ease-in-out [&>a:first-child]:rounded-t-[var(--radius-md)] [&>a:last-child]:border-b-0 [&>a:last-child]:rounded-b-[var(--radius-md)] [&>a:hover]:bg-[var(--color-bg-surface-hover)]">
         <% if @login_user.present? %>
           <%= link_to "ログアウト", logout_path, data: { "turbo-method": :delete } %>
         <% else %>

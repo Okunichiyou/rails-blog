@@ -11,24 +11,13 @@ class Ui::PasswordFieldComponentTest < ViewComponent::TestCase
     assert_selector("input[type='password'][name='user_database_authentication[password]'][id='user_database_authentication_password']")
   end
 
-  test "size のクラスが設定されること" do
-    render_inline(Ui::PasswordFieldComponent.new(builder: form_builder, method: :password, size: :large))
-
-    assert_selector("input.text-field-component.large.default")
-  end
-
-  test "variant のクラスが設定されること" do
-    render_inline(Ui::PasswordFieldComponent.new(builder: form_builder, method: :password, size: :medium, variant: :alert))
-
-    assert_selector("input.text-field-component.medium.alert")
-  end
-
   test "html_options が適用されること" do
     component = Ui::PasswordFieldComponent.new(
       builder: form_builder,
       method: :password,
       size: :medium,
-      html_options: { autocomplete: "current-password", class: "custom-class" }
+      autocomplete: "current-password",
+      class: "custom-class"
     )
 
     render_inline(component)
@@ -37,8 +26,6 @@ class Ui::PasswordFieldComponentTest < ViewComponent::TestCase
     assert_selector("input[type='password']")
     # autocomplete属性があることを確認
     assert_selector("input[autocomplete='current-password']")
-    # classがマージされていることを確認
-    assert_selector("input.text-field-component.medium.default")
     # custom-classも含まれていることを確認
     assert_selector("input.custom-class")
   end

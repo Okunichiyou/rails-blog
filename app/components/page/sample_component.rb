@@ -1,5 +1,5 @@
 module Page
-  class SampleComponent < Page::Base
+  class SampleComponent < ApplicationComponent
     def initialize
     end
   end

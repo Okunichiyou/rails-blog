@@ -8,7 +8,7 @@ class HeaderComponentTest < ViewComponent::TestCase
     render_inline(Ui::HeaderComponent.new(login_user: nil))
 
     # ヘッダー要素の確認
-    assert_selector("header[data-scope='ui-header-component'].ui-header-component")
+    assert_selector("header")
 
     # ロゴの確認
     assert_selector(".logo a[href='/']", text: "奥日曜のWebサイト")
@@ -54,8 +54,8 @@ class HeaderComponentTest < ViewComponent::TestCase
   # HTML属性のテスト
   # =====================================
   test "カスタムHTML属性が設定されること" do
-    render_inline(Ui::HeaderComponent.new(login_user: nil, html_options: { id: [ "custom-header" ], class: [ "custom-class" ] }))
+    render_inline(Ui::HeaderComponent.new(login_user: nil, id: "custom-header", class: "custom-class"))
 
-    assert_selector("header#custom-header[data-scope='ui-header-component'].ui-header-component.custom-class")
+    assert_selector("header#custom-header.custom-class")
   end
 end

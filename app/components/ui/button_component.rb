@@ -1,5 +1,5 @@
 module Ui
-  class ButtonComponent < Ui::Base
+  class ButtonComponent < ApplicationComponent
     CATEGORY_OPTIONS = %i[primary secondary].freeze
     SIZE_OPTIONS = %i[full large medium small].freeze
     TYPE_OPTIONS = %i[button submit reset].freeze
@@ -7,35 +7,85 @@ module Ui
 
     def initialize(
       category:,
-      button_class: "",
       size:,
       type: :button,
       variant: :default,
       text:,
-      html_options: {}
+      **html_options
     )
       @category = filter_attribute(value: category, white_list: CATEGORY_OPTIONS)
-      @button_class = button_class.split
       @size = filter_attribute(value: size, white_list: SIZE_OPTIONS)
       @type = filter_attribute(value: type, white_list: TYPE_OPTIONS)
       @variant = filter_attribute(value: variant, white_list: VARIANT_OPTIONS)
       @text = text
-      @html_options = build_html_options(html_options)
+      @html_options = html_options.merge(type: @type.to_s, class: button_classes(html_options[:class]))
     end
 
     private
 
-    def build_html_options(html_options)
-      options = html_options.merge({ class: button_classes })
-      options.merge!({ type: @type.to_s })
+    def button_classes(extra_classes)
+      classes = [
+        "group",
+        "border-none cursor-pointer font-bold px-10 py-6 text-center",
+        "overflow-hidden relative transition-all duration-[400ms] ease-[cubic-bezier(0.175,0.885,0.32,2.2)]",
+        "hover:px-[2.8rem] hover:py-[1.8rem]",
+        "active:px-[3.1rem] active:py-[2.1rem]",
+        "disabled:cursor-not-allowed disabled:opacity-50",
+        "disabled:hover:px-10 disabled:hover:py-6",
+        "rounded-[3rem]",
+        @category,
+        @variant == :danger ? "danger" : nil,
+        size_class,
+        extra_classes
+      ].compact
+      classes.join(" ")
     end
 
-    def button_classes
-      classes = []
-      classes.push(@category.to_s)
-      classes.concat(@button_class)
-      classes.push(@size.to_s)
-      classes.push(@variant.to_s)
+    def size_class
+      case @size
+      when :full
+        "w-full"
+      when :large
+        "w-[12.5rem]"
+      when :medium
+        "w-[7.5rem]"
+      when :small
+        "w-[5rem]"
+      end
+    end
+
+    def text_color_class
+      case @category
+      when :primary
+        if @variant == :danger
+          "text-[var(--color-text-primary-danger-button)]"
+        else
+          "text-[var(--color-text-primary-button)]"
+        end
+      when :secondary
+        if @variant == :danger
+          "text-[var(--color-text-secondary-danger-button)]"
+        else
+          "text-[var(--color-text-secondary-button)]"
+        end
+      end
+    end
+
+    def tint_bg_class
+      case @category
+      when :primary
+        if @variant == :danger
+          "bg-[var(--color-bg-primary-danger-button)]"
+        else
+          "bg-[var(--color-bg-primary-button)]"
+        end
+      when :secondary
+        if @variant == :danger
+          "bg-[var(--color-bg-secondary-danger-button)]"
+        else
+          "bg-[var(--color-bg-secondary-button)]"
+        end
+      end
     end
   end
 end

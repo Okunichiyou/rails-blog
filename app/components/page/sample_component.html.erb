@@ -20,11 +20,11 @@
   <%= render Ui::ButtonComponent.new(category: :primary, size: :medium, text: "プライマリー")%>
   <%= render Ui::ButtonComponent.new(category: :primary, size: :small, text: "small")%>
   <%= render Ui::ButtonComponent.new(category: :primary, size: :full, text: "プライマリー/フルサイズ")%>
-  <%= render Ui::ButtonComponent.new(category: :primary, size: :medium, text: "無効なボタン", html_options: { disabled: true })%>
-  <%= render Ui::ButtonComponent.new(category: :secondary, size: :medium, text: "無効なボタン", html_options: { disabled: true })%>
+  <%= render Ui::ButtonComponent.new(category: :primary, size: :medium, text: "無効なボタン", disabled: true)%>
+  <%= render Ui::ButtonComponent.new(category: :secondary, size: :medium, text: "無効なボタン", disabled: true)%>
   <%= render Ui::ButtonComponent.new(category: :primary, size: :medium, variant: :danger, text: "danger")%>
   <%= render Ui::ButtonComponent.new(category: :secondary, size: :medium, variant: :danger, text: "danger")%>
-    <%= render Ui::ButtonComponent.new(category: :primary, size: :medium, variant: :danger, text: "danger", html_options: { disabled: true })%>
-  <%= render Ui::ButtonComponent.new(category: :secondary, size: :medium, variant: :danger, text: "danger", html_options: { disabled: true })%>
+  <%= render Ui::ButtonComponent.new(category: :primary, size: :medium, variant: :danger, text: "danger", disabled: true)%>
+  <%= render Ui::ButtonComponent.new(category: :secondary, size: :medium, variant: :danger, text: "danger", disabled: true)%>
 </div>
 

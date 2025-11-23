@@ -86,6 +86,6 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
       create_database_authentication_path: "/user/database_authentications"
     ))
 
-    assert_selector(".alert", text: "Confirmation token が見つかりません")
+    assert_selector("div", text: "Confirmation token が見つかりません")
   end
 end

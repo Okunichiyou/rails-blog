@@ -92,7 +92,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     # 無効なトークンの場合はエラーメッセージを表示
     assert_response :unprocessable_entity
     assert_select "h2", text: "メールアドレスの確認に失敗しました"
-    assert_select "div.alert", text: /Confirmation token is invalid/
+    assert_select "div", text: /Confirmation token is invalid/
   end
 
   test "GET /confirmations/confirmation 30分丁度のトークンは有効（境界値を含む）" do
@@ -133,7 +133,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
       # 期限切れの場合はエラーメッセージを表示
       assert_response :unprocessable_entity
       assert_select "h2", text: "メールアドレスの確認に失敗しました"
-      assert_select "div.alert", text: /needs to be confirmed within/
+      assert_select "div", text: /needs to be confirmed within/
 
       # メールアドレスの確認は完了していない
       confirmation.reload

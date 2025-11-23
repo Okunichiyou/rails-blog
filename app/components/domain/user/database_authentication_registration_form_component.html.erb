@@ -1,5 +1,5 @@
 <div <%= tag.attributes(@html_options) %> >
-  <%= form_with(model: @form, url: @create_database_authentication_path, html: { method: :post, class: "database-authentication-registration-form" }) do |f| %>
+  <%= form_with(model: @form, url: @create_database_authentication_path, html: { method: :post, class: "database-authentication-registration-form flex flex-col gap-4" }) do |f| %>
     <% if @form.errors[:confirmation_token].any? %>
       <%= render Ui::FlashComponent.new(flash_type: :alert) do |c| %>
         <%- c.with_flash_content do %>
@@ -9,7 +9,7 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :user_name %>
+      <%= f.label :user_name, class: "block" %>
       <%= render Ui::TextFieldComponent.new(
         builder: f,
         method: :user_name,
@@ -20,13 +20,13 @@
     </div>
 
     <div class="field">
-      <%= f.label :email %>
+      <%= f.label :email, class: "block" %>
       <p><%= @form.email %></p>
       <%= render Ui::FieldErrorsComponent.new(error_messages: @form.errors.full_messages_for(:email)) %>
     </div>
 
     <div class="field">
-      <%= f.label :password %>
+      <%= f.label :password, class: "block" %>
       <%= render Ui::PasswordFieldComponent.new(
         builder: f,
         method: :password,
@@ -37,7 +37,7 @@
     </div>
 
     <div class="field">
-      <%= f.label :password_confirmation %>
+      <%= f.label :password_confirmation, class: "block" %>
       <%= render Ui::PasswordFieldComponent.new(
         builder: f,
         method: :password_confirmation,
