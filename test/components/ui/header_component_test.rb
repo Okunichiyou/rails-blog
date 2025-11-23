@@ -30,7 +30,7 @@ class HeaderComponentTest < ViewComponent::TestCase
     render_inline(Ui::HeaderComponent.new(login_user: nil))
 
     # ログインリンクの確認
-    assert_selector(".hamburger-menu a[href='/database_authentications/sign_in']", text: "ログイン")
+    assert_selector(".hamburger-menu a[href='/login']", text: "ログイン")
 
     # ログアウトリンクが表示されないことの確認
     assert_no_selector(".hamburger-menu a", text: "ログアウト")
@@ -44,7 +44,7 @@ class HeaderComponentTest < ViewComponent::TestCase
     render_inline(Ui::HeaderComponent.new(login_user: user))
 
     # ログアウトリンクの確認
-    assert_selector(".hamburger-menu a[href='/database_authentications/sign_out'][data-turbo-method='delete']", text: "ログアウト")
+    assert_selector(".hamburger-menu a[href='/logout'][data-turbo-method='delete']", text: "ログアウト")
 
     # ログインリンクが表示されないことの確認
     assert_no_selector(".hamburger-menu a", text: "ログイン")

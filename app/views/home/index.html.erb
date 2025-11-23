@@ -6,10 +6,10 @@
     <p><strong>Name:</strong> <%= current_user.name %></p>
     <p><strong>Email:</strong> <%= current_user.database_authentication.email %></p>
   </div>
-  <%= link_to "Logout", destroy_database_authentication_session_path, data: { turbo_method: :delete } %>
+  <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete } %>
 <% else %>
   <div class="auth-links">
-    <%= link_to "Sign in", new_database_authentication_session_path %>
-    <%= link_to "Sign up", new_confirmation_confirmation_path %>
+    <%= link_to "ログイン", login_path %>
+    <%= link_to "新規登録", new_confirmation_confirmation_path %>
   </div>
 <% end %>

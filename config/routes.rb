@@ -3,9 +3,13 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   devise_for :user, skip: :all
-  devise_for :database_authentications, class_name: "User::DatabaseAuthentication", controllers: {
-    sessions: "user/database_authentication/sessions"
-  }
+  devise_for :database_authentications, class_name: "User::DatabaseAuthentication", skip: :all
+
+  devise_scope :database_authentication do
+    get "/login", to: "user/database_authentication/sessions#new", as: :login
+    post "/login", to: "user/database_authentication/sessions#create"
+    delete "/logout", to: "user/database_authentication/sessions#destroy", as: :logout
+  end
   devise_for :confirmations, class_name: "User::Confirmation", controllers: {
     confirmations: "user/confirmations"
   }

@@ -16,7 +16,7 @@ class User::DatabaseAuthentication::SessionsControllerTest < ActionDispatch::Int
   # =====================================
 
   test "GET /database_authentication/login ログイン画面表示" do
-    get new_database_authentication_session_path
+    get login_path
 
     assert_response :success
     assert_select "form", count: 1
@@ -27,7 +27,7 @@ class User::DatabaseAuthentication::SessionsControllerTest < ActionDispatch::Int
   # =====================================
 
   test "POST /database_authentication/login 正しい認証情報でログイン成功" do
-    post database_authentication_session_path, params: {
+    post login_path, params: {
       database_authentication: {
         email: "test@example.com",
         password: "password123"
@@ -41,7 +41,7 @@ class User::DatabaseAuthentication::SessionsControllerTest < ActionDispatch::Int
   end
 
   test "POST /database_authentication/login 存在しないメールアドレスでログイン失敗" do
-    post database_authentication_session_path, params: {
+    post login_path, params: {
       database_authentication: {
         email: "nonexistent@example.com",
         password: "password123"
@@ -55,7 +55,7 @@ class User::DatabaseAuthentication::SessionsControllerTest < ActionDispatch::Int
   end
 
   test "POST /database_authentication/login 間違ったパスワードでログイン失敗" do
-    post database_authentication_session_path, params: {
+    post login_path, params: {
       database_authentication: {
         email: "test@example.com",
         password: "wrongpassword"
@@ -74,7 +74,7 @@ class User::DatabaseAuthentication::SessionsControllerTest < ActionDispatch::Int
 
   test "DELETE /database_authentication/logout ログアウト成功" do
     # ログイン状態を作成
-    post database_authentication_session_path, params: {
+    post login_path, params: {
       database_authentication: {
         email: "test@example.com",
         password: "password123"
@@ -82,7 +82,7 @@ class User::DatabaseAuthentication::SessionsControllerTest < ActionDispatch::Int
     }
 
     # ログアウト実行
-    delete destroy_database_authentication_session_path
+    delete logout_path
 
     assert_redirected_to root_path
     assert_nil session["warden.user.user.key"]
@@ -90,7 +90,7 @@ class User::DatabaseAuthentication::SessionsControllerTest < ActionDispatch::Int
   end
 
   test "DELETE /database_authentication/logout 未ログイン状態でログアウト" do
-    delete destroy_database_authentication_session_path
+    delete logout_path
 
     assert_redirected_to root_path
     assert_nil session["warden.user.user.key"]
