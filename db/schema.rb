@@ -11,18 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2025_11_23_080954) do
-  create_table "sns_credentials", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.string "provider", null: false
-    t.string "uid", null: false
-    t.string "email", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["provider", "email"], name: "index_sns_credentials_on_provider_and_email", unique: true
-    t.index ["provider", "uid"], name: "index_sns_credentials_on_provider_and_uid", unique: true
-    t.index ["user_id"], name: "index_sns_credentials_on_user_id"
-  end
-
   create_table "user_confirmations", force: :cascade do |t|
     t.string "confirmation_token", null: false
     t.datetime "confirmed_at"
@@ -45,6 +33,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_23_080954) do
     t.index ["user_id"], name: "index_user_database_authentications_on_user_id"
   end
 
+  create_table "user_sns_credentials", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider", "email"], name: "index_user_sns_credentials_on_provider_and_email", unique: true
+    t.index ["provider", "uid"], name: "index_user_sns_credentials_on_provider_and_uid", unique: true
+    t.index ["user_id"], name: "index_user_sns_credentials_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -52,6 +52,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_23_080954) do
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
-  add_foreign_key "sns_credentials", "users"
   add_foreign_key "user_database_authentications", "users"
+  add_foreign_key "user_sns_credentials", "users"
 end

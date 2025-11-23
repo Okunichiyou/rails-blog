@@ -1,9 +1,9 @@
 require "test_helper"
 
-class SnsCredentialTest < ActiveSupport::TestCase
+class User::SnsCredentialTest < ActiveSupport::TestCase
   def setup
     @user = users(:one)
-    @sns_credential = SnsCredential.new(
+    @sns_credential = User::SnsCredential.new(
       user: @user,
       provider: "google",
       uid: "123456789",
@@ -43,7 +43,7 @@ class SnsCredentialTest < ActiveSupport::TestCase
   # uniquenessバリデーション: provider + uid
   test "should require unique combination of provider and uid" do
     @sns_credential.save!
-    duplicate = SnsCredential.new(
+    duplicate = User::SnsCredential.new(
       user: @user,
       provider: @sns_credential.provider,
       uid: @sns_credential.uid,
@@ -55,7 +55,7 @@ class SnsCredentialTest < ActiveSupport::TestCase
 
   test "should allow same uid with different provider" do
     @sns_credential.save!
-    different_provider = SnsCredential.new(
+    different_provider = User::SnsCredential.new(
       user: @user,
       provider: "github",
       uid: @sns_credential.uid,
@@ -67,7 +67,7 @@ class SnsCredentialTest < ActiveSupport::TestCase
   # uniquenessバリデーション: provider + email
   test "should require unique combination of provider and email" do
     @sns_credential.save!
-    duplicate = SnsCredential.new(
+    duplicate = User::SnsCredential.new(
       user: @user,
       provider: @sns_credential.provider,
       uid: "different_uid",
@@ -79,7 +79,7 @@ class SnsCredentialTest < ActiveSupport::TestCase
 
   test "should allow same email with different provider" do
     @sns_credential.save!
-    different_provider = SnsCredential.new(
+    different_provider = User::SnsCredential.new(
       user: @user,
       provider: "github",
       uid: "987654321",
@@ -95,7 +95,7 @@ class SnsCredentialTest < ActiveSupport::TestCase
 
   test "should be destroyed when user is destroyed" do
     @sns_credential.save!
-    assert_difference("SnsCredential.count", -1) do
+    assert_difference("User::SnsCredential.count", -1) do
       @user.destroy
     end
   end
