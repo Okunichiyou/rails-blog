@@ -1,24 +1,37 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## セットアップ
 
-Things you may want to cover:
+### 1. 依存関係のインストール
 
-* Ruby version
+```bash
+bundle install
+```
 
-* System dependencies
+### 2. 設定ファイルのコピー
 
-* Configuration
+```bash
+cp -n config/samples/*.yml config/
+```
 
-* Database creation
+その後、各設定ファイルを編集して自分の認証情報を設定してください。
 
-* Database initialization
+- `config/google_auth.yml`
 
-* How to run the test suite
+### 3. データベースのセットアップ
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+bundle exec rails db:prepare
+```
 
-* Deployment instructions
+### 4. サーバーの起動
 
-* ...
+```bash
+# Tailwind CSSの変更をサーバー再起動なしで反映させる
+bin/dev
+```
+
+```bash
+# Railsサーバーを立ち上げる
+bundle exec rails server
+```
