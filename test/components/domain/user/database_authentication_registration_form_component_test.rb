@@ -75,7 +75,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
       create_database_authentication_path: "/user/database_authentications"
     ))
 
-    assert_selector("button[type=submit]", text: "Submit")
+    assert_selector("button[type=submit]", text: "登録")
   end
 
   test "confirmation_tokenにエラーがある場合、FlashComponentでエラーメッセージが表示されること" do
