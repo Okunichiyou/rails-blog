@@ -133,10 +133,184 @@
     }
   }
 
-  body > .content-area {
+  body>.content-area {
     max-width: var(--max-content-width);
     margin-inline: auto;
     padding-inline: var(--layout-content-padding);
     padding-top: 20px;
+  }
+}
+
+@layer utilities {
+
+  /* テキスト色 */
+  .text-default {
+    color: var(--color-text-default);
+  }
+
+  .text-secondary {
+    color: var(--color-text-secondary);
+  }
+
+  .text-placeholder {
+    color: var(--color-text-placeholder);
+  }
+
+  .text-link {
+    color: var(--color-text-link);
+  }
+
+  .text-info {
+    color: var(--color-text-info);
+  }
+
+  .text-notice {
+    color: var(--color-text-notice);
+  }
+
+  .text-warn {
+    color: var(--color-text-warn);
+  }
+
+  .text-alert {
+    color: var(--color-text-alert);
+  }
+
+  .text-alert-inline {
+    color: var(--color-text-alert-inline);
+  }
+
+  /* ボタンテキスト色 */
+  .text-btn-primary {
+    color: var(--color-text-primary-button);
+  }
+
+  .text-btn-secondary {
+    color: var(--color-text-secondary-button);
+  }
+
+  .text-btn-primary-danger {
+    color: var(--color-text-primary-danger-button);
+  }
+
+  .text-btn-secondary-danger {
+    color: var(--color-text-secondary-danger-button);
+  }
+
+  /* 背景色 */
+  .bg-default {
+    background-color: var(--color-bg-default);
+  }
+
+  .bg-surface {
+    background-color: var(--color-bg-surface);
+  }
+
+  .bg-surface-hover {
+    background-color: var(--color-bg-surface-hover);
+  }
+
+  .bg-info {
+    background-color: var(--color-bg-info);
+  }
+
+  .bg-notice {
+    background-color: var(--color-bg-notice);
+  }
+
+  .bg-warn {
+    background-color: var(--color-bg-warn);
+  }
+
+  .bg-alert {
+    background-color: var(--color-bg-alert);
+  }
+
+  .bg-primary {
+    background-color: var(--color-bg-primary);
+  }
+
+  .bg-text-btn-primary {
+    background-color: var(--color-text-primary-button);
+  }
+
+  /* ボタン背景色 */
+  .bg-btn-primary {
+    background-color: var(--color-bg-primary-button);
+  }
+
+  .bg-btn-secondary {
+    background-color: var(--color-bg-secondary-button);
+  }
+
+  .bg-btn-primary-danger {
+    background-color: var(--color-bg-primary-danger-button);
+  }
+
+  .bg-btn-secondary-danger {
+    background-color: var(--color-bg-secondary-danger-button);
+  }
+
+  /* ボーダー色 */
+  .border-default {
+    border-color: var(--color-border-default);
+  }
+
+  .border-alert {
+    border-color: var(--color-border-alert);
+  }
+
+  /* ボーダーラディウス */
+  .rounded-sm {
+    border-radius: var(--radius-sm);
+  }
+
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+
+  /* フォントサイズ */
+  .text-size-body {
+    font-size: var(--font-size-body);
+  }
+
+  .text-size-note {
+    font-size: var(--font-size-note);
+  }
+
+  /* フォントウェイト */
+  .font-weight-body {
+    font-weight: var(--font-weight-body);
+  }
+
+  .font-weight-body-bold {
+    font-weight: var(--font-weight-body-bold);
+  }
+
+  .font-weight-heading {
+    font-weight: var(--font-weight-heading);
+  }
+
+  /* シャドウ */
+  .shadow-default {
+    box-shadow: var(--shadow);
+  }
+
+  /* Stroke色 */
+  .stroke-btn-primary {
+    stroke: var(--color-text-primary-button);
+  }
+
+  /* レイアウト */
+  .max-w-content {
+    max-width: var(--max-content-width);
+  }
+
+  .px-layout {
+    padding-inline: var(--layout-content-padding);
   }
 }

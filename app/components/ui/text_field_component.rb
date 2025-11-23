@@ -21,12 +21,12 @@ module Ui
 
     def field_classes(extra_classes)
       classes = [
-        "box-border border-[1.5px] rounded-[var(--radius-sm)] px-2 py-1",
-        "border-[var(--color-border-default)]",
-        "text-[length:var(--font-size-body)] font-[var(--font-weight-body)]",
-        "text-[var(--color-text-default)]",
-        "placeholder:text-[var(--color-text-placeholder)]",
-        "disabled:text-[var(--color-text-secondary)] disabled:cursor-not-allowed disabled:opacity-60",
+        "box-border border-[1.5px] rounded-sm px-2 py-1",
+        "border-default",
+        "text-size-body font-weight-body",
+        "text-default",
+        "placeholder:text-placeholder",
+        "disabled:text-secondary disabled:cursor-not-allowed disabled:opacity-60",
         size_class,
         variant_class,
         extra_classes
@@ -52,7 +52,7 @@ module Ui
 
       case @variant
       when :alert
-        "border-[var(--color-border-alert)]"
+        "border-alert"
       end
     end
   end

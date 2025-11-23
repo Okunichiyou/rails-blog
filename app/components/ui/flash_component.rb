@@ -16,7 +16,7 @@ module Ui
 
     def flash_classes(extra_classes)
       classes = [
-        "rounded-[var(--radius-sm)] p-4",
+        "rounded-sm p-4",
         flash_type_class,
         extra_classes
       ].compact
@@ -26,13 +26,13 @@ module Ui
     def flash_type_class
       case @flash_type
       when :info
-        "bg-[var(--color-bg-info)] text-[var(--color-text-info)]"
+        "bg-info text-info"
       when :notice
-        "bg-[var(--color-bg-notice)] text-[var(--color-text-notice)]"
+        "bg-notice text-notice"
       when :warn
-        "bg-[var(--color-bg-warn)] text-[var(--color-text-warn)]"
+        "bg-warn text-warn"
       when :alert
-        "bg-[var(--color-bg-alert)] text-[var(--color-text-alert)]"
+        "bg-alert text-alert"
       end
     end
   end

@@ -9,7 +9,7 @@ module Ui
 
     def error_classes(extra_classes)
       classes = [
-        "list-disc list-inside mt-1 mb-0 text-[var(--color-text-alert-inline)] text-[length:var(--font-size-note)] [&>li]:my-[2px]",
+        "list-disc list-inside mt-1 mb-0 text-alert-inline text-size-note [&>li]:my-[2px]",
         extra_classes
       ].compact
       classes.join(" ")

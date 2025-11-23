@@ -16,10 +16,10 @@ module Ui
 
     def panel_classes(extra_classes)
       classes = [
-        "bg-[var(--color-bg-surface)]",
-        "rounded-[var(--radius-lg)]",
+        "bg-surface",
+        "rounded-lg",
         "p-4",
-        "shadow-[var(--shadow)]",
+        "shadow-default",
         size_class,
         extra_classes
       ].compact

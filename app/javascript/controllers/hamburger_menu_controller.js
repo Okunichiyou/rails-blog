@@ -19,7 +19,7 @@ export default class extends Controller {
     // メニューの表示/非表示
     this.#menu.classList.toggle('hidden', !this.#isOpen);
     this.#menu.classList.toggle('block', this.#isOpen);
-    this.#menu.classList.toggle('shadow-[var(--shadow)]', this.#isOpen);
+    this.#menu.classList.toggle('shadow-default', this.#isOpen);
 
     // 3本の線のアニメーション
     if (this.#isOpen) {
@@ -49,7 +49,7 @@ export default class extends Controller {
   #close() {
     this.#isOpen = false;
     this.#menu.classList.add('hidden');
-    this.#menu.classList.remove('block', 'shadow-[var(--shadow)]');
+    this.#menu.classList.remove('block', 'shadow-default');
     this.#lines[0].classList.remove('rotate-45', 'translate-y-[9px]');
     this.#lines[1].classList.remove('opacity-0');
     this.#lines[2].classList.remove('-rotate-45', '-translate-y-[9px]');

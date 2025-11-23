@@ -58,15 +58,15 @@ module Ui
       case @category
       when :primary
         if @variant == :danger
-          "text-[var(--color-text-primary-danger-button)]"
+          "text-btn-primary-danger"
         else
-          "text-[var(--color-text-primary-button)]"
+          "text-btn-primary"
         end
       when :secondary
         if @variant == :danger
-          "text-[var(--color-text-secondary-danger-button)]"
+          "text-btn-secondary-danger"
         else
-          "text-[var(--color-text-secondary-button)]"
+          "text-btn-secondary"
         end
       end
     end
@@ -75,15 +75,15 @@ module Ui
       case @category
       when :primary
         if @variant == :danger
-          "bg-[var(--color-bg-primary-danger-button)]"
+          "bg-btn-primary-danger"
         else
-          "bg-[var(--color-bg-primary-button)]"
+          "bg-btn-primary"
         end
       when :secondary
         if @variant == :danger
-          "bg-[var(--color-bg-secondary-danger-button)]"
+          "bg-btn-secondary-danger"
         else
-          "bg-[var(--color-bg-secondary-button)]"
+          "bg-btn-secondary"
         end
       end
     end
