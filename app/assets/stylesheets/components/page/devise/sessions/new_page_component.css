@@ -1,6 +1,0 @@
-@scope (.page-devise-sessions-new-page-component) to ([data-scope]) {
-  :scope {
-    display: flex;
-    justify-content: center;
-  }
-}

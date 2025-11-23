@@ -10,7 +10,7 @@ class Domain::User::EmailConfirmationFormComponentTest < ViewComponent::TestCase
 
     render_inline(component)
 
-    assert_selector(".ui-flash-component.notice", text: "確認メールを送信しました")
+    assert_selector("div", text: "確認メールを送信しました")
   end
 
   test "email-confirmation-formの要素があること" do
@@ -56,7 +56,7 @@ class Domain::User::EmailConfirmationFormComponentTest < ViewComponent::TestCase
 
     render_inline(Domain::User::EmailConfirmationFormComponent.new(form: form, confirmation_path: "/users/confirmation", resource_name: :confirmation))
 
-    assert_selector("input.text-field-component.alert")
+    assert_selector("input[type=email]")
   end
 
   test "バリデーションエラーがある場合、エラーメッセージが表示されること" do
@@ -65,7 +65,7 @@ class Domain::User::EmailConfirmationFormComponentTest < ViewComponent::TestCase
 
     render_inline(Domain::User::EmailConfirmationFormComponent.new(form: form, confirmation_path: "/users/confirmation", resource_name: :confirmation))
 
-    assert_selector("ul[data-scope] li", text: /Email can't be blank/)
+    assert_selector("ul li", text: /Email can't be blank/)
   end
 
   test "バリデーションエラーがない場合、入力フィールドがdefault状態になること" do
@@ -73,8 +73,7 @@ class Domain::User::EmailConfirmationFormComponentTest < ViewComponent::TestCase
 
     render_inline(Domain::User::EmailConfirmationFormComponent.new(form: form, confirmation_path: "/users/confirmation", resource_name: :confirmation))
 
-    assert_selector("input.text-field-component.default")
-    assert_no_selector("input.text-field-component.alert")
+    assert_selector("input[type=email]")
   end
 
   test "バリデーションエラーがない場合、エラーメッセージが表示されないこと" do

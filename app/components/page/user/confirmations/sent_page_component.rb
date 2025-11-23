@@ -1,8 +1,9 @@
 module Page
   module User
     module Confirmations
-      class SentPageComponent < Page::Base
-        def initialize
+      class SentPageComponent < ApplicationComponent
+        def initialize(**html_options)
+          @html_options = html_options
         end
       end
     end

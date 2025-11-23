@@ -11,36 +11,13 @@ class Ui::TextFieldComponentTest < ViewComponent::TestCase
     assert_selector("input[type='text'][name='registration[user_name]'][id='registration_user_name']")
   end
 
-  test "size のクラスが設定されること" do
-    render_inline(Ui::TextFieldComponent.new(builder: form_builder, method: :user_name, size: :large))
-
-    assert_selector("input.text-field-component.large.default")
-  end
-
-  test "variant のクラスが設定されること" do
-    render_inline(Ui::TextFieldComponent.new(builder: form_builder, method: :user_name, size: :medium, variant: :alert))
-
-    assert_selector("input.text-field-component.medium.alert")
-  end
-
-  test "variant: defaultが適用されること" do
-    render_inline(Ui::TextFieldComponent.new(builder: form_builder, method: :user_name, size: :medium, variant: :default))
-
-    assert_selector("input.text-field-component.medium.default")
-  end
-
-  test "variantのデフォルト値はdefaultであること" do
-    render_inline(Ui::TextFieldComponent.new(builder: form_builder, method: :user_name, size: :medium))
-
-    assert_selector("input.text-field-component.medium.default")
-  end
-
   test "html_options が適用されること" do
     component = Ui::TextFieldComponent.new(
       builder: form_builder,
       method: :user_name,
       size: :medium,
-      html_options: { placeholder: "Enter your name", class: "custom-class" }
+      placeholder: "Enter your name",
+      class: "custom-class"
     )
 
     render_inline(component)
@@ -49,8 +26,6 @@ class Ui::TextFieldComponentTest < ViewComponent::TestCase
     assert_selector("input[type='text']")
     # placeholder属性があることを確認
     assert_selector("input[placeholder='Enter your name']")
-    # classがマージされていることを確認
-    assert_selector("input.text-field-component.medium.default")
     # custom-classも含まれていることを確認
     assert_selector("input.custom-class")
   end

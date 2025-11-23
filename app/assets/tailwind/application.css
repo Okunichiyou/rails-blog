@@ -1,0 +1,316 @@
+@import "tailwindcss";
+
+@theme {
+  /* 背景色 */
+  --color-bg-default: light-dark(rgb(245 246 246), rgb(29 32 32));
+  --color-bg-surface: light-dark(rgb(255 255 255), rgb(47 50 50));
+  --color-bg-surface-hover: light-dark(rgb(12 123 187 / 0.08), rgb(12 123 187 / 0.15));
+  --color-bg-info: light-dark(rgb(219 235 248), rgb(32 76 110));
+  --color-bg-notice: light-dark(rgb(223 244 224), rgb(22 48 28));
+  --color-bg-warn: light-dark(rgb(247 243 195), rgb(64 58 24));
+  --color-bg-alert: light-dark(rgb(244 223 232), rgb(64 28 38));
+  --color-bg-primary: light-dark(rgb(12 123 187), rgb(12 123 187));
+
+  /* ボタン背景色 */
+  --color-bg-primary-button: var(--color-bg-primary);
+  --color-bg-secondary-button: light-dark(rgb(237 237 237 / 0.25), rgb(255 255 255 / 0.25));
+  --color-bg-primary-danger-button: light-dark(rgb(201 73 81), rgb(201 73 81));
+  --color-bg-secondary-danger-button: light-dark(rgb(249 206 224), rgb(238 192 210));
+
+  /* テキスト色 */
+  --color-text-default: light-dark(rgb(11 49 76), rgb(228 230 239));
+  --color-text-secondary: light-dark(rgb(50 82 96), rgb(206 208 217));
+  --color-text-placeholder: light-dark(rgb(120 120 120), rgb(160 160 160));
+  --color-text-link: light-dark(rgb(12 123 187), rgb(155 213 250));
+  --color-text-info: light-dark(rgb(44 64 76), rgb(200 241 254));
+  --color-text-notice: light-dark(rgb(43 53 44), rgb(180 230 190));
+  --color-text-warn: light-dark(rgb(39 39 22), rgb(240 220 140));
+  --color-text-alert: light-dark(rgb(96 27 38), rgb(255 180 195));
+  --color-text-alert-inline: light-dark(rgb(148 18 38), rgb(255 180 195));
+
+  /* ボタンテキスト色 */
+  --color-text-primary-button: light-dark(rgb(255 255 255), rgb(255 255 255));
+  --color-text-secondary-button: light-dark(rgb(11 49 76), rgb(228 230 239));
+  --color-text-primary-danger-button: light-dark(rgb(255 255 255), rgb(255 255 255));
+  --color-text-secondary-danger-button: light-dark(rgb(131 13 38), rgb(82 15 32));
+
+  /* ボーダー色 */
+  --color-border-default: var(--color-text-default);
+  --color-border-alert: var(--color-text-alert-inline);
+
+  /* フォントサイズ */
+  --font-size-h1: 2.25rem;
+  --font-size-h2: 1.875rem;
+  --font-size-h3: 1.5rem;
+  --font-size-h4: 1.25rem;
+  --font-size-h5: 1.125rem;
+  --font-size-h6: 1rem;
+  --font-size-body: 1rem;
+  --font-size-note: 0.875rem;
+
+  /* フォントウェイト */
+  --font-weight-heading: 700;
+  --font-weight-body: 400;
+  --font-weight-body-bold: 700;
+
+  /* シャドウ */
+  --shadow-color: light-dark(rgb(0 0 0 / 0.15), rgb(255 255 255 / 0.1));
+  --shadow: 0px 4px 8px 3px var(--shadow-color), 0px 1px 3px 0px var(--shadow-color);
+
+  /* コンテンツの最長幅 */
+  --max-content-width: 1200px;
+
+  /* レイアウトパディング */
+  --layout-content-padding: 20px;
+
+  /* ボーダーラディウス */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+}
+
+@media (max-width: 768px) {
+  @theme {
+    --font-size-h1: 2rem;
+    --font-size-h2: 1.875rem;
+    --font-size-h3: 1.5rem;
+    --font-size-h4: 1.25rem;
+    --font-size-h5: 1.125rem;
+    --font-size-h6: 1rem;
+  }
+}
+
+@layer base {
+  h1 {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-heading);
+  }
+
+  h2 {
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-heading);
+  }
+
+  h3 {
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-heading);
+  }
+
+  h4 {
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-heading);
+  }
+
+  h5 {
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-heading);
+  }
+
+  h6 {
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-heading);
+  }
+
+  body {
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body);
+    background-color: var(--color-bg-default);
+    color: var(--color-text-default);
+  }
+
+  button {
+    padding: 0;
+  }
+
+  a {
+    color: var(--color-text-link);
+    text-decoration: underline;
+    text-underline-offset: auto;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  body>.content-area {
+    max-width: var(--max-content-width);
+    margin-inline: auto;
+    padding-inline: var(--layout-content-padding);
+    padding-top: 20px;
+  }
+}
+
+@layer utilities {
+
+  /* テキスト色 */
+  .text-default {
+    color: var(--color-text-default);
+  }
+
+  .text-secondary {
+    color: var(--color-text-secondary);
+  }
+
+  .text-placeholder {
+    color: var(--color-text-placeholder);
+  }
+
+  .text-link {
+    color: var(--color-text-link);
+  }
+
+  .text-info {
+    color: var(--color-text-info);
+  }
+
+  .text-notice {
+    color: var(--color-text-notice);
+  }
+
+  .text-warn {
+    color: var(--color-text-warn);
+  }
+
+  .text-alert {
+    color: var(--color-text-alert);
+  }
+
+  .text-alert-inline {
+    color: var(--color-text-alert-inline);
+  }
+
+  /* ボタンテキスト色 */
+  .text-btn-primary {
+    color: var(--color-text-primary-button);
+  }
+
+  .text-btn-secondary {
+    color: var(--color-text-secondary-button);
+  }
+
+  .text-btn-primary-danger {
+    color: var(--color-text-primary-danger-button);
+  }
+
+  .text-btn-secondary-danger {
+    color: var(--color-text-secondary-danger-button);
+  }
+
+  /* 背景色 */
+  .bg-default {
+    background-color: var(--color-bg-default);
+  }
+
+  .bg-surface {
+    background-color: var(--color-bg-surface);
+  }
+
+  .bg-surface-hover {
+    background-color: var(--color-bg-surface-hover);
+  }
+
+  .bg-info {
+    background-color: var(--color-bg-info);
+  }
+
+  .bg-notice {
+    background-color: var(--color-bg-notice);
+  }
+
+  .bg-warn {
+    background-color: var(--color-bg-warn);
+  }
+
+  .bg-alert {
+    background-color: var(--color-bg-alert);
+  }
+
+  .bg-primary {
+    background-color: var(--color-bg-primary);
+  }
+
+  .bg-text-btn-primary {
+    background-color: var(--color-text-primary-button);
+  }
+
+  /* ボタン背景色 */
+  .bg-btn-primary {
+    background-color: var(--color-bg-primary-button);
+  }
+
+  .bg-btn-secondary {
+    background-color: var(--color-bg-secondary-button);
+  }
+
+  .bg-btn-primary-danger {
+    background-color: var(--color-bg-primary-danger-button);
+  }
+
+  .bg-btn-secondary-danger {
+    background-color: var(--color-bg-secondary-danger-button);
+  }
+
+  /* ボーダー色 */
+  .border-default {
+    border-color: var(--color-border-default);
+  }
+
+  .border-alert {
+    border-color: var(--color-border-alert);
+  }
+
+  /* ボーダーラディウス */
+  .rounded-sm {
+    border-radius: var(--radius-sm);
+  }
+
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+
+  /* フォントサイズ */
+  .text-size-body {
+    font-size: var(--font-size-body);
+  }
+
+  .text-size-note {
+    font-size: var(--font-size-note);
+  }
+
+  /* フォントウェイト */
+  .font-weight-body {
+    font-weight: var(--font-weight-body);
+  }
+
+  .font-weight-body-bold {
+    font-weight: var(--font-weight-body-bold);
+  }
+
+  .font-weight-heading {
+    font-weight: var(--font-weight-heading);
+  }
+
+  /* シャドウ */
+  .shadow-default {
+    box-shadow: var(--shadow);
+  }
+
+  /* Stroke色 */
+  .stroke-btn-primary {
+    stroke: var(--color-text-primary-button);
+  }
+
+  /* レイアウト */
+  .max-w-content {
+    max-width: var(--max-content-width);
+  }
+
+  .px-layout {
+    padding-inline: var(--layout-content-padding);
+  }
+}
