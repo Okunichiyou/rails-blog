@@ -1,13 +1,35 @@
 <div <%= tag.attributes(@html_options.merge(class: "flex justify-center")) %> >
-  <%= render Ui::PanelComponent.new(size: :medium) do |panel| %>
+  <%= render Ui::PanelComponent.new(size: :large) do |panel| %>
     <%- panel.with_panel_content do %>
-      <h1>ログイン</h1>
+      <h1 class="mb-6">ログイン</h1>
 
-      <%= render Domain::User::LoginFormComponent.new(
-        resource: @resource,
-        resource_name: @resource_name,
-        login_path: @login_path
-      ) %>
-      <% end %>
+      <div class="flex gap-6">
+        <!-- 左側: SNSログイン -->
+        <div class="flex-1 flex flex-col justify-center items-center">
+          <%= form_with url: sns_credential_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false }, html: { class: "w-full" } do %>
+            <%= render Ui::Button::IconComponent.new(
+              category: :secondary,
+              size: :full,
+              type: :submit,
+              text: "Googleでログイン",
+              icon: image_tag("google-icon.png", class: "w-5 h-5"),
+              icon_position: :left
+            ) %>
+          <% end %>
+        </div>
+
+        <!-- 中央: 区切り線 -->
+        <div class="border-l border-gray-300"></div>
+
+        <!-- 右側: DBログインフォーム -->
+        <div class="flex-1">
+          <%= render Domain::User::LoginFormComponent.new(
+            resource: @resource,
+            resource_name: @resource_name,
+            login_path: @login_path
+          ) %>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </div>

@@ -2,6 +2,7 @@ class User < ApplicationRecord
   devise :authenticatable
 
   has_one :database_authentication, dependent: :destroy
+  has_many :sns_credentials, dependent: :destroy
 
   before_validation :trim_name
 

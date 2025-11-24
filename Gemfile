@@ -34,3 +34,5 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 4.4"
+
+gem "omniauth-google-oauth2", "~> 1.2"

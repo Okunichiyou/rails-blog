@@ -1,38 +1,25 @@
 module Ui
-  class ButtonComponent < ApplicationComponent
-    CATEGORY_OPTIONS = %i[primary secondary].freeze
-    SIZE_OPTIONS = %i[full large medium small].freeze
-    TYPE_OPTIONS = %i[button submit reset].freeze
-    VARIANT_OPTIONS = %i[default danger].freeze
+  module Button
+    class Style
+      attr_reader :category, :size, :variant
 
-    def initialize(
-      category:,
-      size:,
-      type: :button,
-      variant: :default,
-      text:,
-      **html_options
-    )
-      @category = filter_attribute(value: category, white_list: CATEGORY_OPTIONS)
-      @size = filter_attribute(value: size, white_list: SIZE_OPTIONS)
-      @type = filter_attribute(value: type, white_list: TYPE_OPTIONS)
-      @variant = filter_attribute(value: variant, white_list: VARIANT_OPTIONS)
-      @text = text
-      @html_options = html_options.merge(type: @type.to_s, class: button_classes(html_options[:class]))
-    end
+      def initialize(category:, size:, variant: :default)
+        @category = category
+        @size = size
+        @variant = variant
+      end
 
-    private
-
-    def button_classes(extra_classes)
+    def button_classes(extra_classes = nil)
       classes = [
         "group",
-        "border-none cursor-pointer font-bold px-10 py-6 text-center",
+        "cursor-pointer font-bold px-10 py-6 text-center",
         "overflow-hidden relative transition-all duration-[400ms] ease-[cubic-bezier(0.175,0.885,0.32,2.2)]",
         "hover:px-[2.8rem] hover:py-[1.8rem]",
         "active:px-[3.1rem] active:py-[2.1rem]",
         "disabled:cursor-not-allowed disabled:opacity-50",
         "disabled:hover:px-10 disabled:hover:py-6",
         "rounded-[3rem]",
+        border_class,
         @category,
         @variant == :danger ? "danger" : nil,
         size_class,
@@ -86,6 +73,24 @@ module Ui
           "bg-btn-secondary"
         end
       end
+    end
+
+    def border_class
+      "border-none"
+    end
+
+    def shadow_class
+      case @category
+      when :primary
+        "shadow-[inset_2px_2px_1px_0_rgba(255,255,255,0.5),inset_-1px_-1px_1px_1px_rgba(255,255,255,0.5)]"
+      when :secondary
+        if @variant == :danger
+          "shadow-[inset_1px_1px_1px_0_rgba(0,0,0,0.25),inset_-1px_-1px_1px_0_rgba(0,0,0,0.25)]"
+        else
+          "shadow-[inset_1px_1px_1px_0_rgba(0,0,0,0.25),inset_-1px_-1px_1px_0_rgba(0,0,0,0.25)]"
+        end
+      end
+    end
     end
   end
 end
