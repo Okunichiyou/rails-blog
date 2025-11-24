@@ -21,24 +21,16 @@ class User::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallbac
 
   def callback_for(provider)
     auth = request.env["omniauth.auth"]
+    omniauth_data = User::OmniauthData.from_omniauth(auth)
 
-    sns_credential = User::SnsCredential.find_by(provider: auth.provider, uid: auth.uid)
+    result = User::SnsAuthenticationDomainService.authenticate_or_create(omniauth_data)
 
-    if sns_credential.nil?
-      ActiveRecord::Base.transaction do
-        @user = User.create!(name: auth.info.name)
-        User::SnsCredential.create!(user: @user, provider: auth.provider, uid: auth.uid, email: auth.info.email)
-      end
-    else
-      @user = sns_credential.user
-    end
-
-    if @user.persisted?
+    if result.success?
+      @user = result.user
       sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: provider.to_s.capitalize) if is_navigational_format?
     else
-      session["devise.#{provider}_data"] = auth.except(:extra)
-      redirect_to new_user_registration_url
+      redirect_to login_path, alert: result.message
     end
   end
 end
