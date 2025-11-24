@@ -35,3 +35,21 @@ bin/dev
 # Railsサーバーを立ち上げる
 bundle exec rails server
 ```
+
+## 開発Tips
+
+### コンポーネントのデザイン確認
+
+`http://localhost:3000/rails/view_components/page/sample_component/default`にアクセスすると、コンポーネントの一覧が確認できる。
+
+### テストの実行
+
+```shell
+bundle exec rails test
+```
+
+### リンターの実行
+
+```shell
+bundle exec rubocop
+```
