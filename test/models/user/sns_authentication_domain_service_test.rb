@@ -26,14 +26,20 @@ class User::SnsAuthenticationDomainServiceTest < ActiveSupport::TestCase
     assert_nil result.error
   end
 
-  test "authenticate_or_create creates new user when sns_credential does not exist" do
-    assert_difference [ "User.count", "User::SnsCredential.count" ], 1 do
-      result = User::SnsAuthenticationDomainService.authenticate_or_create(@omniauth_data)
+  test "authenticate_or_create returns pending_registration for new user" do
+    assert_difference "User::PendingSnsCredential.count", 1 do
+      assert_no_difference [ "User.count", "User::SnsCredential.count" ] do
+        result = User::SnsAuthenticationDomainService.authenticate_or_create(@omniauth_data)
 
-      assert result.success?
-      assert_not_nil result.user
-      assert_equal @omniauth_data.name, result.user.name
-      assert_nil result.error
+        assert result.pending_registration?
+        assert_nil result.user
+        assert_not_nil result.token
+        assert_nil result.error
+
+        # PendingSnsCredentialが作成されていることを確認
+        pending = User::PendingSnsCredential.find_by(token: result.token)
+        assert_not_nil pending
+      end
     end
   end
 
@@ -71,21 +77,68 @@ class User::SnsAuthenticationDomainServiceTest < ActiveSupport::TestCase
     assert_equal "既に同じメールアドレスでアカウントが連携されています", result.message
   end
 
-  test "authenticate_or_create creates both user and sns_credential in transaction" do
+  test "create_from_pending creates user and sns_credential from pending token" do
+    pending = User::PendingSnsCredential.create_from_omniauth!(@omniauth_data)
+
     assert_difference "User.count", 1 do
       assert_difference "User::SnsCredential.count", 1 do
-        result = User::SnsAuthenticationDomainService.authenticate_or_create(@omniauth_data)
+        assert_difference "User::PendingSnsCredential.count", -1 do
+          result = User::SnsAuthenticationDomainService.create_from_pending(pending.token, "Custom Name")
 
-        assert result.success?
-        created_user = result.user
-        created_credential = User::SnsCredential.find_by(uid: @omniauth_data.uid)
+          assert result.success?
+          assert_not_nil result.user
+          assert_equal "Custom Name", result.user.name
+          assert_nil result.error
 
-        assert_equal created_user, created_credential.user
-        assert_equal @omniauth_data.provider, created_credential.provider
-        assert_equal @omniauth_data.uid, created_credential.uid
-        assert_equal @omniauth_data.email, created_credential.email
+          created_credential = User::SnsCredential.find_by(uid: @omniauth_data.uid)
+          assert_equal result.user, created_credential.user
+          assert_equal @omniauth_data.provider, created_credential.provider
+          assert_equal @omniauth_data.uid, created_credential.uid
+          assert_equal @omniauth_data.email, created_credential.email
+
+          # PendingSnsCredentialが削除されていることを確認
+          assert_nil User::PendingSnsCredential.find_by(token: pending.token)
+        end
       end
     end
+  end
+
+  test "create_from_pending fails when token is invalid" do
+    result = User::SnsAuthenticationDomainService.create_from_pending("invalid_token", "Test Name")
+
+    assert result.failure?
+    assert_nil result.user
+    assert_equal :token_not_found_or_expired, result.error
+    assert_equal "登録トークンが見つからないか、有効期限が切れています", result.message
+  end
+
+  test "create_from_pending fails when token is expired" do
+    pending = user_pending_sns_credentials(:expired)
+
+    result = User::SnsAuthenticationDomainService.create_from_pending(pending.token, "Test Name")
+
+    assert result.failure?
+    assert_nil result.user
+    assert_equal :token_not_found_or_expired, result.error
+  end
+
+  test "create_from_pending fails when email is already used" do
+    user = users(:one)
+    User::DatabaseAuthentication.create!(
+      user: user,
+      email: @omniauth_data.email,
+      password: "password123",
+      password_confirmation: "password123"
+    )
+
+    pending = User::PendingSnsCredential.create_from_omniauth!(@omniauth_data)
+
+    result = User::SnsAuthenticationDomainService.create_from_pending(pending.token, "Test Name")
+
+    assert result.failure?
+    assert_nil result.user
+    assert_equal :email_already_used, result.error
+    assert_equal "既に同じメールアドレスでアカウントが連携されています", result.message
   end
 
   test "authenticate_or_create fails when omniauth_data is invalid" do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_23_080954) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_24_084348) do
   create_table "user_confirmations", force: :cascade do |t|
     t.string "confirmation_token", null: false
     t.datetime "confirmed_at"
@@ -31,6 +31,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_23_080954) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_user_database_authentications_on_email", unique: true
     t.index ["user_id"], name: "index_user_database_authentications_on_user_id"
+  end
+
+  create_table "user_pending_sns_credentials", force: :cascade do |t|
+    t.string "token", null: false
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.string "email", null: false
+    t.string "name", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expires_at"], name: "index_user_pending_sns_credentials_on_expires_at"
+    t.index ["provider", "uid"], name: "index_user_pending_sns_credentials_on_provider_and_uid"
+    t.index ["token"], name: "index_user_pending_sns_credentials_on_token", unique: true
   end
 
   create_table "user_sns_credentials", force: :cascade do |t|

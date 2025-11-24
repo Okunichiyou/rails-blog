@@ -33,23 +33,25 @@ class User::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::Int
   # google_oauth2アクション（Google認証コールバック）
   # =====================================
 
-  test "Google認証成功 - 新規ユーザー作成" do
+  test "Google認証成功 - 新規ユーザーの場合はPendingSnsCredentialを作成して登録フォームへリダイレクト" do
     OmniAuth.config.mock_auth[:google_oauth2] = build_auth_hash
 
-    assert_difference [ "User.count", "User::SnsCredential.count" ], 1 do
-      post sns_credential_google_oauth2_omniauth_callback_path
+    assert_no_difference [ "User.count", "User::SnsCredential.count" ] do
+      assert_difference "User::PendingSnsCredential.count", 1 do
+        post sns_credential_google_oauth2_omniauth_callback_path
+      end
     end
 
-    assert_redirected_to root_path
-    assert_not_nil session["warden.user.user.key"]
+    # 登録フォームへリダイレクトされることを確認
+    assert_response :redirect
+    assert_match %r{/user/sns_credential_registrations/new\?token=}, response.location
 
-    created_user = User.last
-    assert_equal "Test User", created_user.name
-
-    created_credential = User::SnsCredential.last
-    assert_equal "google", created_credential.provider
-    assert_equal "123456789", created_credential.uid
-    assert_equal "test@example.com", created_credential.email
+    # PendingSnsCredentialが正しく作成されていることを確認
+    pending = User::PendingSnsCredential.last
+    assert_equal "google", pending.provider
+    assert_equal "123456789", pending.uid
+    assert_equal "test@example.com", pending.email
+    assert_equal "Test User", pending.name
   end
 
   test "Google認証成功 - 既存ユーザーでログイン" do
@@ -143,7 +145,7 @@ class User::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::Int
 
     get sns_credential_google_oauth2_omniauth_callback_path
 
-    assert_redirected_to root_path
+    assert_redirected_to login_path
     assert_match(/Authentication failed/, flash[:alert])
   end
 end
