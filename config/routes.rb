@@ -4,6 +4,11 @@ Rails.application.routes.draw do
 
   devise_for :user, skip: :all
   devise_for :database_authentications, class_name: "User::DatabaseAuthentication", skip: :all
+  devise_for :sns_credentials, class_name: "User::SnsCredential",
+    path: "user/sns_credentials",
+    controllers: {
+      omniauth_callbacks: "user/sns_credential/omniauth_callbacks"
+    }
 
   devise_scope :database_authentication do
     get "/login", to: "user/database_authentication/sessions#new", as: :login

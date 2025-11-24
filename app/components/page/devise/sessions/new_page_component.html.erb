@@ -8,6 +8,11 @@
         resource_name: @resource_name,
         login_path: @login_path
       ) %>
+
+      <div class="mt-4">
+        <%= button_to "Sign in with Google",
+            sns_credential_google_oauth2_omniauth_authorize_path, data: { turbo: false } %>
+      </div>
       <% end %>
   <% end %>
 </div>

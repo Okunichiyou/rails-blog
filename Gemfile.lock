@@ -225,9 +225,6 @@ GEM
     omniauth-oauth2 (1.8.0)
       oauth2 (>= 1.4, < 3)
       omniauth (~> 2.0)
-    omniauth-rails_csrf_protection (2.0.0)
-      actionpack (>= 4.2)
-      omniauth (~> 2.0)
     orm_adapter (0.5.0)
     ostruct (0.6.2)
     parallel (1.27.0)
@@ -443,7 +440,6 @@ DEPENDENCIES
   jbuilder
   kamal
   omniauth-google-oauth2 (~> 1.2)
-  omniauth-rails_csrf_protection (~> 2.0)
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.2)

@@ -1,7 +1,7 @@
 class User::SnsCredential < ApplicationRecord
   belongs_to :user
 
-  devise :omniauthable, omniauth_providers: [:google_oauth2]
+  devise :omniauthable, omniauth_providers: %i[google_oauth2]
 
   validates :provider, presence: true
   validates :uid, presence: true

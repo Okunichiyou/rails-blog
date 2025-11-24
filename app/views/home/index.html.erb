@@ -4,7 +4,6 @@
   <div class="user-info">
     <h2>Logged in as:</h2>
     <p><strong>Name:</strong> <%= current_user.name %></p>
-    <p><strong>Email:</strong> <%= current_user.database_authentication.email %></p>
   </div>
   <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete } %>
 <% else %>
