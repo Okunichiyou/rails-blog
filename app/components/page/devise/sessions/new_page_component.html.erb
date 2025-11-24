@@ -7,7 +7,7 @@
         <!-- 左側: SNSログイン -->
         <div class="flex-1 flex flex-col justify-center items-center">
           <%= form_with url: sns_credential_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false }, html: { class: "w-full" } do %>
-            <%= render Ui::IconButtonComponent.new(
+            <%= render Ui::Button::IconComponent.new(
               category: :secondary,
               size: :full,
               type: :submit,
