@@ -74,6 +74,8 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+      - name: Copy configuration files from samples
+        run: cp config/samples/*.yml config/
 
       - name: Run tests
         env:
