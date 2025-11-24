@@ -24,6 +24,18 @@ erDiagram
     DATETIME updated_at "NOT NULL"
   }
 
+  pending_sns_credentials {
+    INTEGER id PK
+    STRING provider "NOT NULL"
+    STRING uid "NOT NULL"
+    STRING email "NOT NULL"
+    STRING name "NOT NULL"
+    STRING token UK "NOT NULL, 一時登録トークン"
+    DATETIME expires_at "NOT NULL, トークン有効期限"
+    DATETIME created_at "NOT NULL"
+    DATETIME updated_at "NOT NULL"
+  }
+
   users ||--o{ sns_credentials : "SNS認証情報を持つ"
 ```
 
@@ -60,10 +72,16 @@ sequenceDiagram
         App->>DB: database_authenticationsとsns_credentialsからメールアドレスが一致するユーザーを検索
 
         alt メールアドレスが一致するユーザが見つかった
-          App-->>Browser: /sign_inにリダイレクト。フラッシュメッセージにて、「既に同じメールアドレスでアカウントが連携されている」と表示
+          App-->>Browser: /loginにリダイレクト。フラッシュメッセージにて、「既に同じメールアドレスでアカウントが連携されている」と表示
           Browser-->>User: ログイン失敗
         else メールアドレスが一致するユーザーが見つからなかった
+          App->>DB: pending_sns_credentialsテーブルに一時データを保存（トークン生成）
+          App-->>Browser: GET /user/sns_credential_registrations/new?token=xxx にリダイレクト
+          Browser-->>User: ユーザー名編集フォーム表示
+          User->>Browser: ユーザー名を編集・確定
+          Browser->>App: POST /user/sns_credential_registrations
           App->>DB: usersテーブルとsns_credentialsテーブルにデータを作成
+          App->>DB: pending_sns_credentialsテーブルから一時データを削除
           App->>App: セッション作成（ログイン）
           App-->>Browser: GET root_path にリダイレクト
           Browser-->>User: ログイン完了
@@ -81,27 +99,28 @@ sequenceDiagram
   - 無効な認証コード
   - トークン取得失敗
 - ユーザーが認証をキャンセル → SNSプロバイダーの認証画面でキャンセルした場合
-- メールアドレス重複 → `sns_credentials.email`のユニーク制約違反
+- メールアドレス重複
+  - アカウント連携機能は現状未実装のため、メアド重複は弾く仕様になっている。
 
 ### 認証失敗時の挙動
 
-- 認証が失敗した場合はサインイン画面（`/sign_in`）にリダイレクト
+- 認証が失敗した場合はサインイン画面（`/login`）にリダイレクト
 - エラーメッセージをフラッシュメッセージで表示
 
 ## リダイレクトURI設定
 
 ### Google認証
 
-- 認証開始URI: `/user/auth/google`
-- コールバックURI: `/user/auth/google/callback`
+- 認証開始URI: `/user/sns_credentials/auth/google_oauth2`
+- コールバックURI: `/user/sns_credentials/auth/google_oauth2/callback`
 
-### Apple認証
+### Apple認証(未実装)
 
-- 認証開始URI: `/user/auth/apple`
-- コールバックURI: `/user/auth/apple/callback`
+- 認証開始URI: `/user/sns_credentials/auth/apple/callback`
+- コールバックURI: `/user/sns_credentials/auth/apple/callback`
 
 ## 認証成功・失敗時の遷移先
 
 - 認証成功(既存ユーザー): `root_path` へリダイレクト
-- 認証成功(新規ユーザー): 登録画面に行き、ユーザー名の入力を行う
-- 認証失敗: `/sign_up` （新規登録画面）へリダイレクト
+- 認証成功(新規ユーザー): `/user/sns_credential_registrations/new?token=xxx`(登録画面)に行き、ユーザー名の入力を行う
+- 認証失敗: `/login` （新規登録画面）へリダイレクト
