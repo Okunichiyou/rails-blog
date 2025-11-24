@@ -11,7 +11,7 @@ class CreateUserPendingSnsCredentials < ActiveRecord::Migration[8.0]
       t.timestamps
     end
     add_index :user_pending_sns_credentials, :token, unique: true
-    add_index :user_pending_sns_credentials, [:provider, :uid]
+    add_index :user_pending_sns_credentials, [ :provider, :uid ]
     add_index :user_pending_sns_credentials, :expires_at
   end
 end
