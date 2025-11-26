@@ -3,12 +3,18 @@ return unless Rails.env.development?
 require "rbs_rails/rake_task"
 
 namespace :rbs do
-  task setup: %i[clean collection prototype rbs_rails:all subtract]
+  task setup: %i[clean collection inline prototype rbs_rails:all subtract]
 
   task :clean do
     sh "rm", "-rf", "sig/rbs_rails/"
     sh "rm", "-rf", "sig/prototype/"
+    sh "rm", "-rf", "sig/generated/"
     sh "rm", "-rf", ".gem_rbs_collection/"
+  end
+
+  desc "Generate RBS files from inline comments (created by rbs-trace)"
+  task :inline do
+    sh "rbs-inline", "app", "--output", "--opt-out"
   end
 
   task :collection do
@@ -20,14 +26,25 @@ namespace :rbs do
   end
 
   task :subtract do
+    # prototypeからrbs_railsを差し引く
     sh "rbs", "subtract", "--write", "sig/prototype", "sig/rbs_rails"
+
+    # prototypeからgeneratedを差し引く（inlineで生成した型が優先）
+    sh "rbs", "subtract", "--write", "sig/prototype", "sig/generated" if Dir.exist?("sig/generated")
+
+    # rbs_railsからgeneratedを差し引く（inlineで生成した型が優先）
+    sh "rbs", "subtract", "--write", "sig/rbs_rails", "sig/generated" if Dir.exist?("sig/generated")
 
     prototype_path = Rails.root.join("sig/prototype")
     rbs_rails_path = Rails.root.join("sig/rbs_rails")
+    generated_path = Rails.root.join("sig/generated")
     subtrahends = Rails.root.glob("sig/*")
-      .reject { |path| path == prototype_path || path == rbs_rails_path }
+      .reject { |path| path == prototype_path || path == rbs_rails_path || path == generated_path }
       .map { |path| "--subtrahend=#{path}" }
-    sh "rbs", "subtract", "--write", "sig/prototype", "sig/rbs_rails", *subtrahends
+
+    if subtrahends.any?
+      sh "rbs", "subtract", "--write", "sig/prototype", "sig/rbs_rails", *subtrahends
+    end
   end
 
   task :validate do
