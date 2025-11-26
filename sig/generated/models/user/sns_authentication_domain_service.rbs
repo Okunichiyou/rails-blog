@@ -34,25 +34,4 @@ class User::SnsAuthenticationDomainService
   # @return [Boolean] 使用されている場合true
   # @rbs (String) -> bool
   def email_already_used?: (String) -> bool
-
-  # 結果オブジェクト
-  class Result
-    # @rbs (user: User) -> User::SnsAuthenticationDomainService::Result
-    def self.success: (user: User) -> User::SnsAuthenticationDomainService::Result
-
-    # @rbs (error: Symbol, message: String) -> User::SnsAuthenticationDomainService::Result
-    def self.failure: (error: Symbol, message: String) -> User::SnsAuthenticationDomainService::Result
-
-    # @rbs (token: String) -> User::SnsAuthenticationDomainService::Result
-    def self.pending_registration: (token: String) -> User::SnsAuthenticationDomainService::Result
-
-    # @rbs () -> bool
-    def success?: () -> bool
-
-    # @rbs () -> bool
-    def failure?: () -> bool
-
-    # @rbs () -> bool
-    def pending_registration?: () -> bool
-  end
 end
