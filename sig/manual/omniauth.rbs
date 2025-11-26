@@ -1,0 +1,9 @@
+module OmniAuth
+  class AuthHash < Hash[untyped, untyped]
+    def provider: () -> untyped
+    def uid: () -> untyped
+    def info: () -> untyped
+    def credentials: () -> untyped
+    def extra: () -> untyped
+  end
+end
