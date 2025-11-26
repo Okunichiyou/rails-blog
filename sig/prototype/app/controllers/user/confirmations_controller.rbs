@@ -1,3 +1,0 @@
-class User::ConfirmationsController < Devise::ConfirmationsController
-  @form: untyped
-end

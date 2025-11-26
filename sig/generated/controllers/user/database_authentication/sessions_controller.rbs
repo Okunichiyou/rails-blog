@@ -1,4 +1,0 @@
-class User::DatabaseAuthentication::SessionsController < Devise::SessionsController
-  # @rbs () -> Integer?
-  def create: () -> Integer?
-end
