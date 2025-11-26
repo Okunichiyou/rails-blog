@@ -1,0 +1,5 @@
+class ApplicationComponent < ViewComponent::Base
+  private
+
+  def filter_attribute: (value: untyped, white_list: untyped) -> untyped
+end

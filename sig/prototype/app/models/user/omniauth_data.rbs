@@ -1,0 +1,26 @@
+# OmniAuthから取得した認証データを表すValue Object
+class User::OmniauthData
+  @provider: untyped
+
+  @uid: untyped
+
+  @name: untyped
+
+  @email: untyped
+
+  include ActiveModel::Model
+
+  attr_reader provider: untyped
+
+  attr_reader uid: untyped
+
+  attr_reader name: untyped
+
+  attr_reader email: untyped
+
+  # @param auth [OmniAuth::AuthHash] OmniAuthのハッシュデータ
+  # @return [User::OmniauthData]
+  def self.from_omniauth: (untyped auth) -> untyped
+
+  def initialize: (provider: untyped, uid: untyped, name: untyped, email: untyped) -> void
+end

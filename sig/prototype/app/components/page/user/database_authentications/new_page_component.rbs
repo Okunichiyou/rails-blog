@@ -1,0 +1,15 @@
+module Page
+  module User
+    module DatabaseAuthentications
+      class NewPageComponent < ApplicationComponent
+        @form: untyped
+
+        @create_database_authentication_path: untyped
+
+        @html_options: untyped
+
+        def initialize: (form: untyped, create_database_authentication_path: untyped, **untyped html_options) -> void
+      end
+    end
+  end
+end

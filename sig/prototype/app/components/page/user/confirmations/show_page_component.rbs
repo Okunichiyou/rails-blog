@@ -1,0 +1,13 @@
+module Page
+  module User
+    module Confirmations
+      class ShowPageComponent < ApplicationComponent
+        @resource: untyped
+
+        @html_options: untyped
+
+        def initialize: (resource: untyped, **untyped html_options) -> void
+      end
+    end
+  end
+end

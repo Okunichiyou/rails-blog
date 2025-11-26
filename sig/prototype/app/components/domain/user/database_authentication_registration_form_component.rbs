@@ -1,0 +1,11 @@
+module Domain
+  module User
+    class DatabaseAuthenticationRegistrationFormComponent < ApplicationComponent
+      @form: untyped
+
+      @create_database_authentication_path: untyped
+
+      def initialize: (form: untyped, create_database_authentication_path: untyped) -> void
+    end
+  end
+end

@@ -1,0 +1,17 @@
+module Ui
+  class PanelComponent < ApplicationComponent
+    @size: untyped
+
+    @html_options: untyped
+
+    SIZE_OPTIONS: ::Array[:full | :large | :medium | :small]
+
+    def initialize: (size: untyped, **untyped html_options) -> void
+
+    private
+
+    def panel_classes: (untyped extra_classes) -> untyped
+
+    def size_class: () -> untyped
+  end
+end

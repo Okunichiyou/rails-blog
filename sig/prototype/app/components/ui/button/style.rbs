@@ -1,0 +1,31 @@
+module Ui
+  module Button
+    class Style
+      @category: untyped
+
+      @size: untyped
+
+      @variant: untyped
+
+      attr_reader category: untyped
+
+      attr_reader size: untyped
+
+      attr_reader variant: untyped
+
+      def initialize: (category: untyped, size: untyped, ?variant: ::Symbol) -> void
+
+      def button_classes: (?untyped? extra_classes) -> untyped
+
+      def size_class: () -> untyped
+
+      def text_color_class: () -> untyped
+
+      def tint_bg_class: () -> untyped
+
+      def border_class: () -> "border-none"
+
+      def shadow_class: () -> untyped
+    end
+  end
+end

@@ -1,0 +1,11 @@
+class User::ConfirmationsController < Devise::ConfirmationsController
+  @form: untyped
+
+  def new: () -> untyped
+
+  def create: () -> untyped
+
+  def sent: () -> nil
+
+  def show: () -> untyped
+end

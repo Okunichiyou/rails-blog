@@ -1,0 +1,5 @@
+class User < ApplicationRecord
+  private
+
+  def trim_name: () -> untyped
+end

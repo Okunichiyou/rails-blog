@@ -1,0 +1,11 @@
+module Page
+  module User
+    module Confirmations
+      class SentPageComponent < ApplicationComponent
+        @html_options: untyped
+
+        def initialize: (**untyped html_options) -> void
+      end
+    end
+  end
+end

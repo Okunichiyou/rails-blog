@@ -1,0 +1,3 @@
+class User::DatabaseAuthentication::SessionsController < Devise::SessionsController
+  def create: () -> untyped
+end

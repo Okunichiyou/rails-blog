@@ -1,0 +1,17 @@
+module Page
+  module Devise
+    module Sessions
+      class NewPageComponent < ApplicationComponent
+        @resource: untyped
+
+        @resource_name: untyped
+
+        @login_path: untyped
+
+        @html_options: untyped
+
+        def initialize: (resource: untyped, resource_name: untyped, login_path: untyped, **untyped html_options) -> void
+      end
+    end
+  end
+end
