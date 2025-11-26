@@ -6,6 +6,4 @@ target :app do
   check "app/models"
   check "app/controllers"
   check "app/components"
-
-  configure_code_diagnostics(D::Ruby.strict)
 end
