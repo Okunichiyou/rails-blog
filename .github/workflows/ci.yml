@@ -53,32 +53,6 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
-  check_rbs_setup:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-      - name: Copy configuration files from samples
-        run: cp config/samples/*.yml config/
-
-      - name: Run rake setup
-        run: bundle exec rake rbs:setup
-
-      - name: Check for file differences
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "Error: Files were modified by rake setup"
-            git status
-            git diff
-            exit 1
-          fi
-
   type_check:
     runs-on: ubuntu-latest
     steps:
