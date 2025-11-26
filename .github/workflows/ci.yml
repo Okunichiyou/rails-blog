@@ -53,7 +53,7 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
-  check_setup:
+  check_rbs_setup:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -64,6 +64,8 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+      - name: Copy configuration files from samples
+        run: cp config/samples/*.yml config/
 
       - name: Run rake setup
         run: bundle exec rake rbs:setup
