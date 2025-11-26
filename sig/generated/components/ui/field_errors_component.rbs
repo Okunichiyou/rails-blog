@@ -1,5 +1,3 @@
-# Generated from app/components/ui/field_errors_component.rb with RBS::Inline
-
 module Ui
   class FieldErrorsComponent < ApplicationComponent
     # @rbs (error_messages: Array[untyped], **nil) -> void

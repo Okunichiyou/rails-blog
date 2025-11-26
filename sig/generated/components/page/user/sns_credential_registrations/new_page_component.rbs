@@ -1,5 +1,3 @@
-# Generated from app/components/page/user/sns_credential_registrations/new_page_component.rb with RBS::Inline
-
 module Page
   module User
     module SnsCredentialRegistrations

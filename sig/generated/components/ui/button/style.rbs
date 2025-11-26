@@ -1,5 +1,3 @@
-# Generated from app/components/ui/button/style.rb with RBS::Inline
-
 module Ui
   module Button
     class Style

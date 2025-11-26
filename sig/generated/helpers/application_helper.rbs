@@ -1,4 +1,2 @@
-# Generated from app/helpers/application_helper.rb with RBS::Inline
-
 module ApplicationHelper
 end

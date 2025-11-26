@@ -1,5 +1,3 @@
-# Generated from app/forms/user/database_authentication_registration_form.rb with RBS::Inline
-
 class User::DatabaseAuthenticationRegistrationForm
   include ActiveModel::Model
 

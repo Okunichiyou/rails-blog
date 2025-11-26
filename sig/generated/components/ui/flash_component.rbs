@@ -1,5 +1,3 @@
-# Generated from app/components/ui/flash_component.rb with RBS::Inline
-
 module Ui
   class FlashComponent < ApplicationComponent
     FLASH_TYPES: untyped

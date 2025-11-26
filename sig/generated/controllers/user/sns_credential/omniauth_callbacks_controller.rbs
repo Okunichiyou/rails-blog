@@ -1,5 +1,3 @@
-# Generated from app/controllers/user/sns_credential/omniauth_callbacks_controller.rb with RBS::Inline
-
 class User::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # @rbs () -> (Integer | String)
   def google_oauth2: () -> (Integer | String)

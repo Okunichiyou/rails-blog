@@ -25,30 +25,38 @@ namespace :rbs do
     sh "rbs", "prototype", "rb", "--out-dir=sig/prototype", "--base-dir=.", "app"
   end
 
-  task :subtract do
-    # prototypeからrbs_railsを差し引く
-    sh "rbs", "subtract", "--write", "sig/prototype", "sig/rbs_rails"
-
-    # prototypeからgeneratedを差し引く（inlineで生成した型が優先）
-    sh "rbs", "subtract", "--write", "sig/prototype", "sig/generated" if Dir.exist?("sig/generated")
-
-    # rbs_railsからgeneratedを差し引く（inlineで生成した型が優先）
-    sh "rbs", "subtract", "--write", "sig/rbs_rails", "sig/generated" if Dir.exist?("sig/generated")
-
-    prototype_path = Rails.root.join("sig/prototype")
-    rbs_rails_path = Rails.root.join("sig/rbs_rails")
-    generated_path = Rails.root.join("sig/generated")
-    subtrahends = Rails.root.glob("sig/*")
-      .reject { |path| path == prototype_path || path == rbs_rails_path || path == generated_path }
-      .map { |path| "--subtrahend=#{path}" }
-
-    if subtrahends.any?
-      sh "rbs", "subtract", "--write", "sig/prototype", "sig/rbs_rails", *subtrahends
-    end
-  end
-
   task :validate do
     sh "rbs", "-Isig", "validate", "--silent"
+  end
+
+  task :subtract do
+    PriorityManager.new(shell_method: method(:sh)).execute
+  end
+
+  class PriorityManager
+    def initialize(shell_method:)
+      @shell_method = shell_method
+      @priorities = %w[manual generated rbs_rails prototype].map { |dir| "sig/#{dir}" }
+    end
+
+    def execute
+      apply_priority_hierarchy
+    end
+
+    private
+
+    def apply_priority_hierarchy
+      @priorities.each_with_index do |higher_priority_dir, i|
+        @priorities[i+1..].each do |lower_priority_dir|
+          next unless Dir.exist?(higher_priority_dir)
+          subtract_from(lower_priority_dir, higher_priority_dir)
+        end
+      end
+    end
+
+    def subtract_from(minuend, subtrahend)
+      @shell_method.call("rbs", "subtract", "--write", minuend, subtrahend)
+    end
   end
 end
 

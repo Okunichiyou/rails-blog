@@ -1,5 +1,3 @@
-# Generated from app/models/user.rb with RBS::Inline
-
 class User < ApplicationRecord
   private
 

@@ -1,4 +1,2 @@
-# Generated from app/models/user/database_authentication.rb with RBS::Inline
-
 class User::DatabaseAuthentication < ApplicationRecord
 end

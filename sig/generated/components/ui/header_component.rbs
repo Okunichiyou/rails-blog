@@ -1,5 +1,3 @@
-# Generated from app/components/ui/header_component.rb with RBS::Inline
-
 module Ui
   class HeaderComponent < ApplicationComponent
     # @rbs (?login_user: nil | User, **nil | String) -> void

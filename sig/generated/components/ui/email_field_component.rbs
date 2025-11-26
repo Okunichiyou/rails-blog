@@ -1,5 +1,3 @@
-# Generated from app/components/ui/email_field_component.rb with RBS::Inline
-
 module Ui
   class EmailFieldComponent < ApplicationComponent
     SIZE_OPTIONS: untyped

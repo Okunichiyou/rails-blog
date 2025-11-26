@@ -1,5 +1,3 @@
-# Generated from app/models/user/omniauth_data.rb with RBS::Inline
-
 # OmniAuthから取得した認証データを表すValue Object
 class User::OmniauthData
   include ActiveModel::Model

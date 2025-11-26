@@ -1,5 +1,3 @@
-# Generated from app/components/application_component.rb with RBS::Inline
-
 class ApplicationComponent < ViewComponent::Base
   private
 

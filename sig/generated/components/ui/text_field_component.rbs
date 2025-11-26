@@ -1,5 +1,3 @@
-# Generated from app/components/ui/text_field_component.rb with RBS::Inline
-
 module Ui
   class TextFieldComponent < ApplicationComponent
     SIZE_OPTIONS: untyped

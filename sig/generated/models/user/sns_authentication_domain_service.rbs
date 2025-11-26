@@ -1,5 +1,3 @@
-# Generated from app/models/user/sns_authentication_domain_service.rb with RBS::Inline
-
 # SNS認証に関するドメインロジックを扱うサービス
 class User::SnsAuthenticationDomainService
   # SNS認証を行い、ユーザーを取得または作成する

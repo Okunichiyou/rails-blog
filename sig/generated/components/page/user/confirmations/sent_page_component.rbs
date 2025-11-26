@@ -1,5 +1,3 @@
-# Generated from app/components/page/user/confirmations/sent_page_component.rb with RBS::Inline
-
 module Page
   module User
     module Confirmations

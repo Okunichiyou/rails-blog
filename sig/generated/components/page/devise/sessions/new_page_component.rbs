@@ -1,5 +1,3 @@
-# Generated from app/components/page/devise/sessions/new_page_component.rb with RBS::Inline
-
 module Page
   module Devise
     module Sessions

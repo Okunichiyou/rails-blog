@@ -1,5 +1,3 @@
-# Generated from app/controllers/user/confirmations_controller.rb with RBS::Inline
-
 class User::ConfirmationsController < Devise::ConfirmationsController
   def new: () -> untyped
 

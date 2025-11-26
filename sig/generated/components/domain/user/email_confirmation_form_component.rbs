@@ -1,5 +1,3 @@
-# Generated from app/components/domain/user/email_confirmation_form_component.rb with RBS::Inline
-
 module Domain
   module User
     class EmailConfirmationFormComponent < ApplicationComponent

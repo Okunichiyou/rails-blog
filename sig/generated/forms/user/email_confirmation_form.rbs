@@ -1,5 +1,3 @@
-# Generated from app/forms/user/email_confirmation_form.rb with RBS::Inline
-
 class User::EmailConfirmationForm
   include ActiveModel::Model
 
