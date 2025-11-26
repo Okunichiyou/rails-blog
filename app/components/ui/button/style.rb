@@ -3,12 +3,14 @@ module Ui
     class Style
       attr_reader :category, :size, :variant
 
+      # @rbs (category: Symbol, size: Symbol, ?variant: Symbol) -> void
       def initialize(category:, size:, variant: :default)
         @category = category
         @size = size
         @variant = variant
       end
 
+    # @rbs (?String?) -> String
     def button_classes(extra_classes = nil)
       classes = [
         "group",
@@ -28,6 +30,7 @@ module Ui
       classes.join(" ")
     end
 
+    # @rbs () -> String
     def size_class
       case @size
       when :full
@@ -41,6 +44,7 @@ module Ui
       end
     end
 
+    # @rbs () -> String
     def text_color_class
       case @category
       when :primary
@@ -58,6 +62,7 @@ module Ui
       end
     end
 
+    # @rbs () -> String
     def tint_bg_class
       case @category
       when :primary
@@ -75,10 +80,12 @@ module Ui
       end
     end
 
+    # @rbs () -> String
     def border_class
       "border-none"
     end
 
+    # @rbs () -> String
     def shadow_class
       case @category
       when :primary

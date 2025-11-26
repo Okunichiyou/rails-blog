@@ -1,4 +1,5 @@
 class User::SnsCredentialRegistrationsController < ApplicationController
+  # @rbs () -> ActiveSupport::SafeBuffer?
   def new
     token = params[:token]
     pending_credential = User::PendingSnsCredential.find_by(token: token)
@@ -10,6 +11,7 @@ class User::SnsCredentialRegistrationsController < ApplicationController
     render :new, status: :unprocessable_entity
   end
 
+  # @rbs () -> (ActiveSupport::SafeBuffer | Integer)
   def create
     form_params = params.require(:sns_credential_registration).permit(:user_name, :token)
     @form = User::SnsCredentialRegistrationForm.new(form_params)

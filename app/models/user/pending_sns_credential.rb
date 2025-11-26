@@ -13,6 +13,7 @@ class User::PendingSnsCredential < ApplicationRecord
   scope :expired, -> { where("expires_at < ?", Time.current) }
 
   # トークンから有効なレコードを検索
+  # @rbs (String) -> User::PendingSnsCredential?
   def self.find_valid_by_token(token)
     find_by(token: token)&.tap do |record|
       raise ActiveRecord::RecordNotFound if record.expired?
@@ -20,6 +21,7 @@ class User::PendingSnsCredential < ApplicationRecord
   end
 
   # OmniAuthDataから作成
+  # @rbs (User::OmniauthData) -> User::PendingSnsCredential
   def self.create_from_omniauth!(omniauth_data)
     create!(
       token: generate_secure_token,
@@ -32,11 +34,13 @@ class User::PendingSnsCredential < ApplicationRecord
   end
 
   # 期限切れかどうか
+  # @rbs () -> bool
   def expired?
     expires_at < Time.current
   end
 
   # OmniauthDataオブジェクトに変換
+  # @rbs () -> User::OmniauthData
   def to_omniauth_data
     User::OmniauthData.new(
       provider: provider,
@@ -48,6 +52,7 @@ class User::PendingSnsCredential < ApplicationRecord
 
   private
 
+  # @rbs () -> String
   def self.generate_secure_token
     SecureRandom.urlsafe_base64(32)
   end

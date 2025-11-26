@@ -1,6 +1,7 @@
 require "test_helper"
 
 class Ui::TextFieldComponentTest < ViewComponent::TestCase
+  # @rbs () -> ActionView::Helpers::FormBuilder
   def form_builder
     ActionView::Helpers::FormBuilder.new("registration", User::DatabaseAuthenticationRegistrationForm.new, vc_test_controller.view_context, {})
   end

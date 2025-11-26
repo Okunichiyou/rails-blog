@@ -4,6 +4,7 @@ module Ui
 
     SIZE_OPTIONS = %i[full large medium small].freeze
 
+    # @rbs (size: Symbol, **nil | String) -> void
     def initialize(
       size:,
       **html_options
@@ -14,6 +15,7 @@ module Ui
 
     private
 
+    # @rbs (String?) -> String
     def panel_classes(extra_classes)
       classes = [
         "bg-surface",
@@ -26,6 +28,7 @@ module Ui
       classes.join(" ")
     end
 
+    # @rbs () -> String
     def size_class
       case @size
       when :full

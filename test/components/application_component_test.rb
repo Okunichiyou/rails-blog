@@ -3,6 +3,7 @@ require "test_helper"
 class ApplicationComponentTest < ViewComponent::TestCase
   # テスト用の継承クラス
   class TestComponent < ApplicationComponent
+    # @rbs () -> void
     def initialize
     end
   end

@@ -1,6 +1,7 @@
 require "test_helper"
 
 class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::TestCase
+  # @rbs () -> bool
   def setup
     @pending = user_pending_sns_credentials(:one)
     @form = User::SnsCredentialRegistrationForm.new(

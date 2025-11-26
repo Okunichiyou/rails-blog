@@ -1,6 +1,7 @@
 require "test_helper"
 
 class Ui::EmailFieldComponentTest < ViewComponent::TestCase
+  # @rbs () -> ActionView::Helpers::FormBuilder
   def form_builder
     ActionView::Helpers::FormBuilder.new("user_database_authentication", User::DatabaseAuthentication.new, vc_test_controller.view_context, {})
   end

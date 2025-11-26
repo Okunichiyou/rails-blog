@@ -1,6 +1,7 @@
 require "test_helper"
 
 class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::IntegrationTest
+  # @rbs () -> User::PendingSnsCredential
   def setup
     @pending = user_pending_sns_credentials(:one)
   end

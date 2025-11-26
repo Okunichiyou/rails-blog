@@ -19,6 +19,7 @@ class User::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::Int
 
   private
 
+  # @rbs (**nil | String) -> OmniAuth::AuthHash
   def build_auth_hash(**overrides)
     hash = @valid_auth_hash.deep_dup
     overrides.each do |key, value|

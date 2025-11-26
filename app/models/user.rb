@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   private
 
+  # @rbs () -> String?
   def trim_name
     self.name = name&.strip
   end

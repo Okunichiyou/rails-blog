@@ -1,6 +1,7 @@
 require "test_helper"
 
 class User::SnsAuthenticationDomainServiceTest < ActiveSupport::TestCase
+  # @rbs () -> User::OmniauthData
   def setup
     @omniauth_data = User::OmniauthData.new(
       provider: "google",

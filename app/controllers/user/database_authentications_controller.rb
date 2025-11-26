@@ -1,4 +1,5 @@
 class User::DatabaseAuthenticationsController < ApplicationController
+  # @rbs () -> ActiveSupport::SafeBuffer?
   def new
     confirmation_token = params[:confirmation_token]
     @form = User::DatabaseAuthenticationRegistrationForm.new(confirmation_token:)
@@ -8,6 +9,7 @@ class User::DatabaseAuthenticationsController < ApplicationController
     render :new, status: :unprocessable_entity
   end
 
+  # @rbs () -> (ActiveSupport::SafeBuffer | Integer)
   def create
     form_params = params.require(:confirmation).permit(:user_name, :password, :password_confirmation, :confirmation_token)
     @form = User::DatabaseAuthenticationRegistrationForm.new(form_params)

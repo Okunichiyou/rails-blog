@@ -1,6 +1,7 @@
 require "test_helper"
 
 class User::SnsCredentialTest < ActiveSupport::TestCase
+  # @rbs () -> User::SnsCredential
   def setup
     @user = users(:one)
     @sns_credential = User::SnsCredential.new(

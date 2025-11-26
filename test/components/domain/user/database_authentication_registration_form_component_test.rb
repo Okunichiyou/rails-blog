@@ -1,6 +1,7 @@
 require "test_helper"
 
 class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewComponent::TestCase
+  # @rbs () -> User::DatabaseAuthenticationRegistrationForm
   def setup
     confirmation = User::Confirmation.create!(
       email: "test@example.com",

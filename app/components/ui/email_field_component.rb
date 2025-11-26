@@ -3,6 +3,7 @@ module Ui
     SIZE_OPTIONS = %i[full large medium small].freeze
     VARIANT_OPTIONS = %i[default alert].freeze
 
+    # @rbs (builder: ActionView::Helpers::FormBuilder, method: Symbol, size: Symbol, ?variant: Symbol, **nil | bool | String | Hash[untyped, untyped]) -> void
     def initialize(
       builder:,
       method:,
@@ -19,6 +20,7 @@ module Ui
 
     private
 
+    # @rbs (String?) -> String
     def field_classes(extra_classes)
       classes = [
         "box-border border-[1.5px] rounded-sm px-2 py-1",
@@ -34,6 +36,7 @@ module Ui
       classes.join(" ")
     end
 
+    # @rbs () -> String
     def size_class
       case @size
       when :full
@@ -47,6 +50,7 @@ module Ui
       end
     end
 
+    # @rbs () -> String
     def variant_class
       return "" if @variant == :default
 
