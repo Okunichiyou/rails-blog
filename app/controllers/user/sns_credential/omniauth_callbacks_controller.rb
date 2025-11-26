@@ -1,12 +1,10 @@
 class User::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   skip_before_action :verify_authenticity_token, only: %i[google_oauth2]
 
-  # @rbs () -> (Integer | String)
   def google_oauth2
     callback_for(:google)
   end
 
-  # @rbs () -> Integer
   def failure
     error_type = request.env["omniauth.error.type"]
     error = request.env["omniauth.error"]
@@ -21,7 +19,6 @@ class User::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallbac
 
   private
 
-  # @rbs (Symbol) -> (Integer | String)
   def callback_for(provider)
     auth = request.env["omniauth.auth"]
     omniauth_data = User::OmniauthData.from_omniauth(auth)

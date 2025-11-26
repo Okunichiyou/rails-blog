@@ -2,7 +2,9 @@
 
 require "rbs/trace"
 
-trace = RBS::Trace.new
+# app/配下の.rbファイルからapp/controllersを除外
+paths = Dir.glob("#{Dir.pwd}/app/**/*.rb").reject { |path| path.include?("app/controllers") }
+trace = RBS::Trace.new(paths: paths)
 trace.enable
 
 Minitest.after_run do

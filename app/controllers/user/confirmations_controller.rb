@@ -4,7 +4,6 @@ class User::ConfirmationsController < Devise::ConfirmationsController
     respond_with(@form)
   end
 
-  # @rbs () -> (ActiveSupport::SafeBuffer | Integer)
   def create
     @form = User::EmailConfirmationForm.new(params.require(:confirmation).permit(:email))
     if @form.call
@@ -19,7 +18,6 @@ class User::ConfirmationsController < Devise::ConfirmationsController
   def sent
   end
 
-  # @rbs () -> (Integer | ActiveSupport::SafeBuffer)
   def show
     self.resource = resource_class.confirm_by_token(params[:confirmation_token])
 
