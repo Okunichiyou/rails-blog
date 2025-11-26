@@ -1,0 +1,7 @@
+module Ui
+  class FieldErrorsComponent < ApplicationComponent
+    @error_messages: untyped
+
+    @html_options: untyped
+  end
+end

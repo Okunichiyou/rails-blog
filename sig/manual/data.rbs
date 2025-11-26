@@ -1,0 +1,4 @@
+# Data class for Ruby 3.2+
+class Data
+  def self.define: (*Symbol | String) -> Class
+end

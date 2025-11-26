@@ -1,0 +1,7 @@
+module Ui
+  class HeaderComponent < ApplicationComponent
+    @login_user: untyped
+
+    @html_options: untyped
+  end
+end

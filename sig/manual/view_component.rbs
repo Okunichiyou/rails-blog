@@ -1,0 +1,11 @@
+module ViewComponent
+  class Base < ActionView::Base
+    def initialize: (**untyped) -> void
+    def render_in: (untyped view_context) -> String
+    def before_render: () -> void
+    def before_render_check: () -> void
+
+    def self.renders_one: (*untyped, **untyped) -> void
+    def self.renders_many: (*untyped, **untyped) -> void
+  end
+end

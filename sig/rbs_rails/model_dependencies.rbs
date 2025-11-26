@@ -1,0 +1,8 @@
+class User::SnsCredential::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+end
+class ActiveRecord::Associations::CollectionProxy < ::ActiveRecord::Relation
+end
+class ActiveRecord::Relation < ::Object
+end
+module ActiveRecord::Associations
+end

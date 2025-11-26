@@ -12,18 +12,22 @@ class User::SnsCredentialRegistrationForm
   validate :validate_token
   validate :validate_user, unless: -> { validation_context == :token_validation_only }
 
+  # @rbs () -> ActiveModel::Name
   def model_name
     ActiveModel::Name.new(self, nil, "SnsCredentialRegistration")
   end
 
+  # @rbs () -> String?
   def email
     @pending_credential&.email
   end
 
+  # @rbs () -> String
   def provider
     @pending_credential&.provider
   end
 
+  # @rbs () -> bool
   def call
     return false unless valid?
 
@@ -40,6 +44,7 @@ class User::SnsCredentialRegistrationForm
 
   private
 
+  # @rbs () -> ActiveModel::Error?
   def validate_token
     @pending_credential = User::PendingSnsCredential.find_by(token: token)
 
@@ -53,6 +58,7 @@ class User::SnsCredentialRegistrationForm
     end
   end
 
+  # @rbs () -> Array[untyped]?
   def validate_user
     return unless @pending_credential # pending_credentialが見つからない場合はスキップ
 

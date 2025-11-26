@@ -1,0 +1,41 @@
+class User::DatabaseAuthenticationRegistrationForm
+  include ActiveModel::Model
+
+  include ActiveModel::Attributes
+
+  attr_reader user: untyped
+
+  attr_reader user_database_authentication: untyped
+
+  # Userモデル属性からフォーム属性へのマッピング
+  USER_ATTR_TRANSFORM_MAP: untyped
+
+  # @rbs () -> ActiveModel::Name
+  def model_name: () -> ActiveModel::Name
+
+  # @rbs () -> String?
+  def email: () -> String?
+
+  # @rbs () -> bool
+  def call: () -> bool
+
+  # @rbs () -> nil
+  def validate_token: () -> nil
+
+  private
+
+  # @rbs () -> User::DatabaseAuthentication
+  def build_models: () -> User::DatabaseAuthentication
+
+  # @rbs () -> Array[untyped]?
+  def validate_user: () -> Array[untyped]?
+
+  # @rbs () -> Array[untyped]?
+  def validate_database_authentication: () -> Array[untyped]?
+
+  # @rbs () -> bool
+  def save_models: () -> bool
+
+  # @rbs () -> User::Confirmation?
+  def confirmation_resource: () -> User::Confirmation?
+end

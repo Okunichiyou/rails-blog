@@ -1,0 +1,7 @@
+module Ui
+  class FlashComponent < ApplicationComponent
+    @flash_type: untyped
+
+    @html_options: untyped
+  end
+end

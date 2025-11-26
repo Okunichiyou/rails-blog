@@ -21,10 +21,15 @@ gem "view_component"
 group :development, :test do
   gem "brakeman", require: false
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "rbs-trace", require: false
   gem "rubocop-rails-omakase", require: false
 end
 
 group :development do
+  gem "rbs", require: false
+  gem "rbs-inline", require: false
+  gem "rbs_rails", require: false
+  gem "steep", require: false
   gem "web-console"
 end
 

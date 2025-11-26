@@ -1,0 +1,16 @@
+module Ui
+  class FlashComponent < ApplicationComponent
+    FLASH_TYPES: untyped
+
+    # @rbs (flash_type: Symbol, **untyped) -> void
+    def initialize: (flash_type: Symbol, **untyped) -> void
+
+    private
+
+    # @rbs (untyped) -> String
+    def flash_classes: (untyped) -> String
+
+    # @rbs () -> String
+    def flash_type_class: () -> String
+  end
+end

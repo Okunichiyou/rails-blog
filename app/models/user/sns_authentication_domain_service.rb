@@ -6,10 +6,12 @@ class User::SnsAuthenticationDomainService
   #
   # @param omniauth_data [User::OmniauthData] OmniAuth認証データ
   # @return [Result] 成功の場合はuserを含む、失敗の場合はerrorを含む
+  # @rbs (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
   def self.authenticate_or_create(omniauth_data)
     new.authenticate_or_create(omniauth_data)
   end
 
+  # @rbs (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
   def authenticate_or_create(omniauth_data)
     # OmniAuthデータの検証
     unless omniauth_data.valid?
@@ -39,10 +41,12 @@ class User::SnsAuthenticationDomainService
   # @param token [String] 一時登録トークン
   # @param user_name [String] ユーザーが編集したユーザー名
   # @return [Result] 成功の場合はuserを含む、失敗の場合はerrorを含む
+  # @rbs (String, String) -> User::SnsAuthenticationDomainService::Result
   def self.create_from_pending(token, user_name)
     new.create_from_pending(token, user_name)
   end
 
+  # @rbs (String, String) -> User::SnsAuthenticationDomainService::Result
   def create_from_pending(token, user_name)
     # 一時登録データを取得
     pending = User::PendingSnsCredential.find_valid_by_token(token)
@@ -90,6 +94,7 @@ class User::SnsAuthenticationDomainService
 
   private
 
+  # @rbs (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
   def create_pending_registration(omniauth_data)
     # メールアドレスが既に使用されているかチェック
     if email_already_used?(omniauth_data.email)
@@ -142,34 +147,51 @@ class User::SnsAuthenticationDomainService
   #
   # @param email [String] チェックするメールアドレス
   # @return [Boolean] 使用されている場合true
+  # @rbs (String) -> bool
   def email_already_used?(email)
     # DatabaseAuthenticationまたはSnsCredentialでメールアドレスが使用されているか
     User::DatabaseAuthentication.exists?(email: email) ||
       User::SnsCredential.exists?(email: email)
   end
 
-  # 結果オブジェクト
-  class Result < Data.define(:success, :user, :error, :message, :token, :pending)
+  # SNS認証の結果を格納する
+  # success = true:  認証完了してログインできる状態
+  # success = false: 認証に失敗
+  # pending = true:  SNS認証は完了したが、ユーザー情報の入力がこれから必要な状態
+  Result = Data.define(
+    :success, #: bool
+    :user,    #: User?
+    :error,   #: Symbol?
+    :message, #: String?
+    :token,   #: String?
+    :pending  #: bool
+  ) do
+    # @rbs (user: User) -> User::SnsAuthenticationDomainService::Result
     def self.success(user:)
       new(success: true, user: user, error: nil, message: nil, token: nil, pending: false)
     end
 
+    # @rbs (error: Symbol, message: String) -> User::SnsAuthenticationDomainService::Result
     def self.failure(error:, message:)
       new(success: false, user: nil, error: error, message: message, token: nil, pending: false)
     end
 
+    # @rbs (token: String) -> User::SnsAuthenticationDomainService::Result
     def self.pending_registration(token:)
       new(success: false, user: nil, error: nil, message: nil, token: token, pending: true)
     end
 
+    # @rbs () -> bool
     def success?
       success
     end
 
+    # @rbs () -> bool
     def failure?
       !success && !pending
     end
 
+    # @rbs () -> bool
     def pending_registration?
       pending
     end

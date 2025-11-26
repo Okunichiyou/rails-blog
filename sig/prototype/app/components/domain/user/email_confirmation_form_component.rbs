@@ -1,0 +1,11 @@
+module Domain
+  module User
+    class EmailConfirmationFormComponent < ApplicationComponent
+      @form: untyped
+
+      @confirmation_path: untyped
+
+      @resource_name: untyped
+    end
+  end
+end

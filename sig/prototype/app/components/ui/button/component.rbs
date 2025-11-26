@@ -1,0 +1,19 @@
+module Ui
+  module Button
+    class Component < ApplicationComponent
+      @category: untyped
+
+      @size: untyped
+
+      @type: untyped
+
+      @variant: untyped
+
+      @text: untyped
+
+      @style: untyped
+
+      @html_options: untyped
+    end
+  end
+end

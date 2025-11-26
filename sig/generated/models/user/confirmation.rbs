@@ -1,0 +1,9 @@
+class User::Confirmation < ApplicationRecord
+  private
+
+  # @rbs () -> String?
+  def trim_email: () -> String?
+
+  # @rbs () -> String?
+  def trim_unconfirmed_email: () -> String?
+end

@@ -1,0 +1,46 @@
+module Devise
+  class ConfirmationsController < ::DeviseController
+    def show: () -> untyped
+    def create: () -> untyped
+    def new: () -> untyped
+  end
+
+  class OmniauthCallbacksController < ::DeviseController
+    def failure: () -> untyped
+    def passthru: () -> untyped
+    def translation_scope: () -> Symbol
+  end
+end
+
+# Add Devise helper methods to controllers
+class DeviseController < ApplicationController
+  def resource: () -> untyped
+  def resource_name: () -> untyped
+  def resource_class: () -> untyped
+  def devise_mapping: () -> untyped
+  def signed_in_resource: () -> untyped
+  def sign_in: (untyped, untyped) -> untyped
+  def sign_out: (untyped) -> untyped
+  def sign_up: (untyped, untyped) -> untyped
+  def resource=: (untyped) -> untyped
+  def respond_with: (*untyped) -> untyped
+  def sign_in_and_redirect: (untyped, **untyped) -> untyped
+  def set_flash_message: (*untyped, **untyped) -> untyped
+  def is_navigational_format?: () -> bool
+end
+
+# Add Devise helper methods to ApplicationController
+class ApplicationController
+  def authenticate_user!: () -> untyped
+  def user_signed_in?: () -> bool
+  def current_user: () -> untyped
+  def sign_in: (untyped, untyped) -> untyped
+  def sign_out: (untyped) -> untyped
+  def after_sign_in_path_for: (untyped) -> untyped
+  def after_sign_out_path_for: (untyped) -> untyped
+  def root_path: () -> String
+  def login_path: () -> String
+  def new_user_database_authentication_path: (**untyped) -> String
+  def email_confirmation_sent_path: () -> String
+  def new_user_sns_credential_registration_path: (*untyped, **untyped) -> String
+end

@@ -4,6 +4,7 @@ module Ui
 
     FLASH_TYPES = %i[info notice warn alert].freeze
 
+    # @rbs (flash_type: Symbol, **untyped) -> void
     def initialize(
       flash_type:,
       **html_options
@@ -14,6 +15,7 @@ module Ui
 
     private
 
+    # @rbs (untyped) -> String
     def flash_classes(extra_classes)
       classes = [
         "rounded-sm p-4",
@@ -23,6 +25,7 @@ module Ui
       classes.join(" ")
     end
 
+    # @rbs () -> String
     def flash_type_class
       case @flash_type
       when :info
@@ -33,6 +36,8 @@ module Ui
         "bg-warn text-warn"
       when :alert
         "bg-alert text-alert"
+      else
+        ""
       end
     end
   end

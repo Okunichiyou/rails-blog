@@ -1,0 +1,62 @@
+# SNS認証に関するドメインロジックを扱うサービス
+class User::SnsAuthenticationDomainService
+  # SNS認証を行い、ユーザーを取得または作成する
+  #
+  # @param omniauth_data [User::OmniauthData] OmniAuth認証データ
+  # @return [Result] 成功の場合はuserを含む、失敗の場合はerrorを含む
+  # @rbs (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
+  def self.authenticate_or_create: (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
+
+  # @rbs (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
+  def authenticate_or_create: (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
+
+  # 一時登録トークンからユーザーを作成
+  #
+  # @param token [String] 一時登録トークン
+  # @param user_name [String] ユーザーが編集したユーザー名
+  # @return [Result] 成功の場合はuserを含む、失敗の場合はerrorを含む
+  # @rbs (String, String) -> User::SnsAuthenticationDomainService::Result
+  def self.create_from_pending: (String, String) -> User::SnsAuthenticationDomainService::Result
+
+  # @rbs (String, String) -> User::SnsAuthenticationDomainService::Result
+  def create_from_pending: (String, String) -> User::SnsAuthenticationDomainService::Result
+
+  private
+
+  # @rbs (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
+  def create_pending_registration: (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
+
+  def create_new_user: (untyped omniauth_data) -> untyped
+
+  # メールアドレスが既に使用されているか確認
+  #
+  # @param email [String] チェックするメールアドレス
+  # @return [Boolean] 使用されている場合true
+  # @rbs (String) -> bool
+  def email_already_used?: (String) -> bool
+
+  # SNS認証の結果を格納する
+  # success = true:  認証完了してログインできる状態
+  # success = false: 認証に失敗
+  # pending = true:  SNS認証は完了したが、ユーザー情報の入力がこれから必要な状態
+  class Result < Data
+    attr_reader success(): bool
+
+    attr_reader user(): User?
+
+    attr_reader error(): Symbol?
+
+    attr_reader message(): String?
+
+    attr_reader token(): String?
+
+    attr_reader pending(): bool
+
+    def self.new: (bool success, User? user, Symbol? error, String? message, String? token, bool pending) -> instance
+                | (success: bool, user: User?, error: Symbol?, message: String?, token: String?, pending: bool) -> instance
+
+    def self.members: () -> [ :success, :user, :error, :message, :token, :pending ]
+
+    def members: () -> [ :success, :user, :error, :message, :token, :pending ]
+  end
+end

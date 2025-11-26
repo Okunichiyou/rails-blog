@@ -1,0 +1,15 @@
+module Page
+  module User
+    module Confirmations
+      class NewPageComponent < ApplicationComponent
+        @form: untyped
+
+        @confirmation_path: untyped
+
+        @resource_name: untyped
+
+        @html_options: untyped
+      end
+    end
+  end
+end

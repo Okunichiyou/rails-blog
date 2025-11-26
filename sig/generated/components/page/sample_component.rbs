@@ -1,0 +1,5 @@
+module Page
+  class SampleComponent < ApplicationComponent
+    def initialize: () -> untyped
+  end
+end

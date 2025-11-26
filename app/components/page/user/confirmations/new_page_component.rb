@@ -2,6 +2,7 @@ module Page
   module User
     module Confirmations
       class NewPageComponent < ApplicationComponent
+        # @rbs (form: User::EmailConfirmationForm, confirmation_path: String, ?resource_name: Symbol, **nil) -> void
         def initialize(form:, confirmation_path:, resource_name: :confirmation, **html_options)
           @form = form
           @confirmation_path = confirmation_path

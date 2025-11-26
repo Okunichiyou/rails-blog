@@ -13,6 +13,7 @@ class User::OmniauthData
 
   # @param auth [OmniAuth::AuthHash] OmniAuthのハッシュデータ
   # @return [User::OmniauthData]
+  # @rbs (OmniAuth::AuthHash) -> User::OmniauthData
   def self.from_omniauth(auth)
     new(
       provider: auth.provider,
@@ -22,6 +23,7 @@ class User::OmniauthData
     )
   end
 
+  # @rbs (provider: String | nil, uid: String | nil, name: String | nil, email: String | nil) -> void
   def initialize(provider:, uid:, name:, email:)
     @provider = provider
     @uid = uid

@@ -1,0 +1,7 @@
+module Ui
+  class PanelComponent < ApplicationComponent
+    @size: untyped
+
+    @html_options: untyped
+  end
+end

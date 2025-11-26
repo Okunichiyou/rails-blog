@@ -6,6 +6,7 @@ module Ui
       TYPE_OPTIONS = %i[button submit reset].freeze
       VARIANT_OPTIONS = %i[default danger].freeze
 
+      # @rbs (category: Symbol, size: Symbol, text: String, ?type: Symbol, ?variant: Symbol, ?icon: ActiveSupport::SafeBuffer | nil, ?icon_position: Symbol, **nil | bool | String) -> void
       def initialize(
         category:,
         size:,
@@ -29,14 +30,17 @@ module Ui
 
       private
 
+      # @rbs () -> String
       def text_color_class
         @style.text_color_class
       end
 
+      # @rbs () -> String
       def tint_bg_class
         @style.tint_bg_class
       end
 
+      # @rbs () -> String
       def shadow_class
         @style.shadow_class
       end

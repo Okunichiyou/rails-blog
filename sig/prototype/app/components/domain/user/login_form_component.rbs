@@ -1,0 +1,11 @@
+module Domain
+  module User
+    class LoginFormComponent < ApplicationComponent
+      @resource: untyped
+
+      @resource_name: untyped
+
+      @login_path: untyped
+    end
+  end
+end

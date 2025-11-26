@@ -1,0 +1,10 @@
+module Page
+  module User
+    module DatabaseAuthentications
+      class NewPageComponent < ApplicationComponent
+        # @rbs (form: User::DatabaseAuthenticationRegistrationForm, create_database_authentication_path: String, **nil) -> void
+        def initialize: (form: User::DatabaseAuthenticationRegistrationForm, create_database_authentication_path: String, **nil) -> void
+      end
+    end
+  end
+end

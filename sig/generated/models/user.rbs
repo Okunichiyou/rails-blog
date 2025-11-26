@@ -1,0 +1,6 @@
+class User < ApplicationRecord
+  private
+
+  # @rbs () -> String?
+  def trim_name: () -> String?
+end

@@ -1,0 +1,5 @@
+class ApplicationRecord < ActiveRecord::Base
+  # Common attributes that might be used across models
+  def name: () -> String?
+  def name=: (String?) -> String?
+end

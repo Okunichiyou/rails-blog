@@ -18,14 +18,17 @@ class User::DatabaseAuthenticationRegistrationForm
     name: :user_name
   }.freeze
 
+  # @rbs () -> ActiveModel::Name
   def model_name
     ActiveModel::Name.new(self, nil, "Confirmation")
   end
 
+  # @rbs () -> String?
   def email
     confirmation_resource&.email
   end
 
+  # @rbs () -> bool
   def call
     build_models
     return false unless valid?
@@ -33,6 +36,7 @@ class User::DatabaseAuthenticationRegistrationForm
     save_models
   end
 
+  # @rbs () -> nil
   def validate_token
     found_resource = User::Confirmation.find_by(confirmation_token:)
 
@@ -49,6 +53,7 @@ class User::DatabaseAuthenticationRegistrationForm
 
   private
 
+  # @rbs () -> User::DatabaseAuthentication
   def build_models
     @user = User.new(name: user_name)
     @user_database_authentication = User::DatabaseAuthentication.new(
@@ -59,6 +64,7 @@ class User::DatabaseAuthenticationRegistrationForm
     )
   end
 
+  # @rbs () -> Array[untyped]?
   def validate_user
     return unless @user # モデルが構築されていない場合はスキップ
     return if user.valid?
@@ -69,6 +75,7 @@ class User::DatabaseAuthenticationRegistrationForm
     end
   end
 
+  # @rbs () -> Array[untyped]?
   def validate_database_authentication
     return unless @user_database_authentication # モデルが構築されていない場合はスキップ
     return if user_database_authentication.valid?
@@ -78,6 +85,7 @@ class User::DatabaseAuthenticationRegistrationForm
     end
   end
 
+  # @rbs () -> bool
   def save_models
     ActiveRecord::Base.transaction do
       user.save!
@@ -91,6 +99,7 @@ class User::DatabaseAuthenticationRegistrationForm
     false
   end
 
+  # @rbs () -> User::Confirmation?
   def confirmation_resource
     @confirmation_resource ||= User::Confirmation.find_by(confirmation_token:)
   end

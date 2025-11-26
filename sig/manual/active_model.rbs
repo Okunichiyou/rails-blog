@@ -1,0 +1,21 @@
+module ActiveModel
+  module Model
+    def self.included: (untyped) -> void
+
+    module ClassMethods
+      def validates: (*untyped) -> void
+    end
+  end
+
+  module Validations
+    def valid?: () -> bool
+    def invalid?: () -> bool
+    def errors: () -> untyped
+    def validate: (*untyped) -> void
+
+    module ClassMethods
+      def validates: (*untyped) -> void
+      def validate: (*untyped) -> void
+    end
+  end
+end

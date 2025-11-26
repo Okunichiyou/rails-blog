@@ -1,0 +1,16 @@
+module Ui
+  class PanelComponent < ApplicationComponent
+    SIZE_OPTIONS: untyped
+
+    # @rbs (size: Symbol, **untyped) -> void
+    def initialize: (size: Symbol, **untyped) -> void
+
+    private
+
+    # @rbs (untyped) -> String
+    def panel_classes: (untyped) -> String
+
+    # @rbs () -> String
+    def size_class: () -> String
+  end
+end
