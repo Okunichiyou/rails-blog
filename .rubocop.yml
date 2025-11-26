@@ -17,3 +17,7 @@ Layout/ParameterAlignment:
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
+
+# rbs-inline の型コメント用で不要と判断。特に他のコメントに関してもスペースの有無は拘りないので一括disable
+Layout/LeadingCommentSpace:
+  Enabled: false

@@ -34,4 +34,29 @@ class User::SnsAuthenticationDomainService
   # @return [Boolean] 使用されている場合true
   # @rbs (String) -> bool
   def email_already_used?: (String) -> bool
+
+  # SNS認証の結果を格納する
+  # success = true:  認証完了してログインできる状態
+  # success = false: 認証に失敗
+  # pending = true:  SNS認証は完了したが、ユーザー情報の入力がこれから必要な状態
+  class Result < Data
+    attr_reader success(): bool
+
+    attr_reader user(): User?
+
+    attr_reader error(): Symbol?
+
+    attr_reader message(): String?
+
+    attr_reader token(): String?
+
+    attr_reader pending(): bool
+
+    def self.new: (bool success, User? user, Symbol? error, String? message, String? token, bool pending) -> instance
+                | (success: bool, user: User?, error: Symbol?, message: String?, token: String?, pending: bool) -> instance
+
+    def self.members: () -> [ :success, :user, :error, :message, :token, :pending ]
+
+    def members: () -> [ :success, :user, :error, :message, :token, :pending ]
+  end
 end

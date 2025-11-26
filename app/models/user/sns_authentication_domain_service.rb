@@ -154,8 +154,18 @@ class User::SnsAuthenticationDomainService
       User::SnsCredential.exists?(email: email)
   end
 
-  # 結果オブジェクト
-  class Result < Data.define(:success, :user, :error, :message, :token, :pending)
+  # SNS認証の結果を格納する
+  # success = true:  認証完了してログインできる状態
+  # success = false: 認証に失敗
+  # pending = true:  SNS認証は完了したが、ユーザー情報の入力がこれから必要な状態
+  Result = Data.define(
+    :success, #: bool
+    :user,    #: User?
+    :error,   #: Symbol?
+    :message, #: String?
+    :token,   #: String?
+    :pending  #: bool
+  ) do
     # @rbs (user: User) -> User::SnsAuthenticationDomainService::Result
     def self.success(user:)
       new(success: true, user: user, error: nil, message: nil, token: nil, pending: false)
