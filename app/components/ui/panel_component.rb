@@ -39,6 +39,8 @@ module Ui
         "w-[400px]"
       when :small
         "w-[200px]"
+      else
+        ""
       end
     end
   end

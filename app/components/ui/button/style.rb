@@ -41,6 +41,8 @@ module Ui
         "w-[7.5rem]"
       when :small
         "w-[5rem]"
+      else
+        ""
       end
     end
 
@@ -59,6 +61,8 @@ module Ui
         else
           "text-btn-secondary"
         end
+      else
+        ""
       end
     end
 
@@ -77,6 +81,8 @@ module Ui
         else
           "bg-btn-secondary"
         end
+      else
+        ""
       end
     end
 
@@ -96,6 +102,8 @@ module Ui
         else
           "shadow-[inset_1px_1px_1px_0_rgba(0,0,0,0.25),inset_-1px_-1px_1px_0_rgba(0,0,0,0.25)]"
         end
+      else
+        ""
       end
     end
     end

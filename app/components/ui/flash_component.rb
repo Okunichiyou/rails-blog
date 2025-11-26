@@ -36,6 +36,8 @@ module Ui
         "bg-warn text-warn"
       when :alert
         "bg-alert text-alert"
+      else
+        ""
       end
     end
   end

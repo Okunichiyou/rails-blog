@@ -47,6 +47,8 @@ module Ui
         "w-[15rem]"
       when :small
         "w-[10rem]"
+      else
+        ""
       end
     end
 
@@ -57,6 +59,8 @@ module Ui
       case @variant
       when :alert
         "border-alert"
+      else
+        ""
       end
     end
   end
