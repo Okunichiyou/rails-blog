@@ -1,0 +1,12 @@
+# Generated from app/components/page/user/database_authentications/new_page_component.rb with RBS::Inline
+
+module Page
+  module User
+    module DatabaseAuthentications
+      class NewPageComponent < ApplicationComponent
+        # @rbs (form: User::DatabaseAuthenticationRegistrationForm, create_database_authentication_path: String, **nil) -> void
+        def initialize: (form: User::DatabaseAuthenticationRegistrationForm, create_database_authentication_path: String, **nil) -> void
+      end
+    end
+  end
+end

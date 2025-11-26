@@ -1,0 +1,11 @@
+# Generated from app/components/page/user/confirmations/sent_page_component.rb with RBS::Inline
+
+module Page
+  module User
+    module Confirmations
+      class SentPageComponent < ApplicationComponent
+        def initialize: (**untyped html_options) -> untyped
+      end
+    end
+  end
+end

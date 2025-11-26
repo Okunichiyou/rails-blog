@@ -1,5 +1,3 @@
-class ApplicationRecord < ::ActiveRecord::Base
-end
 class User::SnsCredential::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
 end
 class ActiveRecord::Associations::CollectionProxy < ::ActiveRecord::Relation

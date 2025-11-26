@@ -1,7 +1,5 @@
 class User < ::ApplicationRecord
   class DatabaseAuthentication < ::ApplicationRecord
-    extend ::_ActiveRecord_Relation_ClassMethods[::User::DatabaseAuthentication, ::User::DatabaseAuthentication::ActiveRecord_Relation, ::Integer]
-
     module GeneratedAttributeMethods
       def id: () -> ::Integer
 
@@ -219,17 +217,9 @@ class User < ::ApplicationRecord
 
       def clear_updated_at_change: () -> void
     end
-    include GeneratedAttributeMethods
 
-    def user: () -> ::User
-    def user=: (::User?) -> ::User?
-    def reload_user: () -> ::User?
-    def build_user: (untyped) -> ::User
-    def create_user: (untyped) -> ::User
-    def create_user!: (untyped) -> ::User
     module GeneratedAssociationMethods
     end
-    include GeneratedAssociationMethods
 
     module GeneratedRelationMethods
     end
@@ -244,5 +234,17 @@ class User < ::ApplicationRecord
       include ::User::DatabaseAuthentication::GeneratedRelationMethods
       include ::_ActiveRecord_Relation[::User::DatabaseAuthentication, ::Integer]
     end
+    extend ::_ActiveRecord_Relation_ClassMethods[::User::DatabaseAuthentication, ::User::DatabaseAuthentication::ActiveRecord_Relation, ::Integer]
+
+    include GeneratedAttributeMethods
+
+    def user: () -> ::User
+    def user=: (::User?) -> ::User?
+    def reload_user: () -> ::User?
+    def build_user: (untyped) -> ::User
+    def create_user: (untyped) -> ::User
+    def create_user!: (untyped) -> ::User
+
+    include GeneratedAssociationMethods
   end
 end

@@ -1,0 +1,22 @@
+# Generated from app/models/user/omniauth_data.rb with RBS::Inline
+
+# OmniAuthから取得した認証データを表すValue Object
+class User::OmniauthData
+  include ActiveModel::Model
+
+  attr_reader provider: untyped
+
+  attr_reader uid: untyped
+
+  attr_reader name: untyped
+
+  attr_reader email: untyped
+
+  # @param auth [OmniAuth::AuthHash] OmniAuthのハッシュデータ
+  # @return [User::OmniauthData]
+  # @rbs (OmniAuth::AuthHash) -> User::OmniauthData
+  def self.from_omniauth: (OmniAuth::AuthHash) -> User::OmniauthData
+
+  # @rbs (provider: String | nil, uid: String | nil, name: String | nil, email: String | nil) -> void
+  def initialize: (provider: String | nil, uid: String | nil, name: String | nil, email: String | nil) -> void
+end

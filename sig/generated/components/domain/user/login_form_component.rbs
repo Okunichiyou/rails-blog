@@ -1,0 +1,10 @@
+# Generated from app/components/domain/user/login_form_component.rb with RBS::Inline
+
+module Domain
+  module User
+    class LoginFormComponent < ApplicationComponent
+      # @rbs (resource: User::DatabaseAuthentication, resource_name: Symbol, login_path: String) -> void
+      def initialize: (resource: User::DatabaseAuthentication, resource_name: Symbol, login_path: String) -> void
+    end
+  end
+end

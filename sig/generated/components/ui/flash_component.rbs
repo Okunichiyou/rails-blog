@@ -1,0 +1,18 @@
+# Generated from app/components/ui/flash_component.rb with RBS::Inline
+
+module Ui
+  class FlashComponent < ApplicationComponent
+    FLASH_TYPES: untyped
+
+    # @rbs (flash_type: Symbol, **nil | String) -> void
+    def initialize: (flash_type: Symbol, **nil | String) -> void
+
+    private
+
+    # @rbs (String?) -> String
+    def flash_classes: (String?) -> String
+
+    # @rbs () -> String
+    def flash_type_class: () -> String
+  end
+end

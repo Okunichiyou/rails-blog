@@ -3,7 +3,5 @@ module Ui
     @login_user: untyped
 
     @html_options: untyped
-
-    def initialize: (?login_user: untyped?, **untyped html_options) -> void
   end
 end

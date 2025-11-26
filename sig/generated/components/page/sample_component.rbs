@@ -1,0 +1,7 @@
+# Generated from app/components/page/sample_component.rb with RBS::Inline
+
+module Page
+  class SampleComponent < ApplicationComponent
+    def initialize: () -> untyped
+  end
+end

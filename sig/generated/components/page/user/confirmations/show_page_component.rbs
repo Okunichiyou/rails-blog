@@ -1,0 +1,12 @@
+# Generated from app/components/page/user/confirmations/show_page_component.rb with RBS::Inline
+
+module Page
+  module User
+    module Confirmations
+      class ShowPageComponent < ApplicationComponent
+        # @rbs (resource: User::Confirmation, **nil) -> void
+        def initialize: (resource: User::Confirmation, **nil) -> void
+      end
+    end
+  end
+end

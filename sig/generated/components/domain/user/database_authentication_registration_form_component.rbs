@@ -1,0 +1,10 @@
+# Generated from app/components/domain/user/database_authentication_registration_form_component.rb with RBS::Inline
+
+module Domain
+  module User
+    class DatabaseAuthenticationRegistrationFormComponent < ApplicationComponent
+      # @rbs (form: User::DatabaseAuthenticationRegistrationForm, create_database_authentication_path: String) -> void
+      def initialize: (form: User::DatabaseAuthenticationRegistrationForm, create_database_authentication_path: String) -> void
+    end
+  end
+end

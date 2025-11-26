@@ -1,0 +1,29 @@
+# Generated from app/components/ui/button/icon_component.rb with RBS::Inline
+
+module Ui
+  module Button
+    class IconComponent < ApplicationComponent
+      CATEGORY_OPTIONS: untyped
+
+      SIZE_OPTIONS: untyped
+
+      TYPE_OPTIONS: untyped
+
+      VARIANT_OPTIONS: untyped
+
+      # @rbs (category: Symbol, size: Symbol, text: String, ?type: Symbol, ?variant: Symbol, ?icon: ActiveSupport::SafeBuffer | nil, ?icon_position: Symbol, **nil | bool | String) -> void
+      def initialize: (category: Symbol, size: Symbol, text: String, ?type: Symbol, ?variant: Symbol, ?icon: ActiveSupport::SafeBuffer | nil, ?icon_position: Symbol, **nil | bool | String) -> void
+
+      private
+
+      # @rbs () -> String
+      def text_color_class: () -> String
+
+      # @rbs () -> String
+      def tint_bg_class: () -> String
+
+      # @rbs () -> String
+      def shadow_class: () -> String
+    end
+  end
+end

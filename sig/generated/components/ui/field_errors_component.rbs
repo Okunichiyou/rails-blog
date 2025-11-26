@@ -1,0 +1,13 @@
+# Generated from app/components/ui/field_errors_component.rb with RBS::Inline
+
+module Ui
+  class FieldErrorsComponent < ApplicationComponent
+    # @rbs (error_messages: Array[untyped], **nil) -> void
+    def initialize: (error_messages: Array[untyped], **nil) -> void
+
+    private
+
+    # @rbs (nil) -> String
+    def error_classes: (nil) -> String
+  end
+end

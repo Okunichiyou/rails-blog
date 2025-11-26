@@ -6,8 +6,6 @@ module Domain
       @resource_name: untyped
 
       @login_path: untyped
-
-      def initialize: (resource: untyped, resource_name: untyped, login_path: untyped) -> void
     end
   end
 end

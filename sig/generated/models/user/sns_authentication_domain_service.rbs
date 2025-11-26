@@ -1,0 +1,60 @@
+# Generated from app/models/user/sns_authentication_domain_service.rb with RBS::Inline
+
+# SNS認証に関するドメインロジックを扱うサービス
+class User::SnsAuthenticationDomainService
+  # SNS認証を行い、ユーザーを取得または作成する
+  #
+  # @param omniauth_data [User::OmniauthData] OmniAuth認証データ
+  # @return [Result] 成功の場合はuserを含む、失敗の場合はerrorを含む
+  # @rbs (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
+  def self.authenticate_or_create: (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
+
+  # @rbs (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
+  def authenticate_or_create: (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
+
+  # 一時登録トークンからユーザーを作成
+  #
+  # @param token [String] 一時登録トークン
+  # @param user_name [String] ユーザーが編集したユーザー名
+  # @return [Result] 成功の場合はuserを含む、失敗の場合はerrorを含む
+  # @rbs (String, String) -> User::SnsAuthenticationDomainService::Result
+  def self.create_from_pending: (String, String) -> User::SnsAuthenticationDomainService::Result
+
+  # @rbs (String, String) -> User::SnsAuthenticationDomainService::Result
+  def create_from_pending: (String, String) -> User::SnsAuthenticationDomainService::Result
+
+  private
+
+  # @rbs (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
+  def create_pending_registration: (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
+
+  def create_new_user: (untyped omniauth_data) -> untyped
+
+  # メールアドレスが既に使用されているか確認
+  #
+  # @param email [String] チェックするメールアドレス
+  # @return [Boolean] 使用されている場合true
+  # @rbs (String) -> bool
+  def email_already_used?: (String) -> bool
+
+  # 結果オブジェクト
+  class Result
+    # @rbs (user: User) -> User::SnsAuthenticationDomainService::Result
+    def self.success: (user: User) -> User::SnsAuthenticationDomainService::Result
+
+    # @rbs (error: Symbol, message: String) -> User::SnsAuthenticationDomainService::Result
+    def self.failure: (error: Symbol, message: String) -> User::SnsAuthenticationDomainService::Result
+
+    # @rbs (token: String) -> User::SnsAuthenticationDomainService::Result
+    def self.pending_registration: (token: String) -> User::SnsAuthenticationDomainService::Result
+
+    # @rbs () -> bool
+    def success?: () -> bool
+
+    # @rbs () -> bool
+    def failure?: () -> bool
+
+    # @rbs () -> bool
+    def pending_registration?: () -> bool
+  end
+end

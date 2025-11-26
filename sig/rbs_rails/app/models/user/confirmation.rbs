@@ -1,7 +1,5 @@
 class User < ::ApplicationRecord
   class Confirmation < ::ApplicationRecord
-    extend ::_ActiveRecord_Relation_ClassMethods[::User::Confirmation, ::User::Confirmation::ActiveRecord_Relation, ::Integer]
-
     module GeneratedAttributeMethods
       def id: () -> ::Integer
 
@@ -291,11 +289,9 @@ class User < ::ApplicationRecord
 
       def clear_updated_at_change: () -> void
     end
-    include GeneratedAttributeMethods
 
     module GeneratedAssociationMethods
     end
-    include GeneratedAssociationMethods
 
     module GeneratedRelationMethods
     end
@@ -310,5 +306,10 @@ class User < ::ApplicationRecord
       include ::User::Confirmation::GeneratedRelationMethods
       include ::_ActiveRecord_Relation[::User::Confirmation, ::Integer]
     end
+    extend ::_ActiveRecord_Relation_ClassMethods[::User::Confirmation, ::User::Confirmation::ActiveRecord_Relation, ::Integer]
+
+    include GeneratedAttributeMethods
+
+    include GeneratedAssociationMethods
   end
 end

@@ -1,0 +1,12 @@
+# Generated from app/components/page/devise/sessions/new_page_component.rb with RBS::Inline
+
+module Page
+  module Devise
+    module Sessions
+      class NewPageComponent < ApplicationComponent
+        # @rbs (resource: User::DatabaseAuthentication, resource_name: Symbol, login_path: String, **nil) -> void
+        def initialize: (resource: User::DatabaseAuthentication, resource_name: Symbol, login_path: String, **nil) -> void
+      end
+    end
+  end
+end

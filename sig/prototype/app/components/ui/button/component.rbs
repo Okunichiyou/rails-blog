@@ -14,24 +14,6 @@ module Ui
       @style: untyped
 
       @html_options: untyped
-
-      CATEGORY_OPTIONS: ::Array[:primary | :secondary]
-
-      SIZE_OPTIONS: ::Array[:full | :large | :medium | :small]
-
-      TYPE_OPTIONS: ::Array[:button | :submit | :reset]
-
-      VARIANT_OPTIONS: ::Array[:default | :danger]
-
-      def initialize: (category: untyped, size: untyped, text: untyped, ?type: ::Symbol, ?variant: ::Symbol, **untyped html_options) -> void
-
-      private
-
-      def text_color_class: () -> untyped
-
-      def tint_bg_class: () -> untyped
-
-      def shadow_class: () -> untyped
     end
   end
 end

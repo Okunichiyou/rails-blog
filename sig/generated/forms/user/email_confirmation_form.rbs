@@ -1,0 +1,20 @@
+# Generated from app/forms/user/email_confirmation_form.rb with RBS::Inline
+
+class User::EmailConfirmationForm
+  include ActiveModel::Model
+
+  include ActiveModel::Attributes
+
+  include ActiveModel::Validations::Callbacks
+
+  # @rbs () -> ActiveModel::Name
+  def model_name: () -> ActiveModel::Name
+
+  # @rbs () -> bool
+  def call: () -> bool
+
+  private
+
+  # @rbs () -> String
+  def trim_email: () -> String
+end

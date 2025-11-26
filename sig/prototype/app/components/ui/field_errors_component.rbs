@@ -3,11 +3,5 @@ module Ui
     @error_messages: untyped
 
     @html_options: untyped
-
-    def initialize: (error_messages: untyped, **untyped html_options) -> void
-
-    private
-
-    def error_classes: (untyped extra_classes) -> untyped
   end
 end

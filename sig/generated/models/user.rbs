@@ -1,0 +1,8 @@
+# Generated from app/models/user.rb with RBS::Inline
+
+class User < ApplicationRecord
+  private
+
+  # @rbs () -> String?
+  def trim_name: () -> String?
+end

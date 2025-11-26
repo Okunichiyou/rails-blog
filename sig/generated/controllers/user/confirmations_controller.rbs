@@ -1,0 +1,13 @@
+# Generated from app/controllers/user/confirmations_controller.rb with RBS::Inline
+
+class User::ConfirmationsController < Devise::ConfirmationsController
+  def new: () -> untyped
+
+  # @rbs () -> (ActiveSupport::SafeBuffer | Integer)
+  def create: () -> (ActiveSupport::SafeBuffer | Integer)
+
+  def sent: () -> untyped
+
+  # @rbs () -> (Integer | ActiveSupport::SafeBuffer)
+  def show: () -> (Integer | ActiveSupport::SafeBuffer)
+end

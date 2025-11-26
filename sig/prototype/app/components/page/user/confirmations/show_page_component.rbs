@@ -5,8 +5,6 @@ module Page
         @resource: untyped
 
         @html_options: untyped
-
-        def initialize: (resource: untyped, **untyped html_options) -> void
       end
     end
   end

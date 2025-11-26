@@ -1,0 +1,34 @@
+# Generated from app/components/ui/button/style.rb with RBS::Inline
+
+module Ui
+  module Button
+    class Style
+      attr_reader category: untyped
+
+      attr_reader size: untyped
+
+      attr_reader variant: untyped
+
+      # @rbs (category: Symbol, size: Symbol, ?variant: Symbol) -> void
+      def initialize: (category: Symbol, size: Symbol, ?variant: Symbol) -> void
+
+      # @rbs (?String?) -> String
+      def button_classes: (?String?) -> String
+
+      # @rbs () -> String
+      def size_class: () -> String
+
+      # @rbs () -> String
+      def text_color_class: () -> String
+
+      # @rbs () -> String
+      def tint_bg_class: () -> String
+
+      # @rbs () -> String
+      def border_class: () -> String
+
+      # @rbs () -> String
+      def shadow_class: () -> String
+    end
+  end
+end

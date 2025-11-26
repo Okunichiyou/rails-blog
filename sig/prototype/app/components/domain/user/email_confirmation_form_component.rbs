@@ -6,8 +6,6 @@ module Domain
       @confirmation_path: untyped
 
       @resource_name: untyped
-
-      def initialize: (form: untyped, confirmation_path: untyped, resource_name: untyped) -> void
     end
   end
 end

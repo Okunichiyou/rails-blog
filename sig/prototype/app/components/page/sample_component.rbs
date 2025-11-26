@@ -1,5 +1,0 @@
-module Page
-  class SampleComponent < ApplicationComponent
-    def initialize: () -> void
-  end
-end

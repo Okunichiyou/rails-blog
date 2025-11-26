@@ -7,8 +7,6 @@ module Page
         @create_sns_credential_registration_path: untyped
 
         @html_options: untyped
-
-        def initialize: (form: untyped, create_sns_credential_registration_path: untyped, **untyped html_options) -> void
       end
     end
   end

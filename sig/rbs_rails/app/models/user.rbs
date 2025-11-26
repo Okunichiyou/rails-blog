@@ -1,6 +1,4 @@
 class User < ::ApplicationRecord
-  extend ::_ActiveRecord_Relation_ClassMethods[::User, ::User::ActiveRecord_Relation, ::Integer]
-
   module GeneratedAttributeMethods
     def id: () -> ::Integer
 
@@ -146,21 +144,9 @@ class User < ::ApplicationRecord
 
     def clear_updated_at_change: () -> void
   end
-  include GeneratedAttributeMethods
-  def sns_credentials: () -> ::User::SnsCredential::ActiveRecord_Associations_CollectionProxy
-  def sns_credentials=: (::User::SnsCredential::ActiveRecord_Associations_CollectionProxy | ::Array[::User::SnsCredential]) -> (::User::SnsCredential::ActiveRecord_Associations_CollectionProxy | ::Array[::User::SnsCredential])
-  def sns_credential_ids: () -> ::Array[::Integer]
-  def sns_credential_ids=: (::Array[::Integer]) -> ::Array[::Integer]
-  def database_authentication: () -> ::User::DatabaseAuthentication?
-  def database_authentication=: (::User::DatabaseAuthentication?) -> ::User::DatabaseAuthentication?
-  def build_database_authentication: (?untyped) -> ::User::DatabaseAuthentication
-  def create_database_authentication: (untyped) -> ::User::DatabaseAuthentication
-  def create_database_authentication!: (untyped) -> ::User::DatabaseAuthentication
-  def reload_database_authentication: () -> ::User::DatabaseAuthentication?
 
   module GeneratedAssociationMethods
   end
-  include GeneratedAssociationMethods
 
   module GeneratedRelationMethods
   end
@@ -175,4 +161,19 @@ class User < ::ApplicationRecord
     include ::User::GeneratedRelationMethods
     include ::_ActiveRecord_Relation[::User, ::Integer]
   end
+  extend ::_ActiveRecord_Relation_ClassMethods[::User, ::User::ActiveRecord_Relation, ::Integer]
+
+  include GeneratedAttributeMethods
+  def sns_credentials: () -> ::User::SnsCredential::ActiveRecord_Associations_CollectionProxy
+  def sns_credentials=: (::User::SnsCredential::ActiveRecord_Associations_CollectionProxy | ::Array[::User::SnsCredential]) -> (::User::SnsCredential::ActiveRecord_Associations_CollectionProxy | ::Array[::User::SnsCredential])
+  def sns_credential_ids: () -> ::Array[::Integer]
+  def sns_credential_ids=: (::Array[::Integer]) -> ::Array[::Integer]
+  def database_authentication: () -> ::User::DatabaseAuthentication?
+  def database_authentication=: (::User::DatabaseAuthentication?) -> ::User::DatabaseAuthentication?
+  def build_database_authentication: (?untyped) -> ::User::DatabaseAuthentication
+  def create_database_authentication: (untyped) -> ::User::DatabaseAuthentication
+  def create_database_authentication!: (untyped) -> ::User::DatabaseAuthentication
+  def reload_database_authentication: () -> ::User::DatabaseAuthentication?
+
+  include GeneratedAssociationMethods
 end

@@ -1,7 +1,0 @@
-class User::Confirmation < ApplicationRecord
-  private
-
-  def trim_email: () -> untyped
-
-  def trim_unconfirmed_email: () -> untyped
-end

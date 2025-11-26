@@ -3,15 +3,5 @@ module Ui
     @flash_type: untyped
 
     @html_options: untyped
-
-    FLASH_TYPES: ::Array[:info | :notice | :warn | :alert]
-
-    def initialize: (flash_type: untyped, **untyped html_options) -> void
-
-    private
-
-    def flash_classes: (untyped extra_classes) -> untyped
-
-    def flash_type_class: () -> untyped
   end
 end

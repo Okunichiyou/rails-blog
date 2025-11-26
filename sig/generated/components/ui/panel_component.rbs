@@ -1,0 +1,18 @@
+# Generated from app/components/ui/panel_component.rb with RBS::Inline
+
+module Ui
+  class PanelComponent < ApplicationComponent
+    SIZE_OPTIONS: untyped
+
+    # @rbs (size: Symbol, **nil | String) -> void
+    def initialize: (size: Symbol, **nil | String) -> void
+
+    private
+
+    # @rbs (String?) -> String
+    def panel_classes: (String?) -> String
+
+    # @rbs () -> String
+    def size_class: () -> String
+  end
+end

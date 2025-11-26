@@ -1,0 +1,6 @@
+# Generated from app/controllers/user/database_authentication/sessions_controller.rb with RBS::Inline
+
+class User::DatabaseAuthentication::SessionsController < Devise::SessionsController
+  # @rbs () -> Integer?
+  def create: () -> Integer?
+end

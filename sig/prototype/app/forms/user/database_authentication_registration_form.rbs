@@ -1,38 +1,3 @@
 class User::DatabaseAuthenticationRegistrationForm
-  @user: untyped
-
-  @user_database_authentication: untyped
-
   @confirmation_resource: untyped
-
-  include ActiveModel::Model
-
-  include ActiveModel::Attributes
-
-  attr_reader user: untyped
-
-  attr_reader user_database_authentication: untyped
-
-  # Userモデル属性からフォーム属性へのマッピング
-  USER_ATTR_TRANSFORM_MAP: { name: :user_name }
-
-  def model_name: () -> untyped
-
-  def email: () -> untyped
-
-  def call: () -> (false | untyped)
-
-  def validate_token: () -> (nil | untyped)
-
-  private
-
-  def build_models: () -> untyped
-
-  def validate_user: () -> (nil | untyped)
-
-  def validate_database_authentication: () -> (nil | untyped)
-
-  def save_models: () -> untyped
-
-  def confirmation_resource: () -> untyped
 end

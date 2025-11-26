@@ -1,0 +1,9 @@
+# Generated from app/controllers/user/database_authentications_controller.rb with RBS::Inline
+
+class User::DatabaseAuthenticationsController < ApplicationController
+  # @rbs () -> ActiveSupport::SafeBuffer?
+  def new: () -> ActiveSupport::SafeBuffer?
+
+  # @rbs () -> (ActiveSupport::SafeBuffer | Integer)
+  def create: () -> (ActiveSupport::SafeBuffer | Integer)
+end

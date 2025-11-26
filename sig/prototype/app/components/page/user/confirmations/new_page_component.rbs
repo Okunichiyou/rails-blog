@@ -9,8 +9,6 @@ module Page
         @resource_name: untyped
 
         @html_options: untyped
-
-        def initialize: (form: untyped, confirmation_path: untyped, ?resource_name: ::Symbol, **untyped html_options) -> void
       end
     end
   end
