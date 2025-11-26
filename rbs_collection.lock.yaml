@@ -89,14 +89,6 @@ gems:
     revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
-- name: ast
-  version: '2.4'
-  source:
-    type: git
-    name: ruby/gem_rbs_collection
-    revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
-    remote: https://github.com/ruby/gem_rbs_collection.git
-    repo_dir: gems
 - name: base64
   version: 0.3.0
   source:
@@ -141,14 +133,6 @@ gems:
     revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
-- name: csv
-  version: '3.3'
-  source:
-    type: git
-    name: ruby/gem_rbs_collection
-    revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
-    remote: https://github.com/ruby/gem_rbs_collection.git
-    repo_dir: gems
 - name: date
   version: '0'
   source:
@@ -185,10 +169,6 @@ gems:
     revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
-- name: ffi
-  version: 1.17.2
-  source:
-    type: rubygems
 - name: fileutils
   version: '0'
   source:
@@ -237,14 +217,6 @@ gems:
     revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
-- name: listen
-  version: '3.9'
-  source:
-    type: git
-    name: ruby/gem_rbs_collection
-    revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
-    remote: https://github.com/ruby/gem_rbs_collection.git
-    repo_dir: gems
 - name: logger
   version: '0'
   source:
@@ -285,10 +257,6 @@ gems:
   version: '0'
   source:
     type: stdlib
-- name: mutex_m
-  version: 0.3.0
-  source:
-    type: rubygems
 - name: net-http
   version: '0'
   source:
@@ -321,18 +289,6 @@ gems:
   version: '0'
   source:
     type: stdlib
-- name: optparse
-  version: '0'
-  source:
-    type: stdlib
-- name: parser
-  version: '3.2'
-  source:
-    type: git
-    name: ruby/gem_rbs_collection
-    revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
-    remote: https://github.com/ruby/gem_rbs_collection.git
-    repo_dir: gems
 - name: pathname
   version: '0'
   source:
@@ -345,10 +301,6 @@ gems:
   version: '0'
   source:
     type: stdlib
-- name: prism
-  version: 1.4.0
-  source:
-    type: rubygems
 - name: pstore
   version: '0'
   source:
@@ -389,14 +341,6 @@ gems:
     revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
-- name: rainbow
-  version: '3.0'
-  source:
-    type: git
-    name: ruby/gem_rbs_collection
-    revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
-    remote: https://github.com/ruby/gem_rbs_collection.git
-    repo_dir: gems
 - name: rake
   version: '13.0'
   source:
@@ -405,22 +349,6 @@ gems:
     revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
-- name: rbs
-  version: 3.9.5
-  source:
-    type: rubygems
-- name: rbs-inline
-  version: 0.12.0
-  source:
-    type: rubygems
-- name: rbs-trace
-  version: 0.7.0
-  source:
-    type: rubygems
-- name: rbs_rails
-  version: 0.12.1
-  source:
-    type: rubygems
 - name: rdoc
   version: '0'
   source:
@@ -462,10 +390,6 @@ gems:
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: stringio
-  version: '0'
-  source:
-    type: stdlib
-- name: strscan
   version: '0'
   source:
     type: stdlib
