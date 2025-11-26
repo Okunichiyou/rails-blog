@@ -4,7 +4,7 @@ module Ui
 
     SIZE_OPTIONS = %i[full large medium small].freeze
 
-    # @rbs (size: Symbol, **nil | String) -> void
+    # @rbs (size: Symbol, **untyped) -> void
     def initialize(
       size:,
       **html_options
@@ -15,7 +15,7 @@ module Ui
 
     private
 
-    # @rbs (String?) -> String
+    # @rbs (untyped) -> String
     def panel_classes(extra_classes)
       classes = [
         "bg-surface",

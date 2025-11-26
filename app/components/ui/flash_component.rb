@@ -4,7 +4,7 @@ module Ui
 
     FLASH_TYPES = %i[info notice warn alert].freeze
 
-    # @rbs (flash_type: Symbol, **nil | String) -> void
+    # @rbs (flash_type: Symbol, **untyped) -> void
     def initialize(
       flash_type:,
       **html_options
@@ -15,7 +15,7 @@ module Ui
 
     private
 
-    # @rbs (String?) -> String
+    # @rbs (untyped) -> String
     def flash_classes(extra_classes)
       classes = [
         "rounded-sm p-4",
