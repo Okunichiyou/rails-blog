@@ -50,8 +50,9 @@
         <span class="hamburger-line w-6 h-[3px] bg-text-btn-primary transition-all duration-300 ease-in-out"></span>
         <span class="hamburger-line w-6 h-[3px] bg-text-btn-primary transition-all duration-300 ease-in-out"></span>
       </button>
-      <nav class="hamburger-menu absolute top-[60px] right-0 bg-surface border border-default rounded-md min-w-[120px] z-[1000] hidden [&>a]:block [&>a]:py-3 [&>a]:px-4 [&>a]:text-[var(--color-text-default)] [&>a]:no-underline [&>a]:text-size-body [&>a]:border-b [&>a]:border-default [&>a]:transition-colors [&>a]:duration-200 [&>a]:ease-in-out [&>a:first-child]:rounded-t-md [&>a:last-child]:border-b-0 [&>a:last-child]:rounded-b-md [&>a:hover]:bg-surface-hover">
+      <nav class="hamburger-menu absolute top-[60px] right-0 bg-surface border border-default rounded-md min-w-[180px] z-[1000] hidden [&>a]:block [&>a]:py-3 [&>a]:px-4 [&>a]:text-[var(--color-text-default)] [&>a]:no-underline [&>a]:text-size-body [&>a]:border-b [&>a]:border-default [&>a]:transition-colors [&>a]:duration-200 [&>a]:ease-in-out [&>a:first-child]:rounded-t-md [&>a:last-child]:border-b-0 [&>a:last-child]:rounded-b-md [&>a:hover]:bg-bg-surface-hover">
         <% if @login_user.present? %>
+          <%= link_to "アカウント設定", user_account_settings_path %>
           <%= link_to "ログアウト", logout_path, data: { "turbo-method": :delete } %>
         <% else %>
           <%= link_to "ログイン", login_path %>
