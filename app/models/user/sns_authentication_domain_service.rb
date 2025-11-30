@@ -36,6 +36,16 @@ class User::SnsAuthenticationDomainService
     end
   end
 
+  # 既存ユーザーにSNS認証を紐付ける
+  #
+  # @param omniauth_data [User::OmniauthData] OmniAuth認証データ
+  # @param current_user [User] 現在ログイン中のユーザー
+  # @return [Result] 成功の場合はuserを含む、失敗の場合はerrorを含む
+  # @rbs (User::OmniauthData, User) -> User::SnsAuthenticationDomainService::Result
+  def self.link_to_existing_user(omniauth_data, current_user)
+    new.link_to_existing_user(omniauth_data, current_user)
+  end
+
   # 一時登録トークンからユーザーを作成
   #
   # @param token [String] 一時登録トークン
@@ -44,6 +54,33 @@ class User::SnsAuthenticationDomainService
   # @rbs (String, String) -> User::SnsAuthenticationDomainService::Result
   def self.create_from_pending(token, user_name)
     new.create_from_pending(token, user_name)
+  end
+
+  # @rbs (User::OmniauthData, User) -> User::SnsAuthenticationDomainService::Result
+  def link_to_existing_user(omniauth_data, current_user)
+    # OmniAuthデータの検証
+    unless omniauth_data.valid?
+      return Result.failure(
+        error: :invalid_auth_data,
+        message: "認証データが不完全です (#{omniauth_data.errors.full_messages.join(', ')})"
+      )
+    end
+
+    # SNS認証情報を作成（重複はバリデーションで弾かれる）
+    User::SnsCredential.create!(
+      user: current_user,
+      provider: omniauth_data.provider,
+      uid: omniauth_data.uid,
+      email: omniauth_data.email
+    )
+
+    Result.success(user: current_user)
+  rescue ActiveRecord::RecordInvalid => e
+    # バリデーションエラー
+    Result.failure(
+      error: :validation_error,
+      message: e.message
+    )
   end
 
   # @rbs (String, String) -> User::SnsAuthenticationDomainService::Result

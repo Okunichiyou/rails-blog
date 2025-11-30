@@ -1,0 +1,25 @@
+<div>
+  <h2>連携アカウント</h2>
+
+  <dl class="mt-4 space-y-4">
+    <div>
+      <dt class="font-bold mb-2">Google連携</dt>
+      <dd>
+        <% if google_linked? %>
+          <span class="text-notice-inline">連携済み</span>
+        <% else %>
+          <%= form_with url: google_oauth2_path, method: :post, data: { turbo: false } do %>
+            <%= render Ui::Button::IconComponent.new(
+              category: :secondary,
+              size: :full,
+              type: :submit,
+              text: "Googleアカウントで連携する",
+              icon: image_tag("google-icon.png", class: "w-5 h-5"),
+              icon_position: :left
+            ) %>
+          <% end %>
+        <% end %>
+      </dd>
+    </div>
+  </dl>
+</div>

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   namespace :user do
     resources :database_authentications, only: [ :new, :create ]
     resources :sns_credential_registrations, only: [ :new, :create ]
+    resource :account_settings, only: [ :show ]
   end
 
   devise_for :users

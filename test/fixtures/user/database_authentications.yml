@@ -1,0 +1,7 @@
+# DatabaseAuthenticationのfixture
+# パスワードは "password123" でハッシュ化されている
+
+db_auth_user:
+  user: db_auth_user
+  email: "db_auth@example.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User::DatabaseAuthentication, 'password123') %>

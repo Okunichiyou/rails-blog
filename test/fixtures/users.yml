@@ -3,3 +3,6 @@ one:
 
 two:
   name: "Test User Two"
+
+db_auth_user:
+  name: "DB Auth User"

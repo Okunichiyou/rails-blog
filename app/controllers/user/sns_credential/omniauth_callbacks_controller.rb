@@ -2,7 +2,13 @@ class User::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallbac
   skip_before_action :verify_authenticity_token, only: %i[google_oauth2]
 
   def google_oauth2
-    callback_for(:google)
+    if current_user
+      # ログイン済み → アカウント連携フロー
+      handle_account_linking(:google)
+    else
+      # 未ログイン → 既存の新規登録・ログインフロー
+      callback_for(:google)
+    end
   end
 
   def failure
@@ -18,6 +24,19 @@ class User::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallbac
   end
 
   private
+
+  def handle_account_linking(provider)
+    auth = request.env["omniauth.auth"]
+    omniauth_data = User::OmniauthData.from_omniauth(auth)
+
+    result = User::SnsAuthenticationDomainService.link_to_existing_user(omniauth_data, current_user)
+
+    if result.success?
+      redirect_to root_path, notice: "Googleアカウントを連携しました"
+    else
+      redirect_to root_path, alert: result.message
+    end
+  end
 
   def callback_for(provider)
     auth = request.env["omniauth.auth"]
