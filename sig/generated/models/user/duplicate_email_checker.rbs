@@ -1,0 +1,4 @@
+class User::DuplicateEmailChecker
+  # @rbs (String?) -> bool
+  def self.duplicate?: (String?) -> bool
+end

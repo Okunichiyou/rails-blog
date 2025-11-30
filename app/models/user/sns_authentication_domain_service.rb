@@ -59,7 +59,7 @@ class User::SnsAuthenticationDomainService
     end
 
     # メールアドレス重複チェック
-    if email_already_used?(pending.email)
+    if User::DuplicateEmailChecker.duplicate?(pending.email)
       return Result.failure(
         error: :email_already_used,
         message: "既に同じメールアドレスでアカウントが連携されています"
@@ -97,7 +97,7 @@ class User::SnsAuthenticationDomainService
   # @rbs (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
   def create_pending_registration(omniauth_data)
     # メールアドレスが既に使用されているかチェック
-    if email_already_used?(omniauth_data.email)
+    if User::DuplicateEmailChecker.duplicate?(omniauth_data.email)
       return Result.failure(
         error: :email_already_used,
         message: "既に同じメールアドレスでアカウントが連携されています"
@@ -116,7 +116,7 @@ class User::SnsAuthenticationDomainService
 
   def create_new_user(omniauth_data)
     # メールアドレスが既に使用されているかチェック
-    if email_already_used?(omniauth_data.email)
+    if User::DuplicateEmailChecker.duplicate?(omniauth_data.email)
       return Result.failure(
         error: :email_already_used,
         message: "既に同じメールアドレスでアカウントが連携されています"
@@ -141,17 +141,6 @@ class User::SnsAuthenticationDomainService
       error: :validation_error,
       message: e.message
     )
-  end
-
-  # メールアドレスが既に使用されているか確認
-  #
-  # @param email [String] チェックするメールアドレス
-  # @return [Boolean] 使用されている場合true
-  # @rbs (String) -> bool
-  def email_already_used?(email)
-    # DatabaseAuthenticationまたはSnsCredentialでメールアドレスが使用されているか
-    User::DatabaseAuthentication.exists?(email: email) ||
-      User::SnsCredential.exists?(email: email)
   end
 
   # SNS認証の結果を格納する
