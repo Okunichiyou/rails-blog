@@ -10,6 +10,7 @@ class User::DatabaseAuthenticationRegistrationForm
   attr_reader :user, :user_database_authentication
 
   validate :validate_token
+  validate :validate_email_duplication
   validate :validate_user
   validate :validate_database_authentication
 
@@ -49,6 +50,13 @@ class User::DatabaseAuthenticationRegistrationForm
       errors.add(:confirmation_token, :not_confirmed, message: "が確認されていません")
       nil
     end
+  end
+
+  # @rbs () -> void
+  def validate_email_duplication
+    return unless User::DuplicateEmailChecker.duplicate?(email)
+
+    errors.add(:email, :already_used, message: "は既に使用されています")
   end
 
   private

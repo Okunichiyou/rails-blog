@@ -169,6 +169,45 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
   end
 
   # =====================================
+  # メールアドレス重複チェック
+  # =====================================
+
+  test "database_authenticationで既に使用されているemailの場合、emailにエラーが格納される" do
+    existing_user = User.create!(name: "Existing User")
+    User::DatabaseAuthentication.create!(
+      user: existing_user,
+      email: "test@example.com",
+      password: "password123"
+    )
+
+    form = User::DatabaseAuthenticationRegistrationForm.new(@valid_attributes)
+
+    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
+      assert_not form.call
+    end
+
+    assert form.errors[:email].any?, "emailのエラーが格納されていない"
+  end
+
+  test "sns_credentialで既に使用されているemailの場合、emailにエラーが格納される" do
+    existing_user = User.create!(name: "Existing User")
+    User::SnsCredential.create!(
+      user: existing_user,
+      provider: "google",
+      uid: "12345",
+      email: "test@example.com"
+    )
+
+    form = User::DatabaseAuthenticationRegistrationForm.new(@valid_attributes)
+
+    assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
+      assert_not form.call
+    end
+
+    assert form.errors[:email].any?, "emailのエラーが格納されていない"
+  end
+
+  # =====================================
   # トークン検証
   # =====================================
 
