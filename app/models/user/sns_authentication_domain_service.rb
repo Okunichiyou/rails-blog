@@ -114,35 +114,6 @@ class User::SnsAuthenticationDomainService
     )
   end
 
-  def create_new_user(omniauth_data)
-    # メールアドレスが既に使用されているかチェック
-    if User::DuplicateEmailChecker.duplicate?(omniauth_data.email)
-      return Result.failure(
-        error: :email_already_used,
-        message: "既に同じメールアドレスでアカウントが連携されています"
-      )
-    end
-
-    # 新規ユーザーとSNS認証情報を作成
-    user = nil
-    ActiveRecord::Base.transaction do
-      user = User.create!(name: omniauth_data.name)
-      User::SnsCredential.create!(
-        user: user,
-        provider: omniauth_data.provider,
-        uid: omniauth_data.uid,
-        email: omniauth_data.email
-      )
-    end
-
-    Result.success(user: user)
-  rescue ActiveRecord::RecordInvalid => e
-    Result.failure(
-      error: :validation_error,
-      message: e.message
-    )
-  end
-
   # SNS認証の結果を格納する
   # success = true:  認証完了してログインできる状態
   # success = false: 認証に失敗
