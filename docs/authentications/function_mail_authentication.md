@@ -99,11 +99,11 @@ sequenceDiagram
     User->>Browser: メールアドレス・パスワード入力
     Browser->>App: POST /users/sign_in
     App->>DB: user_database_authenticationsテーブルから認証情報取得
-    App->>App: パスワード検証
-    alt パスワード正しい
+    App->>App: メールアドレス・パスワード検証
+    alt 認証成功
         App->>App: セッション作成
         App-->>Browser: ログイン成功・リダイレクト
-    else パスワード間違い
+    else 認証失敗
         App-->>Browser: エラーメッセージ表示
     end
 ```
@@ -112,8 +112,8 @@ sequenceDiagram
 
 ### Sign Up時のエラー
 
-- メールアドレス重複 → `user_database_authentications.email`のユニーク制約違反
-- バリデーションエラー → パスワード要件未満、メール形式不正
+- メールアドレス重複 → `User::DuplicateEmailChecker`による重複チェック（database_authenticationまたはsns_credentialで既に使用されている場合）
+- バリデーションエラー → パスワード要件未満、メール形式不正、ユーザー名重複など
 - メール送信失敗 → SMTP設定エラー、ネットワーク障害
 
 ### Sign In時のエラー
