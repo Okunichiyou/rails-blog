@@ -5,7 +5,7 @@
     <div>
       <dt class="font-bold mb-2">Google連携</dt>
       <dd>
-        <% if google_linked? %>
+        <% if @user.google_linked? %>
           <span class="text-notice-inline">連携済み</span>
         <% else %>
           <%= form_with url: google_oauth2_path, method: :post, data: { turbo: false } do %>

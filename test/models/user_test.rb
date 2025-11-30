@@ -166,6 +166,40 @@ class UserTest < ActiveSupport::TestCase
   end
 
   # =====================================
+  # google_linked?
+  # =====================================
+
+  test "Googleアカウントが連携されている場合、google_linked?がtrueを返す" do
+    user = User.create!(name: "Google User")
+    User::SnsCredential.create!(
+      user: user,
+      provider: "google_oauth2",
+      uid: "123456789",
+      email: "google@example.com"
+    )
+
+    assert user.google_linked?
+  end
+
+  test "Googleアカウントが連携されていない場合、google_linked?がfalseを返す" do
+    user = User.create!(name: "Non Google User")
+
+    assert_not user.google_linked?
+  end
+
+  test "他のプロバイダー（GitHub等）のSNS認証のみの場合、google_linked?がfalseを返す" do
+    user = User.create!(name: "GitHub User")
+    User::SnsCredential.create!(
+      user: user,
+      provider: "github",
+      uid: "987654321",
+      email: "github@example.com"
+    )
+
+    assert_not user.google_linked?
+  end
+
+  # =====================================
   # データベース制約テスト
   # =====================================
 

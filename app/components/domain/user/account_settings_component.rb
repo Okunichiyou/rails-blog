@@ -6,11 +6,6 @@ module Domain
         @user = user
       end
 
-      # @rbs () -> bool
-      def google_linked?
-        @user.sns_credentials.exists?(provider: "google_oauth2")
-      end
-
       # @rbs () -> String
       def google_oauth2_path
         sns_credential_google_oauth2_omniauth_authorize_path
