@@ -1,0 +1,11 @@
+module Domain
+  module User
+    class AccountSettingsComponent < ApplicationComponent
+      # @rbs (user: ::User) -> void
+      def initialize: (user: ::User) -> void
+
+      # @rbs () -> String
+      def google_oauth2_path: () -> String
+    end
+  end
+end

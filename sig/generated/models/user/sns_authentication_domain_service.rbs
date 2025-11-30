@@ -10,6 +10,14 @@ class User::SnsAuthenticationDomainService
   # @rbs (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
   def authenticate_or_create: (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
 
+  # 既存ユーザーにSNS認証を紐付ける
+  #
+  # @param omniauth_data [User::OmniauthData] OmniAuth認証データ
+  # @param current_user [User] 現在ログイン中のユーザー
+  # @return [Result] 成功の場合はuserを含む、失敗の場合はerrorを含む
+  # @rbs (User::OmniauthData, User) -> User::SnsAuthenticationDomainService::Result
+  def self.link_to_existing_user: (User::OmniauthData, User) -> User::SnsAuthenticationDomainService::Result
+
   # 一時登録トークンからユーザーを作成
   #
   # @param token [String] 一時登録トークン
@@ -17,6 +25,9 @@ class User::SnsAuthenticationDomainService
   # @return [Result] 成功の場合はuserを含む、失敗の場合はerrorを含む
   # @rbs (String, String) -> User::SnsAuthenticationDomainService::Result
   def self.create_from_pending: (String, String) -> User::SnsAuthenticationDomainService::Result
+
+  # @rbs (User::OmniauthData, User) -> User::SnsAuthenticationDomainService::Result
+  def link_to_existing_user: (User::OmniauthData, User) -> User::SnsAuthenticationDomainService::Result
 
   # @rbs (String, String) -> User::SnsAuthenticationDomainService::Result
   def create_from_pending: (String, String) -> User::SnsAuthenticationDomainService::Result

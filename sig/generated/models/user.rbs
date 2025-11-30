@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # @rbs () -> bool
+  def google_linked?: () -> bool
+
   private
 
   # @rbs () -> String?

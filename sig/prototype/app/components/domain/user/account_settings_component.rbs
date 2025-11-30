@@ -1,0 +1,7 @@
+module Domain
+  module User
+    class AccountSettingsComponent < ApplicationComponent
+      @user: untyped
+    end
+  end
+end
