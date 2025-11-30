@@ -26,15 +26,6 @@ class User::SnsAuthenticationDomainService
   # @rbs (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
   def create_pending_registration: (User::OmniauthData) -> User::SnsAuthenticationDomainService::Result
 
-  def create_new_user: (untyped omniauth_data) -> untyped
-
-  # メールアドレスが既に使用されているか確認
-  #
-  # @param email [String] チェックするメールアドレス
-  # @return [Boolean] 使用されている場合true
-  # @rbs (String) -> bool
-  def email_already_used?: (String) -> bool
-
   # SNS認証の結果を格納する
   # success = true:  認証完了してログインできる状態
   # success = false: 認証に失敗

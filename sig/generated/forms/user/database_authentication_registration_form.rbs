@@ -22,6 +22,9 @@ class User::DatabaseAuthenticationRegistrationForm
   # @rbs () -> nil
   def validate_token: () -> nil
 
+  # @rbs () -> void
+  def validate_email_duplication: () -> void
+
   private
 
   # @rbs () -> User::DatabaseAuthentication
