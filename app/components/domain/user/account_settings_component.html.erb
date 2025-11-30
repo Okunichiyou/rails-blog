@@ -8,7 +8,7 @@
         <% if @user.google_linked? %>
           <span class="text-notice-inline">連携済み</span>
         <% else %>
-          <%= form_with url: google_oauth2_path, method: :post, data: { turbo: false } do %>
+          <%= form_with url: sns_credential_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false } do %>
             <%= render Ui::Button::IconComponent.new(
               category: :secondary,
               size: :full,
