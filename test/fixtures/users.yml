@@ -6,3 +6,7 @@ two:
 
 db_auth_user:
   name: "DB Auth User"
+
+author:
+  name: "Author"
+  author: true

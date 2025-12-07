@@ -54,6 +54,25 @@ bundle exec rails test
 bundle exec rubocop
 ```
 
+### データの初期化
+
+テーブルを作り直して、シードを再実行します。
+
+```shell
+bundle exec rails db:reset
+```
+
+このコマンドでは以下の処理が走ります。
+
+1. テーブルのドロップ
+2. テーブルの作成
+    - schema.rbをロードしてテーブルを作成するため、マイグレーションは走りません
+    - データの初期化後にマイグレーションを実行したい場合は、`bundle exec rails db:reset`をした後に`bundle exec rails db:seed`でデータを作成することを推奨します
+
+3. シードの実行
+
+### テーブルの
+
 ### 型チェック
 
 このプロジェクトでは、Steepとrbs-inlineを使用して型チェックを行っています。
