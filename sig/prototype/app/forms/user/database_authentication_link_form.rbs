@@ -1,0 +1,3 @@
+class User::DatabaseAuthenticationLinkForm
+  @confirmation_resource: untyped
+end

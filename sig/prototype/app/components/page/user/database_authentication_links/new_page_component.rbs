@@ -1,0 +1,13 @@
+module Page
+  module User
+    module DatabaseAuthenticationLinks
+      class NewPageComponent < ApplicationComponent
+        @form: untyped
+
+        @create_database_authentication_link_path: untyped
+
+        @html_options: untyped
+      end
+    end
+  end
+end

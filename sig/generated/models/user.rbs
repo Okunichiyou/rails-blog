@@ -2,6 +2,9 @@ class User < ApplicationRecord
   # @rbs () -> bool
   def google_linked?: () -> bool
 
+  # @rbs () -> bool
+  def database_authenticated?: () -> bool
+
   private
 
   # @rbs () -> String?

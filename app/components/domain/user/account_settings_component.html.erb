@@ -3,6 +3,15 @@
 
   <dl class="mt-4 space-y-4">
     <div>
+      <dt class="font-bold mb-2">メール認証</dt>
+      <dd>
+        <% if @user.database_authenticated? %>
+          <span class="text-notice-inline">認証済み: </span>
+          <span><%= @user.database_authentication.email %></span>
+        <% else %>
+          <%= link_to "メールアドレスを登録", new_confirmation_confirmation_path %>
+        <% end %>
+      </dd>
       <dt class="font-bold mb-2">Google連携</dt>
       <dd>
         <% if @user.google_linked? %>

@@ -1,0 +1,9 @@
+module Domain
+  module User
+    class DatabaseAuthenticationLinkFormComponent < ApplicationComponent
+      @form: untyped
+
+      @create_database_authentication_link_path: untyped
+    end
+  end
+end
