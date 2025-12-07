@@ -71,8 +71,6 @@ bundle exec rails db:reset
 
 3. シードの実行
 
-### テーブルの
-
 ### 型チェック
 
 このプロジェクトでは、Steepとrbs-inlineを使用して型チェックを行っています。
