@@ -200,6 +200,27 @@ class UserTest < ActiveSupport::TestCase
   end
 
   # =====================================
+  # database_authenticated?
+  # =====================================
+
+  test "DatabaseAuthenticationが存在する場合、database_authenticated?がtrueを返す" do
+    user = User.create!(name: "DB Auth Test User")
+    User::DatabaseAuthentication.create!(
+      user: user,
+      email: "dbauth@example.com",
+      password: "password123"
+    )
+
+    assert user.database_authenticated?
+  end
+
+  test "DatabaseAuthenticationが存在しない場合、database_authenticated?がfalseを返す" do
+    user = User.create!(name: "No DB Auth User")
+
+    assert_not user.database_authenticated?
+  end
+
+  # =====================================
   # author?
   # =====================================
 
