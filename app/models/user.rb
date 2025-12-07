@@ -10,6 +10,16 @@ class User < ApplicationRecord
                    uniqueness: { case_sensitive: false },
                    length: { maximum: 255 }
 
+  # @rbs () -> bool
+  def google_linked?
+    sns_credentials.exists?(provider: "google_oauth2")
+  end
+
+  # @rbs () -> bool
+  def database_authenticated?
+    User::DatabaseAuthentication.exists?(user_id: id)
+  end
+
   private
 
   # @rbs () -> String?

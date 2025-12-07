@@ -144,6 +144,6 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
     end
 
     assert_response :unprocessable_entity
-    assert_match "既に同じメールアドレスでアカウントが連携されています", response.body
+    assert_match "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。", response.body
   end
 end

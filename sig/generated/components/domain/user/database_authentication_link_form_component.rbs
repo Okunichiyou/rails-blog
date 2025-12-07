@@ -1,0 +1,8 @@
+module Domain
+  module User
+    class DatabaseAuthenticationLinkFormComponent < ApplicationComponent
+      # @rbs (form: User::DatabaseAuthenticationLinkForm, create_database_authentication_link_path: String) -> void
+      def initialize: (form: User::DatabaseAuthenticationLinkForm, create_database_authentication_link_path: String) -> void
+    end
+  end
+end

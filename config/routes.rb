@@ -23,8 +23,14 @@ Rails.application.routes.draw do
   end
 
   namespace :user do
-    resources :database_authentications, only: [ :new, :create ]
+    resources :database_authentications, only: [ :new, :create ] do
+      collection do
+        get :link_new
+        post :link_create
+      end
+    end
     resources :sns_credential_registrations, only: [ :new, :create ]
+    resource :account_settings, only: [ :show ]
   end
 
   devise_for :users

@@ -1,0 +1,10 @@
+module Page
+  module User
+    module AccountSettings
+      class ShowPageComponent < ApplicationComponent
+        # @rbs (user: ::User) -> void
+        def initialize: (user: ::User) -> void
+      end
+    end
+  end
+end

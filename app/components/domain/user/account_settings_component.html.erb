@@ -1,0 +1,34 @@
+<div>
+  <h2>連携アカウント</h2>
+
+  <dl class="mt-4 space-y-4">
+    <div>
+      <dt class="font-bold mb-2">メール認証</dt>
+      <dd>
+        <% if @user.database_authenticated? %>
+          <span class="text-notice-inline">認証済み: </span>
+          <span><%= @user.database_authentication.email %></span>
+        <% else %>
+          <%= link_to "メールアドレスを登録", new_confirmation_confirmation_path %>
+        <% end %>
+      </dd>
+      <dt class="font-bold mb-2">Google連携</dt>
+      <dd>
+        <% if @user.google_linked? %>
+          <span class="text-notice-inline">連携済み</span>
+        <% else %>
+          <%= form_with url: sns_credential_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false } do %>
+            <%= render Ui::Button::IconComponent.new(
+              category: :secondary,
+              size: :full,
+              type: :submit,
+              text: "Googleアカウントで連携する",
+              icon: image_tag("google-icon.png", class: "w-5 h-5"),
+              icon_position: :left
+            ) %>
+          <% end %>
+        <% end %>
+      </dd>
+    </div>
+  </dl>
+</div>

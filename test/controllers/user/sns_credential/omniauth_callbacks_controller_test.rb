@@ -92,7 +92,7 @@ class User::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::Int
     end
 
     assert_redirected_to login_path
-    assert_equal "既に同じメールアドレスでアカウントが連携されています", flash[:alert]
+    assert_equal "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。", flash[:alert]
   end
 
   test "Google認証失敗 - メールアドレスが既にSnsCredentialで使用されている" do
@@ -111,7 +111,7 @@ class User::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::Int
     end
 
     assert_redirected_to login_path
-    assert_equal "既に同じメールアドレスでアカウントが連携されています", flash[:alert]
+    assert_equal "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。", flash[:alert]
   end
 
   test "Google認証失敗 - 認証データが不完全（info.nameがnil）" do
@@ -134,6 +134,89 @@ class User::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::Int
 
     assert_redirected_to login_path
     assert_includes flash[:alert], "Email can't be blank"
+  end
+
+  # =====================================
+  # アカウント連携（ログイン済みユーザー）
+  # =====================================
+
+  test "ログイン済みユーザーがGoogleアカウントを連携できる" do
+    # ログイン
+    post login_path, params: {
+      database_authentication: {
+        email: "db_auth@example.com",
+        password: "password123"
+      }
+    }
+
+    OmniAuth.config.mock_auth[:google_oauth2] = build_auth_hash
+
+    assert_difference "User::SnsCredential.count", 1 do
+      assert_no_difference "User.count" do
+        post sns_credential_google_oauth2_omniauth_callback_path
+      end
+    end
+
+    assert_redirected_to root_path
+    assert_equal "Googleアカウントを連携しました", flash[:notice]
+
+    # 正しく連携されていることを確認
+    credential = User::SnsCredential.find_by(provider: "google", uid: "123456789")
+    assert_equal users(:db_auth_user), credential.user
+  end
+
+  test "ログイン済みユーザー：既に別のユーザーに紐づいているGoogleアカウントの場合は連携失敗" do
+    other_user = users(:one)
+    User::SnsCredential.create!(
+      user: other_user,
+      provider: "google",
+      uid: "123456789",
+      email: "test@example.com"
+    )
+
+    # ログイン
+    post login_path, params: {
+      database_authentication: {
+        email: "db_auth@example.com",
+        password: "password123"
+      }
+    }
+
+    OmniAuth.config.mock_auth[:google_oauth2] = build_auth_hash
+
+    assert_no_difference [ "User.count", "User::SnsCredential.count" ] do
+      post sns_credential_google_oauth2_omniauth_callback_path
+    end
+
+    assert_redirected_to root_path
+    assert_not_nil flash[:alert]
+  end
+
+  test "ログイン済みユーザー：既に同じユーザーに紐づいているGoogleアカウントの場合は連携失敗" do
+    user = users(:db_auth_user)
+    User::SnsCredential.create!(
+      user: user,
+      provider: "google",
+      uid: "123456789",
+      email: "test@example.com"
+    )
+
+    # ログイン
+    post login_path, params: {
+      database_authentication: {
+        email: "db_auth@example.com",
+        password: "password123"
+      }
+    }
+
+    OmniAuth.config.mock_auth[:google_oauth2] = build_auth_hash
+
+    assert_no_difference [ "User.count", "User::SnsCredential.count" ] do
+      post sns_credential_google_oauth2_omniauth_callback_path
+    end
+
+    assert_redirected_to root_path
+    assert_not_nil flash[:alert]
   end
 
   # =====================================

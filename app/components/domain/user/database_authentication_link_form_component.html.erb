@@ -1,0 +1,47 @@
+<%= form_with(model: @form, url: @create_database_authentication_link_path, html: { method: :post, class: "database-authentication-link-form flex flex-col gap-4" }) do |f| %>
+  <% if @form.errors[:base].any? %>
+    <%= render Ui::FlashComponent.new(flash_type: :alert) do |c| %>
+      <%- c.with_flash_content do %>
+        <%= @form.errors.full_messages_for(:base).join(", ") %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_name, "ユーザー名", class: "block" %>
+    <p><%= @form.user_name %></p>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, class: "block" %>
+    <p><%= @form.email %></p>
+    <%= render Ui::FieldErrorsComponent.new(error_messages: @form.errors.full_messages_for(:email)) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, class: "block" %>
+    <%= render Ui::PasswordFieldComponent.new(
+      builder: f,
+      method: :password,
+      size: :medium,
+      variant: @form.errors[:password].any? ? :alert : :default
+    ) %>
+    <%= render Ui::FieldErrorsComponent.new(error_messages: @form.errors.full_messages_for(:password)) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, class: "block" %>
+    <%= render Ui::PasswordFieldComponent.new(
+      builder: f,
+      method: :password_confirmation,
+      size: :medium,
+      variant: @form.errors[:password_confirmation].any? ? :alert : :default
+    ) %>
+    <%= render Ui::FieldErrorsComponent.new(error_messages: @form.errors.full_messages_for(:password_confirmation)) %>
+  </div>
+  <%= f.hidden_field :confirmation_token %>
+
+  <div class="actions">
+    <%= render Ui::Button::Component.new(category: :primary, size: :medium, type: :submit, text: "リンク") %>
+  </div>
+<% end %>

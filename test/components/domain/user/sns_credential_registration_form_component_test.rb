@@ -81,14 +81,14 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
   end
 
   test "baseエラーがある場合、FlashComponentでエラーメッセージが表示されること" do
-    @form.errors.add(:base, "既に同じメールアドレスでアカウントが連携されています")
+    @form.errors.add(:base, "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。")
 
     render_inline(Domain::User::SnsCredentialRegistrationFormComponent.new(
       form: @form,
       create_sns_credential_registration_path: "/user/sns_credential_registrations"
     ))
 
-    assert_selector("div", text: "既に同じメールアドレスでアカウントが連携されています")
+    assert_selector("div", text: "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。")
   end
 
   test "user_nameにエラーがある場合、エラーメッセージが表示されること" do

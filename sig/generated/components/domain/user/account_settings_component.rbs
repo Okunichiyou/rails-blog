@@ -1,0 +1,8 @@
+module Domain
+  module User
+    class AccountSettingsComponent < ApplicationComponent
+      # @rbs (user: ::User) -> void
+      def initialize: (user: ::User) -> void
+    end
+  end
+end

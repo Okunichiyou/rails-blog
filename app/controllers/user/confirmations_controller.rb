@@ -22,7 +22,12 @@ class User::ConfirmationsController < Devise::ConfirmationsController
     self.resource = resource_class.confirm_by_token(params[:confirmation_token])
 
     if resource.errors.empty?
-      redirect_to new_user_database_authentication_path(confirmation_token: resource.confirmation_token)
+      # 他の認証手段を持っているユーザーが新たにメール認証をアカウントに追加する場合
+      if current_user.present?
+        redirect_to link_new_user_database_authentications_path(confirmation_token: resource.confirmation_token)
+      else
+        redirect_to new_user_database_authentication_path(confirmation_token: resource.confirmation_token)
+      end
     else
       respond_with(resource, status: :unprocessable_entity)
     end
