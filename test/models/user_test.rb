@@ -200,6 +200,28 @@ class UserTest < ActiveSupport::TestCase
   end
 
   # =====================================
+  # author?
+  # =====================================
+
+  test "authorがtrueの場合、author?がtrueを返す" do
+    user = User.create!(name: "Author User", author: true)
+
+    assert user.author?
+  end
+
+  test "authorがfalseの場合、author?がfalseを返す" do
+    user = User.create!(name: "Regular User", author: false)
+
+    assert_not user.author?
+  end
+
+  test "authorがデフォルト値（false）の場合、author?がfalseを返す" do
+    user = User.create!(name: "Default User")
+
+    assert_not user.author?
+  end
+
+  # =====================================
   # データベース制約テスト
   # =====================================
 
