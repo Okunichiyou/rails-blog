@@ -99,7 +99,7 @@ class User::SnsAuthenticationDomainService
     if User::DuplicateEmailChecker.duplicate?(pending.email)
       return Result.failure(
         error: :email_already_used,
-        message: "既に同じメールアドレスでアカウントが連携されています"
+        message: "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。"
       )
     end
 
@@ -137,7 +137,7 @@ class User::SnsAuthenticationDomainService
     if User::DuplicateEmailChecker.duplicate?(omniauth_data.email)
       return Result.failure(
         error: :email_already_used,
-        message: "既に同じメールアドレスでアカウントが連携されています"
+        message: "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。"
       )
     end
 

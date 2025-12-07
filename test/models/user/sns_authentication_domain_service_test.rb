@@ -58,7 +58,7 @@ class User::SnsAuthenticationDomainServiceTest < ActiveSupport::TestCase
     assert result.failure?
     assert_nil result.user
     assert_equal :email_already_used, result.error
-    assert_equal "既に同じメールアドレスでアカウントが連携されています", result.message
+    assert_equal "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。", result.message
   end
 
   test "authenticate_or_create fails when email is already used in SnsCredential" do
@@ -75,7 +75,7 @@ class User::SnsAuthenticationDomainServiceTest < ActiveSupport::TestCase
     assert result.failure?
     assert_nil result.user
     assert_equal :email_already_used, result.error
-    assert_equal "既に同じメールアドレスでアカウントが連携されています", result.message
+    assert_equal "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。", result.message
   end
 
   test "create_from_pending creates user and sns_credential from pending token" do
@@ -139,7 +139,7 @@ class User::SnsAuthenticationDomainServiceTest < ActiveSupport::TestCase
     assert result.failure?
     assert_nil result.user
     assert_equal :email_already_used, result.error
-    assert_equal "既に同じメールアドレスでアカウントが連携されています", result.message
+    assert_equal "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。", result.message
   end
 
   test "authenticate_or_create fails when omniauth_data is invalid" do

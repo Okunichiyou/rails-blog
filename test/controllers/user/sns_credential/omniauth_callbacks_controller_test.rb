@@ -92,7 +92,7 @@ class User::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::Int
     end
 
     assert_redirected_to login_path
-    assert_equal "既に同じメールアドレスでアカウントが連携されています", flash[:alert]
+    assert_equal "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。", flash[:alert]
   end
 
   test "Google認証失敗 - メールアドレスが既にSnsCredentialで使用されている" do
@@ -111,7 +111,7 @@ class User::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::Int
     end
 
     assert_redirected_to login_path
-    assert_equal "既に同じメールアドレスでアカウントが連携されています", flash[:alert]
+    assert_equal "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。", flash[:alert]
   end
 
   test "Google認証失敗 - 認証データが不完全（info.nameがnil）" do

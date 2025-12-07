@@ -151,6 +151,6 @@ class User::SnsCredentialRegistrationFormTest < ActiveSupport::TestCase
     )
 
     assert_not form.call
-    assert_includes form.errors[:base], "既に同じメールアドレスでアカウントが連携されています"
+    assert_includes form.errors[:base], "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。"
   end
 end
