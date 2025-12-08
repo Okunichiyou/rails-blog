@@ -1,5 +1,8 @@
 # README
 
+[![CI](https://github.com/Okunichiyou/rails-blog/actions/workflows/ci.yml/badge.svg)](https://github.com/Okunichiyou/rails-blog/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/Okunichiyou/rails-blog/branch/main/graph/badge.svg)](https://codecov.io/gh/Okunichiyou/rails-blog)
+
 ## セットアップ
 
 ### 1. 依存関係のインストール
@@ -47,6 +50,14 @@ bundle exec rails server
 ```shell
 bundle exec rails test
 ```
+
+カバレッジを計測する場合:
+
+```shell
+COVERAGE=true bundle exec rails test
+```
+
+カバレッジレポートは `coverage/index.html` で確認できます。
 
 ### リンターの実行
 
