@@ -5,8 +5,6 @@ module Page
         @form: untyped
 
         @create_sns_credential_registration_path: untyped
-
-        @html_options: untyped
       end
     end
   end
