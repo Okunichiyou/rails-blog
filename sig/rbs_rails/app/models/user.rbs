@@ -36,41 +36,41 @@ class User < ::ApplicationRecord
 
     def clear_id_change: () -> void
 
-    def name: () -> ::String
+    def author: () -> bool
 
-    def name=: (::String) -> ::String
+    def author=: (bool) -> bool
 
-    def name?: () -> bool
+    def author?: () -> bool
 
-    def name_changed?: () -> bool
+    def author_changed?: () -> bool
 
-    def name_change: () -> [ ::String?, ::String? ]
+    def author_change: () -> [ bool?, bool? ]
 
-    def name_will_change!: () -> void
+    def author_will_change!: () -> void
 
-    def name_was: () -> ::String?
+    def author_was: () -> bool?
 
-    def name_previously_changed?: () -> bool
+    def author_previously_changed?: () -> bool
 
-    def name_previous_change: () -> ::Array[::String?]?
+    def author_previous_change: () -> ::Array[bool?]?
 
-    def name_previously_was: () -> ::String?
+    def author_previously_was: () -> bool?
 
-    def name_before_last_save: () -> ::String?
+    def author_before_last_save: () -> bool?
 
-    def name_change_to_be_saved: () -> ::Array[::String?]?
+    def author_change_to_be_saved: () -> ::Array[bool?]?
 
-    def name_in_database: () -> ::String?
+    def author_in_database: () -> bool?
 
-    def saved_change_to_name: () -> ::Array[::String?]?
+    def saved_change_to_author: () -> ::Array[bool?]?
 
-    def saved_change_to_name?: () -> bool
+    def saved_change_to_author?: () -> bool
 
-    def will_save_change_to_name?: () -> bool
+    def will_save_change_to_author?: () -> bool
 
-    def restore_name!: () -> void
+    def restore_author!: () -> void
 
-    def clear_name_change: () -> void
+    def clear_author_change: () -> void
 
     def created_at: () -> ::ActiveSupport::TimeWithZone
 
@@ -107,6 +107,42 @@ class User < ::ApplicationRecord
     def restore_created_at!: () -> void
 
     def clear_created_at_change: () -> void
+
+    def name: () -> ::String
+
+    def name=: (::String) -> ::String
+
+    def name?: () -> bool
+
+    def name_changed?: () -> bool
+
+    def name_change: () -> [ ::String?, ::String? ]
+
+    def name_will_change!: () -> void
+
+    def name_was: () -> ::String?
+
+    def name_previously_changed?: () -> bool
+
+    def name_previous_change: () -> ::Array[::String?]?
+
+    def name_previously_was: () -> ::String?
+
+    def name_before_last_save: () -> ::String?
+
+    def name_change_to_be_saved: () -> ::Array[::String?]?
+
+    def name_in_database: () -> ::String?
+
+    def saved_change_to_name: () -> ::Array[::String?]?
+
+    def saved_change_to_name?: () -> bool
+
+    def will_save_change_to_name?: () -> bool
+
+    def restore_name!: () -> void
+
+    def clear_name_change: () -> void
 
     def updated_at: () -> ::ActiveSupport::TimeWithZone
 
