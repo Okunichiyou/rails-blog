@@ -3,8 +3,6 @@ module Page
     module Confirmations
       class ShowPageComponent < ApplicationComponent
         @resource: untyped
-
-        @html_options: untyped
       end
     end
   end
