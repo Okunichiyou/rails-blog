@@ -49,13 +49,4 @@ class HeaderComponentTest < ViewComponent::TestCase
     # ログインリンクが表示されないことの確認
     assert_no_selector(".hamburger-menu a", text: "ログイン")
   end
-
-  # =====================================
-  # HTML属性のテスト
-  # =====================================
-  test "カスタムHTML属性が設定されること" do
-    render_inline(Ui::HeaderComponent.new(login_user: nil, id: "custom-header", class: "custom-class"))
-
-    assert_selector("header#custom-header.custom-class")
-  end
 end

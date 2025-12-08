@@ -1,6 +1,6 @@
 module Ui
   class HeaderComponent < ApplicationComponent
-    # @rbs (?login_user: nil | User, **nil | String) -> void
-    def initialize: (?login_user: nil | User, **nil | String) -> void
+    # @rbs (?login_user: nil | User) -> void
+    def initialize: (?login_user: nil | User) -> void
   end
 end
