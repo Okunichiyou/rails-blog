@@ -1,9 +1,4 @@
-<%
-  base_classes = "bg-primary"
-  merged_classes = [@html_options[:class], base_classes].compact.join(" ")
-  html_attrs = @html_options.merge(class: merged_classes)
-%>
-<header <%= tag.attributes(html_attrs) %>>
+<header class="bg-primary">
   <div class="flex justify-between h-[60px] max-w-content mx-auto px-layout">
     <div class="logo text-btn-primary flex h-full items-center font-['Yomogi',cursive] text-[1.2rem]">
       <%= link_to "奥日曜のWebサイト", root_path, class: "text-btn-primary no-underline" %>

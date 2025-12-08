@@ -2,8 +2,8 @@ module Page
   module User
     module DatabaseAuthenticationLinks
       class NewPageComponent < ApplicationComponent
-        # @rbs (form: User::DatabaseAuthenticationLinkForm, create_database_authentication_link_path: String, **nil) -> void
-        def initialize: (form: User::DatabaseAuthenticationLinkForm, create_database_authentication_link_path: String, **nil) -> void
+        # @rbs (form: User::DatabaseAuthenticationLinkForm, create_database_authentication_link_path: String) -> void
+        def initialize: (form: User::DatabaseAuthenticationLinkForm, create_database_authentication_link_path: String) -> void
       end
     end
   end

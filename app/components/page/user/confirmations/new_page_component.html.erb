@@ -1,4 +1,4 @@
-<div <%= tag.attributes(@html_options.merge(class: "flex justify-center")) %> >
+<div class="flex justify-center">
   <%= render Ui::PanelComponent.new(size: :medium) do |panel| %>
     <%- panel.with_panel_content do %>
       <h2>確認メールの送信</h2>

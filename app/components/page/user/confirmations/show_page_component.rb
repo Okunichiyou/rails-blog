@@ -2,10 +2,9 @@ module Page
   module User
     module Confirmations
       class ShowPageComponent < ApplicationComponent
-        # @rbs (resource: User::Confirmation, **nil) -> void
-        def initialize(resource:, **html_options)
+        # @rbs (resource: User::Confirmation) -> void
+        def initialize(resource:)
           @resource = resource
-          @html_options = html_options
         end
       end
     end

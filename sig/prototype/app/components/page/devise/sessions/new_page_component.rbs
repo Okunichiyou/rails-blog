@@ -7,8 +7,6 @@ module Page
         @resource_name: untyped
 
         @login_path: untyped
-
-        @html_options: untyped
       end
     end
   end

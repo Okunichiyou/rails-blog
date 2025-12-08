@@ -1,25 +1,23 @@
-<div <%= tag.attributes(@html_options) %> >
-  <% flash.each do |type, message| %>
-    <%= render Ui::FlashComponent.new(flash_type: type.to_sym) do |c| %>
-      <%- c.with_flash_content do %>
-        <%= message %>
-      <% end %>
+<% flash.each do |type, message| %>
+  <%= render Ui::FlashComponent.new(flash_type: type.to_sym) do |c| %>
+    <%- c.with_flash_content do %>
+      <%= message %>
     <% end %>
   <% end %>
-  
-  <%= form_for(@resource, as: @resource_name, url: @login_path, html: { class: "database-authentication-form flex flex-col gap-4" }) do |f| %>
-    <div>
-      <%= f.label :email %><br />
-      <%= render Ui::EmailFieldComponent.new(builder: f, method: :email, size: :medium, html_options: { autofocus: true, autocomplete: "email" }) %>
-    </div>
-  
-    <div>
-      <%= f.label :password %><br />
-      <%= render Ui::PasswordFieldComponent.new(builder: f, method: :password, size: :medium, html_options: { autocomplete: "current-password" }) %>
-    </div>
-  
-    <div class="actions">
-      <%= render Ui::Button::Component.new(category: :primary, size: :full, type: :submit, text: "ログイン") %>
-    </div>
-  <% end %>
-</div>
+<% end %>
+
+<%= form_for(@resource, as: @resource_name, url: @login_path, html: { class: "database-authentication-form flex flex-col gap-4" }) do |f| %>
+  <div>
+    <%= f.label :email %><br />
+    <%= render Ui::EmailFieldComponent.new(builder: f, method: :email, size: :medium, html_options: { autofocus: true, autocomplete: "email" }) %>
+  </div>
+
+  <div>
+    <%= f.label :password %><br />
+    <%= render Ui::PasswordFieldComponent.new(builder: f, method: :password, size: :medium, html_options: { autocomplete: "current-password" }) %>
+  </div>
+
+  <div class="actions">
+    <%= render Ui::Button::Component.new(category: :primary, size: :full, type: :submit, text: "ログイン") %>
+  </div>
+<% end %>
