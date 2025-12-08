@@ -2,8 +2,8 @@ module Page
   module Devise
     module Sessions
       class NewPageComponent < ApplicationComponent
-        # @rbs (resource: User::DatabaseAuthentication, resource_name: Symbol, login_path: String, **nil) -> void
-        def initialize: (resource: User::DatabaseAuthentication, resource_name: Symbol, login_path: String, **nil) -> void
+        # @rbs (resource: User::DatabaseAuthentication, resource_name: Symbol, login_path: String) -> void
+        def initialize: (resource: User::DatabaseAuthentication, resource_name: Symbol, login_path: String) -> void
       end
     end
   end
