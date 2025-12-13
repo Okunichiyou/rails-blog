@@ -86,6 +86,18 @@ Running tests automatically generates rbs-inline type definitions.
 
 ## Development Flow
 
+### After Editing Code
+
+After editing Ruby files, run the following commands:
+
+```bash
+# Regenerate RBS type definitions
+bundle exec rake rbs:setup
+
+# Run type checking
+bundle exec steep check
+```
+
 ### Test-Driven Development
 
 1. Identify test perspectives before implementation
