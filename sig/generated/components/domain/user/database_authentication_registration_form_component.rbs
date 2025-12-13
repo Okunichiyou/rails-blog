@@ -1,8 +1,8 @@
 module Domain
   module User
     class DatabaseAuthenticationRegistrationFormComponent < ApplicationComponent
-      # @rbs (form: User::DatabaseAuthenticationRegistrationForm, create_database_authentication_path: String) -> void
-      def initialize: (form: User::DatabaseAuthenticationRegistrationForm, create_database_authentication_path: String) -> void
+      # @rbs (form: User::DatabaseAuthenticationRegistrationForm) -> void
+      def initialize: (form: User::DatabaseAuthenticationRegistrationForm) -> void
     end
   end
 end

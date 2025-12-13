@@ -4,8 +4,6 @@ module Domain
       @resource: untyped
 
       @resource_name: untyped
-
-      @login_path: untyped
     end
   end
 end
