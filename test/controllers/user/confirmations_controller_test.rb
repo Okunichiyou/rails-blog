@@ -53,7 +53,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "POST /confirmations/confirmation 無効な形式のメールアドレスでバリデーションエラー" do
@@ -63,7 +63,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   # =====================================
@@ -90,7 +90,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     get confirmation_confirmation_path, params: { confirmation_token: "invalid_token" }
 
     # 無効なトークンの場合はエラーメッセージを表示
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_select "h2", text: "メールアドレスの確認に失敗しました"
     assert_select "div", text: /Confirmation token is invalid/
   end
@@ -131,7 +131,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
       get confirmation_confirmation_path, params: { confirmation_token: "expired_30min_1sec_token" }
 
       # 期限切れの場合はエラーメッセージを表示
-      assert_response :unprocessable_entity
+      assert_response :unprocessable_content
       assert_select "h2", text: "メールアドレスの確認に失敗しました"
       assert_select "div", text: /needs to be confirmed within/
 

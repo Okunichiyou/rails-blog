@@ -15,7 +15,7 @@ class User::DatabaseAuthenticationsController < ApplicationController
 
     return if @form.valid?
 
-    render :new, status: :unprocessable_entity
+    render :new, status: :unprocessable_content
   end
 
   def create
@@ -27,7 +27,7 @@ class User::DatabaseAuthenticationsController < ApplicationController
       sign_in(:database_authentication, @form.user_database_authentication)
       redirect_to root_path
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -40,7 +40,7 @@ class User::DatabaseAuthenticationsController < ApplicationController
 
     return if @form.valid?
 
-    render :link_new, status: :unprocessable_entity
+    render :link_new, status: :unprocessable_content
   end
 
   def link_create
@@ -54,7 +54,7 @@ class User::DatabaseAuthenticationsController < ApplicationController
       sign_in(:database_authentication, @form.user_database_authentication)
       redirect_to root_path
     else
-      render :link_new, status: :unprocessable_entity
+      render :link_new, status: :unprocessable_content
     end
   end
 end

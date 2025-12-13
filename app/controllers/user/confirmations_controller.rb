@@ -11,7 +11,7 @@ class User::ConfirmationsController < Devise::ConfirmationsController
         return redirect_to email_confirmation_sent_path
       end
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -29,7 +29,7 @@ class User::ConfirmationsController < Devise::ConfirmationsController
         redirect_to new_user_database_authentication_path(confirmation_token: resource.confirmation_token)
       end
     else
-      respond_with(resource, status: :unprocessable_entity)
+      respond_with(resource, status: :unprocessable_content)
     end
   end
 end

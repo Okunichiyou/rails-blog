@@ -29,7 +29,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
   test "GET /user/database_authentications/new 無効なトークンでエラー" do
     get new_user_database_authentication_path(confirmation_token: "invalid_token")
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_select "form", count: 1
   end
 
@@ -42,7 +42,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
 
     get new_user_database_authentication_path(confirmation_token: "unconfirmed_token")
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_select "form", count: 1
   end
 
@@ -97,7 +97,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       }
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_select "form", count: 1
   end
 
@@ -123,7 +123,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       end
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_select "form", count: 1
   end
 
@@ -147,7 +147,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       }
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "POST /user/database_authentications 必須項目不足でエラー(name)" do
@@ -170,7 +170,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       }
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   # emailはconfirmationから自動的に設定されるため、リクエストのemailパラメータは無視される
@@ -196,7 +196,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       }
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "POST /user/database_authentications 未確認のトークンでの登録は失敗" do
@@ -218,7 +218,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       }
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_select "form", count: 1
   end
 
@@ -329,7 +329,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
 
     get link_new_user_database_authentications_path(confirmation_token: "invalid_token")
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "GET /user/database_authentications/link_new 既にdatabase_authenticationを持っているユーザーの場合はエラー" do
@@ -350,7 +350,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
 
     get link_new_user_database_authentications_path(confirmation_token: "link_token")
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   # =====================================
@@ -461,7 +461,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       }
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "POST /user/database_authentications/link_create パスワード不一致でエラー" do
@@ -502,7 +502,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       }
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "POST /user/database_authentications/link_create 既にdatabase_authenticationを持っているユーザーの場合はエラー" do
@@ -531,6 +531,6 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       }
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 end

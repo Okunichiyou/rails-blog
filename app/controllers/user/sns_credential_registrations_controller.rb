@@ -7,7 +7,7 @@ class User::SnsCredentialRegistrationsController < ApplicationController
     # トークンが無効な場合はエラー画面を表示
     return if @form.valid?(:token_validation_only)
 
-    render :new, status: :unprocessable_entity
+    render :new, status: :unprocessable_content
   end
 
   def create
@@ -18,7 +18,7 @@ class User::SnsCredentialRegistrationsController < ApplicationController
       sign_in(:user, @form.user)
       redirect_to root_path, notice: "アカウントの登録が完了しました"
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 end
