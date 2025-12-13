@@ -1,4 +1,12 @@
-<%= render Page::User::DatabaseAuthentications::NewPageComponent.new(
-  form: @form,
-  create_database_authentication_path: user_database_authentications_path
-) %>
+<div class="flex justify-center">
+  <%= render Ui::PanelComponent.new(size: :medium) do |panel| %>
+    <%- panel.with_panel_content do %>
+      <h2>Registration Form</h2>
+
+      <%= render Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
+        form: @form,
+        create_database_authentication_path: user_database_authentications_path
+      ) %>
+    <% end %>
+  <% end %>
+</div>
