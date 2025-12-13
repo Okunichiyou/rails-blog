@@ -41,3 +41,6 @@ config/google_auth.yml
 
 # Ignore coverage reports
 /coverage
+
+# Ignore Serena MCP local files
+/.serena
