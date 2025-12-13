@@ -1,4 +1,4 @@
-<%= form_with(model: @form, url: @confirmation_path, as: @resource_name, html: { method: :post, class: "email-confirmation-form flex flex-col gap-4" }) do |f| %>
+<%= form_with(model: @form, url: confirmation_confirmation_path, as: @resource_name, html: { method: :post, class: "email-confirmation-form flex flex-col gap-4" }) do |f| %>
   <% flash.each do |type, message| %>
     <%= render Ui::FlashComponent.new(flash_type: type.to_sym) do |c| %>
       <%- c.with_flash_content do %>

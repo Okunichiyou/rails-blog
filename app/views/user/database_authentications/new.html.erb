@@ -3,10 +3,7 @@
     <%- panel.with_panel_content do %>
       <h2>Registration Form</h2>
 
-      <%= render Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-        form: @form,
-        create_database_authentication_path: user_database_authentications_path
-      ) %>
+      <%= render Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(form: @form) %>
     <% end %>
   <% end %>
 </div>

@@ -13,8 +13,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
   test "registration formの要素があること" do
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: @form,
-      create_database_authentication_path: "/user/database_authentications"
+      form: @form
     ))
 
     assert_selector("form[action='/user/database_authentications'][method=post]")
@@ -22,8 +21,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
   test "nameのラベルとinput要素があること" do
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: @form,
-      create_database_authentication_path: "/user/database_authentications"
+      form: @form
     ))
 
     assert_selector("label[for='confirmation_user_name']", text: "User name")
@@ -32,8 +30,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
   test "emailのラベルとテキスト表示があること" do
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: @form,
-      create_database_authentication_path: "/user/database_authentications"
+      form: @form
     ))
 
     assert_selector("label[for='confirmation_email']", text: "Email")
@@ -42,8 +39,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
   test "passwordのラベルとinput要素があること" do
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: @form,
-      create_database_authentication_path: "/user/database_authentications"
+      form: @form
     ))
 
     assert_selector("label[for='confirmation_password']", text: "Password")
@@ -52,8 +48,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
   test "password_confirmationのラベルとinput要素があること" do
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: @form,
-      create_database_authentication_path: "/user/database_authentications"
+      form: @form
     ))
 
     assert_selector("label[for='confirmation_password_confirmation']", text: "Password confirmation")
@@ -62,8 +57,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
   test "confirmation_tokenのhidden fieldがあること" do
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: @form,
-      create_database_authentication_path: "/user/database_authentications"
+      form: @form
     ))
 
     assert_selector("input[type=hidden][name='confirmation[confirmation_token]']", visible: false)
@@ -72,8 +66,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
 
   test "submitボタンがあること" do
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: @form,
-      create_database_authentication_path: "/user/database_authentications"
+      form: @form
     ))
 
     assert_selector("button[type=submit]", text: "登録")
@@ -83,8 +76,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
     @form.errors.add(:confirmation_token, :not_found, message: "が見つかりません")
 
     render_inline(Domain::User::DatabaseAuthenticationRegistrationFormComponent.new(
-      form: @form,
-      create_database_authentication_path: "/user/database_authentications"
+      form: @form
     ))
 
     assert_selector("div", text: "Confirmation token が見つかりません")

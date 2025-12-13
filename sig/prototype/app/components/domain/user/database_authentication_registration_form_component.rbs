@@ -2,8 +2,6 @@ module Domain
   module User
     class DatabaseAuthenticationRegistrationFormComponent < ApplicationComponent
       @form: untyped
-
-      @create_database_authentication_path: untyped
     end
   end
 end

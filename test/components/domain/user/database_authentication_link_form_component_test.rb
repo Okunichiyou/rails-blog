@@ -17,8 +17,7 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
 
   test "link formの要素があること" do
     render_inline(Domain::User::DatabaseAuthenticationLinkFormComponent.new(
-      form: @form,
-      create_database_authentication_link_path: "/user/database_authentications/link_create"
+      form: @form
     ))
 
     assert_selector("form[action='/user/database_authentications/link_create'][method=post]")
@@ -26,8 +25,7 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
 
   test "user_nameのラベルとテキスト表示があること" do
     render_inline(Domain::User::DatabaseAuthenticationLinkFormComponent.new(
-      form: @form,
-      create_database_authentication_link_path: "/user/database_authentications/link_create"
+      form: @form
     ))
 
     assert_selector("label[for='confirmation_user_name']", text: "ユーザー名")
@@ -36,8 +34,7 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
 
   test "emailのラベルとテキスト表示があること" do
     render_inline(Domain::User::DatabaseAuthenticationLinkFormComponent.new(
-      form: @form,
-      create_database_authentication_link_path: "/user/database_authentications/link_create"
+      form: @form
     ))
 
     assert_selector("label[for='confirmation_email']", text: "Email")
@@ -46,8 +43,7 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
 
   test "passwordのラベルとinput要素があること" do
     render_inline(Domain::User::DatabaseAuthenticationLinkFormComponent.new(
-      form: @form,
-      create_database_authentication_link_path: "/user/database_authentications/link_create"
+      form: @form
     ))
 
     assert_selector("label[for='confirmation_password']", text: "Password")
@@ -56,8 +52,7 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
 
   test "password_confirmationのラベルとinput要素があること" do
     render_inline(Domain::User::DatabaseAuthenticationLinkFormComponent.new(
-      form: @form,
-      create_database_authentication_link_path: "/user/database_authentications/link_create"
+      form: @form
     ))
 
     assert_selector("label[for='confirmation_password_confirmation']", text: "Password confirmation")
@@ -66,8 +61,7 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
 
   test "confirmation_tokenのhidden fieldがあること" do
     render_inline(Domain::User::DatabaseAuthenticationLinkFormComponent.new(
-      form: @form,
-      create_database_authentication_link_path: "/user/database_authentications/link_create"
+      form: @form
     ))
 
     assert_selector("input[type=hidden][name='confirmation[confirmation_token]']", visible: false)
@@ -76,8 +70,7 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
 
   test "submitボタンがあること" do
     render_inline(Domain::User::DatabaseAuthenticationLinkFormComponent.new(
-      form: @form,
-      create_database_authentication_link_path: "/user/database_authentications/link_create"
+      form: @form
     ))
 
     assert_selector("button[type=submit]", text: "リンク")
@@ -87,8 +80,7 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
     @form.errors.add(:base, :token_not_found, message: "認証トークンが見つかりません")
 
     render_inline(Domain::User::DatabaseAuthenticationLinkFormComponent.new(
-      form: @form,
-      create_database_authentication_link_path: "/user/database_authentications/link_create"
+      form: @form
     ))
 
     assert_selector("div", text: "認証トークンが見つかりません")

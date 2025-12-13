@@ -14,8 +14,7 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
 
   test "registration formの要素があること" do
     render_inline(Domain::User::SnsCredentialRegistrationFormComponent.new(
-      form: @form,
-      create_sns_credential_registration_path: "/user/sns_credential_registrations"
+      form: @form
     ))
 
     assert_selector("form[action='/user/sns_credential_registrations'][method=post]")
@@ -23,8 +22,7 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
 
   test "user_nameのラベルとinput要素があること" do
     render_inline(Domain::User::SnsCredentialRegistrationFormComponent.new(
-      form: @form,
-      create_sns_credential_registration_path: "/user/sns_credential_registrations"
+      form: @form
     ))
 
     assert_selector("label[for='sns_credential_registration_user_name']", text: "ユーザー名")
@@ -33,8 +31,7 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
 
   test "user_nameの初期値が設定されていること" do
     render_inline(Domain::User::SnsCredentialRegistrationFormComponent.new(
-      form: @form,
-      create_sns_credential_registration_path: "/user/sns_credential_registrations"
+      form: @form
     ))
 
     assert_selector("input[value='#{@pending.name}']")
@@ -42,8 +39,7 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
 
   test "emailのラベルとテキスト表示があること" do
     render_inline(Domain::User::SnsCredentialRegistrationFormComponent.new(
-      form: @form,
-      create_sns_credential_registration_path: "/user/sns_credential_registrations"
+      form: @form
     ))
 
     assert_selector("label[for='sns_credential_registration_email']", text: "Email")
@@ -52,8 +48,7 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
 
   test "tokenのhidden fieldがあること" do
     render_inline(Domain::User::SnsCredentialRegistrationFormComponent.new(
-      form: @form,
-      create_sns_credential_registration_path: "/user/sns_credential_registrations"
+      form: @form
     ))
 
     assert_selector("input[type=hidden][name='sns_credential_registration[token]']", visible: false)
@@ -62,8 +57,7 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
 
   test "submitボタンがあること" do
     render_inline(Domain::User::SnsCredentialRegistrationFormComponent.new(
-      form: @form,
-      create_sns_credential_registration_path: "/user/sns_credential_registrations"
+      form: @form
     ))
 
     assert_selector("button[type=submit]", text: "登録")
@@ -73,8 +67,7 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
     @form.errors.add(:token, :not_found, message: "が見つかりません")
 
     render_inline(Domain::User::SnsCredentialRegistrationFormComponent.new(
-      form: @form,
-      create_sns_credential_registration_path: "/user/sns_credential_registrations"
+      form: @form
     ))
 
     assert_selector("div", text: "Token が見つかりません")
@@ -84,8 +77,7 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
     @form.errors.add(:base, "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。")
 
     render_inline(Domain::User::SnsCredentialRegistrationFormComponent.new(
-      form: @form,
-      create_sns_credential_registration_path: "/user/sns_credential_registrations"
+      form: @form
     ))
 
     assert_selector("div", text: "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。")
@@ -95,8 +87,7 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
     @form.errors.add(:user_name, :blank, message: "can't be blank")
 
     render_inline(Domain::User::SnsCredentialRegistrationFormComponent.new(
-      form: @form,
-      create_sns_credential_registration_path: "/user/sns_credential_registrations"
+      form: @form
     ))
 
     assert_selector("div", text: "User name can't be blank")

@@ -1,8 +1,8 @@
 module Domain
   module User
     class LoginFormComponent < ApplicationComponent
-      # @rbs (resource: User::DatabaseAuthentication, resource_name: Symbol, login_path: String) -> void
-      def initialize: (resource: User::DatabaseAuthentication, resource_name: Symbol, login_path: String) -> void
+      # @rbs (resource: User::DatabaseAuthentication, resource_name: Symbol) -> void
+      def initialize: (resource: User::DatabaseAuthentication, resource_name: Symbol) -> void
     end
   end
 end
