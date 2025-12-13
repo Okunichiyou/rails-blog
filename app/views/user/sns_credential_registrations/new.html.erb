@@ -1,4 +1,12 @@
-<%= render Page::User::SnsCredentialRegistrations::NewPageComponent.new(
-  form: @form,
-  create_sns_credential_registration_path: user_sns_credential_registrations_path
-) %>
+<div class="flex justify-center">
+  <%= render Ui::PanelComponent.new(size: :medium) do |panel| %>
+    <%- panel.with_panel_content do %>
+      <h2>登録フォーム</h2>
+
+      <%= render Domain::User::SnsCredentialRegistrationFormComponent.new(
+        form: @form,
+        create_sns_credential_registration_path: user_sns_credential_registrations_path
+      ) %>
+    <% end %>
+  <% end %>
+</div>

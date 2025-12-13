@@ -1,4 +1,12 @@
-<%= render Page::User::DatabaseAuthenticationLinks::NewPageComponent.new(
-  form: @form,
-  create_database_authentication_link_path: link_create_user_database_authentications_path
-) %>
+<div class="flex justify-center" >
+  <%= render Ui::PanelComponent.new(size: :medium) do |panel| %>
+    <%- panel.with_panel_content do %>
+      <h2>メール認証をリンク</h2>
+
+      <%= render Domain::User::DatabaseAuthenticationLinkFormComponent.new(
+        form: @form,
+        create_database_authentication_link_path: link_create_user_database_authentications_path
+      ) %>
+    <% end %>
+  <% end %>
+</div>

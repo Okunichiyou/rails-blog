@@ -3,7 +3,6 @@ class User::AccountSettingsController < ApplicationController
 
   def show
     @user = current_user
-    render Page::User::AccountSettings::ShowPageComponent.new(user: @user)
   end
 
   private

@@ -1,9 +1,0 @@
-module Page
-  module User
-    module Confirmations
-      class ShowPageComponent < ApplicationComponent
-        @resource: untyped
-      end
-    end
-  end
-end

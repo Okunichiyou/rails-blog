@@ -48,7 +48,7 @@ Controllers are namespaced under `user/` (e.g., `User::DatabaseAuthentication::S
 
 ### ViewComponent Structure
 
-Components in `app/components/` follow a three-tier hierarchy:
+Components in `app/components/` follow a two-tier hierarchy:
 
 - **`ui/`** - Reusable UI primitives (buttons, fields, panels)
   - Use keyword arguments for inputs
@@ -57,7 +57,7 @@ Components in `app/components/` follow a three-tier hierarchy:
 
 - **`domain/`** - Business logic components that transform ActiveRecord/API objects for UI consumption
 
-- **`page/`** - Page-level components that receive data from controllers and compose domain/ui components
+Views in `app/views/` compose UI and Domain components directly.
 
 Preview components at: `http://localhost:3000/rails/view_components/`
 
