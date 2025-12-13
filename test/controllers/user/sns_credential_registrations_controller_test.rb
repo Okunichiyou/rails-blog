@@ -31,14 +31,14 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
   test "GET new: 無効なトークンの場合はエラー画面" do
     get new_user_sns_credential_registration_path(token: "invalid_token")
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "GET new: 期限切れトークンの場合はエラー画面" do
     expired = user_pending_sns_credentials(:expired)
     get new_user_sns_credential_registration_path(token: expired.token)
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "POST create: 有効なパラメータでユーザーを作成してログイン" do
@@ -90,7 +90,7 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
       }
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     # エラーメッセージが表示されていることを確認
     assert_match /can&#39;t be blank|を入力してください/, response.body
   end
@@ -105,7 +105,7 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
       }
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "POST create: 既存のユーザー名の場合はエラー" do
@@ -120,7 +120,7 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
       }
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     # エラーメッセージが表示されていることを確認
     assert_match /has already been taken|はすでに存在します/, response.body
   end
@@ -143,7 +143,7 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
       }
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_match "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。", response.body
   end
 end

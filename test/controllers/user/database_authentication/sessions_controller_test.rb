@@ -47,7 +47,7 @@ class User::DatabaseAuthentication::SessionsControllerTest < ActionDispatch::Int
       }
     }
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_nil session["warden.user.user.key"]
     assert_nil session["warden.user.database_authentication.key"]
   end
@@ -60,7 +60,7 @@ class User::DatabaseAuthentication::SessionsControllerTest < ActionDispatch::Int
       }
     }
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_nil session["warden.user.user.key"]
     assert_nil session["warden.user.database_authentication.key"]
   end
