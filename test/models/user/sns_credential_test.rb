@@ -20,25 +20,25 @@ class User::SnsCredentialTest < ActiveSupport::TestCase
   test "should require user" do
     @sns_credential.user = nil
     assert_not @sns_credential.valid?
-    assert_includes @sns_credential.errors[:user], "must exist"
+    assert_includes @sns_credential.errors[:user], "を入力してください"
   end
 
   test "should require provider" do
     @sns_credential.provider = nil
     assert_not @sns_credential.valid?
-    assert_includes @sns_credential.errors[:provider], "can't be blank"
+    assert_includes @sns_credential.errors[:provider], "を入力してください"
   end
 
   test "should require uid" do
     @sns_credential.uid = nil
     assert_not @sns_credential.valid?
-    assert_includes @sns_credential.errors[:uid], "can't be blank"
+    assert_includes @sns_credential.errors[:uid], "を入力してください"
   end
 
   test "should require email" do
     @sns_credential.email = nil
     assert_not @sns_credential.valid?
-    assert_includes @sns_credential.errors[:email], "can't be blank"
+    assert_includes @sns_credential.errors[:email], "を入力してください"
   end
 
   # uniquenessバリデーション: provider + uid
@@ -51,7 +51,7 @@ class User::SnsCredentialTest < ActiveSupport::TestCase
       email: "different@example.com"
     )
     assert_not duplicate.valid?
-    assert_includes duplicate.errors[:uid], "has already been taken"
+    assert_includes duplicate.errors[:uid], "はすでに存在します"
   end
 
   test "should allow same uid with different provider" do
@@ -75,7 +75,7 @@ class User::SnsCredentialTest < ActiveSupport::TestCase
       email: @sns_credential.email
     )
     assert_not duplicate.valid?
-    assert_includes duplicate.errors[:email], "has already been taken"
+    assert_includes duplicate.errors[:email], "はすでに存在します"
   end
 
   test "should allow same email with different provider" do

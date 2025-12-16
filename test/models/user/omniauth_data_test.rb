@@ -22,7 +22,7 @@ class User::OmniauthDataTest < ActiveSupport::TestCase
     )
 
     assert_not omniauth_data.valid?
-    assert_includes omniauth_data.errors[:provider], "can't be blank"
+    assert_includes omniauth_data.errors[:provider], "を入力してください"
   end
 
   test "invalid without uid" do
@@ -34,7 +34,7 @@ class User::OmniauthDataTest < ActiveSupport::TestCase
     )
 
     assert_not omniauth_data.valid?
-    assert_includes omniauth_data.errors[:uid], "can't be blank"
+    assert_includes omniauth_data.errors[:uid], "を入力してください"
   end
 
   test "invalid without name" do
@@ -46,7 +46,7 @@ class User::OmniauthDataTest < ActiveSupport::TestCase
     )
 
     assert_not omniauth_data.valid?
-    assert_includes omniauth_data.errors[:name], "can't be blank"
+    assert_includes omniauth_data.errors[:name], "を入力してください"
   end
 
   test "invalid without email" do
@@ -58,7 +58,7 @@ class User::OmniauthDataTest < ActiveSupport::TestCase
     )
 
     assert_not omniauth_data.valid?
-    assert_includes omniauth_data.errors[:email], "can't be blank"
+    assert_includes omniauth_data.errors[:email], "を入力してください"
   end
 
   test "from_omniauth creates OmniauthData from OmniAuth hash" do

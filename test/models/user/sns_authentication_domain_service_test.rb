@@ -155,8 +155,8 @@ class User::SnsAuthenticationDomainServiceTest < ActiveSupport::TestCase
     assert result.failure?
     assert_nil result.user
     assert_equal :invalid_auth_data, result.error
-    assert_includes result.message, "Name can't be blank"
-    assert_includes result.message, "Email can't be blank"
+    assert_includes result.message, "Nameを入力してください"
+    assert_includes result.message, "Emailを入力してください"
   end
 
   # =====================================

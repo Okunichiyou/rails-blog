@@ -65,7 +65,7 @@ class Domain::User::EmailConfirmationFormComponentTest < ViewComponent::TestCase
 
     render_inline(Domain::User::EmailConfirmationFormComponent.new(form: form, resource_name: :confirmation))
 
-    assert_selector("ul li", text: /Email can't be blank/)
+    assert_selector("ul li", text: /Emailを入力してください/)
   end
 
   test "バリデーションエラーがない場合、入力フィールドがdefault状態になること" do

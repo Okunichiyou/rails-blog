@@ -122,7 +122,7 @@ class User::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::Int
     end
 
     assert_redirected_to login_path
-    assert_includes flash[:alert], "Name can't be blank"
+    assert_includes flash[:alert], "Nameを入力してください"
   end
 
   test "Google認証失敗 - 認証データが不完全（info.emailがnil）" do
@@ -133,7 +133,7 @@ class User::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::Int
     end
 
     assert_redirected_to login_path
-    assert_includes flash[:alert], "Email can't be blank"
+    assert_includes flash[:alert], "Emailを入力してください"
   end
 
   # =====================================

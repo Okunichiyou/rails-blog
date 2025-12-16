@@ -4,12 +4,12 @@ class User::PendingSnsCredentialTest < ActiveSupport::TestCase
   test "必須項目のバリデーション" do
     pending = User::PendingSnsCredential.new
     assert_not pending.valid?
-    assert_includes pending.errors[:token], "can't be blank"
-    assert_includes pending.errors[:provider], "can't be blank"
-    assert_includes pending.errors[:uid], "can't be blank"
-    assert_includes pending.errors[:email], "can't be blank"
-    assert_includes pending.errors[:name], "can't be blank"
-    assert_includes pending.errors[:expires_at], "can't be blank"
+    assert_includes pending.errors[:token], "を入力してください"
+    assert_includes pending.errors[:provider], "を入力してください"
+    assert_includes pending.errors[:uid], "を入力してください"
+    assert_includes pending.errors[:email], "を入力してください"
+    assert_includes pending.errors[:name], "を入力してください"
+    assert_includes pending.errors[:expires_at], "を入力してください"
   end
 
   test "トークンの一意性バリデーション" do
@@ -23,7 +23,7 @@ class User::PendingSnsCredentialTest < ActiveSupport::TestCase
       expires_at: 10.minutes.from_now
     )
     assert_not pending2.valid?
-    assert_includes pending2.errors[:token], "has already been taken"
+    assert_includes pending2.errors[:token], "はすでに存在します"
   end
 
   test "create_from_omniauth! でOmniauthDataから作成できる" do

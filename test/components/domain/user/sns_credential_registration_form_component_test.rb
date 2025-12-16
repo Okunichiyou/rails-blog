@@ -70,7 +70,7 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
       form: @form
     ))
 
-    assert_selector("div", text: "Token が見つかりません")
+    assert_selector("div", text: "Tokenが見つかりません")
   end
 
   test "baseエラーがある場合、FlashComponentでエラーメッセージが表示されること" do
@@ -84,12 +84,12 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
   end
 
   test "user_nameにエラーがある場合、エラーメッセージが表示されること" do
-    @form.errors.add(:user_name, :blank, message: "can't be blank")
+    @form.errors.add(:user_name, :blank, message: "を入力してください")
 
     render_inline(Domain::User::SnsCredentialRegistrationFormComponent.new(
       form: @form
     ))
 
-    assert_selector("div", text: "User name can't be blank")
+    assert_selector("div", text: "User nameを入力してください")
   end
 end

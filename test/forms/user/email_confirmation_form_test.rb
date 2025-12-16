@@ -16,14 +16,14 @@ class User::EmailConfirmationFormTest < ActiveSupport::TestCase
     form = User::EmailConfirmationForm.new(email: "")
 
     assert_not form.valid?
-    assert_includes form.errors[:email], "can't be blank"
+    assert_includes form.errors[:email], "を入力してください"
   end
 
   test "メールアドレスが無効な形式の場合にバリデーションエラーになること" do
     form = User::EmailConfirmationForm.new(email: "invalid-email")
 
     assert_not form.valid?
-    assert_includes form.errors[:email], "is invalid"
+    assert_includes form.errors[:email], "は不正な値です"
   end
 
   test "既存のメールアドレスで再送信する場合" do
