@@ -30,6 +30,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "letter_opener_web"
   gem "rbs", require: false
   gem "rbs-inline", require: false
   gem "rbs_rails", require: false
