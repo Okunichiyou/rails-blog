@@ -22,7 +22,7 @@ class User::SnsCredentialRegistrationFormTest < ActiveSupport::TestCase
     )
 
     assert_not form.valid?
-    assert_includes form.errors[:user_name], "can't be blank"
+    assert_includes form.errors[:user_name], "を入力してください"
   end
 
   test "tokenが空の場合はバリデーションエラー" do
@@ -32,7 +32,7 @@ class User::SnsCredentialRegistrationFormTest < ActiveSupport::TestCase
     )
 
     assert_not form.valid?
-    assert_includes form.errors[:token], "can't be blank"
+    assert_includes form.errors[:token], "を入力してください"
   end
 
   test "tokenが存在しない場合はバリデーションエラー" do
@@ -64,7 +64,7 @@ class User::SnsCredentialRegistrationFormTest < ActiveSupport::TestCase
     )
 
     assert_not form.valid?
-    assert_includes form.errors[:user_name], "has already been taken"
+    assert_includes form.errors[:user_name], "はすでに存在します"
   end
 
   test "token_validation_only コンテキストではuser_nameをバリデーションしない" do

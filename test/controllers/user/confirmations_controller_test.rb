@@ -23,7 +23,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     # 送信されたメールの内容を確認
     mail = ActionMailer::Base.deliveries.last
     assert_equal [ email ], mail.to
-    assert_match /Confirmation/, mail.subject
+    assert_match /メールアドレス確認/, mail.subject
   end
 
   test "POST /confirmations/confirmation 既存の未確認メールアドレスで再送信" do
@@ -43,7 +43,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     # 送信されたメールの内容を確認
     mail = ActionMailer::Base.deliveries.last
     assert_equal [ "existing@example.com" ], mail.to
-    assert_match /Confirmation/, mail.subject
+    assert_match /メールアドレス確認/, mail.subject
   end
 
   test "POST /confirmations/confirmation 空のメールアドレスでバリデーションエラー" do
@@ -92,7 +92,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     # 無効なトークンの場合はエラーメッセージを表示
     assert_response :unprocessable_content
     assert_select "h2", text: "メールアドレスの確認に失敗しました"
-    assert_select "div", text: /Confirmation token is invalid/
+    assert_select "div", text: /Confirmation tokenは不正な値です/
   end
 
   test "GET /confirmations/confirmation 30分丁度のトークンは有効（境界値を含む）" do
@@ -133,7 +133,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
       # 期限切れの場合はエラーメッセージを表示
       assert_response :unprocessable_content
       assert_select "h2", text: "メールアドレスの確認に失敗しました"
-      assert_select "div", text: /needs to be confirmed within/
+      assert_select "div", text: /の期限が切れました/
 
       # メールアドレスの確認は完了していない
       confirmation.reload

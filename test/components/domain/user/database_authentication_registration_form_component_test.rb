@@ -79,6 +79,6 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
       form: @form
     ))
 
-    assert_selector("div", text: "Confirmation token が見つかりません")
+    assert_selector("div", text: "Confirmation tokenが見つかりません")
   end
 end

@@ -2,12 +2,14 @@ source "https://rubygems.org"
 
 gem "bootsnap", require: false
 gem "devise", "~> 4.9"
+gem "devise-i18n", "~> 1.12"
 gem "importmap-rails"
 gem "jbuilder"
 gem "kamal", require: false
 gem "propshaft"
 gem "puma", ">= 5.0"
 gem "rails", "~> 8.1"
+gem "rails-i18n", "~> 8.0"
 gem "solid_cable"
 gem "solid_cache"
 gem "solid_queue"

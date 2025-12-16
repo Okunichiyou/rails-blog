@@ -100,39 +100,39 @@ class UserTest < ActiveSupport::TestCase
   test "nameが256文字の場合、バリデーションエラーになること" do
     user = User.new(name: "a" * 256)
     assert_not user.valid?
-    assert_includes user.errors[:name], "is too long (maximum is 255 characters)"
+    assert_includes user.errors[:name], "は255文字以内で入力してください"
   end
 
   test "nameが重複している場合、バリデーションエラーになること" do
     User.create!(name: "duplicate_user")
     user = User.new(name: "duplicate_user")
     assert_not user.valid?
-    assert_includes user.errors[:name], "has already been taken"
+    assert_includes user.errors[:name], "はすでに存在します"
   end
 
   test "nameがnilの場合、バリデーションエラーになること" do
     user = User.new(name: nil)
     assert_not user.valid?
-    assert_includes user.errors[:name], "can't be blank"
+    assert_includes user.errors[:name], "を入力してください"
   end
 
   test "nameが空文字の場合、バリデーションエラーになること" do
     user = User.new(name: "")
     assert_not user.valid?
-    assert_includes user.errors[:name], "can't be blank"
+    assert_includes user.errors[:name], "を入力してください"
   end
 
   test "nameが空白のみの場合、バリデーションエラーになること" do
     user = User.new(name: "   ")
     assert_not user.valid?
-    assert_includes user.errors[:name], "can't be blank"
+    assert_includes user.errors[:name], "を入力してください"
   end
 
   test "大文字小文字を区別せずに重複チェックすること" do
     User.create!(name: "CaseTest")
     user = User.new(name: "casetest")
     assert_not user.valid?
-    assert_includes user.errors[:name], "has already been taken"
+    assert_includes user.errors[:name], "はすでに存在します"
   end
 
   # =====================================

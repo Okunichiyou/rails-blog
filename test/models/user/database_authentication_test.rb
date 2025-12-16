@@ -58,7 +58,7 @@ class User::DatabaseAuthenticationTest < ActiveSupport::TestCase
     )
 
     assert_not auth.valid?
-    assert_includes auth.errors[:email], "can't be blank"
+    assert_includes auth.errors[:email], "を入力してください"
   end
 
   test "emailがnilの場合、バリデーションエラーになる" do
@@ -70,7 +70,7 @@ class User::DatabaseAuthenticationTest < ActiveSupport::TestCase
     )
 
     assert_not auth.valid?
-    assert_includes auth.errors[:email], "can't be blank"
+    assert_includes auth.errors[:email], "を入力してください"
   end
 
   test "emailが無効な形式の場合、バリデーションエラーになる" do
@@ -85,7 +85,7 @@ class User::DatabaseAuthenticationTest < ActiveSupport::TestCase
       )
 
       assert_not auth.valid?, "#{invalid_email} should be invalid"
-      assert_includes auth.errors[:email], "is invalid"
+      assert_includes auth.errors[:email], "は不正な値です"
     end
   end
 
@@ -105,7 +105,7 @@ class User::DatabaseAuthenticationTest < ActiveSupport::TestCase
     )
 
     assert_not auth2.valid?
-    assert_includes auth2.errors[:email], "has already been taken"
+    assert_includes auth2.errors[:email], "はすでに存在します"
   end
 
   test "emailの大文字小文字を区別せずに重複チェックする" do
@@ -124,7 +124,7 @@ class User::DatabaseAuthenticationTest < ActiveSupport::TestCase
     )
 
     assert_not auth2.valid?
-    assert_includes auth2.errors[:email], "has already been taken"
+    assert_includes auth2.errors[:email], "はすでに存在します"
   end
 
   test "passwordが空の場合、バリデーションエラーになる" do
@@ -136,7 +136,7 @@ class User::DatabaseAuthenticationTest < ActiveSupport::TestCase
     )
 
     assert_not auth.valid?
-    assert_includes auth.errors[:password], "can't be blank"
+    assert_includes auth.errors[:password], "を入力してください"
   end
 
   test "passwordが短すぎる場合、バリデーションエラーになる" do
@@ -148,7 +148,7 @@ class User::DatabaseAuthenticationTest < ActiveSupport::TestCase
     )
 
     assert_not auth.valid?
-    assert_includes auth.errors[:password], "is too short (minimum is 6 characters)"
+    assert_includes auth.errors[:password], "は6文字以上で入力してください"
   end
 
   test "passwordが長すぎる場合、バリデーションエラーになる" do
@@ -160,7 +160,7 @@ class User::DatabaseAuthenticationTest < ActiveSupport::TestCase
     )
 
     assert_not auth.valid?
-    assert_includes auth.errors[:password], "is too long (maximum is 128 characters)"
+    assert_includes auth.errors[:password], "は128文字以内で入力してください"
   end
 
   test "userが存在しない場合、バリデーションエラーになる" do
@@ -171,7 +171,7 @@ class User::DatabaseAuthenticationTest < ActiveSupport::TestCase
     )
 
     assert_not auth.valid?
-    assert_includes auth.errors[:user], "must exist"
+    assert_includes auth.errors[:user], "を入力してください"
   end
 
   # =====================================
