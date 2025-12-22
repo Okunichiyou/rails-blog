@@ -1,0 +1,24 @@
+{
+  "name": "rails-blog",
+  "version": "1.0.0",
+  "description": "[![CI](https://github.com/Okunichiyou/rails-blog/actions/workflows/ci.yml/badge.svg)](https://github.com/Okunichiyou/rails-blog/actions/workflows/ci.yml) [![codecov](https://codecov.io/gh/Okunichiyou/rails-blog/branch/main/graph/badge.svg)](https://codecov.io/gh/Okunichiyou/rails-blog)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "lint:erb": "herb-lint",
+    "lint:erb:fix": "herb-lint --fix",
+    "format:erb": "herb-format",
+    "format:erb:check": "herb-format --check"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@herb-tools/formatter": "^0.8.5",
+    "@herb-tools/linter": "^0.8.5"
+  }
+}

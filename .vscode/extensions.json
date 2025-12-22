@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "Shopify.ruby-lsp",
+    "marcoroth.herb-lsp",
+    "soutaro.steep-vscode",
+    "piotrmurach.view-component",
+    "bradlc.vscode-tailwindcss",
+    "marcoroth.stimulus-lsp",
+    "alexcvzz.vscode-sqlite"
+  ]
+}

@@ -27,6 +27,15 @@ COVERAGE=true bundle exec rails test
 # Linting
 bundle exec rubocop
 
+# ERB Linting (HTML + ERB templates)
+npm run lint:erb
+
+# ERB Linting with auto-fix
+npm run lint:erb:fix
+
+# ERB Formatting (experimental)
+npm run format:erb
+
 # Type checking
 bundle exec steep check
 

@@ -9,6 +9,7 @@
 
 ```bash
 bundle install
+npm install
 ```
 
 ### 2. 設定ファイルのコピー
@@ -62,8 +63,36 @@ COVERAGE=true bundle exec rails test
 ### リンターの実行
 
 ```shell
+# Rubyコードのリント
 bundle exec rubocop
+
+# ERBテンプレートのリント
+npm run lint:erb
+
+# ERBリントエラーの自動修正
+npm run lint:erb:fix
 ```
+
+### フォーマッターの実行
+
+```shell
+# ERBテンプレートのフォーマット（experimental）
+npm run format:erb
+
+# 単一ファイルだけフォーマット
+npm run format:erb -- ファイルパス
+
+# フォーマットのチェックのみ（変更なし）
+npm run format:erb:check
+```
+
+#### Herb（ERBリンター/フォーマッター）について
+
+[Herb](https://herb-tools.dev)はHTML + ERBテンプレート向けのリンター/フォーマッターです。ERBタグを理解した上でHTMLの構文チェックやベストプラクティスの検証を行います。
+
+設定は`.herb.yml`で管理されています。VSCodeを使用している場合は、推奨拡張機能としてHerb LSPが設定されています。
+
+> **Note:** フォーマッターは現在experimental previewの状態です。Rubyコードの解析は限定的なため、Rubocop等との併用を推奨します。
 
 ### データの初期化
 
