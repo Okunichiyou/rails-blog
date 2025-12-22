@@ -9,6 +9,7 @@
 
   <div class="field">
     <%= f.label :email, "Email", class: "block" %>
+
     <%= render Ui::EmailFieldComponent.new(
       builder: f,
       method: :email,
@@ -16,6 +17,7 @@
       variant: @form.errors[:email].any? ? :alert : :default,
       html_options: { autofocus: true, autocomplete: "email" }
     ) %>
+
     <%= render Ui::FieldErrorsComponent.new(error_messages: @form.errors.full_messages_for(:email)) %>
   </div>
 
