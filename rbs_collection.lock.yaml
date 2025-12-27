@@ -113,6 +113,10 @@ gems:
   version: '0'
   source:
     type: stdlib
+- name: cgi-escape
+  version: '0'
+  source:
+    type: stdlib
 - name: concurrent-ruby
   version: '1.1'
   source:
@@ -253,6 +257,10 @@ gems:
   version: '0'
   source:
     type: stdlib
+- name: multi_xml
+  version: 0.8.0
+  source:
+    type: rubygems
 - name: net-http
   version: '0'
   source:
