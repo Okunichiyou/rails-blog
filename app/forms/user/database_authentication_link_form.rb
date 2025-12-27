@@ -34,7 +34,7 @@ class User::DatabaseAuthenticationLinkForm
   end
 
   # @rbs () -> bool
-  def call
+  def save
     build_models
     return false unless valid?
 

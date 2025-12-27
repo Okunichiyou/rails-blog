@@ -16,7 +16,7 @@ class User::EmailConfirmationForm
   end
 
   # @rbs () -> bool
-  def call
+  def save
     return false unless valid?
 
     user_confirmation = User::Confirmation.find_or_initialize_by(unconfirmed_email: email)

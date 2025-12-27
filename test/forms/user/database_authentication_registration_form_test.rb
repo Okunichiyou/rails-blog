@@ -22,7 +22,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
 
     assert_difference [ "User.count", "User::DatabaseAuthentication.count" ], 1 do
       assert_difference "User::Confirmation.count", -1 do
-        assert form.call
+        assert form.save
       end
     end
 
@@ -46,7 +46,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
-      assert_not form.call
+      assert_not form.save
     end
 
     # 両方のバリデーションエラーが格納されていることを確認
@@ -63,7 +63,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
-      assert_not form.call
+      assert_not form.save
     end
 
     # 両方のバリデーションエラーが格納されていることを確認
@@ -80,7 +80,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      assert_not form.call
+      assert_not form.save
     end
 
     assert form.errors[:user_name].any?
@@ -95,7 +95,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      assert_not form.call
+      assert_not form.save
     end
 
     assert form.errors[:password].any?
@@ -110,7 +110,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      assert_not form.call
+      assert_not form.save
     end
 
     assert form.errors[:password_confirmation].any?
@@ -125,7 +125,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      assert_not form.call
+      assert_not form.save
     end
 
     assert form.errors[:user_name].any?
@@ -142,7 +142,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      assert_not form.call
+      assert_not form.save
     end
 
     assert form.errors[:user_name].any?
@@ -159,7 +159,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
-      assert_not form.call
+      assert_not form.save
     end
 
     # 全てのエラーが格納されていることを確認
@@ -183,7 +183,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
     form = User::DatabaseAuthenticationRegistrationForm.new(@valid_attributes)
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
-      assert_not form.call
+      assert_not form.save
     end
 
     assert form.errors[:email].any?, "emailのエラーが格納されていない"
@@ -201,7 +201,7 @@ class User::DatabaseAuthenticationRegistrationFormTest < ActiveSupport::TestCase
     form = User::DatabaseAuthenticationRegistrationForm.new(@valid_attributes)
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
-      assert_not form.call
+      assert_not form.save
     end
 
     assert form.errors[:email].any?, "emailのエラーが格納されていない"

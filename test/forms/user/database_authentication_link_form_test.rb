@@ -23,13 +23,13 @@ class User::DatabaseAuthenticationLinkFormTest < ActiveSupport::TestCase
 
     assert_difference "User::DatabaseAuthentication.count", 1 do
       assert_difference "User::Confirmation.count", -1 do
-        assert form.call
+        assert form.save
       end
     end
 
     # Userは新規作成されない
     assert_no_difference "User.count" do
-      form.call
+      form.save
     end
 
     auth = User::DatabaseAuthentication.find_by(email: "link@example.com")
@@ -49,7 +49,7 @@ class User::DatabaseAuthenticationLinkFormTest < ActiveSupport::TestCase
     )
 
     assert_no_difference [ "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      assert_not form.call
+      assert_not form.save
     end
 
     assert form.errors[:password].any?
@@ -64,7 +64,7 @@ class User::DatabaseAuthenticationLinkFormTest < ActiveSupport::TestCase
     )
 
     assert_no_difference [ "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      assert_not form.call
+      assert_not form.save
     end
 
     assert form.errors[:password_confirmation].any?
@@ -85,7 +85,7 @@ class User::DatabaseAuthenticationLinkFormTest < ActiveSupport::TestCase
     form = User::DatabaseAuthenticationLinkForm.new(current_user: @user, **@valid_attributes)
 
     assert_no_difference "User::DatabaseAuthentication.count" do
-      assert_not form.call
+      assert_not form.save
     end
 
     assert form.errors[:email].any?, "emailのエラーが格納されていない"

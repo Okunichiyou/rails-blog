@@ -14,7 +14,7 @@ class User::SnsCredentialRegistrationsController < ApplicationController
     form_params = params.require(:sns_credential_registration).permit(:user_name, :token)
     @form = User::SnsCredentialRegistrationForm.new(form_params)
 
-    if @form.call
+    if @form.save
       sign_in(:user, @form.user)
       redirect_to root_path, notice: "アカウントの登録が完了しました"
     else
