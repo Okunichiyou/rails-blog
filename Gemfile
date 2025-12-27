@@ -40,6 +40,7 @@ end
 
 group :test do
   gem "capybara"
+  gem "minitest", "< 6" # Rails 8.1.1環境でMinitest 6は動かないためバージョン指定: https://github.com/rails/rails/issues/56406
   gem "selenium-webdriver"
   gem "simplecov", require: false
   gem "simplecov-cobertura", require: false
