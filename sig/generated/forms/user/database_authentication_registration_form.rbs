@@ -17,7 +17,7 @@ class User::DatabaseAuthenticationRegistrationForm
   def email: () -> String?
 
   # @rbs () -> bool
-  def call: () -> bool
+  def save: () -> bool
 
   # @rbs () -> nil
   def validate_token: () -> nil

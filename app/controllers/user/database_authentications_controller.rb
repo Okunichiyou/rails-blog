@@ -22,7 +22,7 @@ class User::DatabaseAuthenticationsController < ApplicationController
     form_params = params.require(:confirmation).permit(:user_name, :password, :password_confirmation, :confirmation_token)
     @form = User::DatabaseAuthenticationRegistrationForm.new(form_params)
 
-    if @form.call
+    if @form.save
       sign_in(:user, @form.user)
       sign_in(:database_authentication, @form.user_database_authentication)
       redirect_to root_path
@@ -50,7 +50,7 @@ class User::DatabaseAuthenticationsController < ApplicationController
       **form_params
     )
 
-    if @form.call
+    if @form.save
       sign_in(:database_authentication, @form.user_database_authentication)
       redirect_to root_path
     else

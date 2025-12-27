@@ -28,7 +28,7 @@ class User::SnsCredentialRegistrationForm
   end
 
   # @rbs () -> bool
-  def call
+  def save
     return false unless valid?
 
     result = User::SnsAuthenticationDomainService.create_from_pending(token, user_name)

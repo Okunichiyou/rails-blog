@@ -5,7 +5,7 @@ class User::EmailConfirmationFormTest < ActiveSupport::TestCase
     form = User::EmailConfirmationForm.new(email: "test@example.com")
 
     assert_difference "User::Confirmation.count", 1 do
-      assert form.call
+      assert form.save
     end
 
     registration = User::Confirmation.find_by(unconfirmed_email: "test@example.com")
@@ -32,14 +32,14 @@ class User::EmailConfirmationFormTest < ActiveSupport::TestCase
     form = User::EmailConfirmationForm.new(email: "existing@example.com")
 
     assert_no_difference "User::Confirmation.count" do
-      assert form.call
+      assert form.save
     end
   end
 
   test "メールアドレスの前後の空白が削除されること" do
     form = User::EmailConfirmationForm.new(email: "  test@example.com  ")
 
-    assert form.call
+    assert form.save
 
     registration = User::Confirmation.find_by(unconfirmed_email: "test@example.com")
     assert_not_nil registration
@@ -49,7 +49,7 @@ class User::EmailConfirmationFormTest < ActiveSupport::TestCase
     form = User::EmailConfirmationForm.new(email: "")
 
     assert_no_difference "User::Confirmation.count" do
-      assert_not form.call
+      assert_not form.save
     end
   end
 end

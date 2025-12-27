@@ -84,7 +84,7 @@ class User::SnsCredentialRegistrationFormTest < ActiveSupport::TestCase
 
     assert_difference "User.count", 1 do
       assert_difference "User::SnsCredential.count", 1 do
-        assert form.call
+        assert form.save
       end
     end
 
@@ -99,7 +99,7 @@ class User::SnsCredentialRegistrationFormTest < ActiveSupport::TestCase
     )
 
     assert_difference "User::PendingSnsCredential.count", -1 do
-      form.call
+      form.save
     end
 
     assert_nil User::PendingSnsCredential.find_by(token: @pending.token)
@@ -133,7 +133,7 @@ class User::SnsCredentialRegistrationFormTest < ActiveSupport::TestCase
       user_name: ""
     )
 
-    assert_not form.call
+    assert_not form.save
   end
 
   test "メールアドレスが既に使用されている場合callが失敗する" do
@@ -150,7 +150,7 @@ class User::SnsCredentialRegistrationFormTest < ActiveSupport::TestCase
       user_name: "Test User"
     )
 
-    assert_not form.call
+    assert_not form.save
     assert_includes form.errors[:base], "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。"
   end
 end

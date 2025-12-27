@@ -6,7 +6,7 @@ class User::ConfirmationsController < Devise::ConfirmationsController
 
   def create
     @form = User::EmailConfirmationForm.new(params.require(:confirmation).permit(:email))
-    if @form.call
+    if @form.save
       super do
         return redirect_to email_confirmation_sent_path
       end
