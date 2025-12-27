@@ -1,8 +1,4 @@
-class User::DatabaseAuthenticationRegistrationForm
-  include ActiveModel::Model
-
-  include ActiveModel::Attributes
-
+class User::DatabaseAuthenticationRegistrationForm < ApplicationForm
   attr_reader user: untyped
 
   attr_reader user_database_authentication: untyped

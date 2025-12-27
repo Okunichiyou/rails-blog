@@ -1,7 +1,4 @@
-class User::SnsCredentialRegistrationForm
-  include ActiveModel::Model
-  include ActiveModel::Attributes
-
+class User::SnsCredentialRegistrationForm < ApplicationForm
   attribute :user_name, :string
   attribute :token, :string
 

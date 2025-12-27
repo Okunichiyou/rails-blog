@@ -1,7 +1,4 @@
-class User::DatabaseAuthenticationLinkForm
-  include ActiveModel::Model
-  include ActiveModel::Attributes
-
+class User::DatabaseAuthenticationLinkForm < ApplicationForm
   attribute :password, :string
   attribute :password_confirmation, :string
   attribute :confirmation_token, :string

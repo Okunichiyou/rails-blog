@@ -1,6 +1,4 @@
-class User::EmailConfirmationForm
-  include ActiveModel::Model
-  include ActiveModel::Attributes
+class User::EmailConfirmationForm < ApplicationForm
   include ActiveModel::Validations::Callbacks
 
   attribute :email, :string

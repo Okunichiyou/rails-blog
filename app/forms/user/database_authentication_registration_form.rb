@@ -1,7 +1,4 @@
-class User::DatabaseAuthenticationRegistrationForm
-  include ActiveModel::Model
-  include ActiveModel::Attributes
-
+class User::DatabaseAuthenticationRegistrationForm < ApplicationForm
   attribute :user_name, :string
   attribute :password, :string
   attribute :password_confirmation, :string

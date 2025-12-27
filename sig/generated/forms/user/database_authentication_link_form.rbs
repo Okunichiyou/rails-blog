@@ -1,8 +1,4 @@
-class User::DatabaseAuthenticationLinkForm
-  include ActiveModel::Model
-
-  include ActiveModel::Attributes
-
+class User::DatabaseAuthenticationLinkForm < ApplicationForm
   attr_reader current_user: untyped
 
   attr_reader user_database_authentication: untyped
