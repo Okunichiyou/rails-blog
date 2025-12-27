@@ -6,9 +6,6 @@ class User::DatabaseAuthenticationLinkForm < ApplicationForm
   # @rbs (current_user: User) -> void
   def initialize: (current_user: User) -> void
 
-  # @rbs () -> ActiveModel::Name
-  def model_name: () -> ActiveModel::Name
-
   # @rbs () -> String?
   def email: () -> String?
 

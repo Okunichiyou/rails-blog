@@ -22,8 +22,8 @@ class Domain::User::EmailConfirmationFormComponentTest < ViewComponent::TestCase
   test "emailのラベルとinput要素があること" do
     render_inline(Domain::User::EmailConfirmationFormComponent.new(form: User::EmailConfirmationForm.new, resource_name: :confirmation))
 
-    assert_selector("label[for='confirmation_email']", text: "Email")
-    assert_selector("input[type=email][name='confirmation[email]'][id='confirmation_email']")
+    assert_selector("label[for='user_email_confirmation_email']", text: "Email")
+    assert_selector("input[type=email][name='user_email_confirmation[email]'][id='user_email_confirmation_email']")
   end
 
   test "submitボタンがあること" do

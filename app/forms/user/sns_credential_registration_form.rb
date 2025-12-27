@@ -9,11 +9,6 @@ class User::SnsCredentialRegistrationForm < ApplicationForm
   validate :validate_token
   validate :validate_user, unless: -> { validation_context == :token_validation_only }
 
-  # @rbs () -> ActiveModel::Name
-  def model_name
-    ActiveModel::Name.new(self, nil, "SnsCredentialRegistration")
-  end
-
   # @rbs () -> String?
   def email
     @pending_credential&.email

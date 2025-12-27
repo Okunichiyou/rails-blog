@@ -8,11 +8,6 @@ class User::EmailConfirmationForm < ApplicationForm
   validates :email, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email.present? }
 
-  # @rbs () -> ActiveModel::Name
-  def model_name
-    ActiveModel::Name.new(self, nil, "Confirmation")
-  end
-
   # @rbs () -> bool
   def save
     return false unless valid?

@@ -16,11 +16,6 @@ class User::DatabaseAuthenticationRegistrationForm < ApplicationForm
     name: :user_name
   }.freeze
 
-  # @rbs () -> ActiveModel::Name
-  def model_name
-    ActiveModel::Name.new(self, nil, "Confirmation")
-  end
-
   # @rbs () -> String?
   def email
     confirmation_resource&.email

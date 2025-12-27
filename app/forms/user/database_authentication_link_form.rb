@@ -15,11 +15,6 @@ class User::DatabaseAuthenticationLinkForm < ApplicationForm
     super(**attributes)
   end
 
-  # @rbs () -> ActiveModel::Name
-  def model_name
-    ActiveModel::Name.new(self, nil, "Confirmation")
-  end
-
   # @rbs () -> String?
   def email
     confirmation_resource&.email

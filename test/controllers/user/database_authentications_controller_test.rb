@@ -8,6 +8,18 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
   teardown do
     OmniAuth.config.mock_auth[:google_oauth2] = nil
   end
+
+  # フォームのparam_keyを使用してパラメータを構築
+  # これにより、model_nameの変更がテストで検知される
+  def registration_form_params(attributes)
+    param_key = User::DatabaseAuthenticationRegistrationForm.new(confirmation_token: "dummy").model_name.param_key.to_sym
+    { param_key => attributes }
+  end
+
+  def link_form_params(attributes)
+    param_key = User::DatabaseAuthenticationLinkForm.new(current_user: User.new).model_name.param_key.to_sym
+    { param_key => attributes }
+  end
   # =====================================
   # newアクション（登録フォーム表示）
   # =====================================
@@ -60,15 +72,13 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
 
     assert_difference [ "User.count", "User::DatabaseAuthentication.count" ], 1 do
       assert_difference "User::Confirmation.count", -1 do
-        post user_database_authentications_path, params: {
-          confirmation: {
-            confirmation_token: "finish_token",
-            user_name: "Test User",
-            email: "finish@example.com",
-            password: "password123",
-            password_confirmation: "password123"
-          }
-        }
+        post user_database_authentications_path, params: registration_form_params(
+          confirmation_token: "finish_token",
+          user_name: "Test User",
+          email: "finish@example.com",
+          password: "password123",
+          password_confirmation: "password123"
+        )
       end
     end
 
@@ -86,15 +96,13 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
 
   test "POST /user/database_authentications 無効なトークンでエラー" do
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      post user_database_authentications_path, params: {
-        confirmation: {
-          confirmation_token: "invalid_token",
-          user_name: "Test User",
-          email: "test@example.com",
-          password: "password123",
-          password_confirmation: "password123"
-        }
-      }
+      post user_database_authentications_path, params: registration_form_params(
+        confirmation_token: "invalid_token",
+        user_name: "Test User",
+        email: "test@example.com",
+        password: "password123",
+        password_confirmation: "password123"
+      )
     end
 
     assert_response :unprocessable_content
@@ -111,15 +119,13 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
       assert_no_difference "User::Confirmation.count" do
-        post user_database_authentications_path, params: {
-          confirmation: {
-            confirmation_token: "mismatch_token",
-            user_name: "Test User",
-            email: "mismatch@example.com",
-            password: "password123",
-            password_confirmation: "different_password"
-          }
-        }
+        post user_database_authentications_path, params: registration_form_params(
+          confirmation_token: "mismatch_token",
+          user_name: "Test User",
+          email: "mismatch@example.com",
+          password: "password123",
+          password_confirmation: "different_password"
+        )
       end
     end
 
@@ -136,15 +142,13 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
-      post user_database_authentications_path, params: {
-        confirmation: {
-          confirmation_token: "short_token",
-          user_name: "Test User",
-          email: "short@example.com",
-          password: "123",
-          password_confirmation: "123"
-        }
-      }
+      post user_database_authentications_path, params: registration_form_params(
+        confirmation_token: "short_token",
+        user_name: "Test User",
+        email: "short@example.com",
+        password: "123",
+        password_confirmation: "123"
+      )
     end
 
     assert_response :unprocessable_content
@@ -159,15 +163,13 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
-      post user_database_authentications_path, params: {
-        confirmation: {
-          confirmation_token: "missing_token",
-          user_name: "",
-          email: "missing@example.com",
-          password: "password123",
-          password_confirmation: "password123"
-        }
-      }
+      post user_database_authentications_path, params: registration_form_params(
+        confirmation_token: "missing_token",
+        user_name: "",
+        email: "missing@example.com",
+        password: "password123",
+        password_confirmation: "password123"
+      )
     end
 
     assert_response :unprocessable_content
@@ -185,15 +187,13 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
-      post user_database_authentications_path, params: {
-        confirmation: {
-          confirmation_token: "missing_token",
-          user_name: "user",
-          email: "missing@example.com",
-          password: "",
-          password_confirmation: ""
-        }
-      }
+      post user_database_authentications_path, params: registration_form_params(
+        confirmation_token: "missing_token",
+        user_name: "user",
+        email: "missing@example.com",
+        password: "",
+        password_confirmation: ""
+      )
     end
 
     assert_response :unprocessable_content
@@ -207,15 +207,13 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
-      post user_database_authentications_path, params: {
-        confirmation: {
-          confirmation_token: "unconfirmed_token",
-          user_name: "Test User",
-          email: "unconfirmed@example.com",
-          password: "password123",
-          password_confirmation: "password123"
-        }
-      }
+      post user_database_authentications_path, params: registration_form_params(
+        confirmation_token: "unconfirmed_token",
+        user_name: "Test User",
+        email: "unconfirmed@example.com",
+        password: "password123",
+        password_confirmation: "password123"
+      )
     end
 
     assert_response :unprocessable_content
@@ -232,15 +230,13 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
 
     assert_difference [ "User.count", "User::DatabaseAuthentication.count" ], 1 do
       assert_difference "User::Confirmation.count", -1 do
-        post user_database_authentications_path, params: {
-          confirmation: {
-            confirmation_token: "test_token",
-            user_name: "Test User",
-            email: "malicious@example.com", # 悪意のあるユーザーが別のemailを送信
-            password: "password123",
-            password_confirmation: "password123"
-          }
-        }
+        post user_database_authentications_path, params: registration_form_params(
+          confirmation_token: "test_token",
+          user_name: "Test User",
+          email: "malicious@example.com", # 悪意のあるユーザーが別のemailを送信
+          password: "password123",
+          password_confirmation: "password123"
+        )
       end
     end
 
@@ -388,13 +384,11 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     assert_difference "User::DatabaseAuthentication.count", 1 do
       assert_difference "User::Confirmation.count", -1 do
         assert_no_difference "User.count" do
-          post link_create_user_database_authentications_path, params: {
-            confirmation: {
-              confirmation_token: "link_token",
-              password: "password123",
-              password_confirmation: "password123"
-            }
-          }
+          post link_create_user_database_authentications_path, params: link_form_params(
+            confirmation_token: "link_token",
+            password: "password123",
+            password_confirmation: "password123"
+          )
         end
       end
     end
@@ -417,13 +411,11 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      post link_create_user_database_authentications_path, params: {
-        confirmation: {
-          confirmation_token: "link_token",
-          password: "password123",
-          password_confirmation: "password123"
-        }
-      }
+      post link_create_user_database_authentications_path, params: link_form_params(
+        confirmation_token: "link_token",
+        password: "password123",
+        password_confirmation: "password123"
+      )
     end
 
     assert_response :redirect
@@ -452,13 +444,11 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     post sns_credential_google_oauth2_omniauth_callback_path
 
     assert_no_difference [ "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      post link_create_user_database_authentications_path, params: {
-        confirmation: {
-          confirmation_token: "invalid_token",
-          password: "password123",
-          password_confirmation: "password123"
-        }
-      }
+      post link_create_user_database_authentications_path, params: link_form_params(
+        confirmation_token: "invalid_token",
+        password: "password123",
+        password_confirmation: "password123"
+      )
     end
 
     assert_response :unprocessable_content
@@ -493,13 +483,11 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      post link_create_user_database_authentications_path, params: {
-        confirmation: {
-          confirmation_token: "link_token",
-          password: "password123",
-          password_confirmation: "different_password"
-        }
-      }
+      post link_create_user_database_authentications_path, params: link_form_params(
+        confirmation_token: "link_token",
+        password: "password123",
+        password_confirmation: "different_password"
+      )
     end
 
     assert_response :unprocessable_content
@@ -522,13 +510,11 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      post link_create_user_database_authentications_path, params: {
-        confirmation: {
-          confirmation_token: "link_token",
-          password: "password123",
-          password_confirmation: "password123"
-        }
-      }
+      post link_create_user_database_authentications_path, params: link_form_params(
+        confirmation_token: "link_token",
+        password: "password123",
+        password_confirmation: "password123"
+      )
     end
 
     assert_response :unprocessable_content

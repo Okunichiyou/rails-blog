@@ -6,9 +6,6 @@ class User::DatabaseAuthenticationRegistrationForm < ApplicationForm
   # Userモデル属性からフォーム属性へのマッピング
   USER_ATTR_TRANSFORM_MAP: untyped
 
-  # @rbs () -> ActiveModel::Name
-  def model_name: () -> ActiveModel::Name
-
   # @rbs () -> String?
   def email: () -> String?
 

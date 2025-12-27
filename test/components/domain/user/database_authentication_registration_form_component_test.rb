@@ -24,8 +24,8 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
       form: @form
     ))
 
-    assert_selector("label[for='confirmation_user_name']", text: "User name")
-    assert_selector("input[type=text][name='confirmation[user_name]'][id='confirmation_user_name']")
+    assert_selector("label[for='user_database_authentication_registration_user_name']", text: "User name")
+    assert_selector("input[type=text][name='user_database_authentication_registration[user_name]'][id='user_database_authentication_registration_user_name']")
   end
 
   test "emailのラベルとテキスト表示があること" do
@@ -33,7 +33,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
       form: @form
     ))
 
-    assert_selector("label[for='confirmation_email']", text: "Email")
+    assert_selector("label[for='user_database_authentication_registration_email']", text: "Email")
     assert_selector("p", text: "test@example.com")
   end
 
@@ -42,8 +42,8 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
       form: @form
     ))
 
-    assert_selector("label[for='confirmation_password']", text: "Password")
-    assert_selector("input[type=password][name='confirmation[password]'][id='confirmation_password']")
+    assert_selector("label[for='user_database_authentication_registration_password']", text: "Password")
+    assert_selector("input[type=password][name='user_database_authentication_registration[password]'][id='user_database_authentication_registration_password']")
   end
 
   test "password_confirmationのラベルとinput要素があること" do
@@ -51,8 +51,8 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
       form: @form
     ))
 
-    assert_selector("label[for='confirmation_password_confirmation']", text: "Password confirmation")
-    assert_selector("input[type=password][name='confirmation[password_confirmation]'][id='confirmation_password_confirmation']")
+    assert_selector("label[for='user_database_authentication_registration_password_confirmation']", text: "Password confirmation")
+    assert_selector("input[type=password][name='user_database_authentication_registration[password_confirmation]'][id='user_database_authentication_registration_password_confirmation']")
   end
 
   test "confirmation_tokenのhidden fieldがあること" do
@@ -60,7 +60,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
       form: @form
     ))
 
-    assert_selector("input[type=hidden][name='confirmation[confirmation_token]']", visible: false)
+    assert_selector("input[type=hidden][name='user_database_authentication_registration[confirmation_token]']", visible: false)
     assert_selector("input[value='test_token_123']", visible: false)
   end
 

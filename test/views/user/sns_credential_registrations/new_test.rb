@@ -28,6 +28,6 @@ class UserSnsCredentialRegistrationsNewViewTest < ActionView::TestCase
 
     # フォームの主要な要素が含まれていることを確認
     assert_select("form[action='/user/sns_credential_registrations']")
-    assert_select("input[name='sns_credential_registration[user_name]']")
+    assert_select("input[name='user_sns_credential_registration[user_name]']")
   end
 end

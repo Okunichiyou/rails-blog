@@ -170,9 +170,9 @@ class User::DatabaseAuthenticationLinkFormTest < ActiveSupport::TestCase
     assert_equal "testuser", form.user_name
   end
 
-  test "model_nameはConfirmationを返す" do
+  test "model_nameはUser::DatabaseAuthenticationLinkを返す" do
     form = User::DatabaseAuthenticationLinkForm.new(current_user: @user, **@valid_attributes)
 
-    assert_equal "Confirmation", form.model_name.name
+    assert_equal "User::DatabaseAuthenticationLink", form.model_name.name
   end
 end

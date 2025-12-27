@@ -25,8 +25,8 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
       form: @form
     ))
 
-    assert_selector("label[for='sns_credential_registration_user_name']", text: "ユーザー名")
-    assert_selector("input[type=text][name='sns_credential_registration[user_name]'][id='sns_credential_registration_user_name']")
+    assert_selector("label[for='user_sns_credential_registration_user_name']", text: "ユーザー名")
+    assert_selector("input[type=text][name='user_sns_credential_registration[user_name]'][id='user_sns_credential_registration_user_name']")
   end
 
   test "user_nameの初期値が設定されていること" do
@@ -42,7 +42,7 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
       form: @form
     ))
 
-    assert_selector("label[for='sns_credential_registration_email']", text: "Email")
+    assert_selector("label[for='user_sns_credential_registration_email']", text: "Email")
     assert_selector("p", text: @pending.email)
   end
 
@@ -51,7 +51,7 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
       form: @form
     ))
 
-    assert_selector("input[type=hidden][name='sns_credential_registration[token]']", visible: false)
+    assert_selector("input[type=hidden][name='user_sns_credential_registration[token]']", visible: false)
     assert_selector("input[value='#{@pending.token}']", visible: false)
   end
 
