@@ -1,25 +1,27 @@
 class User::EmailConfirmationForm < ApplicationForm
-  include ActiveModel::Validations::Callbacks
-
   attribute :email, :string
 
-  before_validation :trim_email
-
   validates :email, presence: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email.present? }
+  validate :validate_user_confirmation
 
   # @rbs () -> bool
   def save
     return false unless valid?
 
-    user_confirmation = User::Confirmation.find_or_initialize_by(unconfirmed_email: email)
     user_confirmation.save
   end
 
   private
 
-  # @rbs () -> String
-  def trim_email
-    self.email = email&.strip
+  # @rbs () -> User::Confirmation
+  def user_confirmation
+    @user_confirmation ||= User::Confirmation.find_or_initialize_by(unconfirmed_email: email)
+  end
+
+  # @rbs () -> void
+  def validate_user_confirmation
+    return if email.blank?
+
+    validate_model(user_confirmation, attribute_map: { unconfirmed_email: :email })
   end
 end

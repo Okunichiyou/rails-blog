@@ -1,11 +1,12 @@
 class User::EmailConfirmationForm < ApplicationForm
-  include ActiveModel::Validations::Callbacks
-
   # @rbs () -> bool
   def save: () -> bool
 
   private
 
-  # @rbs () -> String
-  def trim_email: () -> String
+  # @rbs () -> User::Confirmation
+  def user_confirmation: () -> User::Confirmation
+
+  # @rbs () -> void
+  def validate_user_confirmation: () -> void
 end
