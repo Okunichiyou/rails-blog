@@ -19,7 +19,7 @@ class User::DatabaseAuthenticationsController < ApplicationController
   end
 
   def create
-    form_params = params.require(:confirmation).permit(:user_name, :password, :password_confirmation, :confirmation_token)
+    form_params = params.require(:user_database_authentication_registration).permit(:user_name, :password, :password_confirmation, :confirmation_token)
     @form = User::DatabaseAuthenticationRegistrationForm.new(form_params)
 
     if @form.save
@@ -44,7 +44,7 @@ class User::DatabaseAuthenticationsController < ApplicationController
   end
 
   def link_create
-    form_params = params.require(:confirmation).permit(:password, :password_confirmation, :confirmation_token)
+    form_params = params.require(:user_database_authentication_link).permit(:password, :password_confirmation, :confirmation_token)
     @form = User::DatabaseAuthenticationLinkForm.new(
       current_user: current_user,
       **form_params

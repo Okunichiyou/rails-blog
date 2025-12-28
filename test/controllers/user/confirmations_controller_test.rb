@@ -1,6 +1,13 @@
 require "test_helper"
 
 class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
+  # フォームのparam_keyを使用してパラメータを構築
+  # これにより、model_nameの変更がテストで検知される
+  def form_params(attributes)
+    param_key = User::EmailConfirmationForm.new.model_name.param_key.to_sym
+    { param_key => attributes }
+  end
+
   # =====================================
   # createアクション（確認メール送信）
   # =====================================
@@ -10,7 +17,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference "User::Confirmation.count", 1 do
       assert_emails 1 do
-        post confirmation_confirmation_path, params: { confirmation: { email: email } }
+        post confirmation_confirmation_path, params: form_params(email: email)
       end
     end
 
@@ -34,7 +41,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_difference "User::Confirmation.count" do
       assert_emails 1 do
-        post confirmation_confirmation_path, params: { confirmation: { email: "existing@example.com" } }
+        post confirmation_confirmation_path, params: form_params(email: "existing@example.com")
       end
     end
 
@@ -49,7 +56,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
   test "POST /confirmations/confirmation 空のメールアドレスでバリデーションエラー" do
     assert_no_difference "User::Confirmation.count" do
       assert_no_emails do
-        post confirmation_confirmation_path, params: { confirmation: { email: "" } }
+        post confirmation_confirmation_path, params: form_params(email: "")
       end
     end
 
@@ -59,7 +66,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
   test "POST /confirmations/confirmation 無効な形式のメールアドレスでバリデーションエラー" do
     assert_no_difference "User::Confirmation.count" do
       assert_no_emails do
-        post confirmation_confirmation_path, params: { confirmation: { email: "invalid-email" } }
+        post confirmation_confirmation_path, params: form_params(email: "invalid-email")
       end
     end
 

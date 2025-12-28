@@ -28,7 +28,7 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
       form: @form
     ))
 
-    assert_selector("label[for='confirmation_user_name']", text: "ユーザー名")
+    assert_selector("label[for='user_database_authentication_link_user_name']", text: "ユーザー名")
     assert_selector("p", text: "testuser")
   end
 
@@ -37,7 +37,7 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
       form: @form
     ))
 
-    assert_selector("label[for='confirmation_email']", text: "Email")
+    assert_selector("label[for='user_database_authentication_link_email']", text: "Email")
     assert_selector("p", text: "link@example.com")
   end
 
@@ -46,8 +46,8 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
       form: @form
     ))
 
-    assert_selector("label[for='confirmation_password']", text: "Password")
-    assert_selector("input[type=password][name='confirmation[password]'][id='confirmation_password']")
+    assert_selector("label[for='user_database_authentication_link_password']", text: "Password")
+    assert_selector("input[type=password][name='user_database_authentication_link[password]'][id='user_database_authentication_link_password']")
   end
 
   test "password_confirmationのラベルとinput要素があること" do
@@ -55,8 +55,8 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
       form: @form
     ))
 
-    assert_selector("label[for='confirmation_password_confirmation']", text: "Password confirmation")
-    assert_selector("input[type=password][name='confirmation[password_confirmation]'][id='confirmation_password_confirmation']")
+    assert_selector("label[for='user_database_authentication_link_password_confirmation']", text: "Password confirmation")
+    assert_selector("input[type=password][name='user_database_authentication_link[password_confirmation]'][id='user_database_authentication_link_password_confirmation']")
   end
 
   test "confirmation_tokenのhidden fieldがあること" do
@@ -64,7 +64,7 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
       form: @form
     ))
 
-    assert_selector("input[type=hidden][name='confirmation[confirmation_token]']", visible: false)
+    assert_selector("input[type=hidden][name='user_database_authentication_link[confirmation_token]']", visible: false)
     assert_selector("input[value='link_token_123']", visible: false)
   end
 

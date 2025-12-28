@@ -1,12 +1,5 @@
-class User::EmailConfirmationForm
-  include ActiveModel::Model
-
-  include ActiveModel::Attributes
-
+class User::EmailConfirmationForm < ApplicationForm
   include ActiveModel::Validations::Callbacks
-
-  # @rbs () -> ActiveModel::Name
-  def model_name: () -> ActiveModel::Name
 
   # @rbs () -> bool
   def save: () -> bool

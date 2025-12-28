@@ -33,6 +33,6 @@ class UserDatabaseAuthenticationsLinkNewViewTest < ActionView::TestCase
 
     # フォームの主要な要素が含まれていることを確認
     assert_select("form[action='/user/database_authentications/link_create']")
-    assert_select("input[name='confirmation[password]']")
+    assert_select("input[name='user_database_authentication_link[password]']")
   end
 end

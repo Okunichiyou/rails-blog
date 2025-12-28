@@ -1,7 +1,4 @@
-class User::SnsCredentialRegistrationForm
-  include ActiveModel::Model
-  include ActiveModel::Attributes
-
+class User::SnsCredentialRegistrationForm < ApplicationForm
   attribute :user_name, :string
   attribute :token, :string
 
@@ -11,11 +8,6 @@ class User::SnsCredentialRegistrationForm
   validates :token, presence: true
   validate :validate_token
   validate :validate_user, unless: -> { validation_context == :token_validation_only }
-
-  # @rbs () -> ActiveModel::Name
-  def model_name
-    ActiveModel::Name.new(self, nil, "SnsCredentialRegistration")
-  end
 
   # @rbs () -> String?
   def email
@@ -44,7 +36,7 @@ class User::SnsCredentialRegistrationForm
 
   private
 
-  # @rbs () -> ActiveModel::Error?
+  # @rbs () -> void
   def validate_token
     @pending_credential = User::PendingSnsCredential.find_by(token: token)
 
@@ -58,15 +50,11 @@ class User::SnsCredentialRegistrationForm
     end
   end
 
-  # @rbs () -> Array[untyped]?
+  # @rbs () -> void
   def validate_user
     return unless @pending_credential # pending_credentialが見つからない場合はスキップ
 
     temp_user = User.new(name: user_name)
-    return if temp_user.valid?
-
-    temp_user.errors.each do |error|
-      errors.add(:user_name, error.type, message: error.message)
-    end
+    validate_model(temp_user, attribute_map: { name: :user_name })
   end
 end

@@ -1,7 +1,4 @@
-class User::DatabaseAuthenticationLinkForm
-  include ActiveModel::Model
-  include ActiveModel::Attributes
-
+class User::DatabaseAuthenticationLinkForm < ApplicationForm
   attribute :password, :string
   attribute :password_confirmation, :string
   attribute :confirmation_token, :string
@@ -9,18 +6,13 @@ class User::DatabaseAuthenticationLinkForm
   attr_reader :current_user, :user_database_authentication
 
   validate :validate_token
-  validate :validate_database_authentication
+  validates_associated :user_database_authentication
   validate :validate_current_user
 
   # @rbs (current_user: User) -> void
   def initialize(current_user:, **attributes)
     @current_user = current_user
     super(**attributes)
-  end
-
-  # @rbs () -> ActiveModel::Name
-  def model_name
-    ActiveModel::Name.new(self, nil, "Confirmation")
   end
 
   # @rbs () -> String?
@@ -78,16 +70,6 @@ class User::DatabaseAuthenticationLinkForm
       password: password,
       password_confirmation: password_confirmation
     )
-  end
-
-  # @rbs () -> void
-  def validate_database_authentication
-    return unless @user_database_authentication # モデルが構築されていない場合はスキップ
-    return if user_database_authentication.valid?
-
-    user_database_authentication.errors.each do |error|
-      errors.add(error.attribute, error.type, message: error.message)
-    end
   end
 
   # @rbs () -> bool

@@ -5,7 +5,7 @@ class User::ConfirmationsController < Devise::ConfirmationsController
   end
 
   def create
-    @form = User::EmailConfirmationForm.new(params.require(:confirmation).permit(:email))
+    @form = User::EmailConfirmationForm.new(resource_params)
     if @form.save
       super do
         return redirect_to email_confirmation_sent_path
@@ -31,5 +31,11 @@ class User::ConfirmationsController < Devise::ConfirmationsController
     else
       respond_with(resource, status: :unprocessable_content)
     end
+  end
+
+  private
+
+  def resource_params
+    params.require(:user_email_confirmation).permit(:email)
   end
 end

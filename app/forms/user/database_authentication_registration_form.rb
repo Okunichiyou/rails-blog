@@ -1,7 +1,4 @@
-class User::DatabaseAuthenticationRegistrationForm
-  include ActiveModel::Model
-  include ActiveModel::Attributes
-
+class User::DatabaseAuthenticationRegistrationForm < ApplicationForm
   attribute :user_name, :string
   attribute :password, :string
   attribute :password_confirmation, :string
@@ -11,18 +8,8 @@ class User::DatabaseAuthenticationRegistrationForm
 
   validate :validate_token
   validate :validate_email_duplication
-  validate :validate_user
-  validate :validate_database_authentication
-
-  # Userモデル属性からフォーム属性へのマッピング
-  USER_ATTR_TRANSFORM_MAP = {
-    name: :user_name
-  }.freeze
-
-  # @rbs () -> ActiveModel::Name
-  def model_name
-    ActiveModel::Name.new(self, nil, "Confirmation")
-  end
+  validates_associated :user, attribute_mapping: { name: :user_name }
+  validates_associated :user_database_authentication
 
   # @rbs () -> String?
   def email
@@ -37,7 +24,7 @@ class User::DatabaseAuthenticationRegistrationForm
     save_models
   end
 
-  # @rbs () -> nil
+  # @rbs () -> void
   def validate_token
     found_resource = User::Confirmation.find_by(confirmation_token:)
 
@@ -61,7 +48,7 @@ class User::DatabaseAuthenticationRegistrationForm
 
   private
 
-  # @rbs () -> User::DatabaseAuthentication
+  # @rbs () -> void
   def build_models
     @user = User.new(name: user_name)
     @user_database_authentication = User::DatabaseAuthentication.new(
@@ -70,27 +57,6 @@ class User::DatabaseAuthenticationRegistrationForm
       password: password,
       password_confirmation: password_confirmation
     )
-  end
-
-  # @rbs () -> Array[untyped]?
-  def validate_user
-    return unless @user # モデルが構築されていない場合はスキップ
-    return if user.valid?
-
-    user.errors.each do |error|
-      attribute = USER_ATTR_TRANSFORM_MAP[error.attribute] || error.attribute
-      errors.add(attribute, error.type, message: error.message)
-    end
-  end
-
-  # @rbs () -> Array[untyped]?
-  def validate_database_authentication
-    return unless @user_database_authentication # モデルが構築されていない場合はスキップ
-    return if user_database_authentication.valid?
-
-    user_database_authentication.errors.each do |error|
-      errors.add(error.attribute, error.type, message: error.message)
-    end
   end
 
   # @rbs () -> bool
