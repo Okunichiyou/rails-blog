@@ -42,6 +42,29 @@ class User::ConfirmationTest < ActiveSupport::TestCase
     assert_equal "trimmed@example.com", confirmation.unconfirmed_email
   end
 
+  test "unconfirmed_emailが無効な形式の場合にバリデーションエラーになる" do
+    confirmation = User::Confirmation.new(unconfirmed_email: "invalid-email")
+
+    assert_not confirmation.valid?
+    assert_includes confirmation.errors[:unconfirmed_email], "は不正な値です"
+  end
+
+  test "unconfirmed_emailが有効な形式の場合にバリデーションが通る" do
+    confirmation = User::Confirmation.new(unconfirmed_email: "valid@example.com")
+
+    confirmation.valid?
+
+    assert_empty confirmation.errors[:unconfirmed_email]
+  end
+
+  test "unconfirmed_emailが空の場合はフォーマットバリデーションをスキップする" do
+    confirmation = User::Confirmation.new(unconfirmed_email: "")
+
+    confirmation.valid?
+
+    assert_not_includes confirmation.errors[:unconfirmed_email], "は不正な値です"
+  end
+
   test "confirmed_atが設定できる" do
     confirmation = User::Confirmation.new
     time = Time.current

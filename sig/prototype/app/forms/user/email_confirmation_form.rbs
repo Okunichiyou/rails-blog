@@ -1,0 +1,3 @@
+class User::EmailConfirmationForm < ApplicationForm
+  @user_confirmation: untyped
+end

@@ -3,6 +3,8 @@ class User::Confirmation < ApplicationRecord
 
   before_validation :trim_email, :trim_unconfirmed_email
 
+  validates :unconfirmed_email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { unconfirmed_email.present? }
+
   private
 
   # @rbs () -> String?
