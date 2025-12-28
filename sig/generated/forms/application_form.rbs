@@ -5,4 +5,16 @@ class ApplicationForm
 
   # @rbs () -> ActiveModel::Name
   def model_name: () -> ActiveModel::Name
+
+  # 関連モデルのバリデーションを登録する
+  # 第一引数は、モデルを格納するインスタンス変数名のシンボル
+  # 第二引数は、モデルのアトリビュート名をフォーム用のアトリビュート名に変換したい時に使う
+  # @rbs (Symbol, ?attribute_mapping: Hash[Symbol, Symbol]) -> void
+  def self.validates_associated: (Symbol, ?attribute_mapping: Hash[Symbol, Symbol]) -> void
+
+  private
+
+  # 存在確認をするインスタンスと、validateしたいオブジェクトが異なる時など、validates_associatedを使うと不都合がある時に利用する
+  # @rbs (untyped, ?attribute_map: Hash[Symbol, Symbol]) -> void
+  def validate_model: (untyped, ?attribute_map: Hash[Symbol, Symbol]) -> void
 end

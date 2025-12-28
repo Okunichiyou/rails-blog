@@ -36,7 +36,7 @@ class User::SnsCredentialRegistrationForm < ApplicationForm
 
   private
 
-  # @rbs () -> ActiveModel::Error?
+  # @rbs () -> void
   def validate_token
     @pending_credential = User::PendingSnsCredential.find_by(token: token)
 
@@ -50,15 +50,11 @@ class User::SnsCredentialRegistrationForm < ApplicationForm
     end
   end
 
-  # @rbs () -> Array[untyped]?
+  # @rbs () -> void
   def validate_user
     return unless @pending_credential # pending_credentialが見つからない場合はスキップ
 
     temp_user = User.new(name: user_name)
-    return if temp_user.valid?
-
-    temp_user.errors.each do |error|
-      errors.add(:user_name, error.type, message: error.message)
-    end
+    validate_model(temp_user, attribute_map: { name: :user_name })
   end
 end

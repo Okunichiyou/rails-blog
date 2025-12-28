@@ -26,9 +26,6 @@ class User::DatabaseAuthenticationLinkForm < ApplicationForm
   # @rbs () -> User::DatabaseAuthentication
   def build_models: () -> User::DatabaseAuthentication
 
-  # @rbs () -> void
-  def validate_database_authentication: () -> void
-
   # @rbs () -> bool
   def save_models: () -> bool
 
