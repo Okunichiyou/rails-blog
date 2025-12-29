@@ -1,0 +1,14 @@
+class PostDraftForm < ApplicationForm
+  attr_reader post_draft: untyped
+
+  # @rbs (user: User, ?post_draft: PostDraft?, **untyped) -> void
+  def initialize: (user: User, ?post_draft: PostDraft?, **untyped) -> void
+
+  # @rbs () -> bool
+  def save: () -> bool
+
+  private
+
+  # @rbs () -> void
+  def build_post_draft: () -> void
+end

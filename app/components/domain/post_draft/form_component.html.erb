@@ -1,0 +1,31 @@
+<%= form_with(model: @form, url: @url, method: @method, html: { class: "post-draft-form flex flex-col gap-4" }) do |f| %>
+  <div class="field">
+    <%= f.label :title, class: "block" %>
+
+    <%= render Ui::TextFieldComponent.new(
+      builder: f,
+      method: :title,
+      size: :full,
+      variant: @form.errors[:title].any? ? :alert : :default
+    ) %>
+
+    <%= render Ui::FieldErrorsComponent.new(error_messages: @form.errors.full_messages_for(:title)) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :content, class: "block" %>
+
+    <%= render Ui::RichTextAreaComponent.new(
+      builder: f,
+      method: :content,
+      size: :large,
+      variant: @form.errors[:content].any? ? :alert : :default
+    ) %>
+
+    <%= render Ui::FieldErrorsComponent.new(error_messages: @form.errors.full_messages_for(:content)) %>
+  </div>
+
+  <div class="actions">
+    <%= render Ui::Button::Component.new(category: :primary, size: :medium, type: :submit, text: "保存") %>
+  </div>
+<% end %>

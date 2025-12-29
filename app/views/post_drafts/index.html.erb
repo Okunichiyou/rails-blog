@@ -1,0 +1,56 @@
+<div class="flex justify-center">
+  <%= render Ui::PanelComponent.new(size: :large) do |panel| %>
+    <%- panel.with_panel_content do %>
+      <h2>下書き一覧</h2>
+
+      <div class="mb-4">
+        <%= form_with url: new_post_draft_path, method: :get do %>
+          <%= render Ui::Button::IconComponent.new(
+            category: :primary,
+            size: :medium,
+            type: :submit,
+            text: "新規作成",
+            icon: tag.svg(
+              tag.path(d: "M12 4.5v15m7.5-7.5h-15", stroke: "currentColor", stroke_width: 2, stroke_linecap: "round"),
+              xmlns: "http://www.w3.org/2000/svg",
+              fill: "none",
+              viewBox: "0 0 24 24",
+              class: "w-5 h-5 stroke-btn-primary"
+            ),
+            icon_position: :left
+          ) %>
+        <% end %>
+      </div>
+
+      <% if @post_drafts.empty? %>
+        <p class="text-secondary">下書きはありません</p>
+      <% else %>
+        <ul class="divide-y divide-default">
+          <% @post_drafts.each do |draft| %>
+            <li class="py-3">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h3>
+                    <%= link_to draft.title, edit_post_draft_path(draft), class: "text-link" %>
+                  </h3>
+                  <p class="text-secondary text-size-note">
+                    更新: <%= l(draft.updated_at, format: :short) %>
+                  </p>
+                </div>
+                <%= form_with url: post_draft_path(draft), method: :delete, data: { turbo_confirm: "本当に削除しますか？" } do %>
+                  <%= render Ui::Button::Component.new(
+                    category: :secondary,
+                    variant: :danger,
+                    size: :small,
+                    type: :submit,
+                    text: "削除"
+                  ) %>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

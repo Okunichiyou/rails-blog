@@ -1,0 +1,5 @@
+class PostDraftForm < ApplicationForm
+  @user: untyped
+
+  @existing_draft: untyped
+end

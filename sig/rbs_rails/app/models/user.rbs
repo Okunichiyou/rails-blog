@@ -204,6 +204,10 @@ class User < ::ApplicationRecord
   def sns_credentials=: (::User::SnsCredential::ActiveRecord_Associations_CollectionProxy | ::Array[::User::SnsCredential]) -> (::User::SnsCredential::ActiveRecord_Associations_CollectionProxy | ::Array[::User::SnsCredential])
   def sns_credential_ids: () -> ::Array[::Integer]
   def sns_credential_ids=: (::Array[::Integer]) -> ::Array[::Integer]
+  def post_drafts: () -> ::PostDraft::ActiveRecord_Associations_CollectionProxy
+  def post_drafts=: (::PostDraft::ActiveRecord_Associations_CollectionProxy | ::Array[::PostDraft]) -> (::PostDraft::ActiveRecord_Associations_CollectionProxy | ::Array[::PostDraft])
+  def post_draft_ids: () -> ::Array[::Integer]
+  def post_draft_ids=: (::Array[::Integer]) -> ::Array[::Integer]
   def database_authentication: () -> ::User::DatabaseAuthentication?
   def database_authentication=: (::User::DatabaseAuthentication?) -> ::User::DatabaseAuthentication?
   def build_database_authentication: (?untyped) -> ::User::DatabaseAuthentication

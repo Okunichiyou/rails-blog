@@ -1,0 +1,11 @@
+module Domain
+  module PostDraft
+    class FormComponent < ApplicationComponent
+      @form: untyped
+
+      @url: untyped
+
+      @method: untyped
+    end
+  end
+end

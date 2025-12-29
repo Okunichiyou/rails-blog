@@ -1,0 +1,4 @@
+class PostDraft < ApplicationRecord
+  # @rbs () -> bool
+  def new_draft?: () -> bool
+end

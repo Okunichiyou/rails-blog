@@ -35,5 +35,7 @@ Rails.application.routes.draw do
     resource :account_settings, only: [ :show ]
   end
 
+  resources :post_drafts, except: [ :show ]
+
   devise_for :users
 end
