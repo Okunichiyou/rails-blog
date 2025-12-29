@@ -1,0 +1,9 @@
+module Ui
+  module Icon
+    class PlusComponent < ApplicationComponent
+      @size: untyped
+
+      @html_options: untyped
+    end
+  end
+end

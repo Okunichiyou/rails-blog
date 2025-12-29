@@ -10,13 +10,7 @@
             size: :medium,
             type: :submit,
             text: "新規作成",
-            icon: tag.svg(
-              tag.path(d: "M12 4.5v15m7.5-7.5h-15", stroke: "currentColor", stroke_width: 2, stroke_linecap: "round"),
-              xmlns: "http://www.w3.org/2000/svg",
-              fill: "none",
-              viewBox: "0 0 24 24",
-              class: "w-5 h-5 stroke-btn-primary"
-            ),
+            icon: render(Ui::Icon::PlusComponent.new(size: :md, class: "stroke-btn-primary")),
             icon_position: :left
           ) %>
         <% end %>

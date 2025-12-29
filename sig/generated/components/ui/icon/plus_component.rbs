@@ -1,0 +1,18 @@
+module Ui
+  module Icon
+    class PlusComponent < ApplicationComponent
+      SIZE_OPTIONS: untyped
+
+      # @rbs (?size: Symbol, **String | nil) -> void
+      def initialize: (?size: Symbol, **String | nil) -> void
+
+      private
+
+      # @rbs (String?) -> String
+      def icon_classes: (String?) -> String
+
+      # @rbs () -> String
+      def size_class: () -> String
+    end
+  end
+end
