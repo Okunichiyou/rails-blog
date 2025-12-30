@@ -1,7 +1,6 @@
 class PostDraft < ApplicationRecord
   belongs_to :user
-  # NOTE: Postモデル作成後に削除すること
-  belongs_to :post, optional: true, class_name: "PostDraft"
+  belongs_to :post, optional: true
 
   has_rich_text :content
 

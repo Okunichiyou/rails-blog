@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_one :database_authentication, dependent: :destroy
   has_many :sns_credentials, dependent: :destroy
+  has_many :posts, dependent: :destroy
   has_many :post_drafts, dependent: :destroy
 
   before_validation :trim_name

@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   end
 
   resources :post_drafts, except: [ :show ]
+  resources :posts, only: [ :create, :update ]
 
   devise_for :users
 end

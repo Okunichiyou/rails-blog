@@ -1,0 +1,7 @@
+class Post < ApplicationRecord
+  # @rbs (PostDraft) -> Post
+  def self.create_from_draft!: (PostDraft) -> Post
+
+  # @rbs (PostDraft) -> Post
+  def update_from_draft!: (PostDraft) -> Post
+end

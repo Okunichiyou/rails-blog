@@ -31,15 +31,38 @@
                     更新: <%= l(draft.updated_at, format: :short) %>
                   </p>
                 </div>
-                <%= form_with url: post_draft_path(draft), method: :delete, data: { turbo_confirm: "本当に削除しますか？" } do %>
-                  <%= render Ui::Button::Component.new(
-                    category: :secondary,
-                    variant: :danger,
-                    size: :small,
-                    type: :submit,
-                    text: "削除"
-                  ) %>
-                <% end %>
+                <div class="flex gap-2">
+                  <% if draft.new_draft? %>
+                    <%= form_with url: posts_path, method: :post, data: { turbo_confirm: "この下書きを公開しますか？" } do |f| %>
+                      <%= f.hidden_field :draft_id, value: draft.id %>
+                      <%= render Ui::Button::Component.new(
+                        category: :primary,
+                        size: :small,
+                        type: :submit,
+                        text: "公開"
+                      ) %>
+                    <% end %>
+                  <% else %>
+                    <%= form_with url: post_path(draft.post), method: :patch, data: { turbo_confirm: "公開記事を更新しますか？" } do |f| %>
+                      <%= f.hidden_field :draft_id, value: draft.id %>
+                      <%= render Ui::Button::Component.new(
+                        category: :secondary,
+                        size: :small,
+                        type: :submit,
+                        text: "更新"
+                      ) %>
+                    <% end %>
+                  <% end %>
+                  <%= form_with url: post_draft_path(draft), method: :delete, data: { turbo_confirm: "本当に削除しますか？" } do %>
+                    <%= render Ui::Button::Component.new(
+                      category: :secondary,
+                      variant: :danger,
+                      size: :small,
+                      type: :submit,
+                      text: "削除"
+                    ) %>
+                  <% end %>
+                </div>
               </div>
             </li>
           <% end %>
