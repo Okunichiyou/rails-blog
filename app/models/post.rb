@@ -2,8 +2,6 @@ class Post < ApplicationRecord
   belongs_to :user
   has_one :draft, class_name: "PostDraft", dependent: :nullify
 
-  has_rich_text :content
-
   validates :title, presence: true, length: { maximum: 255 }
   validates :published_at, presence: true
 
@@ -13,9 +11,9 @@ class Post < ApplicationRecord
       post = create!(
         user: draft.user,
         title: draft.title,
+        content: draft.content,
         published_at: Time.current
       )
-      post.content = draft.content
       draft.update!(post: post)
       post
     end
@@ -24,9 +22,7 @@ class Post < ApplicationRecord
   # @rbs (PostDraft) -> Post
   def update_from_draft!(draft)
     transaction do
-      update!(title: draft.title)
-      self.content = draft.content.body
-      save!
+      update!(title: draft.title, content: draft.content)
       self
     end
   end

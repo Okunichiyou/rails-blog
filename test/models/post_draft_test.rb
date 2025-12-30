@@ -18,7 +18,7 @@ class PostDraftTest < ActiveSupport::TestCase
     draft.content = "<p>本文です</p>"
     draft.save!
 
-    assert_includes draft.content.body.to_html, "本文です"
+    assert_includes draft.content, "本文です"
   end
 
   test "new_draft?がpost_idがnilの場合trueを返す" do

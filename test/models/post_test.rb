@@ -45,7 +45,7 @@ class PostTest < ActiveSupport::TestCase
 
       assert_equal @user, post.user
       assert_equal "下書きタイトル", post.title
-      assert_equal "下書き本文", post.content.to_plain_text
+      assert_equal "下書き本文", post.content
       assert_not_nil post.published_at
     end
 
@@ -78,7 +78,7 @@ class PostTest < ActiveSupport::TestCase
     post.update_from_draft!(draft)
 
     assert_equal "更新タイトル", post.title
-    assert_equal "更新本文", post.content.to_plain_text
+    assert_equal "更新本文", post.content
   end
 
   test "update_from_draft!がpublished_atを変更しないこと" do

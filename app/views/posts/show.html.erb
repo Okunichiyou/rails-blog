@@ -14,7 +14,7 @@
         </header>
 
         <div class="prose">
-          <%= @post.content %>
+          <%= sanitize_tiptap_content(@post.content) %>
         </div>
       </article>
 

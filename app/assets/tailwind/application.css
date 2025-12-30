@@ -337,46 +337,12 @@
   }
 }
 
-/* Tiptap Editor */
+/* 共通リッチテキストスタイル（エディタと表示で共有） */
 @layer components {
-  /* ツールバーボタン */
-  .tiptap-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: var(--radius-sm);
-    color: var(--color-text-default);
-    background-color: transparent;
-    transition: background-color 0.15s;
-
-    &:hover {
-      background-color: var(--color-bg-surface-hover);
-    }
-
-    &.is-active {
-      background-color: var(--color-bg-primary);
-      color: var(--color-text-primary-button);
-    }
-  }
-
-  /* エディタ本体 */
+  .prose,
   .tiptap-editor {
-    min-height: 200px;
-    padding: 1rem;
-    outline: none;
-
     > * + * {
       margin-top: 0.75em;
-    }
-
-    p.is-editor-empty:first-child::before {
-      content: attr(data-placeholder);
-      float: left;
-      color: var(--color-text-placeholder);
-      pointer-events: none;
-      height: 0;
     }
 
     /* インラインコード */
@@ -470,6 +436,46 @@
       border: none;
       border-top: 1px solid var(--color-border-default);
       margin: 1.5rem 0;
+    }
+  }
+}
+
+/* Tiptap Editor */
+@layer components {
+  /* ツールバーボタン */
+  .tiptap-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-default);
+    background-color: transparent;
+    transition: background-color 0.15s;
+
+    &:hover {
+      background-color: var(--color-bg-surface-hover);
+    }
+
+    &.is-active {
+      background-color: var(--color-bg-primary);
+      color: var(--color-text-primary-button);
+    }
+  }
+
+  /* エディタ本体（固有スタイルのみ） */
+  .tiptap-editor {
+    min-height: 200px;
+    padding: 1rem;
+    outline: none;
+
+    p.is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      float: left;
+      color: var(--color-text-placeholder);
+      pointer-events: none;
+      height: 0;
     }
   }
 

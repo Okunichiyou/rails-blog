@@ -72,16 +72,7 @@ module Ui
       return "" unless object.respond_to?(@method)
 
       content = object.public_send(@method)
-      return "" if content.nil?
-
-      # ActionText::RichTextの場合はHTMLを取得
-      if content.respond_to?(:to_trix_html)
-        content.to_trix_html
-      elsif content.respond_to?(:body)
-        content.body.to_s
-      else
-        content.to_s
-      end
+      content.to_s
     end
 
     # @rbs () -> String

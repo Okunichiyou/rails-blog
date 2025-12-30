@@ -215,6 +215,42 @@ class PostDraft < ::ApplicationRecord
     def restore_updated_at!: () -> void
 
     def clear_updated_at_change: () -> void
+
+    def content: () -> ::String?
+
+    def content=: (::String?) -> ::String?
+
+    def content?: () -> bool
+
+    def content_changed?: () -> bool
+
+    def content_change: () -> [ ::String?, ::String? ]
+
+    def content_will_change!: () -> void
+
+    def content_was: () -> ::String?
+
+    def content_previously_changed?: () -> bool
+
+    def content_previous_change: () -> ::Array[::String?]?
+
+    def content_previously_was: () -> ::String?
+
+    def content_before_last_save: () -> ::String?
+
+    def content_change_to_be_saved: () -> ::Array[::String?]?
+
+    def content_in_database: () -> ::String?
+
+    def saved_change_to_content: () -> ::Array[::String?]?
+
+    def saved_change_to_content?: () -> bool
+
+    def will_save_change_to_content?: () -> bool
+
+    def restore_content!: () -> void
+
+    def clear_content_change: () -> void
   end
 
   module GeneratedAssociationMethods
@@ -237,12 +273,6 @@ class PostDraft < ::ApplicationRecord
 
   include GeneratedAttributeMethods
 
-  def rich_text_content: () -> ::ActionText::RichText?
-  def rich_text_content=: (::ActionText::RichText?) -> ::ActionText::RichText?
-  def build_rich_text_content: (?untyped) -> ::ActionText::RichText
-  def create_rich_text_content: (untyped) -> ::ActionText::RichText
-  def create_rich_text_content!: (untyped) -> ::ActionText::RichText
-  def reload_rich_text_content: () -> ::ActionText::RichText?
   def user: () -> ::User
   def user=: (::User?) -> ::User?
   def reload_user: () -> ::User?

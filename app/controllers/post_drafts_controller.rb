@@ -25,7 +25,7 @@ class PostDraftsController < ApplicationController
       user: current_user,
       post_draft: @post_draft,
       title: @post_draft.title,
-      content: @post_draft.content&.to_plain_text
+      content: @post_draft.content
     )
   end
 

@@ -157,7 +157,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     published_post.reload
     assert_equal "更新後タイトル", published_post.title
-    assert_equal "更新後本文", published_post.content.to_plain_text
+    assert_equal "更新後本文", published_post.content
   end
 
   test "PATCH /posts/:id 紐づいていない下書きでは更新できない" do
