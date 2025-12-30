@@ -35,6 +35,10 @@ Rails.application.routes.draw do
     resource :account_settings, only: [ :show ]
   end
 
+  resources :users, only: [] do
+    resources :posts, only: [ :index, :destroy ], controller: "users/posts"
+  end
+
   resources :post_drafts, except: [ :show ]
   resources :posts, only: [ :index, :show, :create, :update ]
   resources :editor_images, only: [ :create ]
