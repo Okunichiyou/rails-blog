@@ -39,186 +39,6 @@ module ActiveStorage
 
       def clear_id_change: () -> void
 
-      def key: () -> ::String
-
-      def key=: (::String) -> ::String
-
-      def key?: () -> bool
-
-      def key_changed?: () -> bool
-
-      def key_change: () -> [ ::String?, ::String? ]
-
-      def key_will_change!: () -> void
-
-      def key_was: () -> ::String?
-
-      def key_previously_changed?: () -> bool
-
-      def key_previous_change: () -> ::Array[::String?]?
-
-      def key_previously_was: () -> ::String?
-
-      def key_before_last_save: () -> ::String?
-
-      def key_change_to_be_saved: () -> ::Array[::String?]?
-
-      def key_in_database: () -> ::String?
-
-      def saved_change_to_key: () -> ::Array[::String?]?
-
-      def saved_change_to_key?: () -> bool
-
-      def will_save_change_to_key?: () -> bool
-
-      def restore_key!: () -> void
-
-      def clear_key_change: () -> void
-
-      def filename: () -> ::String
-
-      def filename=: (::String) -> ::String
-
-      def filename?: () -> bool
-
-      def filename_changed?: () -> bool
-
-      def filename_change: () -> [ ::String?, ::String? ]
-
-      def filename_will_change!: () -> void
-
-      def filename_was: () -> ::String?
-
-      def filename_previously_changed?: () -> bool
-
-      def filename_previous_change: () -> ::Array[::String?]?
-
-      def filename_previously_was: () -> ::String?
-
-      def filename_before_last_save: () -> ::String?
-
-      def filename_change_to_be_saved: () -> ::Array[::String?]?
-
-      def filename_in_database: () -> ::String?
-
-      def saved_change_to_filename: () -> ::Array[::String?]?
-
-      def saved_change_to_filename?: () -> bool
-
-      def will_save_change_to_filename?: () -> bool
-
-      def restore_filename!: () -> void
-
-      def clear_filename_change: () -> void
-
-      def content_type: () -> ::String?
-
-      def content_type=: (::String?) -> ::String?
-
-      def content_type?: () -> bool
-
-      def content_type_changed?: () -> bool
-
-      def content_type_change: () -> [ ::String?, ::String? ]
-
-      def content_type_will_change!: () -> void
-
-      def content_type_was: () -> ::String?
-
-      def content_type_previously_changed?: () -> bool
-
-      def content_type_previous_change: () -> ::Array[::String?]?
-
-      def content_type_previously_was: () -> ::String?
-
-      def content_type_before_last_save: () -> ::String?
-
-      def content_type_change_to_be_saved: () -> ::Array[::String?]?
-
-      def content_type_in_database: () -> ::String?
-
-      def saved_change_to_content_type: () -> ::Array[::String?]?
-
-      def saved_change_to_content_type?: () -> bool
-
-      def will_save_change_to_content_type?: () -> bool
-
-      def restore_content_type!: () -> void
-
-      def clear_content_type_change: () -> void
-
-      def metadata: () -> ::String?
-
-      def metadata=: (::String?) -> ::String?
-
-      def metadata?: () -> bool
-
-      def metadata_changed?: () -> bool
-
-      def metadata_change: () -> [ ::String?, ::String? ]
-
-      def metadata_will_change!: () -> void
-
-      def metadata_was: () -> ::String?
-
-      def metadata_previously_changed?: () -> bool
-
-      def metadata_previous_change: () -> ::Array[::String?]?
-
-      def metadata_previously_was: () -> ::String?
-
-      def metadata_before_last_save: () -> ::String?
-
-      def metadata_change_to_be_saved: () -> ::Array[::String?]?
-
-      def metadata_in_database: () -> ::String?
-
-      def saved_change_to_metadata: () -> ::Array[::String?]?
-
-      def saved_change_to_metadata?: () -> bool
-
-      def will_save_change_to_metadata?: () -> bool
-
-      def restore_metadata!: () -> void
-
-      def clear_metadata_change: () -> void
-
-      def service_name: () -> ::String
-
-      def service_name=: (::String) -> ::String
-
-      def service_name?: () -> bool
-
-      def service_name_changed?: () -> bool
-
-      def service_name_change: () -> [ ::String?, ::String? ]
-
-      def service_name_will_change!: () -> void
-
-      def service_name_was: () -> ::String?
-
-      def service_name_previously_changed?: () -> bool
-
-      def service_name_previous_change: () -> ::Array[::String?]?
-
-      def service_name_previously_was: () -> ::String?
-
-      def service_name_before_last_save: () -> ::String?
-
-      def service_name_change_to_be_saved: () -> ::Array[::String?]?
-
-      def service_name_in_database: () -> ::String?
-
-      def saved_change_to_service_name: () -> ::Array[::String?]?
-
-      def saved_change_to_service_name?: () -> bool
-
-      def will_save_change_to_service_name?: () -> bool
-
-      def restore_service_name!: () -> void
-
-      def clear_service_name_change: () -> void
-
       def byte_size: () -> ::Integer
 
       def byte_size=: (::Integer) -> ::Integer
@@ -291,6 +111,42 @@ module ActiveStorage
 
       def clear_checksum_change: () -> void
 
+      def content_type: () -> ::String?
+
+      def content_type=: (::String?) -> ::String?
+
+      def content_type?: () -> bool
+
+      def content_type_changed?: () -> bool
+
+      def content_type_change: () -> [ ::String?, ::String? ]
+
+      def content_type_will_change!: () -> void
+
+      def content_type_was: () -> ::String?
+
+      def content_type_previously_changed?: () -> bool
+
+      def content_type_previous_change: () -> ::Array[::String?]?
+
+      def content_type_previously_was: () -> ::String?
+
+      def content_type_before_last_save: () -> ::String?
+
+      def content_type_change_to_be_saved: () -> ::Array[::String?]?
+
+      def content_type_in_database: () -> ::String?
+
+      def saved_change_to_content_type: () -> ::Array[::String?]?
+
+      def saved_change_to_content_type?: () -> bool
+
+      def will_save_change_to_content_type?: () -> bool
+
+      def restore_content_type!: () -> void
+
+      def clear_content_type_change: () -> void
+
       def created_at: () -> ::ActiveSupport::TimeWithZone
 
       def created_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
@@ -326,6 +182,150 @@ module ActiveStorage
       def restore_created_at!: () -> void
 
       def clear_created_at_change: () -> void
+
+      def filename: () -> ::String
+
+      def filename=: (::String) -> ::String
+
+      def filename?: () -> bool
+
+      def filename_changed?: () -> bool
+
+      def filename_change: () -> [ ::String?, ::String? ]
+
+      def filename_will_change!: () -> void
+
+      def filename_was: () -> ::String?
+
+      def filename_previously_changed?: () -> bool
+
+      def filename_previous_change: () -> ::Array[::String?]?
+
+      def filename_previously_was: () -> ::String?
+
+      def filename_before_last_save: () -> ::String?
+
+      def filename_change_to_be_saved: () -> ::Array[::String?]?
+
+      def filename_in_database: () -> ::String?
+
+      def saved_change_to_filename: () -> ::Array[::String?]?
+
+      def saved_change_to_filename?: () -> bool
+
+      def will_save_change_to_filename?: () -> bool
+
+      def restore_filename!: () -> void
+
+      def clear_filename_change: () -> void
+
+      def key: () -> ::String
+
+      def key=: (::String) -> ::String
+
+      def key?: () -> bool
+
+      def key_changed?: () -> bool
+
+      def key_change: () -> [ ::String?, ::String? ]
+
+      def key_will_change!: () -> void
+
+      def key_was: () -> ::String?
+
+      def key_previously_changed?: () -> bool
+
+      def key_previous_change: () -> ::Array[::String?]?
+
+      def key_previously_was: () -> ::String?
+
+      def key_before_last_save: () -> ::String?
+
+      def key_change_to_be_saved: () -> ::Array[::String?]?
+
+      def key_in_database: () -> ::String?
+
+      def saved_change_to_key: () -> ::Array[::String?]?
+
+      def saved_change_to_key?: () -> bool
+
+      def will_save_change_to_key?: () -> bool
+
+      def restore_key!: () -> void
+
+      def clear_key_change: () -> void
+
+      def metadata: () -> ::String?
+
+      def metadata=: (::String?) -> ::String?
+
+      def metadata?: () -> bool
+
+      def metadata_changed?: () -> bool
+
+      def metadata_change: () -> [ ::String?, ::String? ]
+
+      def metadata_will_change!: () -> void
+
+      def metadata_was: () -> ::String?
+
+      def metadata_previously_changed?: () -> bool
+
+      def metadata_previous_change: () -> ::Array[::String?]?
+
+      def metadata_previously_was: () -> ::String?
+
+      def metadata_before_last_save: () -> ::String?
+
+      def metadata_change_to_be_saved: () -> ::Array[::String?]?
+
+      def metadata_in_database: () -> ::String?
+
+      def saved_change_to_metadata: () -> ::Array[::String?]?
+
+      def saved_change_to_metadata?: () -> bool
+
+      def will_save_change_to_metadata?: () -> bool
+
+      def restore_metadata!: () -> void
+
+      def clear_metadata_change: () -> void
+
+      def service_name: () -> ::String
+
+      def service_name=: (::String) -> ::String
+
+      def service_name?: () -> bool
+
+      def service_name_changed?: () -> bool
+
+      def service_name_change: () -> [ ::String?, ::String? ]
+
+      def service_name_will_change!: () -> void
+
+      def service_name_was: () -> ::String?
+
+      def service_name_previously_changed?: () -> bool
+
+      def service_name_previous_change: () -> ::Array[::String?]?
+
+      def service_name_previously_was: () -> ::String?
+
+      def service_name_before_last_save: () -> ::String?
+
+      def service_name_change_to_be_saved: () -> ::Array[::String?]?
+
+      def service_name_in_database: () -> ::String?
+
+      def saved_change_to_service_name: () -> ::Array[::String?]?
+
+      def saved_change_to_service_name?: () -> bool
+
+      def will_save_change_to_service_name?: () -> bool
+
+      def restore_service_name!: () -> void
+
+      def clear_service_name_change: () -> void
     end
     include GeneratedAttributeMethods
     def attachments: () -> ::ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy

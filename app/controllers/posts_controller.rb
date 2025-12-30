@@ -7,11 +7,13 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id])
+    head :not_found and return unless @post
   end
 
   def create
-    draft = current_user.post_drafts.find(params[:draft_id])
+    draft = current_user.post_drafts.find_by(id: params[:draft_id])
+    head :not_found and return unless draft
 
     if draft.post.present?
       redirect_to users_post_drafts_path, alert: "この下書きは既に公開されています"
@@ -23,7 +25,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    draft = current_user.post_drafts.find(params[:draft_id])
+    draft = current_user.post_drafts.find_by(id: params[:draft_id])
+    head :not_found and return unless draft
 
     unless draft.post == @post
       redirect_to users_post_drafts_path, alert: "不正なリクエストです"
@@ -41,6 +44,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = current_user.posts.find(params[:id])
+    @post = current_user.posts.find_by(id: params[:id])
+    head :not_found and return unless @post
   end
 end

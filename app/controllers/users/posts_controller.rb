@@ -26,6 +26,7 @@ class Users::PostsController < ApplicationController
   end
 
   def set_post
-    @post = @user.posts.find(params[:id])
+    @post = @user.posts.find_by(id: params[:id])
+    head :not_found and return unless @post
   end
 end
