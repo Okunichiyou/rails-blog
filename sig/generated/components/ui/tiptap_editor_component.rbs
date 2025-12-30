@@ -10,9 +10,6 @@ module Ui
     private
 
     # @rbs () -> String
-    def editor_classes: () -> String
-
-    # @rbs () -> String
     def content_area_classes: () -> String
 
     # @rbs () -> String

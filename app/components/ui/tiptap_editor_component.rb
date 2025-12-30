@@ -21,17 +21,6 @@ module Ui
     private
 
     # @rbs () -> String
-    def editor_classes
-      classes = [
-        "tiptap-wrapper",
-        "border border-default rounded-md",
-        "bg-surface",
-        variant_class
-      ].compact
-      classes.join(" ")
-    end
-
-    # @rbs () -> String
     def content_area_classes
       classes = [
         "tiptap-content-area",
