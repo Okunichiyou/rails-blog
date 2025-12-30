@@ -14,7 +14,7 @@ namespace :rbs do
 
   desc "Generate RBS files from inline comments (created by rbs-trace)"
   task :inline do
-    sh "rbs-inline", "app/components", "app/forms", "app/models", "--output", "--opt-out"
+    sh "rbs-inline", "app/components", "app/forms", "app/models", "app/presenters", "--output", "--opt-out"
   end
 
   task :collection do

@@ -14,11 +14,11 @@
                   <%= link_to post.title, post_path(post), class: "text-link" %>
                 </h3>
                 <p class="text-secondary text-size-note mt-1">
-                  <span><%= post.user.name %></span>
+                  <span>著者: <%= post.user.name %></span>
                   <span class="mx-2">|</span>
-                  <time datetime="<%= post.published_at.iso8601 %>">
-                    <%= l(post.published_at, format: :long) %>
-                  </time>
+                  <span>作成日時: <time datetime="<%= DateFormatPresenter.to_iso8601(post.published_at) %>"><%= DateFormatPresenter.to_long(post.published_at) %></time></span>
+                  <span class="mx-2">|</span>
+                  <span>更新日時: <time datetime="<%= DateFormatPresenter.to_iso8601(post.updated_at) %>"><%= DateFormatPresenter.to_long(post.updated_at) %></time></span>
                 </p>
               </article>
             </li>
