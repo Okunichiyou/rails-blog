@@ -5,14 +5,26 @@
 
 ## セットアップ
 
-### 1. 依存関係のインストール
+### 1. システム依存のインストール
+
+画像処理にlibvipsが必要です。
+
+```bash
+# macOS
+brew install vips
+
+# Ubuntu/Debian
+sudo apt install libvips
+```
+
+### 2. 依存関係のインストール
 
 ```bash
 bundle install
 npm install
 ```
 
-### 2. 設定ファイルのコピー
+### 3. 設定ファイルのコピー
 
 ```bash
 cp -n config/samples/*.yml config/
@@ -22,13 +34,13 @@ cp -n config/samples/*.yml config/
 
 - `config/google_auth.yml`
 
-### 3. データベースのセットアップ
+### 4. データベースのセットアップ
 
 ```bash
 bundle exec rails db:prepare
 ```
 
-### 4. サーバーの起動
+### 5. サーバーの起動
 
 ```bash
 # Tailwind CSSの変更をサーバー再起動なしで反映させる
