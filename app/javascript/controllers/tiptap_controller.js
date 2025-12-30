@@ -1,15 +1,4 @@
 import { Controller } from "@hotwired/stimulus"
-import { Editor } from "@tiptap/core"
-import StarterKit from "@tiptap/starter-kit"
-import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight"
-import { createLowlight } from "lowlight"
-import ruby from "highlight.js/lib/languages/ruby"
-import javascript from "highlight.js/lib/languages/javascript"
-
-// lowlightセットアップ
-const lowlight = createLowlight()
-lowlight.register("ruby", ruby)
-lowlight.register("javascript", javascript)
 
 export default class extends Controller {
   static targets = ["editor", "input"]
@@ -28,6 +17,11 @@ export default class extends Controller {
   }
 
   initEditor() {
+    const Editor = window.TiptapEditor
+    const StarterKit = window.TiptapStarterKit
+    const CodeBlockLowlight = window.TiptapCodeBlockLowlight
+    const lowlight = window.tiptapLowlight
+
     const extensions = [
       StarterKit.configure({
         codeBlock: false,
