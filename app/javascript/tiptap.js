@@ -4,6 +4,7 @@ import Blockquote from "@tiptap/extension-blockquote"
 import Image from "@tiptap/extension-image"
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight"
 import { createLowlight, common } from "lowlight"
+import hljs from "highlight.js/lib/common"
 
 const lowlight = createLowlight(common)
 
@@ -29,3 +30,4 @@ window.TiptapCodeBlockLowlight = CodeBlockLowlight
 window.TiptapCustomBlockquote = CustomBlockquote
 window.TiptapImage = Image
 window.tiptapLowlight = lowlight
+window.hljs = hljs
