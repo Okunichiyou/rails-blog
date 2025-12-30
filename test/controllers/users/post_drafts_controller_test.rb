@@ -1,6 +1,6 @@
 require "test_helper"
 
-class PostDraftsControllerTest < ActionDispatch::IntegrationTest
+class Users::PostDraftsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @author = User.create!(name: "controller_test_author", author: true)
     @non_author = User.create!(name: "non_author_user", author: false)
@@ -31,19 +31,19 @@ class PostDraftsControllerTest < ActionDispatch::IntegrationTest
   # =====================================
 
   test "GET /post_drafts 未ログインの場合リダイレクト" do
-    get post_drafts_path
+    get users_post_drafts_path
     assert_redirected_to root_path
   end
 
   test "GET /post_drafts 著者でないユーザーの場合リダイレクト" do
     sign_in_as("non_author@example.com")
-    get post_drafts_path
+    get users_post_drafts_path
     assert_redirected_to root_path
   end
 
   test "GET /post_drafts 著者ユーザーの場合成功" do
     sign_in_as("author@example.com")
-    get post_drafts_path
+    get users_post_drafts_path
     assert_response :success
   end
 
@@ -54,11 +54,11 @@ class PostDraftsControllerTest < ActionDispatch::IntegrationTest
   test "GET /post_drafts 自分の下書きのみ表示される" do
     sign_in_as("author@example.com")
 
-    my_draft = PostDraft.create!(user: @author, title: "自分の下書き")
+    PostDraft.create!(user: @author, title: "自分の下書き")
     other_author = User.create!(name: "other_author", author: true)
-    other_draft = PostDraft.create!(user: other_author, title: "他人の下書き")
+    PostDraft.create!(user: other_author, title: "他人の下書き")
 
-    get post_drafts_path
+    get users_post_drafts_path
     assert_response :success
     assert_select "h3", text: "自分の下書き"
     assert_select "h3", text: "他人の下書き", count: 0
@@ -70,7 +70,7 @@ class PostDraftsControllerTest < ActionDispatch::IntegrationTest
 
   test "GET /post_drafts/new 新規作成フォーム表示" do
     sign_in_as("author@example.com")
-    get new_post_draft_path
+    get new_users_post_draft_path
     assert_response :success
     assert_select "form", count: 1
   end
@@ -79,7 +79,7 @@ class PostDraftsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as("author@example.com")
 
     assert_difference "PostDraft.count", 1 do
-      post post_drafts_path, params: {
+      post users_post_drafts_path, params: {
         post_draft: {
           title: "新規下書き",
           content: "<p>本文</p>"
@@ -87,7 +87,7 @@ class PostDraftsControllerTest < ActionDispatch::IntegrationTest
       }
     end
 
-    assert_redirected_to post_drafts_path
+    assert_redirected_to users_post_drafts_path
     assert_equal "下書きを保存しました", flash[:notice]
   end
 
@@ -95,7 +95,7 @@ class PostDraftsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as("author@example.com")
 
     assert_no_difference "PostDraft.count" do
-      post post_drafts_path, params: {
+      post users_post_drafts_path, params: {
         post_draft: {
           title: "",
           content: "<p>本文</p>"
@@ -114,7 +114,7 @@ class PostDraftsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as("author@example.com")
     draft = PostDraft.create!(user: @author, title: "編集テスト")
 
-    get edit_post_draft_path(draft)
+    get edit_users_post_draft_path(draft)
     assert_response :success
   end
 
@@ -122,14 +122,14 @@ class PostDraftsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as("author@example.com")
     draft = PostDraft.create!(user: @author, title: "更新前")
 
-    patch post_draft_path(draft), params: {
+    patch users_post_draft_path(draft), params: {
       post_draft: {
         title: "更新後",
         content: "<p>更新本文</p>"
       }
     }
 
-    assert_redirected_to post_drafts_path
+    assert_redirected_to users_post_drafts_path
     draft.reload
     assert_equal "更新後", draft.title
   end
@@ -143,10 +143,10 @@ class PostDraftsControllerTest < ActionDispatch::IntegrationTest
     draft = PostDraft.create!(user: @author, title: "削除テスト")
 
     assert_difference "PostDraft.count", -1 do
-      delete post_draft_path(draft)
+      delete users_post_draft_path(draft)
     end
 
-    assert_redirected_to post_drafts_path
+    assert_redirected_to users_post_drafts_path
   end
 
   # =====================================
@@ -159,7 +159,7 @@ class PostDraftsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in_as("author@example.com")
 
-    get edit_post_draft_path(other_draft)
+    get edit_users_post_draft_path(other_draft)
     assert_response :not_found
   end
 end

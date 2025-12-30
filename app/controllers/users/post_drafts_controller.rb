@@ -1,4 +1,6 @@
-class PostDraftsController < ApplicationController
+# frozen_string_literal: true
+
+class Users::PostDraftsController < ApplicationController
   before_action :authenticate_author!
   before_action :set_post_draft, only: [ :edit, :update, :destroy ]
 
@@ -14,7 +16,7 @@ class PostDraftsController < ApplicationController
     @form = PostDraftForm.new(user: current_user, **post_draft_params)
 
     if @form.save
-      redirect_to post_drafts_path, notice: "下書きを保存しました"
+      redirect_to users_post_drafts_path, notice: "下書きを保存しました"
     else
       render :new, status: :unprocessable_content
     end
@@ -37,7 +39,7 @@ class PostDraftsController < ApplicationController
     )
 
     if @form.save
-      redirect_to post_drafts_path, notice: "下書きを更新しました"
+      redirect_to users_post_drafts_path, notice: "下書きを更新しました"
     else
       render :edit, status: :unprocessable_content
     end
@@ -45,7 +47,7 @@ class PostDraftsController < ApplicationController
 
   def destroy
     @post_draft.destroy
-    redirect_to post_drafts_path, notice: "下書きを削除しました"
+    redirect_to users_post_drafts_path, notice: "下書きを削除しました"
   end
 
   private

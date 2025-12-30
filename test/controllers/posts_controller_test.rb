@@ -118,7 +118,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
       post posts_path, params: { draft_id: draft.id }
     end
 
-    assert_redirected_to post_drafts_path
+    assert_redirected_to users_post_drafts_path
     assert_equal "記事を公開しました", flash[:notice]
 
     draft.reload
@@ -134,7 +134,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
       post posts_path, params: { draft_id: draft.id }
     end
 
-    assert_redirected_to post_drafts_path
+    assert_redirected_to users_post_drafts_path
     assert_equal "この下書きは既に公開されています", flash[:alert]
   end
 
@@ -152,7 +152,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     patch post_path(published_post), params: { draft_id: draft.id }
 
-    assert_redirected_to post_drafts_path
+    assert_redirected_to users_post_drafts_path
     assert_equal "記事を更新しました", flash[:notice]
 
     published_post.reload
@@ -168,7 +168,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     patch post_path(published_post), params: { draft_id: draft2.id }
 
-    assert_redirected_to post_drafts_path
+    assert_redirected_to users_post_drafts_path
     assert_equal "不正なリクエストです", flash[:alert]
   end
 

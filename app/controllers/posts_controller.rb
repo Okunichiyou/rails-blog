@@ -14,24 +14,24 @@ class PostsController < ApplicationController
     draft = current_user.post_drafts.find(params[:draft_id])
 
     if draft.post.present?
-      redirect_to post_drafts_path, alert: "この下書きは既に公開されています"
+      redirect_to users_post_drafts_path, alert: "この下書きは既に公開されています"
       return
     end
 
     Post.create_from_draft!(draft)
-    redirect_to post_drafts_path, notice: "記事を公開しました"
+    redirect_to users_post_drafts_path, notice: "記事を公開しました"
   end
 
   def update
     draft = current_user.post_drafts.find(params[:draft_id])
 
     unless draft.post == @post
-      redirect_to post_drafts_path, alert: "不正なリクエストです"
+      redirect_to users_post_drafts_path, alert: "不正なリクエストです"
       return
     end
 
     @post.update_from_draft!(draft)
-    redirect_to post_drafts_path, notice: "記事を更新しました"
+    redirect_to users_post_drafts_path, notice: "記事を更新しました"
   end
 
   private

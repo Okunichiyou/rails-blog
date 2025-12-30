@@ -39,7 +39,9 @@ Rails.application.routes.draw do
     resources :posts, only: [ :index, :destroy ], controller: "users/posts"
   end
 
-  resources :post_drafts, except: [ :show ]
+  namespace :users do
+    resources :post_drafts, except: [ :show ]
+  end
   resources :posts, only: [ :index, :show, :create, :update ]
   resources :editor_images, only: [ :create ]
 

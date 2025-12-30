@@ -4,7 +4,7 @@
       <h2>下書き一覧</h2>
 
       <div class="mb-4">
-        <%= form_with url: new_post_draft_path, method: :get do %>
+        <%= form_with url: new_users_post_draft_path, method: :get do %>
           <%= render Ui::Button::IconComponent.new(
             category: :primary,
             size: :medium,
@@ -25,7 +25,7 @@
               <div class="flex justify-between items-center">
                 <div>
                   <h3>
-                    <%= link_to draft.title, edit_post_draft_path(draft), class: "text-link" %>
+                    <%= link_to draft.title, edit_users_post_draft_path(draft), class: "text-link" %>
                   </h3>
                   <p class="text-secondary text-size-note">
                     更新: <%= l(draft.updated_at, format: :short) %>
@@ -53,7 +53,7 @@
                       ) %>
                     <% end %>
                   <% end %>
-                  <%= form_with url: post_draft_path(draft), method: :delete, data: { turbo_confirm: "本当に削除しますか？" } do %>
+                  <%= form_with url: users_post_draft_path(draft), method: :delete, data: { turbo_confirm: "本当に削除しますか？" } do %>
                     <%= render Ui::Button::Component.new(
                       category: :secondary,
                       variant: :danger,
