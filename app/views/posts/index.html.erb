@@ -13,11 +13,9 @@
                 <h3 class="font-weight-heading">
                   <%= link_to post.title, post_path(post), class: "text-link" %>
                 </h3>
-                <p class="text-secondary text-size-note mt-1">
+                <p class="text-secondary text-size-note mt-1 flex flex-col sm:flex-row sm:gap-x-4 gap-y-1">
                   <span>著者: <%= post.user.name %></span>
-                  <span class="mx-2">|</span>
-                  <span>作成日時: <time datetime="<%= DateFormatPresenter.to_iso8601(post.published_at) %>"><%= DateFormatPresenter.to_long(post.published_at) %></time></span>
-                  <span class="mx-2">|</span>
+                  <span>公開日時: <time datetime="<%= DateFormatPresenter.to_iso8601(post.published_at) %>"><%= DateFormatPresenter.to_long(post.published_at) %></time></span>
                   <span>更新日時: <time datetime="<%= DateFormatPresenter.to_iso8601(post.updated_at) %>"><%= DateFormatPresenter.to_long(post.updated_at) %></time></span>
                 </p>
               </article>
