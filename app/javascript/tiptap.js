@@ -1,14 +1,9 @@
 import { Editor } from "@tiptap/core"
 import StarterKit from "@tiptap/starter-kit"
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight"
-import { createLowlight } from "lowlight"
-import ruby from "highlight.js/lib/languages/ruby"
-import javascript from "highlight.js/lib/languages/javascript"
+import { createLowlight, common } from "lowlight"
 
-// lowlightセットアップ
-const lowlight = createLowlight()
-lowlight.register("ruby", ruby)
-lowlight.register("javascript", javascript)
+const lowlight = createLowlight(common)
 
 // グローバルに公開
 window.TiptapEditor = Editor
