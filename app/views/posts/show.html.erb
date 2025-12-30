@@ -1,0 +1,26 @@
+<div class="flex justify-center">
+  <%= render Ui::PanelComponent.new(size: :large) do |panel| %>
+    <%- panel.with_panel_content do %>
+      <article>
+        <header class="mb-6">
+          <h1><%= @post.title %></h1>
+          <p class="text-secondary text-size-note mt-2">
+            <span><%= @post.user.name %></span>
+            <span class="mx-2">|</span>
+            <time datetime="<%= @post.published_at.iso8601 %>">
+              <%= l(@post.published_at, format: :long) %>
+            </time>
+          </p>
+        </header>
+
+        <div class="prose">
+          <%= @post.content %>
+        </div>
+      </article>
+
+      <div class="mt-8 pt-4 border-t border-default">
+        <%= link_to "記事一覧に戻る", posts_path, class: "text-link" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

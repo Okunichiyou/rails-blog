@@ -1,6 +1,14 @@
 class PostsController < ApplicationController
-  before_action :authenticate_author!
+  before_action :authenticate_author!, only: [ :create, :update ]
   before_action :set_post, only: [ :update ]
+
+  def index
+    @posts = Post.includes(:user).order(published_at: :desc)
+  end
+
+  def show
+    @post = Post.find(params[:id])
+  end
 
   def create
     draft = current_user.post_drafts.find(params[:draft_id])

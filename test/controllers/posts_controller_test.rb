@@ -27,6 +27,66 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   # =====================================
+  # index アクション
+  # =====================================
+
+  test "GET /posts 記事一覧を表示できる" do
+    draft = PostDraft.create!(user: @author, title: "公開記事")
+    Post.create_from_draft!(draft)
+
+    get posts_path
+    assert_response :success
+    assert_select "h3", text: "公開記事"
+  end
+
+  test "GET /posts 未ログインでもアクセスできる" do
+    get posts_path
+    assert_response :success
+  end
+
+  test "GET /posts 記事が公開日時の降順で表示される" do
+    draft1 = PostDraft.create!(user: @author, title: "古い記事")
+    post1 = Post.create_from_draft!(draft1)
+    post1.update!(published_at: 2.days.ago)
+
+    draft2 = PostDraft.create!(user: @author, title: "新しい記事")
+    Post.create_from_draft!(draft2)
+
+    get posts_path
+    assert_response :success
+
+    # 新しい記事が先に表示される
+    assert_match(/新しい記事.*古い記事/m, response.body)
+  end
+
+  # =====================================
+  # show アクション
+  # =====================================
+
+  test "GET /posts/:id 記事詳細を表示できる" do
+    draft = PostDraft.create!(user: @author, title: "詳細テスト")
+    draft.update!(content: "記事の本文")
+    published_post = Post.create_from_draft!(draft)
+
+    get post_path(published_post)
+    assert_response :success
+    assert_select "h1", text: "詳細テスト"
+  end
+
+  test "GET /posts/:id 未ログインでもアクセスできる" do
+    draft = PostDraft.create!(user: @author, title: "公開記事")
+    published_post = Post.create_from_draft!(draft)
+
+    get post_path(published_post)
+    assert_response :success
+  end
+
+  test "GET /posts/:id 存在しない記事は404エラーになる" do
+    get post_path(id: 99999)
+    assert_response :not_found
+  end
+
+  # =====================================
   # 認証・認可テスト
   # =====================================
 

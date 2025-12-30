@@ -1,0 +1,30 @@
+<div class="flex justify-center">
+  <%= render Ui::PanelComponent.new(size: :large) do |panel| %>
+    <%- panel.with_panel_content do %>
+      <h2>記事一覧</h2>
+
+      <% if @posts.empty? %>
+        <p class="text-secondary">記事はまだありません</p>
+      <% else %>
+        <ul class="divide-y divide-default">
+          <% @posts.each do |post| %>
+            <li class="py-4">
+              <article>
+                <h3 class="font-weight-heading">
+                  <%= link_to post.title, post_path(post), class: "text-link" %>
+                </h3>
+                <p class="text-secondary text-size-note mt-1">
+                  <span><%= post.user.name %></span>
+                  <span class="mx-2">|</span>
+                  <time datetime="<%= post.published_at.iso8601 %>">
+                    <%= l(post.published_at, format: :long) %>
+                  </time>
+                </p>
+              </article>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

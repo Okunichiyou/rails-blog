@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
-  root "home#index"
+  root "posts#index"
   get "up" => "rails/health#show", as: :rails_health_check
 
   devise_for :user, skip: :all
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   end
 
   resources :post_drafts, except: [ :show ]
-  resources :posts, only: [ :create, :update ]
+  resources :posts, only: [ :index, :show, :create, :update ]
 
   devise_for :users
 end
