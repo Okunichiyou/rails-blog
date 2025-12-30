@@ -1,9 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["editor", "input"]
+  static targets = ["editor", "input", "fileInput"]
   static values = {
-    content: String
+    content: String,
+    uploadUrl: String
   }
 
   connect() {
@@ -21,6 +22,7 @@ export default class extends Controller {
     const StarterKit = window.TiptapStarterKit
     const CodeBlockLowlight = window.TiptapCodeBlockLowlight
     const CustomBlockquote = window.TiptapCustomBlockquote
+    const Image = window.TiptapImage
     const lowlight = window.tiptapLowlight
 
     const extensions = [
@@ -32,6 +34,10 @@ export default class extends Controller {
       CodeBlockLowlight.configure({
         lowlight,
         defaultLanguage: "ruby",
+      }),
+      Image.configure({
+        inline: false,
+        allowBase64: false,
       }),
     ]
 
@@ -101,5 +107,35 @@ export default class extends Controller {
 
   redo() {
     this.editor?.chain().focus().redo().run()
+  }
+
+  openImagePicker() {
+    this.fileInputTarget.click()
+  }
+
+  async uploadImage(event) {
+    const file = event.target.files[0]
+    if (!file) return
+
+    const formData = new FormData()
+    formData.append("image", file)
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content
+
+    const response = await fetch(this.uploadUrlValue, {
+      method: "POST",
+      headers: {
+        "X-CSRF-Token": csrfToken,
+      },
+      body: formData,
+    })
+
+    if (response.ok) {
+      const { url } = await response.json()
+      this.editor?.chain().focus().setImage({ src: url }).run()
+    }
+
+    // ファイル選択をリセット
+    event.target.value = ""
   }
 }

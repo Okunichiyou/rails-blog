@@ -1,6 +1,7 @@
 import { Editor } from "@tiptap/core"
 import StarterKit from "@tiptap/starter-kit"
 import Blockquote from "@tiptap/extension-blockquote"
+import Image from "@tiptap/extension-image"
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight"
 import { createLowlight, common } from "lowlight"
 
@@ -26,4 +27,5 @@ window.TiptapEditor = Editor
 window.TiptapStarterKit = StarterKit
 window.TiptapCodeBlockLowlight = CodeBlockLowlight
 window.TiptapCustomBlockquote = CustomBlockquote
+window.TiptapImage = Image
 window.tiptapLowlight = lowlight

@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   resources :post_drafts, except: [ :show ]
   resources :posts, only: [ :index, :show, :create, :update ]
+  resources :editor_images, only: [ :create ]
 
   devise_for :users
 end

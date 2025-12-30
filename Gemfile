@@ -3,6 +3,7 @@ source "https://rubygems.org"
 gem "bootsnap", require: false
 gem "devise", "~> 4.9"
 gem "devise-i18n", "~> 1.12"
+gem "image_processing", "~> 1.2"
 gem "importmap-rails"
 gem "jbuilder"
 gem "jsbundling-rails"
