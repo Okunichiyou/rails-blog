@@ -1,5 +1,5 @@
 module Ui
-  class RichTextAreaComponent < ApplicationComponent
+  class TiptapEditorComponent < ApplicationComponent
     @builder: untyped
 
     @method: untyped

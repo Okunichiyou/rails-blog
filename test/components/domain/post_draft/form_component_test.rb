@@ -29,14 +29,15 @@ class Domain::PostDraft::FormComponentTest < ViewComponent::TestCase
     assert_selector("input[type='text'][name='post_draft[title]']")
   end
 
-  test "contentのラベルとrich_text_area要素があること" do
+  test "contentのラベルとTiptapエディタ要素があること" do
     render_inline(Domain::PostDraft::FormComponent.new(
       form: @form,
       url: "/post_drafts"
     ))
 
     assert_selector("label[for='post_draft_content']")
-    assert_selector("trix-editor")
+    assert_selector("[data-controller='tiptap']")
+    assert_selector("[data-tiptap-target='editor']")
   end
 
   test "submitボタンがあること" do

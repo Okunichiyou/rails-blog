@@ -320,3 +320,181 @@
     padding-inline: var(--layout-content-padding);
   }
 }
+
+/* Tiptap Editor */
+@layer components {
+  /* ツールバーボタン */
+  .tiptap-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-default);
+    background-color: transparent;
+    transition: background-color 0.15s;
+
+    &:hover {
+      background-color: var(--color-bg-surface-hover);
+    }
+
+    &.is-active {
+      background-color: var(--color-bg-primary);
+      color: var(--color-text-primary-button);
+    }
+  }
+
+  /* エディタ本体 */
+  .tiptap-editor {
+    min-height: 200px;
+    padding: 1rem;
+    outline: none;
+
+    > * + * {
+      margin-top: 0.75em;
+    }
+
+    p.is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      float: left;
+      color: var(--color-text-placeholder);
+      pointer-events: none;
+      height: 0;
+    }
+
+    /* インラインコード */
+    code {
+      background-color: light-dark(rgb(240 240 240), rgb(60 63 65));
+      border-radius: var(--radius-sm);
+      padding: 0.1em 0.3em;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.9em;
+    }
+
+    /* コードブロック */
+    pre {
+      background-color: light-dark(rgb(43 43 43), rgb(30 30 30));
+      color: light-dark(rgb(214 214 214), rgb(214 214 214));
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.875rem;
+      line-height: 1.5;
+
+      code {
+        background: none;
+        padding: 0;
+        color: inherit;
+        font-size: inherit;
+      }
+    }
+
+    /* 引用 */
+    blockquote {
+      border-left: 3px solid var(--color-border-default);
+      padding-left: 1rem;
+      color: var(--color-text-secondary);
+      font-style: italic;
+    }
+
+    /* リスト */
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+    }
+
+    ol {
+      list-style-type: decimal;
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-top: 0.25em;
+    }
+
+    /* 水平線 */
+    hr {
+      border: none;
+      border-top: 1px solid var(--color-border-default);
+      margin: 1.5rem 0;
+    }
+  }
+
+}
+
+/* highlight.js コードハイライト */
+.hljs-comment,
+.hljs-quote {
+  color: #8b949e;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal {
+  color: #ff7b72;
+}
+
+.hljs-name,
+.hljs-tag {
+  color: #7ee787;
+}
+
+.hljs-attr,
+.hljs-attribute {
+  color: #79c0ff;
+}
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #ffa657;
+}
+
+.hljs-string,
+.hljs-regexp {
+  color: #a5d6ff;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link {
+  color: #7ee787;
+}
+
+.hljs-number {
+  color: #79c0ff;
+}
+
+.hljs-built_in,
+.hljs-title,
+.hljs-section {
+  color: #d2a8ff;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #ffa657;
+}
+
+.hljs-params {
+  color: #c9d1d9;
+}
+
+.hljs-meta {
+  color: #8b949e;
+}
+
+.hljs-addition {
+  color: #aff5b4;
+  background-color: rgba(46, 160, 67, 0.15);
+}
+
+.hljs-deletion {
+  color: #ffdcd7;
+  background-color: rgba(248, 81, 73, 0.15);
+}

@@ -1,0 +1,106 @@
+<div
+  class="<%= editor_classes %>"
+  data-controller="tiptap"
+  data-tiptap-content-value="<%= current_content %>"
+>
+  <%# ツールバー %>
+  <div class="tiptap-toolbar flex flex-wrap gap-1 p-2 border-b border-default bg-secondary">
+    <%# テキスト装飾 %>
+    <div class="flex gap-1">
+      <button type="button" data-action="tiptap#toggleBold" class="tiptap-btn" title="太字">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 4h8a4 4 0 014 4 4 4 0 01-4 4H6z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12h9a4 4 0 014 4 4 4 0 01-4 4H6z"></path>
+        </svg>
+      </button>
+      <button type="button" data-action="tiptap#toggleItalic" class="tiptap-btn" title="斜体">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 4h4m-2 0l-4 16m0 0h4"></path>
+        </svg>
+      </button>
+      <button type="button" data-action="tiptap#toggleStrike" class="tiptap-btn" title="取り消し線">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l-2 14"></path>
+        </svg>
+      </button>
+      <button type="button" data-action="tiptap#toggleCode" class="tiptap-btn" title="インラインコード">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="w-px bg-default mx-1"></div>
+
+    <%# 見出し %>
+    <div class="flex gap-1">
+      <button type="button" data-action="tiptap#setHeading" data-level="1" class="tiptap-btn text-xs font-bold" title="見出し1">
+        H1
+      </button>
+      <button type="button" data-action="tiptap#setHeading" data-level="2" class="tiptap-btn text-xs font-bold" title="見出し2">
+        H2
+      </button>
+      <button type="button" data-action="tiptap#setHeading" data-level="3" class="tiptap-btn text-xs font-bold" title="見出し3">
+        H3
+      </button>
+    </div>
+
+    <div class="w-px bg-default mx-1"></div>
+
+    <%# リスト %>
+    <div class="flex gap-1">
+      <button type="button" data-action="tiptap#toggleBulletList" class="tiptap-btn" title="箇条書き">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+      <button type="button" data-action="tiptap#toggleOrderedList" class="tiptap-btn" title="番号付きリスト">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h10M7 16h10M3 8h.01M3 12h.01M3 16h.01"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="w-px bg-default mx-1"></div>
+
+    <%# ブロック %>
+    <div class="flex gap-1">
+      <button type="button" data-action="tiptap#toggleBlockquote" class="tiptap-btn" title="引用">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+        </svg>
+      </button>
+      <button type="button" data-action="tiptap#toggleCodeBlock" class="tiptap-btn" title="コードブロック">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="w-px bg-default mx-1"></div>
+
+    <%# 履歴 %>
+    <div class="flex gap-1">
+      <button type="button" data-action="tiptap#undo" class="tiptap-btn" title="元に戻す">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+        </svg>
+      </button>
+      <button type="button" data-action="tiptap#redo" class="tiptap-btn" title="やり直し">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 10H11a8 8 0 00-8 8v2m18-10l-6 6m6-6l-6-6"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <%# エディタ領域 %>
+  <div class="<%= content_area_classes %>" data-tiptap-target="editor"></div>
+
+  <%# 隠しフィールド（フォーム送信用） %>
+  <input
+    type="hidden"
+    name="<%= input_name %>"
+    data-tiptap-target="input"
+  >
+</div>
