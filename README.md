@@ -123,6 +123,21 @@ bundle exec rails db:reset
 
 3. シードの実行
 
+    ```shell
+    bundle exec rails db:seed
+    ```
+
+    **テスト用ログインユーザー**
+
+    シード実行後、以下のユーザーでログインできます。
+
+    | ユーザー種別 | メールアドレス | パスワード |
+    | ------------- | --------------- | ----------- |
+    | 一般ユーザー | <user@example.com> | password123 |
+    | 著者ユーザー | <author@example.com> | password123 |
+
+    著者ユーザーは記事の作成・編集・公開が可能です。
+
 ### 型チェック
 
 このプロジェクトでは、Steepとrbs-inlineを使用して型チェックを行っています。
