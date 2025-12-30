@@ -17,7 +17,8 @@ class Users::PostsController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:user_id])
+    @user = User.find_by(id: params[:user_id])
+    head :not_found and return unless @user
   end
 
   def authenticate_author!

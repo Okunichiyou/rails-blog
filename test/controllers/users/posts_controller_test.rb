@@ -44,6 +44,11 @@ class Users::PostsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "GET /users/:user_id/posts 存在しないユーザーの場合404を返す" do
+    get user_posts_path(user_id: 999999)
+    assert_response :not_found
+  end
+
   test "GET /users/:user_id/posts 他のauthorの記事一覧も閲覧できる" do
     other_author = User.create!(name: "other_users_posts_author", author: true)
     other_draft = PostDraft.create!(user: other_author, title: "他人の記事")
