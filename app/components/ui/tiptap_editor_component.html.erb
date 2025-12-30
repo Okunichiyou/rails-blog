@@ -1,11 +1,11 @@
 <div
-  class="<%= editor_classes %>"
+  class="<%= editor_classes %> flex flex-col grow min-h-0"
   data-controller="tiptap"
   data-tiptap-content-value="<%= current_content %>"
   data-tiptap-upload-url-value="<%= editor_images_path %>"
 >
-  <%# ツールバー %>
-  <div class="tiptap-toolbar flex flex-wrap gap-1 p-2 border-b border-default bg-secondary">
+  <%# ツールバー（固定） %>
+  <div class="tiptap-toolbar shrink-0 flex flex-wrap gap-1 p-2 border-b border-default bg-secondary">
     <%# テキスト装飾 %>
     <div class="flex gap-1">
       <button type="button" data-action="tiptap#toggleBold" class="tiptap-btn" title="太字">
@@ -118,8 +118,8 @@
     </div>
   </div>
 
-  <%# エディタ領域 %>
-  <div class="<%= content_area_classes %>" data-tiptap-target="editor"></div>
+  <%# エディタ領域（スクロール可能） %>
+  <div class="<%= content_area_classes %> grow overflow-y-auto" data-tiptap-target="editor"></div>
 
   <%# 隠しフィールド（フォーム送信用） %>
   <input
