@@ -20,12 +20,15 @@ export default class extends Controller {
     const Editor = window.TiptapEditor
     const StarterKit = window.TiptapStarterKit
     const CodeBlockLowlight = window.TiptapCodeBlockLowlight
+    const CustomBlockquote = window.TiptapCustomBlockquote
     const lowlight = window.tiptapLowlight
 
     const extensions = [
       StarterKit.configure({
         codeBlock: false,
+        blockquote: false,
       }),
+      CustomBlockquote,
       CodeBlockLowlight.configure({
         lowlight,
         defaultLanguage: "ruby",
@@ -80,6 +83,11 @@ export default class extends Controller {
 
   toggleBlockquote() {
     this.editor?.chain().focus().toggleBlockquote().run()
+  }
+
+  setCalloutType(event) {
+    const type = event.currentTarget.dataset.calloutType
+    this.editor?.chain().focus().toggleBlockquote().updateAttributes("blockquote", { type }).run()
   }
 
   setHeading(event) {
