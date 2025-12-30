@@ -72,9 +72,9 @@ erDiagram
 |-----------------------------------|----------------------------------------------------------------------------|
 | `posts`                           | 公開済みブログ記事。本文は `content` カラムにHTMLで保存                    |
 | `post_drafts`                     | 下書き。`post_id`がNULLなら新規、設定されていれば公開記事の編集中下書き    |
-| `active_storage_attachments`      | 添付ファイルの中間テーブル                                                 |
-| `active_storage_blobs`            | ファイルメタデータ                                                         |
-| `active_storage_variant_records`  | 画像バリアント（リサイズ等）のキャッシュ                                   |
+| `active_storage_attachments`      | 添付ファイルの中間テーブル（将来のアバター等で使用予定）                   |
+| `active_storage_blobs`            | アップロードファイルのメタデータ                                           |
+| `active_storage_variant_records`  | 画像バリアント（リサイズ版）のキャッシュ                                   |
 
 ## 本文の保存方式
 
@@ -86,7 +86,18 @@ erDiagram
 
 ### 画像のアップロード
 
-エディタ内の画像は `EditorImagesController` 経由でActive Storageにアップロードされ、本文HTML内に `<img src="...">` として埋め込まれます。
+1. エディタで画像をアップロード
+2. `EditorImagesController` が受け取り、`ActiveStorage::Blob` に保存
+3. 最大1200x1200pxに縮小したvariantのURLを返却
+4. 本文HTML内に `<img src="..." width="...">` として埋め込み
+
+※ 画像は `active_storage_blobs` に直接保存され、`active_storage_attachments` は使用しない（孤立Blob）
+
+### 画像サイズの調整
+
+- エディタで幅（px）を指定可能
+- HTMLの `width` 属性として保存
+- 表示時にCSSでリサイズ
 
 ## 運用フロー
 
