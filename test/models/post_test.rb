@@ -10,25 +10,34 @@ class PostTest < ActiveSupport::TestCase
   # =====================================
 
   test "titleが空の場合、無効であること" do
-    post = Post.new(user: @user, title: "", published_at: Time.current)
+    now = Time.current
+    post = Post.new(user: @user, title: "", first_published_at: now, last_published_at: now)
     assert_not post.valid?
     assert_includes post.errors[:title], "を入力してください"
   end
 
   test "titleが255文字を超える場合、無効であること" do
-    post = Post.new(user: @user, title: "a" * 256, published_at: Time.current)
+    now = Time.current
+    post = Post.new(user: @user, title: "a" * 256, first_published_at: now, last_published_at: now)
     assert_not post.valid?
     assert_includes post.errors[:title], "は255文字以内で入力してください"
   end
 
-  test "published_atが空の場合、無効であること" do
-    post = Post.new(user: @user, title: "テスト記事", published_at: nil)
+  test "first_published_atが空の場合、無効であること" do
+    post = Post.new(user: @user, title: "テスト記事", first_published_at: nil, last_published_at: Time.current)
     assert_not post.valid?
-    assert_includes post.errors[:published_at], "を入力してください"
+    assert_includes post.errors[:first_published_at], "を入力してください"
+  end
+
+  test "last_published_atが空の場合、無効であること" do
+    post = Post.new(user: @user, title: "テスト記事", first_published_at: Time.current, last_published_at: nil)
+    assert_not post.valid?
+    assert_includes post.errors[:last_published_at], "を入力してください"
   end
 
   test "有効な属性を持つ場合、有効であること" do
-    post = Post.new(user: @user, title: "テスト記事", published_at: Time.current)
+    now = Time.current
+    post = Post.new(user: @user, title: "テスト記事", first_published_at: now, last_published_at: now)
     assert post.valid?
   end
 
@@ -46,7 +55,8 @@ class PostTest < ActiveSupport::TestCase
       assert_equal @user, post.user
       assert_equal "下書きタイトル", post.title
       assert_equal "下書き本文", post.content
-      assert_not_nil post.published_at
+      assert_not_nil post.first_published_at
+      assert_not_nil post.last_published_at
     end
 
     draft.reload
@@ -81,16 +91,30 @@ class PostTest < ActiveSupport::TestCase
     assert_equal "更新本文", post.content
   end
 
-  test "update_from_draft!がpublished_atを変更しないこと" do
+  test "update_from_draft!がfirst_published_atを変更しないこと" do
     draft = PostDraft.create!(user: @user, title: "タイトル")
     post = Post.create_from_draft!(draft)
-    original_published_at = post.published_at
+    original_first_published_at = post.first_published_at
 
     travel 1.hour do
       draft.update!(title: "新タイトル")
       post.update_from_draft!(draft)
     end
 
-    assert_equal original_published_at, post.published_at
+    assert_equal original_first_published_at, post.first_published_at
+  end
+
+  test "update_from_draft!がlast_published_atを更新すること" do
+    draft = PostDraft.create!(user: @user, title: "タイトル")
+    post = Post.create_from_draft!(draft)
+    original_last_published_at = post.last_published_at
+
+    travel 1.hour do
+      draft.update!(title: "新タイトル")
+      post.update_from_draft!(draft)
+      post.reload
+
+      assert_not_equal original_last_published_at, post.last_published_at
+    end
   end
 end

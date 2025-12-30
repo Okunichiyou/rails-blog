@@ -6,7 +6,7 @@ class Users::PostsController < ApplicationController
   before_action :set_post, only: [ :destroy ]
 
   def index
-    @posts = @user.posts.order(published_at: :desc)
+    @posts = @user.posts.order(first_published_at: :desc)
   end
 
   def destroy

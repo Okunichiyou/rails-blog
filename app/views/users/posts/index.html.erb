@@ -15,7 +15,7 @@
                     <%= link_to post.title, post_path(post), class: "text-link" %>
                   </h3>
                   <p class="text-secondary text-size-note">
-                    公開: <%= l(post.published_at, format: :short) %>
+                    公開: <%= l(post.first_published_at, format: :short) %>
                   </p>
                 </div>
                 <% if current_user&.id == @user.id %>

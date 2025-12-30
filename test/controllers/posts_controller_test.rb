@@ -47,7 +47,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "GET /posts 記事が公開日時の降順で表示される" do
     draft1 = PostDraft.create!(user: @author, title: "古い記事")
     post1 = Post.create_from_draft!(draft1)
-    post1.update!(published_at: 2.days.ago)
+    post1.update!(first_published_at: 2.days.ago)
 
     draft2 = PostDraft.create!(user: @author, title: "新しい記事")
     Post.create_from_draft!(draft2)

@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [ :update ]
 
   def index
-    @posts = Post.includes(:user).order(published_at: :desc)
+    @posts = Post.includes(:user).order(first_published_at: :desc)
   end
 
   def show
