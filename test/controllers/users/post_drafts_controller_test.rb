@@ -134,6 +134,22 @@ class Users::PostDraftsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "更新後", draft.title
   end
 
+  test "PATCH /post_drafts/:id 不正な入力でエラー" do
+    sign_in_as("author@example.com")
+    draft = PostDraft.create!(user: @author, title: "更新前")
+
+    patch users_post_draft_path(draft), params: {
+      post_draft: {
+        title: "",
+        content: "<p>本文</p>"
+      }
+    }
+
+    assert_response :unprocessable_content
+    draft.reload
+    assert_equal "更新前", draft.title
+  end
+
   # =====================================
   # destroy アクション
   # =====================================
