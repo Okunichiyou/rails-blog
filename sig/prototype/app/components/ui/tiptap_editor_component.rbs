@@ -4,8 +4,6 @@ module Ui
 
     @method: untyped
 
-    @size: untyped
-
     @variant: untyped
 
     @html_options: untyped

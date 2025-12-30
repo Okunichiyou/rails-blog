@@ -29,7 +29,6 @@
     <%= render Ui::TiptapEditorComponent.new(
       builder: f,
       method: :content,
-      size: :large,
       variant: @form.errors[:content].any? ? :alert : :default
     ) %>
 

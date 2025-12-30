@@ -1,19 +1,11 @@
 module Ui
   class TiptapEditorComponent < ApplicationComponent
-    SIZE_OPTIONS: untyped
-
     VARIANT_OPTIONS: untyped
 
-    # @rbs (builder: ActionView::Helpers::FormBuilder, method: Symbol, size: Symbol, ?variant: Symbol, **untyped) -> void
-    def initialize: (builder: ActionView::Helpers::FormBuilder, method: Symbol, size: Symbol, ?variant: Symbol, **untyped) -> void
+    # @rbs (builder: ActionView::Helpers::FormBuilder, method: Symbol, ?variant: Symbol, **untyped) -> void
+    def initialize: (builder: ActionView::Helpers::FormBuilder, method: Symbol, ?variant: Symbol, **untyped) -> void
 
     private
-
-    # @rbs () -> String
-    def content_area_classes: () -> String
-
-    # @rbs () -> String
-    def size_class: () -> String
 
     # @rbs () -> String
     def variant_class: () -> String

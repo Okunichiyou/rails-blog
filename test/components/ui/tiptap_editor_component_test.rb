@@ -9,7 +9,7 @@ class Ui::TiptapEditorComponentTest < ViewComponent::TestCase
   end
 
   test "基本的な TiptapEditor が生成されること" do
-    render_inline(Ui::TiptapEditorComponent.new(builder: form_builder_with_content, method: :content, size: :large))
+    render_inline(Ui::TiptapEditorComponent.new(builder: form_builder_with_content, method: :content))
 
     assert_selector("[data-controller='tiptap']")
     assert_selector("[data-tiptap-target='editor']")
@@ -19,8 +19,7 @@ class Ui::TiptapEditorComponentTest < ViewComponent::TestCase
   test "hidden inputにvalue属性として初期値が設定されること" do
     render_inline(Ui::TiptapEditorComponent.new(
       builder: form_builder_with_content(content: "<p>既存のコンテンツ</p>"),
-      method: :content,
-      size: :large
+      method: :content
     ))
 
     assert_selector("input[type='hidden'][value='<p>既存のコンテンツ</p>']", visible: :all)
@@ -29,8 +28,7 @@ class Ui::TiptapEditorComponentTest < ViewComponent::TestCase
   test "contentがnilの場合でもvalue属性が空文字で設定されること" do
     render_inline(Ui::TiptapEditorComponent.new(
       builder: form_builder_with_content(content: nil),
-      method: :content,
-      size: :large
+      method: :content
     ))
 
     assert_selector("input[type='hidden'][value='']", visible: :all)
@@ -39,22 +37,15 @@ class Ui::TiptapEditorComponentTest < ViewComponent::TestCase
   test "data-tiptap-content-value属性にもコンテンツが設定されること" do
     render_inline(Ui::TiptapEditorComponent.new(
       builder: form_builder_with_content(content: "<p>テスト内容</p>"),
-      method: :content,
-      size: :large
+      method: :content
     ))
 
     assert_selector("[data-tiptap-content-value='<p>テスト内容</p>']")
   end
 
-  test "不適切なsizeを適用したらエラーが出ること" do
-    assert_raises(ArgumentError, "Invalid attribute value: 'invalid'. Must be one of full, large, medium.") do
-      Ui::TiptapEditorComponent.new(builder: form_builder_with_content, method: :content, size: :invalid)
-    end
-  end
-
   test "不適切なvariantを適用したらエラーが出ること" do
     assert_raises(ArgumentError, "Invalid attribute value: 'invalid'. Must be one of default, alert.") do
-      Ui::TiptapEditorComponent.new(builder: form_builder_with_content, method: :content, size: :large, variant: :invalid)
+      Ui::TiptapEditorComponent.new(builder: form_builder_with_content, method: :content, variant: :invalid)
     end
   end
 
@@ -62,44 +53,10 @@ class Ui::TiptapEditorComponentTest < ViewComponent::TestCase
     render_inline(Ui::TiptapEditorComponent.new(
       builder: form_builder_with_content,
       method: :content,
-      size: :large,
       variant: :alert
     ))
 
     assert_selector(".border-alert")
   end
 
-  # =====================================
-  # サイズバリエーション
-  # =====================================
-
-  test "size: fullでmin-h-[20rem]クラスが適用されること" do
-    render_inline(Ui::TiptapEditorComponent.new(
-      builder: form_builder_with_content,
-      method: :content,
-      size: :full
-    ))
-
-    assert_selector('.min-h-\[20rem\]')
   end
-
-  test "size: largeでmin-h-[15rem]クラスが適用されること" do
-    render_inline(Ui::TiptapEditorComponent.new(
-      builder: form_builder_with_content,
-      method: :content,
-      size: :large
-    ))
-
-    assert_selector('.min-h-\[15rem\]')
-  end
-
-  test "size: mediumでmin-h-[10rem]クラスが適用されること" do
-    render_inline(Ui::TiptapEditorComponent.new(
-      builder: form_builder_with_content,
-      method: :content,
-      size: :medium
-    ))
-
-    assert_selector('.min-h-\[10rem\]')
-  end
-end
