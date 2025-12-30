@@ -58,5 +58,4 @@ class Ui::TiptapEditorComponentTest < ViewComponent::TestCase
 
     assert_selector(".border-alert")
   end
-
-  end
+end
