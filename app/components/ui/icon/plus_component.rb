@@ -20,9 +20,8 @@ module Ui
       def size_class
         case @size
         when :sm then "w-4 h-4"
-        when :md then "w-5 h-5"
         when :lg then "w-6 h-6"
-        else "w-5 h-5"
+        else "w-5 h-5" # :md (default)
         end
       end
     end
