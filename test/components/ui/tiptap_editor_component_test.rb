@@ -68,4 +68,38 @@ class Ui::TiptapEditorComponentTest < ViewComponent::TestCase
 
     assert_selector(".border-alert")
   end
+
+  # =====================================
+  # サイズバリエーション
+  # =====================================
+
+  test "size: fullでmin-h-[20rem]クラスが適用されること" do
+    render_inline(Ui::TiptapEditorComponent.new(
+      builder: form_builder_with_content,
+      method: :content,
+      size: :full
+    ))
+
+    assert_selector('.min-h-\[20rem\]')
+  end
+
+  test "size: largeでmin-h-[15rem]クラスが適用されること" do
+    render_inline(Ui::TiptapEditorComponent.new(
+      builder: form_builder_with_content,
+      method: :content,
+      size: :large
+    ))
+
+    assert_selector('.min-h-\[15rem\]')
+  end
+
+  test "size: mediumでmin-h-[10rem]クラスが適用されること" do
+    render_inline(Ui::TiptapEditorComponent.new(
+      builder: form_builder_with_content,
+      method: :content,
+      size: :medium
+    ))
+
+    assert_selector('.min-h-\[10rem\]')
+  end
 end
