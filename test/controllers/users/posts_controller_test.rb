@@ -82,6 +82,54 @@ class Users::PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   # =====================================
+  # edit アクション
+  # =====================================
+
+  test "GET /users/:user_id/posts/:id/edit 紐づく下書きがある場合、下書き編集画面にリダイレクトする" do
+    sign_in_as("users_posts_author@example.com")
+    draft = PostDraft.create!(user: @author, title: "編集テスト")
+    published_post = Post.create_from_draft!(draft)
+
+    get edit_user_post_path(@author, published_post)
+    assert_redirected_to edit_users_post_draft_path(draft)
+  end
+
+  test "GET /users/:user_id/posts/:id/edit 紐づく下書きがない場合、新しい下書きを作成してリダイレクトする" do
+    sign_in_as("users_posts_author@example.com")
+    draft = PostDraft.create!(user: @author, title: "編集テスト", content: "<p>本文</p>")
+    published_post = Post.create_from_draft!(draft)
+    draft.destroy!
+
+    assert_difference "PostDraft.count", 1 do
+      get edit_user_post_path(@author, published_post)
+    end
+
+    new_draft = PostDraft.last
+    assert_equal published_post.id, new_draft.post_id
+    assert_equal published_post.title, new_draft.title
+    assert_equal published_post.content, new_draft.content
+    assert_redirected_to edit_users_post_draft_path(new_draft)
+  end
+
+  test "GET /users/:user_id/posts/:id/edit 未ログインの場合リダイレクト" do
+    draft = PostDraft.create!(user: @author, title: "テスト")
+    published_post = Post.create_from_draft!(draft)
+
+    get edit_user_post_path(@author, published_post)
+    assert_redirected_to root_path
+  end
+
+  test "GET /users/:user_id/posts/:id/edit 他人の記事を編集しようとするとリダイレクト" do
+    other_author = User.create!(name: "other_users_posts_edit_author", author: true)
+    other_draft = PostDraft.create!(user: other_author, title: "他人の記事")
+    other_post = Post.create_from_draft!(other_draft)
+
+    sign_in_as("users_posts_author@example.com")
+    get edit_user_post_path(other_author, other_post)
+    assert_redirected_to root_path
+  end
+
+  # =====================================
   # destroy アクション
   # =====================================
 

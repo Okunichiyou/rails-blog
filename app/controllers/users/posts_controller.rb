@@ -2,11 +2,16 @@
 
 class Users::PostsController < ApplicationController
   before_action :set_user
-  before_action :authenticate_author!, only: [ :destroy ]
-  before_action :set_post, only: [ :destroy ]
+  before_action :authenticate_author!, only: [ :edit, :destroy ]
+  before_action :set_post, only: [ :edit, :destroy ]
 
   def index
     @posts = @user.posts.order(first_published_at: :desc)
+  end
+
+  def edit
+    draft = @post.draft || create_draft_from_post
+    redirect_to edit_users_post_draft_path(draft)
   end
 
   def destroy
@@ -28,5 +33,14 @@ class Users::PostsController < ApplicationController
   def set_post
     @post = @user.posts.find_by(id: params[:id])
     head :not_found and return unless @post
+  end
+
+  def create_draft_from_post
+    PostDraft.create!(
+      user: current_user,
+      post: @post,
+      title: @post.title,
+      content: @post.content
+    )
   end
 end

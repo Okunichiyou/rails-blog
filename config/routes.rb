@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [] do
-    resources :posts, only: [ :index, :destroy ], controller: "users/posts"
+    resources :posts, only: [ :index, :edit, :destroy ], controller: "users/posts"
   end
 
   namespace :users do
