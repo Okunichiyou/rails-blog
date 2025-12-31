@@ -1,4 +1,4 @@
-class User::DatabaseAuthenticationsController < ApplicationController
+class Users::DatabaseAuthenticationsController < ApplicationController
   before_action :authenticate_user!, only: [ :link_new, :link_create ]
 
   private

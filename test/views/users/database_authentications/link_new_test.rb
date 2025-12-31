@@ -17,22 +17,22 @@ class UserDatabaseAuthenticationsLinkNewViewTest < ActionView::TestCase
   end
 
   test "PanelComponentが表示されること" do
-    render template: "user/database_authentications/link_new"
+    render template: "users/database_authentications/link_new"
 
     assert_select("div.flex.justify-center")
   end
 
   test "h2タグでリンクフォームのタイトルが表示されること" do
-    render template: "user/database_authentications/link_new"
+    render template: "users/database_authentications/link_new"
 
     assert_select("h2", text: "メール認証をリンク")
   end
 
   test "DatabaseAuthenticationLinkFormComponentが表示されること" do
-    render template: "user/database_authentications/link_new"
+    render template: "users/database_authentications/link_new"
 
     # フォームの主要な要素が含まれていることを確認
-    assert_select("form[action='/user/database_authentications/link_create']")
+    assert_select("form[action='/users/database_authentications/link_create']")
     assert_select("input[name='user_database_authentication_link[password]']")
   end
 end

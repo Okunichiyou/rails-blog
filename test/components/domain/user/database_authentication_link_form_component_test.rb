@@ -20,7 +20,7 @@ class Domain::User::DatabaseAuthenticationLinkFormComponentTest < ViewComponent:
       form: @form
     ))
 
-    assert_selector("form[action='/user/database_authentications/link_create'][method=post]")
+    assert_selector("form[action='/users/database_authentications/link_create'][method=post]")
   end
 
   test "user_nameのラベルとテキスト表示があること" do

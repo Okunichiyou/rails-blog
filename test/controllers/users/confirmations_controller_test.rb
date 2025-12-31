@@ -1,6 +1,6 @@
 require "test_helper"
 
-class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
+class Users::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
   # フォームのparam_keyを使用してパラメータを構築
   # これにより、model_nameの変更がテストで検知される
   def form_params(attributes)
@@ -85,7 +85,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
 
     get confirmation_confirmation_path, params: { confirmation_token: "valid_token" }
 
-    assert_redirected_to new_user_database_authentication_path(confirmation_token: "valid_token")
+    assert_redirected_to new_users_database_authentication_path(confirmation_token: "valid_token")
 
     # メールアドレスの確認が完了している
     confirmation.reload
@@ -115,7 +115,7 @@ class User::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
 
       get confirmation_confirmation_path, params: { confirmation_token: "valid_30min_token" }
 
-      assert_redirected_to new_user_database_authentication_path(confirmation_token: "valid_30min_token")
+      assert_redirected_to new_users_database_authentication_path(confirmation_token: "valid_30min_token")
 
       # メールアドレスの確認が完了している（30分丁度は有効）
       confirmation.reload

@@ -17,7 +17,7 @@ class Domain::User::SnsCredentialRegistrationFormComponentTest < ViewComponent::
       form: @form
     ))
 
-    assert_selector("form[action='/user/sns_credential_registrations'][method=post]")
+    assert_selector("form[action='/users/sns_credential_registrations'][method=post]")
   end
 
   test "user_nameのラベルとinput要素があること" do

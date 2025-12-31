@@ -1,4 +1,4 @@
-class User::SnsCredentialRegistrationsController < ApplicationController
+class Users::SnsCredentialRegistrationsController < ApplicationController
   def new
     token = params[:token]
     pending_credential = User::PendingSnsCredential.find_by(token: token)

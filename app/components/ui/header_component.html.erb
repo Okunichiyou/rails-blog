@@ -169,7 +169,7 @@
         "
       >
         <% if @login_user.present? %>
-          <%= link_to "アカウント設定", user_account_settings_path %>
+          <%= link_to "アカウント設定", users_account_settings_path %>
           <% if @login_user.author? %>
             <%= link_to "下書き一覧", users_post_drafts_path %>
             <%= link_to "公開記事一覧", user_posts_path(@login_user) %>
@@ -177,7 +177,7 @@
           <%= link_to "ログアウト", logout_path, data: { "turbo-method": :delete } %>
         <% else %>
           <%= link_to "ログイン", login_path %>
-          <%= link_to "サインアップ", new_user_database_authentication_path %>
+          <%= link_to "サインアップ", new_users_database_authentication_path %>
         <% end %>
       </nav>
     </div>

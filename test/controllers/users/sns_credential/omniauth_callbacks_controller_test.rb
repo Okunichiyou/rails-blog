@@ -1,6 +1,6 @@
 require "test_helper"
 
-class User::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::IntegrationTest
+class Users::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::IntegrationTest
   setup do
     OmniAuth.config.test_mode = true
     @valid_auth_hash = {
@@ -44,7 +44,7 @@ class User::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::Int
 
     # 登録フォームへリダイレクトされることを確認
     assert_response :redirect
-    assert_match %r{/user/sns_credential_registrations/new\?token=}, response.location
+    assert_match %r{/users/sns_credential_registrations/new\?token=}, response.location
 
     # PendingSnsCredentialが正しく作成されていることを確認
     pending = User::PendingSnsCredential.last
@@ -229,6 +229,6 @@ class User::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::Int
     get sns_credential_google_oauth2_omniauth_callback_path
 
     assert_redirected_to login_path
-    assert_match(/Authentication failed/, flash[:alert])
+    assert_match(/認証に失敗しました/, flash[:alert])
   end
 end

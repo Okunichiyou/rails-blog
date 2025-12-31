@@ -60,6 +60,6 @@ class EditorImagesControllerTest < ActionDispatch::IntegrationTest
   test "POST /editor_images 未ログインの場合リダイレクト" do
     post editor_images_path, params: { image: uploaded_image }
 
-    assert_redirected_to root_path
+    assert_redirected_to login_path
   end
 end
