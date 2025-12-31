@@ -6,5 +6,6 @@ target :app do
   check "app/components"
   check "app/forms"
   check "app/models"
+  check "app/presenters/"
   # check "app/controllers"  # コントローラーは型チェック対象外（rbs_railsが型定義を生成しないため）
 end

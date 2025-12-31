@@ -40,13 +40,14 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "tiptap", "data-turbo-track": "reload", defer: true %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <%= render Ui::HeaderComponent.new(login_user: current_user) %>
 
-    <div class="content-area max-w-content mx-auto px-layout pt-5">
+    <div class="content-area max-w-content mx-auto px-layout py-5">
       <%= yield %>
     </div>
   </body>

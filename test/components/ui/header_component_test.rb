@@ -36,6 +36,12 @@ class HeaderComponentTest < ViewComponent::TestCase
     assert_no_selector(".hamburger-menu a", text: "ログアウト")
   end
 
+  test "未ログイン時にサインアップリンクが表示されること" do
+    render_inline(Ui::HeaderComponent.new(login_user: nil))
+
+    assert_selector(".hamburger-menu a[href='/user/database_authentications/new']", text: "サインアップ")
+  end
+
   # =====================================
   # ログイン状態のテスト
   # =====================================
@@ -48,5 +54,37 @@ class HeaderComponentTest < ViewComponent::TestCase
 
     # ログインリンクが表示されないことの確認
     assert_no_selector(".hamburger-menu a", text: "ログイン")
+  end
+
+  test "ログイン時にサインアップリンクが表示されないこと" do
+    user = User.new(id: 1, name: "test")
+    render_inline(Ui::HeaderComponent.new(login_user: user))
+
+    assert_no_selector(".hamburger-menu a", text: "サインアップ")
+  end
+
+  # =====================================
+  # 著者ユーザーのテスト
+  # =====================================
+  test "著者ユーザーの場合、下書き一覧リンクが表示されること" do
+    user = User.new(id: 1, name: "author_user", author: true)
+    render_inline(Ui::HeaderComponent.new(login_user: user))
+
+    assert_selector(".hamburger-menu a[href='/users/post_drafts']", text: "下書き一覧")
+  end
+
+  test "著者ユーザーの場合、公開記事一覧リンクが表示されること" do
+    user = User.new(id: 1, name: "author_user", author: true)
+    render_inline(Ui::HeaderComponent.new(login_user: user))
+
+    assert_selector(".hamburger-menu a[href='/users/1/posts']", text: "公開記事一覧")
+  end
+
+  test "著者でないユーザーの場合、下書き一覧リンクが表示されないこと" do
+    user = User.new(id: 1, name: "non_author_user", author: false)
+    render_inline(Ui::HeaderComponent.new(login_user: user))
+
+    assert_no_selector(".hamburger-menu a", text: "下書き一覧")
+    assert_no_selector(".hamburger-menu a", text: "公開記事一覧")
   end
 end

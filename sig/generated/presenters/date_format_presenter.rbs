@@ -1,0 +1,7 @@
+class DateFormatPresenter
+  # @rbs (ActiveSupport::TimeWithZone) -> String
+  def self.to_long: (ActiveSupport::TimeWithZone) -> String
+
+  # @rbs (ActiveSupport::TimeWithZone) -> String
+  def self.to_iso8601: (ActiveSupport::TimeWithZone) -> String
+end

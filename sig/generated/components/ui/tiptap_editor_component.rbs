@@ -1,0 +1,19 @@
+module Ui
+  class TiptapEditorComponent < ApplicationComponent
+    VARIANT_OPTIONS: untyped
+
+    # @rbs (builder: ActionView::Helpers::FormBuilder, method: Symbol, ?variant: Symbol, **untyped) -> void
+    def initialize: (builder: ActionView::Helpers::FormBuilder, method: Symbol, ?variant: Symbol, **untyped) -> void
+
+    private
+
+    # @rbs () -> String
+    def variant_class: () -> String
+
+    # @rbs () -> String
+    def current_content: () -> String
+
+    # @rbs () -> String
+    def input_name: () -> String
+  end
+end

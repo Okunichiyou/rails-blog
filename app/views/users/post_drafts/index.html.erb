@@ -1,0 +1,73 @@
+<div class="flex justify-center">
+  <%= render Ui::PanelComponent.new(size: :large) do |panel| %>
+    <%- panel.with_panel_content do %>
+      <h2>下書き一覧</h2>
+
+      <div class="mb-4">
+        <%= form_with url: new_users_post_draft_path, method: :get do %>
+          <%= render Ui::Button::IconComponent.new(
+            category: :primary,
+            size: :medium,
+            type: :submit,
+            text: "新規作成",
+            icon: render(Ui::Icon::PlusComponent.new(size: :md, class: "stroke-btn-primary")),
+            icon_position: :left
+          ) %>
+        <% end %>
+      </div>
+
+      <% if @post_drafts.empty? %>
+        <p class="text-secondary">下書きはありません</p>
+      <% else %>
+        <ul class="divide-y divide-default">
+          <% @post_drafts.each do |draft| %>
+            <li class="py-3">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h3>
+                    <%= link_to draft.title, edit_users_post_draft_path(draft), class: "text-link" %>
+                  </h3>
+                  <p class="text-secondary text-size-note">
+                    更新: <%= l(draft.updated_at, format: :short) %>
+                  </p>
+                </div>
+                <div class="flex gap-2">
+                  <% if draft.new_draft? %>
+                    <%= form_with url: posts_path, method: :post, data: { turbo_confirm: "この下書きを公開しますか？" } do |f| %>
+                      <%= f.hidden_field :draft_id, value: draft.id %>
+                      <%= render Ui::Button::Component.new(
+                        category: :primary,
+                        size: :small,
+                        type: :submit,
+                        text: "公開"
+                      ) %>
+                    <% end %>
+                  <% else %>
+                    <%= form_with url: post_path(draft.post), method: :patch, data: { turbo_confirm: "公開記事を更新しますか？" } do |f| %>
+                      <%= f.hidden_field :draft_id, value: draft.id %>
+                      <%= render Ui::Button::Component.new(
+                        category: :secondary,
+                        size: :small,
+                        type: :submit,
+                        text: "更新"
+                      ) %>
+                    <% end %>
+                  <% end %>
+                  <%= form_with url: users_post_draft_path(draft), method: :delete, data: { turbo_confirm: "本当に削除しますか？" } do %>
+                    <%= render Ui::Button::Component.new(
+                      category: :secondary,
+                      variant: :danger,
+                      size: :small,
+                      type: :submit,
+                      text: "削除"
+                    ) %>
+                  <% end %>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

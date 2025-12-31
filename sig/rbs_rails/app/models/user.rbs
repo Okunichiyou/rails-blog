@@ -36,42 +36,6 @@ class User < ::ApplicationRecord
 
     def clear_id_change: () -> void
 
-    def name: () -> ::String
-
-    def name=: (::String) -> ::String
-
-    def name?: () -> bool
-
-    def name_changed?: () -> bool
-
-    def name_change: () -> [ ::String?, ::String? ]
-
-    def name_will_change!: () -> void
-
-    def name_was: () -> ::String?
-
-    def name_previously_changed?: () -> bool
-
-    def name_previous_change: () -> ::Array[::String?]?
-
-    def name_previously_was: () -> ::String?
-
-    def name_before_last_save: () -> ::String?
-
-    def name_change_to_be_saved: () -> ::Array[::String?]?
-
-    def name_in_database: () -> ::String?
-
-    def saved_change_to_name: () -> ::Array[::String?]?
-
-    def saved_change_to_name?: () -> bool
-
-    def will_save_change_to_name?: () -> bool
-
-    def restore_name!: () -> void
-
-    def clear_name_change: () -> void
-
     def author: () -> bool
 
     def author=: (bool) -> bool
@@ -144,6 +108,42 @@ class User < ::ApplicationRecord
 
     def clear_created_at_change: () -> void
 
+    def name: () -> ::String
+
+    def name=: (::String) -> ::String
+
+    def name?: () -> bool
+
+    def name_changed?: () -> bool
+
+    def name_change: () -> [ ::String?, ::String? ]
+
+    def name_will_change!: () -> void
+
+    def name_was: () -> ::String?
+
+    def name_previously_changed?: () -> bool
+
+    def name_previous_change: () -> ::Array[::String?]?
+
+    def name_previously_was: () -> ::String?
+
+    def name_before_last_save: () -> ::String?
+
+    def name_change_to_be_saved: () -> ::Array[::String?]?
+
+    def name_in_database: () -> ::String?
+
+    def saved_change_to_name: () -> ::Array[::String?]?
+
+    def saved_change_to_name?: () -> bool
+
+    def will_save_change_to_name?: () -> bool
+
+    def restore_name!: () -> void
+
+    def clear_name_change: () -> void
+
     def updated_at: () -> ::ActiveSupport::TimeWithZone
 
     def updated_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
@@ -204,6 +204,14 @@ class User < ::ApplicationRecord
   def sns_credentials=: (::User::SnsCredential::ActiveRecord_Associations_CollectionProxy | ::Array[::User::SnsCredential]) -> (::User::SnsCredential::ActiveRecord_Associations_CollectionProxy | ::Array[::User::SnsCredential])
   def sns_credential_ids: () -> ::Array[::Integer]
   def sns_credential_ids=: (::Array[::Integer]) -> ::Array[::Integer]
+  def posts: () -> ::Post::ActiveRecord_Associations_CollectionProxy
+  def posts=: (::Post::ActiveRecord_Associations_CollectionProxy | ::Array[::Post]) -> (::Post::ActiveRecord_Associations_CollectionProxy | ::Array[::Post])
+  def post_ids: () -> ::Array[::Integer]
+  def post_ids=: (::Array[::Integer]) -> ::Array[::Integer]
+  def post_drafts: () -> ::PostDraft::ActiveRecord_Associations_CollectionProxy
+  def post_drafts=: (::PostDraft::ActiveRecord_Associations_CollectionProxy | ::Array[::PostDraft]) -> (::PostDraft::ActiveRecord_Associations_CollectionProxy | ::Array[::PostDraft])
+  def post_draft_ids: () -> ::Array[::Integer]
+  def post_draft_ids=: (::Array[::Integer]) -> ::Array[::Integer]
   def database_authentication: () -> ::User::DatabaseAuthentication?
   def database_authentication=: (::User::DatabaseAuthentication?) -> ::User::DatabaseAuthentication?
   def build_database_authentication: (?untyped) -> ::User::DatabaseAuthentication

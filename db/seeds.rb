@@ -41,4 +41,42 @@ User::DatabaseAuthentication.create!(
 )
 
 puts "Created author user: author@example.com / password123"
+
+# PostDraft (下書き)
+puts "Creating post drafts..."
+PostDraft.create!(
+  user: author_user,
+  title: "下書き記事1",
+  content: "<p>これは下書きの内容です。まだ公開されていません。</p>"
+)
+
+PostDraft.create!(
+  user: author_user,
+  title: "下書き記事2",
+  content: "<p>もう一つの下書き記事です。</p><p>複数の段落があります。</p>"
+)
+
+puts "Created #{PostDraft.count} post drafts"
+
+# Post (公開記事)
+puts "Creating posts..."
+now = Time.current
+Post.create!(
+  user: author_user,
+  title: "最初の公開記事",
+  content: "<p>これは公開された記事です。</p><p>誰でも閲覧できます。</p>",
+  first_published_at: now,
+  last_published_at: now
+)
+
+Post.create!(
+  user: author_user,
+  title: "2つ目の公開記事",
+  content: "<h2>見出し</h2><p>本文の内容です。</p><ul><li>リスト項目1</li><li>リスト項目2</li></ul>",
+  first_published_at: 1.day.ago,
+  last_published_at: 1.day.ago
+)
+
+puts "Created #{Post.count} posts"
+
 puts "Seeding completed!"

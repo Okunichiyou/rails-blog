@@ -1,0 +1,13 @@
+<div class="flex justify-center">
+  <%= render Ui::PanelComponent.new(size: :large) do |panel| %>
+    <%- panel.with_panel_content do %>
+      <h2>下書き編集</h2>
+
+      <%= render Domain::PostDraft::FormComponent.new(
+        form: @form,
+        url: users_post_draft_path(@post_draft),
+        method: :patch
+      ) %>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,37 @@
+<%= form_with(model: @form, url: @url, method: @method, html: { class: "post-draft-form flex flex-col h-[calc(100vh-12rem)]" }) do |f| %>
+  <%# ヘッダー部分（固定） %>
+  <div class="shrink-0 flex flex-col gap-4">
+    <%# 保存ボタン（右寄せ） %>
+    <div class="flex justify-end">
+      <%= render Ui::Button::Component.new(category: :primary, size: :medium, type: :submit, text: "保存") %>
+    </div>
+
+    <%# タイトル %>
+    <div class="field">
+      <%= f.label :title, class: "block" %>
+
+      <%= render Ui::TextFieldComponent.new(
+        builder: f,
+        method: :title,
+        size: :full,
+        variant: @form.errors[:title].any? ? :alert : :default
+      ) %>
+
+      <%= render Ui::FieldErrorsComponent.new(error_messages: @form.errors.full_messages_for(:title)) %>
+    </div>
+
+    <%# コンテンツラベル %>
+    <%= f.label :content, class: "block" %>
+  </div>
+
+  <%# コンテンツエディタ（エディタ領域のみスクロール可能） %>
+  <div class="grow flex flex-col min-h-0 mt-2">
+    <%= render Ui::TiptapEditorComponent.new(
+      builder: f,
+      method: :content,
+      variant: @form.errors[:content].any? ? :alert : :default
+    ) %>
+
+    <%= render Ui::FieldErrorsComponent.new(error_messages: @form.errors.full_messages_for(:content)) %>
+  </div>
+<% end %>

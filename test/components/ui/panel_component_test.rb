@@ -28,4 +28,23 @@ class Ui::PanelComponentTest < ViewComponent::TestCase
 
     assert_selector("div", text: "Test Content")
   end
+
+  # =====================================
+  # サイズバリエーション
+  # =====================================
+
+  test "size: fullでw-fullクラスが適用されること" do
+    render_inline(Ui::PanelComponent.new(size: :full))
+    assert_selector("div.w-full")
+  end
+
+  test "size: largeでw-[800px]クラスが適用されること" do
+    render_inline(Ui::PanelComponent.new(size: :large))
+    assert_selector('div.w-\[800px\]')
+  end
+
+  test "size: smallでw-[200px]クラスが適用されること" do
+    render_inline(Ui::PanelComponent.new(size: :small))
+    assert_selector('div.w-\[200px\]')
+  end
 end

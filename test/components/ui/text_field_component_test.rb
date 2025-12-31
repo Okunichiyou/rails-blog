@@ -42,4 +42,32 @@ class Ui::TextFieldComponentTest < ViewComponent::TestCase
       Ui::TextFieldComponent.new(builder: form_builder, method: :user_name, size: :medium, variant: :invalid)
     end
   end
+
+  # =====================================
+  # サイズバリエーション
+  # =====================================
+
+  test "size: fullでw-fullクラスが適用されること" do
+    render_inline(Ui::TextFieldComponent.new(builder: form_builder, method: :user_name, size: :full))
+    assert_selector("input.w-full")
+  end
+
+  test "size: largeでw-[20rem]クラスが適用されること" do
+    render_inline(Ui::TextFieldComponent.new(builder: form_builder, method: :user_name, size: :large))
+    assert_selector('input.w-\[20rem\]')
+  end
+
+  test "size: smallでw-[10rem]クラスが適用されること" do
+    render_inline(Ui::TextFieldComponent.new(builder: form_builder, method: :user_name, size: :small))
+    assert_selector('input.w-\[10rem\]')
+  end
+
+  # =====================================
+  # バリアントバリエーション
+  # =====================================
+
+  test "variant: alertでborder-alertクラスが適用されること" do
+    render_inline(Ui::TextFieldComponent.new(builder: form_builder, method: :user_name, size: :medium, variant: :alert))
+    assert_selector("input.border-alert")
+  end
 end

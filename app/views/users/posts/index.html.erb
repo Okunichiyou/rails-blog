@@ -1,0 +1,48 @@
+<div class="flex justify-center">
+  <%= render Ui::PanelComponent.new(size: :large) do |panel| %>
+    <%- panel.with_panel_content do %>
+      <h2><%= @user.name %>の投稿記事</h2>
+
+      <% if @posts.empty? %>
+        <p class="text-secondary">投稿した記事はありません</p>
+      <% else %>
+        <ul class="divide-y divide-default">
+          <% @posts.each do |post| %>
+            <li class="py-3">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h3>
+                    <%= link_to post.title, post_path(post), class: "text-link" %>
+                  </h3>
+                  <p class="text-secondary text-size-note">
+                    公開: <%= l(post.first_published_at, format: :short) %>
+                  </p>
+                </div>
+                <% if current_user&.id == @user.id %>
+                  <div class="flex gap-2">
+                    <%= link_to edit_user_post_path(@user, post) do %>
+                      <%= render Ui::Button::Component.new(
+                        category: :secondary,
+                        size: :small,
+                        text: "編集"
+                      ) %>
+                    <% end %>
+                    <%= form_with url: user_post_path(@user, post), method: :delete, data: { turbo_confirm: "本当に削除しますか？公開記事が削除されます。" } do %>
+                      <%= render Ui::Button::Component.new(
+                        category: :secondary,
+                        variant: :danger,
+                        size: :small,
+                        type: :submit,
+                        text: "削除"
+                      ) %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

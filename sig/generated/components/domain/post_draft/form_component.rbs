@@ -1,0 +1,8 @@
+module Domain
+  module PostDraft
+    class FormComponent < ApplicationComponent
+      # @rbs (form: PostDraftForm, url: String, ?method: Symbol) -> void
+      def initialize: (form: PostDraftForm, url: String, ?method: Symbol) -> void
+    end
+  end
+end
