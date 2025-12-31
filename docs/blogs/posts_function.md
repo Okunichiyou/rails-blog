@@ -23,7 +23,8 @@ erDiagram
         bigint user_id FK "NOT NULL"
         string title "NOT NULL"
         text content "本文HTML"
-        datetime published_at "NOT NULL"
+        datetime first_published_at "NOT NULL, 初回公開日時"
+        datetime last_published_at "NOT NULL, 最終公開日時"
         datetime created_at "NOT NULL"
         datetime updated_at "NOT NULL"
     }
@@ -93,17 +94,43 @@ erDiagram
 
 ※ 画像は `active_storage_blobs` に直接保存され、`active_storage_attachments` は使用しない（孤立Blob）
 
-### 画像サイズの調整
+## ライフサイクル
 
-- エディタで幅（px）を指定可能
-- HTMLの `width` 属性として保存
-- 表示時にCSSでリサイズ
+### post_drafts（下書き）
 
-## 運用フロー
+| 操作 | タイミング | 詳細 |
+| ------ | ------------ | ------ |
+| **作成** | 新規下書き作成時 | `post_id = NULL` で作成。著者が「新規下書き」ボタンを押下 |
+| **更新** | 下書き保存時 | 「保存」ボタン押下で `title`, `content`, `updated_at` を更新 |
+| **更新** | 初回公開時 | `post_id` に公開された記事のIDが設定される |
+| **削除** | 著者による削除時 | 下書き一覧から「削除」ボタン押下。紐づく `posts` は削除されない |
+
+### posts（公開記事）
+
+| 操作 | タイミング | 詳細 |
+| ------ | ------------ | ------ |
+| **作成** | 初回公開時 | 下書き一覧から「公開」ボタン押下。`first_published_at` と `last_published_at` に現在時刻を設定 |
+| **更新** | 公開内容更新時 | 下書き一覧から「更新」ボタン押下。`title`, `content`, `last_published_at` を更新（`first_published_at` は不変） |
+| **削除** | 著者による削除時 | ユーザーの記事一覧から「削除」ボタン押下。紐づく `post_drafts.post_id` は `NULL` にならない（下書きも削除される想定） |
+
+### アクションと更新対象
+
+| アクション | 更新されるテーブル | 備考 |
+| ------------ | ------------------- | ------ |
+| 下書き作成 | `post_drafts` (INSERT) | 新規レコード作成 |
+| 保存 | `post_drafts` (UPDATE) | title, content を更新 |
+| 公開 | `posts` (INSERT), `post_drafts` (UPDATE) | posts 作成、post_id を設定 |
+| 下書き保存 | `post_drafts` (UPDATE) | title, content を更新。posts は変更なし |
+| 更新を公開 | `posts` (UPDATE) | title, content, last_published_at を更新 |
+| 下書き削除 | `post_drafts` (DELETE) | 公開済みの場合、posts は残る |
+| 記事削除 | `posts` (DELETE) | post_drafts は残る |
+
+### 運用フロー
 
 1. **新規下書き作成**: `post_drafts` に `post_id = NULL` で作成
-2. **新規公開**: 下書きから `posts` を作成し、下書きの `post_id` に公開記事のIDを設定（下書きは削除せず保持）
-3. **公開記事の編集**: 紐づいた下書き（`post_id` が設定済み）を編集
-4. **編集反映**: 下書きの内容で `posts` を更新
+2. **下書き保存**: `post_drafts` の `title`, `content` を更新
+3. **初回公開**: 下書きから `posts` を作成し、下書きの `post_id` に公開記事のIDを設定
+4. **公開後の編集**: 紐づいた下書きを編集・保存（`posts` は変更されない）
+5. **更新を公開**: 下書きの内容で `posts` を更新し、`last_published_at` を現在時刻に設定
 
 ※ 下書きは公開後も保持され、公開記事の編集用として再利用される
