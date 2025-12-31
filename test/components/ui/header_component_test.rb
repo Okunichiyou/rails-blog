@@ -39,7 +39,7 @@ class HeaderComponentTest < ViewComponent::TestCase
   test "未ログイン時にサインアップリンクが表示されること" do
     render_inline(Ui::HeaderComponent.new(login_user: nil))
 
-    assert_selector(".hamburger-menu a[href='/users/database_authentications/new']", text: "サインアップ")
+    assert_selector(".hamburger-menu a[href='/confirmations/confirmation/new']", text: "サインアップ")
   end
 
   # =====================================
