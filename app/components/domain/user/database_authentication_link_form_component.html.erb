@@ -1,4 +1,4 @@
-<%= form_with(model: @form, url: link_create_user_database_authentications_path, html: { method: :post, class: "database-authentication-link-form flex flex-col gap-4" }) do |f| %>
+<%= form_with(model: @form, url: link_create_users_database_authentications_path, html: { method: :post, class: "database-authentication-link-form flex flex-col gap-4" }) do |f| %>
   <% if @form.errors[:base].any? %>
     <%= render Ui::FlashComponent.new(flash_type: :alert) do |c| %>
       <%- c.with_flash_content do %>

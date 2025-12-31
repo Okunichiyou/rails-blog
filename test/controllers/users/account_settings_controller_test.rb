@@ -1,6 +1,6 @@
 require "test_helper"
 
-class User::AccountSettingsControllerTest < ActionDispatch::IntegrationTest
+class Users::AccountSettingsControllerTest < ActionDispatch::IntegrationTest
   test "ログイン済みユーザーはアカウント設定画面を表示できる" do
     # ログイン
     post login_path, params: {
@@ -10,13 +10,13 @@ class User::AccountSettingsControllerTest < ActionDispatch::IntegrationTest
       }
     }
 
-    get user_account_settings_path
+    get users_account_settings_path
 
     assert_response :success
   end
 
   test "未ログインユーザーはログイン画面にリダイレクトされる" do
-    get user_account_settings_path
+    get users_account_settings_path
 
     assert_redirected_to login_path
     assert_equal "ログインしてください", flash[:alert]

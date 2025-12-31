@@ -1,6 +1,6 @@
 require "test_helper"
 
-class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::IntegrationTest
+class Users::SnsCredentialRegistrationsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @pending = user_pending_sns_credentials(:one)
   end
@@ -13,7 +13,7 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
   end
 
   test "GET new: 有効なトークンでフォームを表示" do
-    get new_user_sns_credential_registration_path(token: @pending.token)
+    get new_users_sns_credential_registration_path(token: @pending.token)
 
     assert_response :success
     assert_select "h2", "登録フォーム"
@@ -22,28 +22,28 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
   end
 
   test "GET new: Googleから取得したユーザー名が初期値として設定されている" do
-    get new_user_sns_credential_registration_path(token: @pending.token)
+    get new_users_sns_credential_registration_path(token: @pending.token)
 
     assert_response :success
     assert_select "input[name='user_sns_credential_registration[user_name]'][value=?]", @pending.name
   end
 
   test "GET new: メールアドレスが表示される" do
-    get new_user_sns_credential_registration_path(token: @pending.token)
+    get new_users_sns_credential_registration_path(token: @pending.token)
 
     assert_response :success
     assert_select "p", @pending.email
   end
 
   test "GET new: 無効なトークンの場合はエラー画面" do
-    get new_user_sns_credential_registration_path(token: "invalid_token")
+    get new_users_sns_credential_registration_path(token: "invalid_token")
 
     assert_response :unprocessable_content
   end
 
   test "GET new: 期限切れトークンの場合はエラー画面" do
     expired = user_pending_sns_credentials(:expired)
-    get new_user_sns_credential_registration_path(token: expired.token)
+    get new_users_sns_credential_registration_path(token: expired.token)
 
     assert_response :unprocessable_content
   end
@@ -51,7 +51,7 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
   test "POST create: 有効なパラメータでユーザーを作成してログイン" do
     assert_difference "User.count", 1 do
       assert_difference "User::SnsCredential.count", 1 do
-        post user_sns_credential_registrations_path, params: form_params(
+        post users_sns_credential_registrations_path, params: form_params(
           token: @pending.token,
           user_name: "Custom User Name"
         )
@@ -74,7 +74,7 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
 
   test "POST create: PendingSnsCredentialが削除される" do
     assert_difference "User::PendingSnsCredential.count", -1 do
-      post user_sns_credential_registrations_path, params: form_params(
+      post users_sns_credential_registrations_path, params: form_params(
         token: @pending.token,
         user_name: "Custom User Name"
       )
@@ -85,7 +85,7 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
 
   test "POST create: user_nameが空の場合はエラー" do
     assert_no_difference [ "User.count", "User::SnsCredential.count" ] do
-      post user_sns_credential_registrations_path, params: form_params(
+      post users_sns_credential_registrations_path, params: form_params(
         token: @pending.token,
         user_name: ""
       )
@@ -98,7 +98,7 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
 
   test "POST create: 無効なトークンの場合はエラー" do
     assert_no_difference [ "User.count", "User::SnsCredential.count" ] do
-      post user_sns_credential_registrations_path, params: form_params(
+      post users_sns_credential_registrations_path, params: form_params(
         token: "invalid_token",
         user_name: "Test User"
       )
@@ -111,7 +111,7 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
     existing_user = users(:one)
 
     assert_no_difference [ "User.count", "User::SnsCredential.count" ] do
-      post user_sns_credential_registrations_path, params: form_params(
+      post users_sns_credential_registrations_path, params: form_params(
         token: @pending.token,
         user_name: existing_user.name
       )
@@ -132,7 +132,7 @@ class User::SnsCredentialRegistrationsControllerTest < ActionDispatch::Integrati
     )
 
     assert_no_difference [ "User.count", "User::SnsCredential.count" ] do
-      post user_sns_credential_registrations_path, params: form_params(
+      post users_sns_credential_registrations_path, params: form_params(
         token: @pending.token,
         user_name: "Test User"
       )

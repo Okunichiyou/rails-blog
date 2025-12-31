@@ -1,4 +1,4 @@
-class User::ConfirmationsController < Devise::ConfirmationsController
+class Users::ConfirmationsController < Devise::ConfirmationsController
   def new
     @form = User::EmailConfirmationForm.new
     respond_with(@form)
@@ -24,9 +24,9 @@ class User::ConfirmationsController < Devise::ConfirmationsController
     if resource.errors.empty?
       # 他の認証手段を持っているユーザーが新たにメール認証をアカウントに追加する場合
       if current_user.present?
-        redirect_to link_new_user_database_authentications_path(confirmation_token: resource.confirmation_token)
+        redirect_to link_new_users_database_authentications_path(confirmation_token: resource.confirmation_token)
       else
-        redirect_to new_user_database_authentication_path(confirmation_token: resource.confirmation_token)
+        redirect_to new_users_database_authentication_path(confirmation_token: resource.confirmation_token)
       end
     else
       respond_with(resource, status: :unprocessable_content)

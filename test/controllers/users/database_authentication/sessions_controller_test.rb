@@ -1,6 +1,6 @@
 require "test_helper"
 
-class User::DatabaseAuthentication::SessionsControllerTest < ActionDispatch::IntegrationTest
+class Users::DatabaseAuthentication::SessionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.create!(name: "Test User")
     @user_database_authentication = User::DatabaseAuthentication.create!(

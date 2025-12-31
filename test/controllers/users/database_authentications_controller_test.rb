@@ -1,6 +1,6 @@
 require "test_helper"
 
-class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationTest
+class Users::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationTest
   setup do
     OmniAuth.config.test_mode = true
   end
@@ -32,14 +32,14 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       confirmed_at: 30.minutes.ago
     )
 
-    get new_user_database_authentication_path(confirmation_token: "valid_token")
+    get new_users_database_authentication_path(confirmation_token: "valid_token")
 
     assert_response :success
     assert_select "form", count: 1
   end
 
   test "GET /user/database_authentications/new 無効なトークンでエラー" do
-    get new_user_database_authentication_path(confirmation_token: "invalid_token")
+    get new_users_database_authentication_path(confirmation_token: "invalid_token")
 
     assert_response :unprocessable_content
     assert_select "form", count: 1
@@ -52,7 +52,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       confirmation_sent_at: 10.minutes.ago
     )
 
-    get new_user_database_authentication_path(confirmation_token: "unconfirmed_token")
+    get new_users_database_authentication_path(confirmation_token: "unconfirmed_token")
 
     assert_response :unprocessable_content
     assert_select "form", count: 1
@@ -72,7 +72,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
 
     assert_difference [ "User.count", "User::DatabaseAuthentication.count" ], 1 do
       assert_difference "User::Confirmation.count", -1 do
-        post user_database_authentications_path, params: registration_form_params(
+        post users_database_authentications_path, params: registration_form_params(
           confirmation_token: "finish_token",
           user_name: "Test User",
           email: "finish@example.com",
@@ -96,7 +96,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
 
   test "POST /user/database_authentications 無効なトークンでエラー" do
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      post user_database_authentications_path, params: registration_form_params(
+      post users_database_authentications_path, params: registration_form_params(
         confirmation_token: "invalid_token",
         user_name: "Test User",
         email: "test@example.com",
@@ -119,7 +119,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
       assert_no_difference "User::Confirmation.count" do
-        post user_database_authentications_path, params: registration_form_params(
+        post users_database_authentications_path, params: registration_form_params(
           confirmation_token: "mismatch_token",
           user_name: "Test User",
           email: "mismatch@example.com",
@@ -142,7 +142,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
-      post user_database_authentications_path, params: registration_form_params(
+      post users_database_authentications_path, params: registration_form_params(
         confirmation_token: "short_token",
         user_name: "Test User",
         email: "short@example.com",
@@ -163,7 +163,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
-      post user_database_authentications_path, params: registration_form_params(
+      post users_database_authentications_path, params: registration_form_params(
         confirmation_token: "missing_token",
         user_name: "",
         email: "missing@example.com",
@@ -187,7 +187,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
-      post user_database_authentications_path, params: registration_form_params(
+      post users_database_authentications_path, params: registration_form_params(
         confirmation_token: "missing_token",
         user_name: "user",
         email: "missing@example.com",
@@ -207,7 +207,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User.count", "User::DatabaseAuthentication.count" ] do
-      post user_database_authentications_path, params: registration_form_params(
+      post users_database_authentications_path, params: registration_form_params(
         confirmation_token: "unconfirmed_token",
         user_name: "Test User",
         email: "unconfirmed@example.com",
@@ -230,7 +230,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
 
     assert_difference [ "User.count", "User::DatabaseAuthentication.count" ], 1 do
       assert_difference "User::Confirmation.count", -1 do
-        post user_database_authentications_path, params: registration_form_params(
+        post users_database_authentications_path, params: registration_form_params(
           confirmation_token: "test_token",
           user_name: "Test User",
           email: "malicious@example.com", # 悪意のあるユーザーが別のemailを送信
@@ -283,7 +283,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       confirmed_at: 30.minutes.ago
     )
 
-    get link_new_user_database_authentications_path(confirmation_token: "link_token")
+    get link_new_users_database_authentications_path(confirmation_token: "link_token")
 
     assert_response :success
   end
@@ -296,7 +296,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       confirmed_at: 30.minutes.ago
     )
 
-    get link_new_user_database_authentications_path(confirmation_token: "link_token")
+    get link_new_users_database_authentications_path(confirmation_token: "link_token")
 
     assert_response :redirect
     assert_redirected_to login_path
@@ -323,7 +323,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
 
     post sns_credential_google_oauth2_omniauth_callback_path
 
-    get link_new_user_database_authentications_path(confirmation_token: "invalid_token")
+    get link_new_users_database_authentications_path(confirmation_token: "invalid_token")
 
     assert_response :unprocessable_content
   end
@@ -344,7 +344,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
       confirmed_at: 30.minutes.ago
     )
 
-    get link_new_user_database_authentications_path(confirmation_token: "link_token")
+    get link_new_users_database_authentications_path(confirmation_token: "link_token")
 
     assert_response :unprocessable_content
   end
@@ -384,7 +384,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     assert_difference "User::DatabaseAuthentication.count", 1 do
       assert_difference "User::Confirmation.count", -1 do
         assert_no_difference "User.count" do
-          post link_create_user_database_authentications_path, params: link_form_params(
+          post link_create_users_database_authentications_path, params: link_form_params(
             confirmation_token: "link_token",
             password: "password123",
             password_confirmation: "password123"
@@ -411,7 +411,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      post link_create_user_database_authentications_path, params: link_form_params(
+      post link_create_users_database_authentications_path, params: link_form_params(
         confirmation_token: "link_token",
         password: "password123",
         password_confirmation: "password123"
@@ -444,7 +444,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     post sns_credential_google_oauth2_omniauth_callback_path
 
     assert_no_difference [ "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      post link_create_user_database_authentications_path, params: link_form_params(
+      post link_create_users_database_authentications_path, params: link_form_params(
         confirmation_token: "invalid_token",
         password: "password123",
         password_confirmation: "password123"
@@ -483,7 +483,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      post link_create_user_database_authentications_path, params: link_form_params(
+      post link_create_users_database_authentications_path, params: link_form_params(
         confirmation_token: "link_token",
         password: "password123",
         password_confirmation: "different_password"
@@ -510,7 +510,7 @@ class User::DatabaseAuthenticationsControllerTest < ActionDispatch::IntegrationT
     )
 
     assert_no_difference [ "User::DatabaseAuthentication.count", "User::Confirmation.count" ] do
-      post link_create_user_database_authentications_path, params: link_form_params(
+      post link_create_users_database_authentications_path, params: link_form_params(
         confirmation_token: "link_token",
         password: "password123",
         password_confirmation: "password123"

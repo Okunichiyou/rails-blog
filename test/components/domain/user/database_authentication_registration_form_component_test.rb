@@ -16,7 +16,7 @@ class Domain::User::DatabaseAuthenticationRegistrationFormComponentTest < ViewCo
       form: @form
     ))
 
-    assert_selector("form[action='/user/database_authentications'][method=post]")
+    assert_selector("form[action='/users/database_authentications'][method=post]")
   end
 
   test "nameのラベルとinput要素があること" do

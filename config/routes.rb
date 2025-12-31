@@ -1,30 +1,53 @@
 Rails.application.routes.draw do
+  # ====================
+  # 開発用ツール
+  # ====================
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
+  # ====================
+  # 基本ルート
+  # ====================
   root "posts#index"
   get "up" => "rails/health#show", as: :rails_health_check
 
+  # ====================
+  # Devise設定
+  # ====================
   devise_for :user, skip: :all
+  devise_for :users
   devise_for :database_authentications, class_name: "User::DatabaseAuthentication", skip: :all
+  devise_for :confirmations, class_name: "User::Confirmation", controllers: {
+    confirmations: "users/confirmations"
+  }
   devise_for :sns_credentials, class_name: "User::SnsCredential",
-    path: "user/sns_credentials",
+    path: "users/sns_credentials",
     controllers: {
-      omniauth_callbacks: "user/sns_credential/omniauth_callbacks"
+      omniauth_callbacks: "users/sns_credential/omniauth_callbacks"
     }
 
+  # ====================
+  # 認証ルート
+  # ====================
   devise_scope :database_authentication do
-    get "/login", to: "user/database_authentication/sessions#new", as: :login
-    post "/login", to: "user/database_authentication/sessions#create"
-    delete "/logout", to: "user/database_authentication/sessions#destroy", as: :logout
-  end
-  devise_for :confirmations, class_name: "User::Confirmation", controllers: {
-    confirmations: "user/confirmations"
-  }
-  devise_scope :confirmation do
-    get "/confirmations/sent", to: "user/confirmations#sent", as: "email_confirmation_sent"
+    get "/login", to: "users/database_authentication/sessions#new", as: :login
+    post "/login", to: "users/database_authentication/sessions#create"
+    delete "/logout", to: "users/database_authentication/sessions#destroy", as: :logout
   end
 
-  namespace :user do
+  devise_scope :confirmation do
+    get "/confirmations/sent", to: "users/confirmations#sent", as: "email_confirmation_sent"
+  end
+
+  # OmniAuth failure時にnew_user_session_pathが必要なためエイリアスを定義
+  direct :new_user_session do
+    "/login"
+  end
+
+  # ====================
+  # ユーザー関連
+  # ====================
+  # ユーザー機能（認証・登録・設定など）
+  namespace :users do
     resources :database_authentications, only: [ :new, :create ] do
       collection do
         get :link_new
@@ -33,17 +56,17 @@ Rails.application.routes.draw do
     end
     resources :sns_credential_registrations, only: [ :new, :create ]
     resource :account_settings, only: [ :show ]
+    resources :post_drafts, except: [ :show ]
   end
 
+  # 特定ユーザーのリソース参照
   resources :users, only: [] do
     resources :posts, only: [ :index, :edit, :destroy ], controller: "users/posts"
   end
 
-  namespace :users do
-    resources :post_drafts, except: [ :show ]
-  end
+  # ====================
+  # その他リソース
+  # ====================
   resources :posts, only: [ :index, :show, :create, :update ]
   resources :editor_images, only: [ :create ]
-
-  devise_for :users
 end

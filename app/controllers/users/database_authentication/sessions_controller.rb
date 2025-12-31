@@ -1,4 +1,4 @@
-class User::DatabaseAuthentication::SessionsController < Devise::SessionsController
+class Users::DatabaseAuthentication::SessionsController < Devise::SessionsController
   def create
     super do |resource|
       sign_in(:user, resource.user)
