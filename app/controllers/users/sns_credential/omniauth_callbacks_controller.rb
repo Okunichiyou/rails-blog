@@ -23,12 +23,6 @@ class Users::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallba
     redirect_to login_path, alert: "Authentication failed: #{error_type}"
   end
 
-  protected
-
-  def after_omniauth_failure_path_for(_scope)
-    login_path
-  end
-
   private
 
   def handle_account_linking(provider)

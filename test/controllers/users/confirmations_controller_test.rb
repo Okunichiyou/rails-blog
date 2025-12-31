@@ -93,6 +93,39 @@ class Users::ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "valid_token", confirmation.confirmation_token
   end
 
+  test "GET /confirmations/confirmation ログイン済みユーザーは連携画面へリダイレクト" do
+    # ログイン用のユーザーを作成
+    user = User.create!(name: "existing_user")
+    User::DatabaseAuthentication.create!(
+      user: user,
+      email: "existing@example.com",
+      password: "password123"
+    )
+
+    # ログイン
+    post login_path, params: {
+      database_authentication: {
+        email: "existing@example.com",
+        password: "password123"
+      }
+    }
+
+    # 新しいメールアドレスの確認
+    confirmation = User::Confirmation.create!(
+      unconfirmed_email: "new_email@example.com",
+      confirmation_token: "link_token"
+    )
+
+    get confirmation_confirmation_path, params: { confirmation_token: "link_token" }
+
+    # ログイン済みの場合は連携画面へリダイレクト
+    assert_redirected_to link_new_users_database_authentications_path(confirmation_token: "link_token")
+
+    # メールアドレスの確認が完了している
+    confirmation.reload
+    assert_not_nil confirmation.confirmed_at
+  end
+
   test "GET /confirmations/confirmation 無効なトークンでエラーメッセージ表示" do
     get confirmation_confirmation_path, params: { confirmation_token: "invalid_token" }
 
