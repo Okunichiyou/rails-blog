@@ -3,7 +3,7 @@
     <%- panel.with_panel_content do %>
       <h1 class="mb-6">ログイン</h1>
 
-      <div class="flex gap-6">
+      <div class="flex flex-col md:flex-row gap-6">
         <!-- 左側: SNSログイン -->
         <div class="flex-1 flex flex-col justify-center items-center">
           <%= form_with url: sns_credential_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false }, html: { class: "w-full" } do %>
@@ -18,11 +18,11 @@
           <% end %>
         </div>
 
-        <!-- 中央: 区切り線 -->
-        <div class="border-l border-gray-300"></div>
+        <!-- 区切り線: モバイルは横線、デスクトップは縦線 -->
+        <div class="border-t md:border-t-0 md:border-l border-gray-300"></div>
 
         <!-- 右側: DBログインフォーム -->
-        <div class="flex-1">
+        <div class="flex-1 min-w-0">
           <%= render Domain::User::LoginFormComponent.new(
             resource: resource,
             resource_name: resource_name
