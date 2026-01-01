@@ -62,6 +62,6 @@ class Users::PostDraftsController < ApplicationController
   end
 
   def post_draft_params
-    params.expect(post_draft: %i[title content]).to_h.symbolize_keys
+    params.expect(post_draft: %i[title content])
   end
 end
