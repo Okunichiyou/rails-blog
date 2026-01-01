@@ -36,6 +36,6 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   private
 
   def resource_params
-    params.require(:user_email_confirmation).permit(:email)
+    params.expect(user_email_confirmation: %i[email])
   end
 end
