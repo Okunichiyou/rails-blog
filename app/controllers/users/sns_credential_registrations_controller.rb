@@ -11,7 +11,7 @@ class Users::SnsCredentialRegistrationsController < ApplicationController
   end
 
   def create
-    form_params = params.require(:user_sns_credential_registration).permit(:user_name, :token)
+    form_params = params.expect(user_sns_credential_registration: %i[user_name token])
     @form = User::SnsCredentialRegistrationForm.new(form_params)
 
     if @form.save
