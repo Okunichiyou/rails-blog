@@ -138,6 +138,14 @@ bundle exec rails db:reset
 
     著者ユーザーは記事の作成・編集・公開が可能です。
 
+### メールの確認
+
+開発環境では[letter_opener_web](https://github.com/fgrehm/letter_opener_web)を使用しています。アプリケーションから送信されたメールは実際には送信されず、以下のURLで確認できます。
+
+`http://localhost:3000/letter_opener`
+
+送信済みメールは `tmp/letter_opener/` に保存されます。
+
 ### 型チェック
 
 このプロジェクトでは、Steepとrbs-inlineを使用して型チェックを行っています。
