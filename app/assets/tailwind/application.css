@@ -38,6 +38,7 @@
 
   /* ボーダー色 */
   --color-border-default: var(--color-text-default);
+  --color-border-secondary: light-dark(rgb(209 213 219), rgb(156 163 175));
   --color-border-alert: var(--color-text-alert-inline);
   --color-border-info: light-dark(rgb(59 130 246), rgb(96 165 250));
   --color-border-notice: light-dark(rgb(34 197 94), rgb(74 222 128));
@@ -276,6 +277,10 @@
   /* ボーダー色 */
   .border-default {
     border-color: var(--color-border-default);
+  }
+
+  .border-secondary {
+    border-color: var(--color-border-secondary);
   }
 
   .border-alert {

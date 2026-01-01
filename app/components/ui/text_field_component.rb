@@ -42,11 +42,11 @@ module Ui
       when :full
         "w-full"
       when :large
-        "w-[20rem]"
+        "w-[20rem] max-w-full"
       when :medium
-        "w-[15rem]"
+        "w-[15rem] max-w-full"
       when :small
-        "w-[10rem]"
+        "w-[10rem] max-w-full"
       else
         ""
       end

@@ -19,8 +19,8 @@ module Ui
       # @rbs () -> String
       def size_class
         case @size
-        when :sm then "w-4 h-4"
-        when :lg then "w-6 h-6"
+        when :sm then "w-4 h-4 max-w-full"
+        when :lg then "w-6 h-6 max-w-full"
         else "w-5 h-5" # :md (default)
         end
       end

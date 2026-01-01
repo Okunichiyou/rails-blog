@@ -32,6 +32,30 @@ class Ui::EmailFieldComponentTest < ViewComponent::TestCase
     assert_selector("input.custom-class")
   end
 
+  test "size: :full で w-full クラスが適用されること" do
+    render_inline(Ui::EmailFieldComponent.new(builder: form_builder, method: :email, size: :full))
+
+    assert_selector("input.w-full")
+  end
+
+  test "size: :large で w-[20rem] クラスが適用されること" do
+    render_inline(Ui::EmailFieldComponent.new(builder: form_builder, method: :email, size: :large))
+
+    assert_selector('input.w-\[20rem\]')
+  end
+
+  test "size: :small で w-[10rem] クラスが適用されること" do
+    render_inline(Ui::EmailFieldComponent.new(builder: form_builder, method: :email, size: :small))
+
+    assert_selector('input.w-\[10rem\]')
+  end
+
+  test "variant: :alert で border-alert クラスが適用されること" do
+    render_inline(Ui::EmailFieldComponent.new(builder: form_builder, method: :email, size: :medium, variant: :alert))
+
+    assert_selector("input.border-alert")
+  end
+
   test "不適切なsizeを適用したらエラーが出ること" do
     assert_raises(ArgumentError, "Invalid attribute value: 'invalid'. Must be one of full, large, medium, small.") do
       Ui::EmailFieldComponent.new(builder: form_builder, method: :email, size: :invalid)
