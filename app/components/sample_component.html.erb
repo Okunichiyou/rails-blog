@@ -1,0 +1,241 @@
+<div class="sample-component p-8 space-y-8">
+  <%# ========================================= %>
+  <%# Typography %>
+  <%# ========================================= %>
+  <section>
+    <h2 class="text-size-heading2 font-weight-heading mb-4 border-b border-default pb-2">Typography</h2>
+    <div class="space-y-2">
+      <p>サンプルの文章</p>
+      <p>文中の<a href="#">リンク</a>のサンプル</p>
+      <h1>見出し1</h1>
+      <p>テスト</p>
+      <h2>見出し2</h2>
+      <p>テスト</p>
+      <h3>見出し3</h3>
+      <p>テスト</p>
+      <h4>見出し4</h4>
+      <p>テスト</p>
+      <h5>見出し5</h5>
+      <p>テスト</p>
+      <h6>見出し6</h6>
+      <p>テスト</p>
+    </div>
+  </section>
+
+  <%# ========================================= %>
+  <%# Ui::Button::Component %>
+  <%# ========================================= %>
+  <section>
+    <h2 class="text-size-heading2 font-weight-heading mb-4 border-b border-default pb-2">Ui::Button::Component</h2>
+
+    <h3 class="text-size-heading3 font-weight-heading mb-2">サイズバリエーション</h3>
+    <div class="flex flex-wrap gap-4 items-center mb-6">
+      <%= render Ui::Button::Component.new(category: :primary, size: :full, text: "Full") %>
+    </div>
+    <div class="flex flex-wrap gap-4 items-center mb-6">
+      <%= render Ui::Button::Component.new(category: :primary, size: :large, text: "Large") %>
+      <%= render Ui::Button::Component.new(category: :primary, size: :medium, text: "Medium") %>
+      <%= render Ui::Button::Component.new(category: :primary, size: :small, text: "Small") %>
+    </div>
+
+    <h3 class="text-size-heading3 font-weight-heading mb-2">カテゴリー</h3>
+    <div class="flex flex-wrap gap-4 items-center mb-6">
+      <%= render Ui::Button::Component.new(category: :primary, size: :medium, text: "Primary") %>
+      <%= render Ui::Button::Component.new(category: :secondary, size: :medium, text: "Secondary") %>
+    </div>
+
+    <h3 class="text-size-heading3 font-weight-heading mb-2">バリアント</h3>
+    <div class="flex flex-wrap gap-4 items-center mb-6">
+      <%= render Ui::Button::Component.new(category: :primary, size: :medium, variant: :default, text: "Default") %>
+      <%= render Ui::Button::Component.new(category: :primary, size: :medium, variant: :danger, text: "Danger") %>
+      <%= render Ui::Button::Component.new(category: :secondary, size: :medium, variant: :default, text: "Default") %>
+      <%= render Ui::Button::Component.new(category: :secondary, size: :medium, variant: :danger, text: "Danger") %>
+    </div>
+
+    <h3 class="text-size-heading3 font-weight-heading mb-2">無効状態</h3>
+    <div class="flex flex-wrap gap-4 items-center mb-6">
+      <%= render Ui::Button::Component.new(category: :primary, size: :medium, text: "Primary Disabled", disabled: true) %>
+      <%= render Ui::Button::Component.new(category: :secondary, size: :medium, text: "Secondary Disabled", disabled: true) %>
+      <%= render Ui::Button::Component.new(category: :primary, size: :medium, variant: :danger, text: "Danger Disabled", disabled: true) %>
+      <%= render Ui::Button::Component.new(category: :secondary, size: :medium, variant: :danger, text: "Danger Disabled", disabled: true) %>
+    </div>
+  </section>
+
+  <%# ========================================= %>
+  <%# Ui::Button::IconComponent %>
+  <%# ========================================= %>
+  <section>
+    <h2 class="text-size-heading2 font-weight-heading mb-4 border-b border-default pb-2">Ui::Button::IconComponent</h2>
+
+    <h3 class="text-size-heading3 font-weight-heading mb-2">アイコン位置</h3>
+    <div class="flex flex-wrap gap-4 items-center mb-6">
+      <%= render Ui::Button::IconComponent.new(
+        category: :primary,
+        size: :medium,
+        text: "左アイコン",
+        icon: render(Ui::Icon::PlusComponent.new(size: :sm)),
+        icon_position: :left
+      ) %>
+      <%= render Ui::Button::IconComponent.new(
+        category: :primary,
+        size: :medium,
+        text: "右アイコン",
+        icon: render(Ui::Icon::PlusComponent.new(size: :sm)),
+        icon_position: :right
+      ) %>
+    </div>
+
+    <h3 class="text-size-heading3 font-weight-heading mb-2">カテゴリー</h3>
+    <div class="flex flex-wrap gap-4 items-center mb-6">
+      <%= render Ui::Button::IconComponent.new(
+        category: :primary,
+        size: :medium,
+        text: "Primary",
+        icon: render(Ui::Icon::PlusComponent.new(size: :sm))
+      ) %>
+      <%= render Ui::Button::IconComponent.new(
+        category: :secondary,
+        size: :medium,
+        text: "Secondary",
+        icon: render(Ui::Icon::PlusComponent.new(size: :sm))
+      ) %>
+    </div>
+  </section>
+
+  <%# ========================================= %>
+  <%# Ui::Icon::PlusComponent %>
+  <%# ========================================= %>
+  <section>
+    <h2 class="text-size-heading2 font-weight-heading mb-4 border-b border-default pb-2">Ui::Icon::PlusComponent</h2>
+
+    <div class="flex flex-wrap gap-4 items-center">
+      <div class="flex flex-col items-center gap-2">
+        <%= render Ui::Icon::PlusComponent.new(size: :sm) %>
+        <span class="text-size-note">sm</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+        <%= render Ui::Icon::PlusComponent.new(size: :md) %>
+        <span class="text-size-note">md</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+        <%= render Ui::Icon::PlusComponent.new(size: :lg) %>
+        <span class="text-size-note">lg</span>
+      </div>
+    </div>
+  </section>
+
+  <%# ========================================= %>
+  <%# Ui::PanelComponent %>
+  <%# ========================================= %>
+  <section>
+    <h2 class="text-size-heading2 font-weight-heading mb-4 border-b border-default pb-2">Ui::PanelComponent</h2>
+
+    <div class="space-y-4">
+      <%= render Ui::PanelComponent.new(size: :small) do |panel| %>
+        <% panel.with_panel_content do %>
+          <p>Small パネル</p>
+        <% end %>
+      <% end %>
+
+      <%= render Ui::PanelComponent.new(size: :medium) do |panel| %>
+        <% panel.with_panel_content do %>
+          <p>Medium パネル</p>
+        <% end %>
+      <% end %>
+
+      <%= render Ui::PanelComponent.new(size: :large) do |panel| %>
+        <% panel.with_panel_content do %>
+          <p>Large パネル</p>
+        <% end %>
+      <% end %>
+
+      <%= render Ui::PanelComponent.new(size: :full) do |panel| %>
+        <% panel.with_panel_content do %>
+          <p>Full パネル</p>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+
+  <%# ========================================= %>
+  <%# Ui::FlashComponent %>
+  <%# ========================================= %>
+  <section>
+    <h2 class="text-size-heading2 font-weight-heading mb-4 border-b border-default pb-2">Ui::FlashComponent</h2>
+
+    <div class="space-y-4">
+      <%= render Ui::FlashComponent.new(flash_type: :info) do |flash| %>
+        <% flash.with_flash_content do %>
+          Info: 情報メッセージです
+        <% end %>
+      <% end %>
+
+      <%= render Ui::FlashComponent.new(flash_type: :notice) do |flash| %>
+        <% flash.with_flash_content do %>
+          Notice: 通知メッセージです
+        <% end %>
+      <% end %>
+
+      <%= render Ui::FlashComponent.new(flash_type: :warn) do |flash| %>
+        <% flash.with_flash_content do %>
+          Warn: 警告メッセージです
+        <% end %>
+      <% end %>
+
+      <%= render Ui::FlashComponent.new(flash_type: :alert) do |flash| %>
+        <% flash.with_flash_content do %>
+          Alert: エラーメッセージです
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+
+  <%# ========================================= %>
+  <%# Ui::FieldErrorsComponent %>
+  <%# ========================================= %>
+  <section>
+    <h2 class="text-size-heading2 font-weight-heading mb-4 border-b border-default pb-2">Ui::FieldErrorsComponent</h2>
+
+    <div class="space-y-4">
+      <%= render Ui::FieldErrorsComponent.new(error_messages: ["エラーメッセージ1", "エラーメッセージ2", "エラーメッセージ3"]) %>
+    </div>
+  </section>
+
+  <%# ========================================= %>
+  <%# Form Fields (TextFieldComponent, EmailFieldComponent, PasswordFieldComponent) %>
+  <%# ========================================= %>
+  <section>
+    <h2 class="text-size-heading2 font-weight-heading mb-4 border-b border-default pb-2">Form Fields</h2>
+
+    <%= form_with(url: "#", method: :get, local: true) do |form| %>
+      <h3 class="text-size-heading3 font-weight-heading mb-2">Ui::TextFieldComponent</h3>
+      <div class="flex flex-wrap gap-4 items-center mb-6">
+        <%= render Ui::TextFieldComponent.new(builder: form, method: :sample_text, size: :small, placeholder: "Small") %>
+        <%= render Ui::TextFieldComponent.new(builder: form, method: :sample_text, size: :medium, placeholder: "Medium") %>
+        <%= render Ui::TextFieldComponent.new(builder: form, method: :sample_text, size: :large, placeholder: "Large") %>
+      </div>
+      <div class="mb-6">
+        <%= render Ui::TextFieldComponent.new(builder: form, method: :sample_text, size: :full, placeholder: "Full") %>
+      </div>
+      <div class="flex flex-wrap gap-4 items-center mb-6">
+        <%= render Ui::TextFieldComponent.new(builder: form, method: :sample_text, size: :medium, variant: :default, placeholder: "Default") %>
+        <%= render Ui::TextFieldComponent.new(builder: form, method: :sample_text, size: :medium, variant: :alert, placeholder: "Alert") %>
+        <%= render Ui::TextFieldComponent.new(builder: form, method: :sample_text, size: :medium, disabled: true, placeholder: "Disabled") %>
+      </div>
+
+      <h3 class="text-size-heading3 font-weight-heading mb-2">Ui::EmailFieldComponent</h3>
+      <div class="flex flex-wrap gap-4 items-center mb-6">
+        <%= render Ui::EmailFieldComponent.new(builder: form, method: :sample_email, size: :medium, placeholder: "email@example.com") %>
+        <%= render Ui::EmailFieldComponent.new(builder: form, method: :sample_email, size: :medium, variant: :alert, placeholder: "email@example.com (alert)") %>
+        <%= render Ui::EmailFieldComponent.new(builder: form, method: :sample_email, size: :medium, disabled: true, placeholder: "email@example.com (disabled)") %>
+      </div>
+
+      <h3 class="text-size-heading3 font-weight-heading mb-2">Ui::PasswordFieldComponent</h3>
+      <div class="flex flex-wrap gap-4 items-center mb-6">
+        <%= render Ui::PasswordFieldComponent.new(builder: form, method: :sample_password, size: :medium, placeholder: "Password") %>
+        <%= render Ui::PasswordFieldComponent.new(builder: form, method: :sample_password, size: :medium, variant: :alert, placeholder: "Password (alert)") %>
+        <%= render Ui::PasswordFieldComponent.new(builder: form, method: :sample_password, size: :medium, disabled: true, placeholder: "Password (disabled)") %>
+      </div>
+    <% end %>
+  </section>
+</div>
