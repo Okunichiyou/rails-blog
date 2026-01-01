@@ -56,7 +56,7 @@ bundle exec rails server
 
 ### コンポーネントのデザイン確認
 
-`http://localhost:3000/rails/view_components/page/sample_component/default`にアクセスすると、コンポーネントの一覧が確認できます。
+`http://localhost:3000/rails/view_components/sample_component/default`にアクセスすると、コンポーネントの一覧が確認できます。
 
 ### テストの実行
 
