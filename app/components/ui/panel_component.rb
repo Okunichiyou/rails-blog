@@ -34,11 +34,11 @@ module Ui
       when :full
         "w-full"
       when :large
-        "w-[800px]"
+        "w-[800px] max-w-full"
       when :medium
-        "w-[400px]"
+        "w-[400px] max-w-full"
       when :small
-        "w-[200px]"
+        "w-[200px] max-w-full"
       else
         ""
       end
