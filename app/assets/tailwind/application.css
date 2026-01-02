@@ -36,6 +36,10 @@
   --color-text-primary-danger-button: light-dark(rgb(255 255 255), rgb(255 255 255));
   --color-text-secondary-danger-button: light-dark(rgb(131 13 38), rgb(82 15 32));
 
+  /* いいねアイコン色 */
+  --color-like: light-dark(rgb(193 40 108), rgb(251 113 133));
+  --color-bg-like-hover: light-dark(rgb(193 40 108 / 0.1), rgb(251 113 133 / 0.15));
+
   /* ボーダー色 */
   --color-border-default: var(--color-text-default);
   --color-border-secondary: light-dark(rgb(209 213 219), rgb(156 163 175));
@@ -335,6 +339,10 @@
   /* Fill色 */
   .fill-primary {
     fill: var(--color-bg-primary);
+  }
+
+  .fill-like {
+    fill: var(--color-like);
   }
 
   /* レイアウト */
