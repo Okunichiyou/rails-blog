@@ -332,6 +332,11 @@
     stroke: var(--color-text-primary-button);
   }
 
+  /* Fill色 */
+  .fill-primary {
+    fill: var(--color-bg-primary);
+  }
+
   /* レイアウト */
   .max-w-content {
     max-width: var(--max-content-width);
