@@ -6,7 +6,9 @@
 erDiagram
     users ||--o{ posts : "has many"
     users ||--o{ post_drafts : "has many"
+    users ||--o{ post_likes : "has many"
     posts ||--o| post_drafts : "has one"
+    posts ||--o{ post_likes : "has many"
     active_storage_attachments }o--|| active_storage_blobs : "belongs to"
     active_storage_blobs ||--o{ active_storage_variant_records : "has many"
 
@@ -35,6 +37,14 @@ erDiagram
         bigint post_id FK "UNIQUE, NULL = 新規下書き"
         string title "NOT NULL"
         text content "本文HTML"
+        datetime created_at "NOT NULL"
+        datetime updated_at "NOT NULL"
+    }
+
+    post_likes {
+        bigint id PK
+        bigint user_id FK "NOT NULL"
+        bigint post_id FK "NOT NULL"
         datetime created_at "NOT NULL"
         datetime updated_at "NOT NULL"
     }
@@ -73,6 +83,7 @@ erDiagram
 |-----------------------------------|----------------------------------------------------------------------------|
 | `posts`                           | 公開済みブログ記事。本文は `content` カラムにHTMLで保存                    |
 | `post_drafts`                     | 下書き。`post_id`がNULLなら新規、設定されていれば公開記事の編集中下書き    |
+| `post_likes`                      | 投稿へのいいね。ユーザーと投稿の中間テーブル（ユニーク制約あり）           |
 | `active_storage_attachments`      | 添付ファイルの中間テーブル（将来のアバター等で使用予定）                   |
 | `active_storage_blobs`            | アップロードファイルのメタデータ                                           |
 | `active_storage_variant_records`  | 画像バリアント（リサイズ版）のキャッシュ                                   |
