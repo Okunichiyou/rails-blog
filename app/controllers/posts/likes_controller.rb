@@ -4,12 +4,18 @@ class Posts::LikesController < ApplicationController
 
   def create
     @post.post_likes.find_or_create_by!(user: current_user)
-    redirect_to post_path(@post)
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to post_path(@post) }
+    end
   end
 
   def destroy
     @post.post_likes.find_by(user: current_user)&.destroy
-    redirect_to post_path(@post)
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to post_path(@post) }
+    end
   end
 
   private

@@ -1,10 +1,13 @@
 module Domain
   module Post
     class LikeButtonComponent < ApplicationComponent
-      # @rbs (post: ::Post, current_user: ::User?) -> void
-      def initialize(post:, current_user:)
+      attr_reader :frame_id
+
+      # @rbs (post: ::Post, current_user: ::User?, id: String) -> void
+      def initialize(post:, current_user:, id:)
         @post = post
         @current_user = current_user
+        @frame_id = "post-like-button-#{id}-#{post.id}"
       end
 
       # @rbs () -> bool

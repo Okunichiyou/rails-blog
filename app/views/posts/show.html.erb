@@ -1,7 +1,7 @@
 <div class="flex justify-center gap-4 pb-20 md:pb-0">
   <%# デスクトップ: 左側に固定表示されるいいねボタン %>
   <aside class="hidden md:block sticky top-24 self-start">
-    <%= render Domain::Post::LikeButtonComponent.new(post: @post, current_user: current_user) %>
+    <%= render Domain::Post::LikeButtonComponent.new(post: @post, current_user: current_user, id: "desktop") %>
   </aside>
 
   <%= render Ui::PanelComponent.new(size: :large) do |panel| %>
@@ -30,5 +30,5 @@
 
 <%# モバイル: 下部に固定表示されるフッター %>
 <div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-secondary p-3 flex justify-start px-layout">
-  <%= render Domain::Post::LikeButtonComponent.new(post: @post, current_user: current_user) %>
+  <%= render Domain::Post::LikeButtonComponent.new(post: @post, current_user: current_user, id: "mobile") %>
 </div>

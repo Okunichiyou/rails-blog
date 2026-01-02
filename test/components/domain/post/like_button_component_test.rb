@@ -13,14 +13,14 @@ class Domain::Post::LikeButtonComponentTest < ViewComponent::TestCase
   # =====================================
 
   test "未ログイン時にログインページへのリンクが表示されること" do
-    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: nil))
+    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: nil, id: "test"))
 
     assert_selector("a[href='/login']")
   end
 
   test "未ログイン時にいいね数が表示されること" do
     PostLike.create!(user: @user, post: @post)
-    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: nil))
+    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: nil, id: "test"))
 
     assert_selector("span", text: "1")
   end
@@ -30,14 +30,14 @@ class Domain::Post::LikeButtonComponentTest < ViewComponent::TestCase
   # =====================================
 
   test "未いいね時にいいねボタン（枠線）が表示されること" do
-    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: @user))
+    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: @user, id: "test"))
 
     assert_selector("form[action='/posts/#{@post.id}/like'][method='post']")
     assert_selector("button[type='submit']")
   end
 
   test "未いいね時にいいね数が0と表示されること" do
-    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: @user))
+    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: @user, id: "test"))
 
     assert_selector("span", text: "0")
   end
@@ -48,7 +48,7 @@ class Domain::Post::LikeButtonComponentTest < ViewComponent::TestCase
 
   test "いいね済み時に解除ボタン（塗りつぶし）が表示されること" do
     PostLike.create!(user: @user, post: @post)
-    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: @user))
+    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: @user, id: "test"))
 
     # DELETEメソッドのフォーム
     assert_selector("form[action='/posts/#{@post.id}/like']")
@@ -57,7 +57,7 @@ class Domain::Post::LikeButtonComponentTest < ViewComponent::TestCase
 
   test "いいね済み時にいいね数が1と表示されること" do
     PostLike.create!(user: @user, post: @post)
-    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: @user))
+    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: @user, id: "test"))
 
     assert_selector("span", text: "1")
   end
@@ -74,7 +74,7 @@ class Domain::Post::LikeButtonComponentTest < ViewComponent::TestCase
     PostLike.create!(user: user2, post: @post)
     PostLike.create!(user: user3, post: @post)
 
-    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: nil))
+    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: nil, id: "test"))
 
     assert_selector("span", text: "3")
   end
