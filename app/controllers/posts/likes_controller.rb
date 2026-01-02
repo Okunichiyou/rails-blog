@@ -25,7 +25,6 @@ class Posts::LikesController < ApplicationController
   end
 
   def set_post
-    @post = Post.find_by(id: params[:post_id])
-    head :not_found and return unless @post
+    @post = Post.find(params[:post_id])
   end
 end

@@ -22,8 +22,7 @@ class Users::PostsController < ApplicationController
   private
 
   def set_user
-    @user = User.find_by(id: params[:user_id])
-    head :not_found and return unless @user
+    @user = User.find(params[:user_id])
   end
 
   def authenticate_author!
@@ -31,8 +30,7 @@ class Users::PostsController < ApplicationController
   end
 
   def set_post
-    @post = @user.posts.find_by(id: params[:id])
-    head :not_found and return unless @post
+    @post = @user.posts.find(params[:id])
   end
 
   def create_draft_from_post

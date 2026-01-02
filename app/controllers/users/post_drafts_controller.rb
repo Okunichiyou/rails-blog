@@ -57,8 +57,7 @@ class Users::PostDraftsController < ApplicationController
   end
 
   def set_post_draft
-    @post_draft = current_user.post_drafts.find_by(id: params[:id])
-    head :not_found and return unless @post_draft
+    @post_draft = current_user.post_drafts.find(params[:id])
   end
 
   def post_draft_params
