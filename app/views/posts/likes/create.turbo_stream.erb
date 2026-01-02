@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "post-like-button-desktop-#{@post.id}" do %>
+  <%= render Domain::Post::LikeButtonComponent.new(post: @post, current_user: current_user, id: "desktop") %>
+<% end %>
+
+<%= turbo_stream.replace "post-like-button-mobile-#{@post.id}" do %>
+  <%= render Domain::Post::LikeButtonComponent.new(post: @post, current_user: current_user, id: "mobile") %>
+<% end %>

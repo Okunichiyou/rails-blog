@@ -170,6 +170,7 @@
       >
         <% if @login_user.present? %>
           <%= link_to "アカウント設定", users_account_settings_path %>
+          <%= link_to "いいねした投稿", users_liked_posts_path %>
           <% if @login_user.author? %>
             <%= link_to "下書き一覧", users_post_drafts_path %>
             <%= link_to "公開記事一覧", user_posts_path(@login_user) %>

@@ -1,0 +1,5 @@
+module Turbo
+  module FramesHelper
+    def turbo_frame_tag: (*untyped ids, ?src: String?, ?target: String?, **untyped attributes) ?{ () -> void } -> ActiveSupport::SafeBuffer
+  end
+end

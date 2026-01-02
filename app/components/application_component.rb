@@ -1,4 +1,6 @@
 class ApplicationComponent < ViewComponent::Base
+  include Turbo::FramesHelper
+
   private
 
   # @rbs (value: Symbol, white_list: Array[untyped]) -> Symbol?

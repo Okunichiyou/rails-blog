@@ -5,6 +5,8 @@ class User < ApplicationRecord
   has_many :sns_credentials, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :post_drafts, dependent: :destroy
+  has_many :post_likes, dependent: :destroy
+  has_many :liked_posts, through: :post_likes, source: :post
 
   before_validation :trim_name
 

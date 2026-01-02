@@ -1,0 +1,27 @@
+<div class="flex justify-center">
+  <%= render Ui::PanelComponent.new(size: :large) do |panel| %>
+    <%- panel.with_panel_content do %>
+      <h2>いいねした投稿</h2>
+
+      <% if @posts.empty? %>
+        <p class="text-secondary">いいねした投稿はありません</p>
+      <% else %>
+        <ul class="divide-y divide-default">
+          <% @posts.each do |post| %>
+            <li class="py-4">
+              <article>
+                <h3 class="font-weight-heading">
+                  <%= link_to post.title, post_path(post), class: "text-link" %>
+                </h3>
+                <p class="text-secondary text-size-note mt-1 flex flex-col sm:flex-row sm:gap-x-4 gap-y-1">
+                  <span>著者: <%= post.user.name %></span>
+                  <span>公開日時: <time datetime="<%= DateFormatPresenter.to_iso8601(post.first_published_at) %>"><%= DateFormatPresenter.to_long(post.first_published_at) %></time></span>
+                </p>
+              </article>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

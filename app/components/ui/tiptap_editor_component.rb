@@ -21,7 +21,7 @@ module Ui
     def variant_class
       return "" if @variant == :default
 
-      "border-alert" # :alert
+      "border-alert"
     end
 
     # @rbs () -> String

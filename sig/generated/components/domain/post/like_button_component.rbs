@@ -1,0 +1,13 @@
+module Domain
+  module Post
+    class LikeButtonComponent < ApplicationComponent
+      attr_reader frame_id: untyped
+
+      # @rbs (post: ::Post, current_user: ::User?, id: String) -> void
+      def initialize: (post: ::Post, current_user: ::User?, id: String) -> void
+
+      # @rbs () -> bool
+      def logged_in?: () -> bool
+    end
+  end
+end

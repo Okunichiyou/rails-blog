@@ -4,4 +4,10 @@ class Post < ApplicationRecord
 
   # @rbs (PostDraft) -> Post
   def update_from_draft!: (PostDraft) -> Post
+
+  # @rbs () -> Integer
+  def likes_count: () -> Integer
+
+  # @rbs (User?) -> bool
+  def liked_by?: (User?) -> bool
 end
