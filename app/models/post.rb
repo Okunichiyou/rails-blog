@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_one :draft, class_name: "PostDraft", dependent: :nullify
+  has_many :post_likes, dependent: :destroy
+  has_many :liked_by_users, through: :post_likes, source: :user
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :first_published_at, presence: true

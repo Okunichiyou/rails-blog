@@ -308,7 +308,14 @@ class Post < ::ApplicationRecord
   extend ::_ActiveRecord_Relation_ClassMethods[::Post, ::Post::ActiveRecord_Relation, ::Integer]
 
   include GeneratedAttributeMethods
-
+  def post_likes: () -> ::PostLike::ActiveRecord_Associations_CollectionProxy
+  def post_likes=: (::PostLike::ActiveRecord_Associations_CollectionProxy | ::Array[::PostLike]) -> (::PostLike::ActiveRecord_Associations_CollectionProxy | ::Array[::PostLike])
+  def post_like_ids: () -> ::Array[::Integer]
+  def post_like_ids=: (::Array[::Integer]) -> ::Array[::Integer]
+  def liked_by_users: () -> ::User::ActiveRecord_Associations_CollectionProxy
+  def liked_by_users=: (::User::ActiveRecord_Associations_CollectionProxy | ::Array[::User]) -> (::User::ActiveRecord_Associations_CollectionProxy | ::Array[::User])
+  def liked_by_user_ids: () -> ::Array[::Integer]
+  def liked_by_user_ids=: (::Array[::Integer]) -> ::Array[::Integer]
   def draft: () -> ::PostDraft?
   def draft=: (::PostDraft?) -> ::PostDraft?
   def build_draft: (?untyped) -> ::PostDraft
