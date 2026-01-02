@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     resources :sns_credential_registrations, only: [ :new, :create ]
     resource :account_settings, only: [ :show ]
     resources :post_drafts, except: [ :show ]
+    resources :liked_posts, only: [ :index ]
   end
 
   # 特定ユーザーのリソース参照
@@ -67,6 +68,8 @@ Rails.application.routes.draw do
   # ====================
   # その他リソース
   # ====================
-  resources :posts, only: [ :index, :show, :create, :update ]
+  resources :posts, only: [ :index, :show, :create, :update ] do
+    resource :like, only: [ :create, :destroy ], controller: "posts/likes"
+  end
   resources :editor_images, only: [ :create ]
 end

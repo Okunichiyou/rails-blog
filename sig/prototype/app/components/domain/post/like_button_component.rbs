@@ -1,0 +1,9 @@
+module Domain
+  module Post
+    class LikeButtonComponent < ApplicationComponent
+      @post: untyped
+
+      @current_user: untyped
+    end
+  end
+end
