@@ -31,4 +31,16 @@ class Post < ApplicationRecord
       self
     end
   end
+
+  # @rbs () -> Integer
+  def likes_count
+    post_likes.count
+  end
+
+  # @rbs (User?) -> bool
+  def liked_by?(user)
+    return false unless user
+
+    post_likes.exists?(user: user)
+  end
 end

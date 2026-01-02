@@ -5,12 +5,6 @@ module Domain
       def initialize: (post: ::Post, current_user: ::User?) -> void
 
       # @rbs () -> bool
-      def liked?: () -> bool
-
-      # @rbs () -> Integer
-      def likes_count: () -> Integer
-
-      # @rbs () -> bool
       def logged_in?: () -> bool
     end
   end

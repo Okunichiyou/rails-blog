@@ -117,4 +117,45 @@ class PostTest < ActiveSupport::TestCase
       assert_not_equal original_last_published_at, post.last_published_at
     end
   end
+
+  # =====================================
+  # likes_countテスト
+  # =====================================
+
+  test "likes_countがいいね数を返すこと" do
+    draft = PostDraft.create!(user: @user, title: "いいねテスト")
+    post = Post.create_from_draft!(draft)
+    user1 = User.create!(name: "likes_count_user1", author: false)
+    user2 = User.create!(name: "likes_count_user2", author: false)
+
+    assert_equal 0, post.likes_count
+
+    PostLike.create!(user: user1, post: post)
+    assert_equal 1, post.likes_count
+
+    PostLike.create!(user: user2, post: post)
+    assert_equal 2, post.likes_count
+  end
+
+  # =====================================
+  # liked_by?テスト
+  # =====================================
+
+  test "liked_by?がユーザーがいいねしているかどうかを返すこと" do
+    draft = PostDraft.create!(user: @user, title: "liked_by?テスト")
+    post = Post.create_from_draft!(draft)
+    user = User.create!(name: "liked_by_user", author: false)
+
+    assert_not post.liked_by?(user)
+
+    PostLike.create!(user: user, post: post)
+    assert post.liked_by?(user)
+  end
+
+  test "liked_by?がnilの場合falseを返すこと" do
+    draft = PostDraft.create!(user: @user, title: "liked_by?nilテスト")
+    post = Post.create_from_draft!(draft)
+
+    assert_not post.liked_by?(nil)
+  end
 end
