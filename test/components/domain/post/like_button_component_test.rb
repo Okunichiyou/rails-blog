@@ -18,6 +18,12 @@ class Domain::Post::LikeButtonComponentTest < ViewComponent::TestCase
     assert_selector("a[href='/login']")
   end
 
+  test "未ログイン時のリンクは画面遷移用の_top属性がついていること" do
+    render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: nil, id: "test"))
+
+    assert_selector("a[href='/login'][data-turbo-frame='_top']")
+  end
+
   test "未ログイン時にいいね数が表示されること" do
     PostLike.create!(user: @user, post: @post)
     render_inline(Domain::Post::LikeButtonComponent.new(post: @post, current_user: nil, id: "test"))
