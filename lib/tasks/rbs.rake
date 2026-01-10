@@ -3,6 +3,9 @@ return unless Rails.env.development?
 require "rbs_rails/rake_task"
 
 RBS_TARGET_DIRS = %w[app/components app/forms app/models app/presenters].freeze
+# 左から順に優先順位が高い型
+# 例えば、manualにもgeneratedにも同じ型定義がある場合はmanualの定義を優先して、generatedの定義は削除される
+RBS_TARGET_PRIORITY = %w[manual generated rbs_rails prototype].freeze
 
 namespace :rbs do
   task setup: %i[clean collection inline prototype rbs_rails:all subtract]
@@ -38,7 +41,7 @@ namespace :rbs do
   class PriorityManager
     def initialize(shell_method:)
       @shell_method = shell_method
-      @priorities = %w[manual generated rbs_rails prototype].map { |dir| "sig/#{dir}" }
+      @priorities = RBS_TARGET_PRIORITY.map { |dir| "sig/#{dir}" }
     end
 
     def execute
