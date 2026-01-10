@@ -44,6 +44,8 @@ bundle exec rails db:prepare
 
 ```bash
 # Tailwind CSSの変更をサーバー再起動なしで反映させる
+# jsファイルの修正を反映させる
+# rbs inlineの修正を即座に反映させる
 bin/dev
 ```
 
