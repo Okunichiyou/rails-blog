@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
+require_relative "config/rbs_targets"
+
 target :app do
   signature "sig"
 
-  check "app/components"
-  check "app/forms"
-  check "app/models"
-  check "app/presenters/"
-  # check "app/controllers"  # コントローラーは型チェック対象外（rbs_railsが型定義を生成しないため）
+  RBS_TARGET_DIRS.each { |dir| check dir }
 end

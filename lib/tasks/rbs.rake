@@ -1,8 +1,8 @@
 return unless Rails.env.development?
 
 require "rbs_rails/rake_task"
+require_relative "../../config/rbs_targets"
 
-RBS_TARGET_DIRS = %w[app/components app/forms app/models app/presenters].freeze
 # 左から順に優先順位が高い型
 # 例えば、manualにもgeneratedにも同じ型定義がある場合はmanualの定義を優先して、generatedの定義は削除される
 RBS_TARGET_PRIORITY = %w[manual generated rbs_rails prototype].freeze
