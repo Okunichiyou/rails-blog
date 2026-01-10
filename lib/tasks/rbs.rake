@@ -1,9 +1,25 @@
 return unless Rails.env.development?
 
 require "rbs_rails/rake_task"
+require_relative "../../config/rbs_targets"
+
+# 左から順に優先順位が高い型
+# 例えば、manualにもgeneratedにも同じ型定義がある場合はmanualの定義を優先して、generatedの定義は削除される
+RBS_TARGET_PRIORITY = %w[manual generated rbs_rails prototype].freeze
 
 namespace :rbs do
   task setup: %i[clean collection inline prototype rbs_rails:all subtract]
+
+  task :watch do
+    dirs = RBS_TARGET_DIRS.join(" ")
+    script = %Q(
+      fswatch -0 #{dirs} | xargs -0 -n1 sh -c '
+        bundle exec rbs-inline "$0" --output --opt-out && \
+        find sig/generated -name "*.rbs" -exec sed -i "" "1,2{/^# Generated from/d; /^$/d;}" {} +
+      '
+    ).strip
+    exec script
+  end
 
   task :clean do
     sh "rm", "-rf", "sig/rbs_rails/"
@@ -12,9 +28,8 @@ namespace :rbs do
     sh "rm", "-rf", ".gem_rbs_collection/"
   end
 
-  desc "Generate RBS files from inline comments (created by rbs-trace)"
   task :inline do
-    sh "rbs-inline", "app/components", "app/forms", "app/models", "app/presenters", "--output", "--opt-out"
+    sh "rbs-inline", *RBS_TARGET_DIRS, "--output", "--opt-out"
   end
 
   task :collection do
@@ -22,7 +37,7 @@ namespace :rbs do
   end
 
   task :prototype do
-    sh "rbs", "prototype", "rb", "--out-dir=sig/prototype", "--base-dir=.", "app/components", "app/forms", "app/models"
+    sh "rbs", "prototype", "rb", "--out-dir=sig/prototype", "--base-dir=.", *RBS_TARGET_DIRS
   end
 
   task :validate do
@@ -36,7 +51,7 @@ namespace :rbs do
   class PriorityManager
     def initialize(shell_method:)
       @shell_method = shell_method
-      @priorities = %w[manual generated rbs_rails prototype].map { |dir| "sig/#{dir}" }
+      @priorities = RBS_TARGET_PRIORITY.map { |dir| "sig/#{dir}" }
     end
 
     def execute
