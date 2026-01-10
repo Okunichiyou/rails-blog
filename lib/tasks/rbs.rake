@@ -10,6 +10,17 @@ RBS_TARGET_PRIORITY = %w[manual generated rbs_rails prototype].freeze
 namespace :rbs do
   task setup: %i[clean collection inline prototype rbs_rails:all subtract]
 
+  task :watch do
+    dirs = RBS_TARGET_DIRS.join(" ")
+    script = %Q(
+      fswatch -0 #{dirs} | xargs -0 -n1 sh -c '
+        bundle exec rbs-inline "$0" --output --opt-out && \
+        find sig/generated -name "*.rbs" -exec sed -i "" "1,2{/^# Generated from/d; /^$/d;}" {} +
+      '
+    ).strip
+    exec script
+  end
+
   task :clean do
     sh "rm", "-rf", "sig/rbs_rails/"
     sh "rm", "-rf", "sig/prototype/"
@@ -17,7 +28,6 @@ namespace :rbs do
     sh "rm", "-rf", ".gem_rbs_collection/"
   end
 
-  desc "Generate RBS files from inline comments (created by rbs-trace)"
   task :inline do
     sh "rbs-inline", *RBS_TARGET_DIRS, "--output", "--opt-out"
   end
