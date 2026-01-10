@@ -2,6 +2,8 @@ return unless Rails.env.development?
 
 require "rbs_rails/rake_task"
 
+RBS_TARGET_DIRS = %w[app/components app/forms app/models app/presenters].freeze
+
 namespace :rbs do
   task setup: %i[clean collection inline prototype rbs_rails:all subtract]
 
@@ -14,7 +16,7 @@ namespace :rbs do
 
   desc "Generate RBS files from inline comments (created by rbs-trace)"
   task :inline do
-    sh "rbs-inline", "app/components", "app/forms", "app/models", "app/presenters", "--output", "--opt-out"
+    sh "rbs-inline", *RBS_TARGET_DIRS, "--output", "--opt-out"
   end
 
   task :collection do
@@ -22,7 +24,7 @@ namespace :rbs do
   end
 
   task :prototype do
-    sh "rbs", "prototype", "rb", "--out-dir=sig/prototype", "--base-dir=.", "app/components", "app/forms", "app/models"
+    sh "rbs", "prototype", "rb", "--out-dir=sig/prototype", "--base-dir=.", *RBS_TARGET_DIRS
   end
 
   task :validate do
