@@ -52,10 +52,6 @@ class Users::PostDraftsController < ApplicationController
 
   private
 
-  def authenticate_author!
-    redirect_to root_path, alert: "権限がありません" unless current_user&.author?
-  end
-
   def set_post_draft
     @post_draft = current_user.post_drafts.find(params[:id])
   end

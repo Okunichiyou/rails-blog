@@ -37,10 +37,6 @@ class PostsController < ApplicationController
 
   private
 
-  def authenticate_author!
-    redirect_to root_path, alert: "権限がありません" unless current_user&.author?
-  end
-
   def set_post
     @post = current_user.posts.find(params[:id])
   end

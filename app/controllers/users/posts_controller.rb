@@ -2,7 +2,7 @@
 
 class Users::PostsController < ApplicationController
   before_action :set_user
-  before_action :authenticate_author!, only: [ :edit, :destroy ]
+  before_action :authenticate_owner!, only: [ :edit, :destroy ]
   before_action :set_post, only: [ :edit, :destroy ]
 
   def index
@@ -25,7 +25,7 @@ class Users::PostsController < ApplicationController
     @user = User.find(params[:user_id])
   end
 
-  def authenticate_author!
+  def authenticate_owner!
     redirect_to root_path, alert: "権限がありません" unless current_user&.id == @user.id
   end
 
