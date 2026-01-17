@@ -54,6 +54,47 @@ bin/dev
 bundle exec rails server
 ```
 
+## SSL開発サーバー（Apple Sign In等）
+
+Apple Sign InなどHTTPSが必要な機能を開発する場合は、以下の手順でSSLサーバーを起動します。
+
+### 1. /etc/hostsの設定
+
+```bash
+sudo vi /etc/hosts
+```
+
+以下のような形式を追記します。
+ドメイン名は任意で、`local.example.com`である必要はありません。
+
+```text
+127.0.0.1 local.example.com
+```
+
+### 2. 環境変数の設定
+
+`/etc/hosts`に設定したドメイン名を環境変数として設定します。
+
+```bash
+export RAILS_BLOG_DOMAIN=local.example.com
+```
+
+### 3. 自己証明書の作成
+
+```bash
+bin/setup-ssl
+```
+
+証明書は `config/ssl/` に生成されます。ブラウザで警告が出る場合は、証明書を信頼済みとして登録してください。
+
+### 4. SSLサーバーの起動
+
+```bash
+bin/ssl-server
+```
+
+`https://$RAILS_BLOG_DOMAIN:3000` でアクセスできます。
+
 ## 開発Tips
 
 ### コンポーネントのデザイン確認

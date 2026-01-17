@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+# Apple Sign In を開発環境で利用するためのSSLサーバー起動スクリプト
+#
+# 事前準備:
+#   1. bin/setup-ssl で証明書を生成
+#   2. /etc/hosts に "127.0.0.1 $RAILS_BLOG_DOMAIN" を追記
+
+set -e
+
+SSL_DIR="config/ssl"
+DOMAIN="${RAILS_BLOG_DOMAIN:?環境変数 RAILS_BLOG_DOMAIN を設定してください}"
+CERT_FILE="$SSL_DIR/$DOMAIN.crt"
+KEY_FILE="$SSL_DIR/$DOMAIN.key"
+PORT="${PORT:-3000}"
+
+# 証明書の存在チェック
+if [ ! -f "$CERT_FILE" ] || [ ! -f "$KEY_FILE" ]; then
+  echo "エラー: SSL証明書が見つかりません"
+  echo "先に bin/setup-ssl を実行してください"
+  exit 1
+fi
+
+echo "==> SSLサーバーを起動します: https://$DOMAIN:$PORT"
+exec bundle exec rails s -b "ssl://127.0.0.1:$PORT?key=$KEY_FILE&cert=$CERT_FILE"

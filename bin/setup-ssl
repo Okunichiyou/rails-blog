@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+
+# Apple Sign In開発用の自己署名証明書を生成するスクリプト
+# 使用方法: bin/setup-ssl
+
+set -e
+
+SSL_DIR="config/ssl"
+DOMAIN="${RAILS_BLOG_DOMAIN:?環境変数 RAILS_BLOG_DOMAIN を設定してください}"
+CERT_FILE="$SSL_DIR/$DOMAIN.crt"
+KEY_FILE="$SSL_DIR/$DOMAIN.key"
+
+echo "==> SSL証明書のセットアップを開始します"
+
+# ディレクトリ作成
+if [ ! -d "$SSL_DIR" ]; then
+  echo "    ディレクトリを作成: $SSL_DIR"
+  mkdir -p "$SSL_DIR"
+fi
+
+# 既存の証明書をチェック
+if [ -f "$CERT_FILE" ] && [ -f "$KEY_FILE" ]; then
+  echo "    証明書は既に存在します: $CERT_FILE"
+  echo "    再生成する場合は $SSL_DIR を削除してから再実行してください"
+  exit 0
+fi
+
+# 証明書を生成
+echo "    証明書を生成中..."
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout "$KEY_FILE" \
+  -out "$CERT_FILE" \
+  -subj "/CN=$DOMAIN" \
+  2>/dev/null
+
+echo "==> SSL証明書の生成が完了しました"
+
