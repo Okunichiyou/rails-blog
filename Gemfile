@@ -8,6 +8,7 @@ gem "importmap-rails"
 gem "jbuilder"
 gem "jsbundling-rails"
 gem "kamal", require: false
+gem "omniauth-apple"
 gem "omniauth-google-oauth2", "~> 1.2"
 gem "propshaft"
 gem "puma", ">= 5.0"

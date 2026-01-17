@@ -77,11 +77,13 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.8)
       public_suffix (>= 2.0.2, < 8.0)
+    aes_key_wrap (1.1.0)
     ast (2.4.3)
     base64 (0.3.0)
     bcrypt (3.1.20)
     bcrypt_pbkdf (1.1.2)
     bigdecimal (4.0.1)
+    bindata (2.5.1)
     bindex (0.8.1)
     bootsnap (1.20.1)
       msgpack (~> 1.2)
@@ -128,6 +130,8 @@ GEM
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
+    faraday-follow_redirects (0.5.0)
+      faraday (>= 1, < 3)
     faraday-net_http (3.4.2)
       net-http (~> 0.5)
     ffi (1.17.2)
@@ -166,6 +170,13 @@ GEM
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
     json (2.18.0)
+    json-jwt (1.17.0)
+      activesupport (>= 4.2)
+      aes_key_wrap
+      base64
+      bindata
+      faraday (~> 2.0)
+      faraday-follow_redirects
     jwt (3.1.2)
       base64
     kamal (2.10.1)
@@ -263,6 +274,9 @@ GEM
       logger
       rack (>= 2.2.3)
       rack-protection
+    omniauth-apple (1.4.0)
+      json-jwt
+      omniauth-oauth2
     omniauth-google-oauth2 (1.2.1)
       jwt (>= 2.9.2)
       oauth2 (~> 2.0)
@@ -538,6 +552,7 @@ DEPENDENCIES
   kamal
   letter_opener_web
   minitest (< 6)
+  omniauth-apple
   omniauth-google-oauth2 (~> 1.2)
   propshaft
   puma (>= 5.0)
