@@ -1,0 +1,25 @@
+# 公開済み投稿
+one:
+  user: author
+  title: "はじめての投稿"
+  content: "これは最初の投稿です。"
+  first_published_at: <%= 1.week.ago %>
+  last_published_at: <%= 1.week.ago %>
+  view_count: 10
+
+two:
+  user: author
+  title: "2番目の投稿"
+  content: "これは2番目の投稿です。"
+  first_published_at: <%= 3.days.ago %>
+  last_published_at: <%= 1.day.ago %>
+  view_count: 5
+
+# 下書きがある投稿
+with_draft:
+  user: author
+  title: "下書きがある投稿"
+  content: "この投稿には編集中の下書きがあります。"
+  first_published_at: <%= 2.days.ago %>
+  last_published_at: <%= 2.days.ago %>
+  view_count: 0
