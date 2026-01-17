@@ -1,6 +1,8 @@
 require "test_helper"
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
+  include ActiveJob::TestHelper
+
   setup do
     @author = User.create!(name: "posts_controller_author", author: true)
     @non_author = User.create!(name: "posts_non_author", author: false)
@@ -84,6 +86,15 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "GET /posts/:id 存在しない記事は404エラーになる" do
     get post_path(id: 99999)
     assert_response :not_found
+  end
+
+  test "PostsViewCountIncrementJobを呼び出す" do
+    post = posts(:one)
+
+    assert_enqueued_with(job: PostsViewCountIncrementJob, args: [ post ]) do
+      get post_path(post)
+    end
+    assert_response :success
   end
 
   # =====================================
