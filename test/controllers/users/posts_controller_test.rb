@@ -45,7 +45,7 @@ class Users::PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /users/:user_id/posts 存在しないユーザーの場合404を返す" do
-    get user_posts_path(user_id: 999999)
+    get user_posts_path(user_id: 0)
     assert_response :not_found
   end
 
@@ -182,7 +182,7 @@ class Users::PostsControllerTest < ActionDispatch::IntegrationTest
   test "DELETE /users/:user_id/posts/:id 存在しない記事IDの場合404エラーになる" do
     sign_in_as("users_posts_author@example.com")
 
-    delete user_post_path(@author, id: 99999)
+    delete user_post_path(@author, id: 0)
     assert_response :not_found
   end
 end

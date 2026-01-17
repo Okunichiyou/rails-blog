@@ -1,0 +1,13 @@
+# 新規投稿用の下書き（まだ公開されていない）
+new_post_draft:
+  user: author
+  title: "新しい投稿の下書き"
+  content: "これは新しい投稿の下書きです。"
+  post: ~
+
+# 既存投稿の編集用下書き
+edit_draft:
+  user: author
+  title: "下書きがある投稿（編集中）"
+  content: "編集中の内容です。"
+  post: with_draft

@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    PostsViewCountIncrementJob.perform_later(@post)
   end
 
   def create

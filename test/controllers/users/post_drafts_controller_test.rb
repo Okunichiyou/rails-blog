@@ -182,14 +182,14 @@ class Users::PostDraftsControllerTest < ActionDispatch::IntegrationTest
   test "GET /post_drafts/:id/edit 存在しない下書きIDの場合404エラーになる" do
     sign_in_as("author@example.com")
 
-    get edit_users_post_draft_path(id: 99999)
+    get edit_users_post_draft_path(id: 0)
     assert_response :not_found
   end
 
   test "PATCH /post_drafts/:id 存在しない下書きIDの場合404エラーになる" do
     sign_in_as("author@example.com")
 
-    patch users_post_draft_path(id: 99999), params: {
+    patch users_post_draft_path(id: 0), params: {
       post_draft: {
         title: "更新テスト",
         content: "<p>本文</p>"
@@ -201,7 +201,7 @@ class Users::PostDraftsControllerTest < ActionDispatch::IntegrationTest
   test "DELETE /post_drafts/:id 存在しない下書きIDの場合404エラーになる" do
     sign_in_as("author@example.com")
 
-    delete users_post_draft_path(id: 99999)
+    delete users_post_draft_path(id: 0)
     assert_response :not_found
   end
 end
