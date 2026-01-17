@@ -1,13 +1,6 @@
 class Users::DatabaseAuthenticationsController < ApplicationController
   before_action :authenticate_user!, only: [ :link_new, :link_create ]
 
-  private
-
-  def authenticate_user!
-    redirect_to login_path, alert: "ログインしてください" unless current_user
-  end
-
-  public
 
   def new
     confirmation_token = params[:confirmation_token]

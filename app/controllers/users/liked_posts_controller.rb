@@ -4,10 +4,4 @@ class Users::LikedPostsController < ApplicationController
   def index
     @posts = current_user.liked_posts.includes(:user).order("post_likes.created_at DESC")
   end
-
-  private
-
-  def authenticate_user!
-    redirect_to login_path, alert: "ログインしてください" unless current_user
-  end
 end
