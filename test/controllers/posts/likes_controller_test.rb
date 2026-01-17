@@ -62,7 +62,7 @@ class Posts::LikesControllerTest < ActionDispatch::IntegrationTest
   test "POST /posts/:post_id/like 存在しない投稿の場合は404エラー" do
     sign_in_as("likes_test_user@example.com")
 
-    post post_like_path(post_id: 99999)
+    post post_like_path(post_id: 0)
     assert_response :not_found
   end
 
@@ -106,7 +106,7 @@ class Posts::LikesControllerTest < ActionDispatch::IntegrationTest
   test "DELETE /posts/:post_id/like 存在しない投稿の場合は404エラー" do
     sign_in_as("likes_test_user@example.com")
 
-    delete post_like_path(post_id: 99999)
+    delete post_like_path(post_id: 0)
     assert_response :not_found
   end
 end

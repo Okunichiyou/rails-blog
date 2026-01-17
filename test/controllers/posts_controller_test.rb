@@ -84,7 +84,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /posts/:id 存在しない記事は404エラーになる" do
-    get post_path(id: 99999)
+    get post_path(id: 0)
     assert_response :not_found
   end
 
@@ -211,7 +211,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "POST /posts 存在しない下書きIDの場合404エラーになる" do
     sign_in_as("posts_author@example.com")
 
-    post posts_path, params: { draft_id: 99999 }
+    post posts_path, params: { draft_id: 0 }
     assert_response :not_found
   end
 
@@ -220,7 +220,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     draft = PostDraft.create!(user: @author, title: "テスト")
     published_post = Post.create_from_draft!(draft)
 
-    patch post_path(published_post), params: { draft_id: 99999 }
+    patch post_path(published_post), params: { draft_id: 0 }
     assert_response :not_found
   end
 
@@ -228,7 +228,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as("posts_author@example.com")
     draft = PostDraft.create!(user: @author, title: "テスト")
 
-    patch post_path(id: 99999), params: { draft_id: draft.id }
+    patch post_path(id: 0), params: { draft_id: draft.id }
     assert_response :not_found
   end
 end
