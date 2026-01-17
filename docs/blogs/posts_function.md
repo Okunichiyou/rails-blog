@@ -25,6 +25,7 @@ erDiagram
         bigint user_id FK "NOT NULL"
         string title "NOT NULL"
         text content "本文HTML"
+        integer view_count "NOT NULL, DEFAULT 0, 記事の閲覧数"
         datetime first_published_at "NOT NULL, 初回公開日時"
         datetime last_published_at "NOT NULL, 最終公開日時"
         datetime created_at "NOT NULL"
