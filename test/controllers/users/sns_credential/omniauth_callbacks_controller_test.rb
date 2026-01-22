@@ -15,12 +15,30 @@ class Users::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::In
 
   teardown do
     OmniAuth.config.mock_auth[:google_oauth2] = nil
+    OmniAuth.config.mock_auth[:apple] = nil
   end
 
   private
 
   def build_auth_hash(**overrides)
     hash = @valid_auth_hash.deep_dup
+    overrides.each do |key, value|
+      keys = key.to_s.split(".")
+      target = keys[0..-2].reduce(hash) { |h, k| h[k.to_sym] }
+      target[keys.last.to_sym] = value
+    end
+    OmniAuth::AuthHash.new(hash)
+  end
+
+  def build_apple_auth_hash(**overrides)
+    hash = {
+      provider: "apple",
+      uid: "apple_123456789",
+      info: {
+        name: "Apple User",
+        email: "apple_test@example.com"
+      }
+    }
     overrides.each do |key, value|
       keys = key.to_s.split(".")
       target = keys[0..-2].reduce(hash) { |h, k| h[k.to_sym] }
@@ -227,6 +245,106 @@ class Users::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::In
     OmniAuth.config.mock_auth[:google_oauth2] = :invalid_credentials
 
     get sns_credential_google_oauth2_omniauth_callback_path
+
+    assert_redirected_to login_path
+    assert_match(/認証に失敗しました/, flash[:alert])
+  end
+
+  # =====================================
+  # appleアクション（Apple認証コールバック）
+  # =====================================
+
+  test "Apple認証成功 - 新規ユーザーの場合はPendingSnsCredentialを作成して登録フォームへリダイレクト" do
+    OmniAuth.config.mock_auth[:apple] = build_apple_auth_hash
+
+    assert_no_difference [ "User.count", "User::SnsCredential.count" ] do
+      assert_difference "User::PendingSnsCredential.count", 1 do
+        post sns_credential_apple_omniauth_callback_path
+      end
+    end
+
+    # 登録フォームへリダイレクトされることを確認
+    assert_response :redirect
+    assert_match %r{/users/sns_credential_registrations/new\?token=}, response.location
+
+    # PendingSnsCredentialが正しく作成されていることを確認
+    pending = User::PendingSnsCredential.last
+    assert_equal "apple", pending.provider
+    assert_equal "apple_123456789", pending.uid
+    assert_equal "apple_test@example.com", pending.email
+    assert_equal "Apple User", pending.name
+  end
+
+  test "Apple認証成功 - 既存ユーザーでログイン" do
+    user = User.create!(name: "Existing Apple User")
+    User::SnsCredential.create!(
+      user: user,
+      provider: "apple",
+      uid: "apple_123456789",
+      email: "apple_existing@example.com"
+    )
+
+    OmniAuth.config.mock_auth[:apple] = build_apple_auth_hash(
+      "info.name": "Existing Apple User",
+      "info.email": "apple_existing@example.com"
+    )
+
+    assert_no_difference [ "User.count", "User::SnsCredential.count" ] do
+      post sns_credential_apple_omniauth_callback_path
+    end
+
+    assert_redirected_to root_path
+    assert_not_nil session["warden.user.user.key"]
+  end
+
+  test "Apple認証失敗 - メールアドレスが既にDatabaseAuthenticationで使用されている" do
+    user = User.create!(name: "Existing User")
+    User::DatabaseAuthentication.create!(
+      user: user,
+      email: "apple_test@example.com",
+      password: "password123",
+      password_confirmation: "password123"
+    )
+
+    OmniAuth.config.mock_auth[:apple] = build_apple_auth_hash
+
+    assert_no_difference [ "User.count", "User::SnsCredential.count" ] do
+      post sns_credential_apple_omniauth_callback_path
+    end
+
+    assert_redirected_to login_path
+    assert_equal "既に同じメールアドレスでアカウントが連携されています。このメールアドレスでSNS認証を利用するには、一度ログインしてからアカウント連携を行ってください。", flash[:alert]
+  end
+
+  test "ログイン済みユーザーがAppleアカウントを連携できる" do
+    # ログイン
+    post login_path, params: {
+      database_authentication: {
+        email: "db_auth@example.com",
+        password: "password123"
+      }
+    }
+
+    OmniAuth.config.mock_auth[:apple] = build_apple_auth_hash
+
+    assert_difference "User::SnsCredential.count", 1 do
+      assert_no_difference "User.count" do
+        post sns_credential_apple_omniauth_callback_path
+      end
+    end
+
+    assert_redirected_to root_path
+    assert_equal "Appleアカウントを連携しました", flash[:notice]
+
+    # 正しく連携されていることを確認
+    credential = User::SnsCredential.find_by(provider: "apple", uid: "apple_123456789")
+    assert_equal users(:db_auth_user), credential.user
+  end
+
+  test "Apple認証失敗時のエラーハンドリング" do
+    OmniAuth.config.mock_auth[:apple] = :invalid_credentials
+
+    get sns_credential_apple_omniauth_callback_path
 
     assert_redirected_to login_path
     assert_match(/認証に失敗しました/, flash[:alert])

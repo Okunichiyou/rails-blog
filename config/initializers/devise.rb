@@ -276,6 +276,14 @@ Devise.setup do |config|
     Rails.application.config_for(:google_auth)[:client_secret],
     scope: "email,openid,profile"
 
+  config.omniauth :apple, Rails.application.config_for(:apple_auth)[:service_bundle_id], "", {
+    scope: "email name",
+    team_id: Rails.application.config_for(:apple_auth)[:team_id],
+    key_id: Rails.application.config_for(:apple_auth)[:key_id],
+    pem: Rails.application.config_for(:apple_auth)[:pem],
+    provider_ignores_state: true
+  }
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

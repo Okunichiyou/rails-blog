@@ -1,5 +1,6 @@
 class Users::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  skip_before_action :verify_authenticity_token, only: %i[google_oauth2]
+  # Apple Sign InはPOSTでコールバックが来るため、CSRF検証を完全にスキップ
+  skip_before_action :verify_authenticity_token, only: %i[google_oauth2 apple]
 
   def google_oauth2
     if current_user
@@ -8,6 +9,16 @@ class Users::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallba
     else
       # 未ログイン → 既存の新規登録・ログインフロー
       callback_for(:google)
+    end
+  end
+
+  def apple
+    if current_user
+      # ログイン済み → アカウント連携フロー
+      handle_account_linking(:apple)
+    else
+      # 未ログイン → 既存の新規登録・ログインフロー
+      callback_for(:apple)
     end
   end
 
@@ -20,7 +31,7 @@ class Users::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallba
     Rails.logger.error "OmniAuth Error: #{error.inspect}"
     Rails.logger.error "OmniAuth Strategy: #{strategy&.name}"
 
-    redirect_to login_path, alert: "Authentication failed: #{error_type}"
+    redirect_to login_path, alert: "認証に失敗しました: #{error_type}"
   end
 
   private
@@ -32,7 +43,8 @@ class Users::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallba
     result = User::SnsAuthenticationDomainService.link_to_existing_user(omniauth_data, current_user)
 
     if result.success?
-      redirect_to root_path, notice: "Googleアカウントを連携しました"
+      provider_name = provider == :apple ? "Apple" : "Google"
+      redirect_to root_path, notice: "#{provider_name}アカウントを連携しました"
     else
       redirect_to root_path, alert: result.message
     end

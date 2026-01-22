@@ -41,6 +41,7 @@
 
 # Ignore customizable config yaml files
 config/google_auth.yml
+config/apple_auth.yml
 
 # Ignore coverage reports
 /coverage

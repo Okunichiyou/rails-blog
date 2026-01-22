@@ -1,0 +1,21 @@
+development:
+  service_bundle_id: your_service_bundle_id
+  team_id: your_team_id
+  key_id: your_key_id
+  pem: |
+    -----BEGIN PRIVATE KEY-----
+    your_private_key_content
+    -----END PRIVATE KEY-----
+production:
+  service_bundle_id: <%= Rails.application.credentials.dig(:apple_auth, :service_bundle_id) %>
+  team_id: <%= Rails.application.credentials.dig(:apple_auth, :team_id) %>
+  key_id: <%= Rails.application.credentials.dig(:apple_auth, :key_id) %>
+  pem: <%= Rails.application.credentials.dig(:apple_auth, :pem) %>
+test:
+  service_bundle_id: test_service_bundle_id
+  team_id: test_team_id
+  key_id: test_key_id
+  pem: |
+    -----BEGIN PRIVATE KEY-----
+    test_private_key_content
+    -----END PRIVATE KEY-----
