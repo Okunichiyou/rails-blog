@@ -32,7 +32,7 @@ class Users::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallba
     result = User::SnsAuthenticationDomainService.link_to_existing_user(omniauth_data, current_user)
 
     if result.success?
-      redirect_to root_path, notice: "Googleアカウントを連携しました"
+      redirect_to root_path, notice: "#{provider.to_s.capitalize}アカウントを連携しました"
     else
       redirect_to root_path, alert: result.message
     end
