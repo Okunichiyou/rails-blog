@@ -16,8 +16,9 @@ class PostPresenterTest < ActiveSupport::TestCase
     assert_equal content, result
   end
 
-  test "nilを渡した場合、空文字が返ること" do
-    result = PostPresenter.beginning_of_content(content: nil)
+
+  test "空文字を渡した場合、空文字が返ること" do
+    result = PostPresenter.beginning_of_content(content: "")
 
     assert_equal "", result
   end
