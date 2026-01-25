@@ -225,9 +225,10 @@ bundle exec steep check
 
 現在、型チェックは以下のディレクトリ配下のみを対象としています:
 
-- `app/models/`
-- `app/forms/`
 - `app/components/`
+- `app/forms/`
+- `app/presenters/`
+- `app/models/`
 
 #### VSCodeでの型チェック
 
