@@ -18,6 +18,7 @@
                   <span>公開日時: <time datetime="<%= DateFormatPresenter.to_iso8601(post.first_published_at) %>"><%= DateFormatPresenter.to_long(post.first_published_at) %></time></span>
                   <span>閲覧数: <%= post.view_count %></span>
                 </p>
+                <p><%= PostPresenter.beginning_of_content(content: post.content) %></p>
               </article>
             </li>
           <% end %>
