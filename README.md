@@ -1,7 +1,42 @@
-# README
+# rails-blog
 
 [![CI](https://github.com/Okunichiyou/rails-blog/actions/workflows/ci.yml/badge.svg)](https://github.com/Okunichiyou/rails-blog/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/Okunichiyou/rails-blog/branch/main/graph/badge.svg)](https://codecov.io/gh/Okunichiyou/rails-blog)
+
+## 技術スタック
+
+### フレームワーク
+
+- [Ruby](https://www.ruby-lang.org/)
+- [Ruby on Rails](https://rubyonrails.org/)
+
+### 認証
+
+- [Devise](https://github.com/heartcombo/devise)
+- [OmniAuth Google OAuth2](https://github.com/zquestz/omniauth-google-oauth2)
+
+### フロントエンド
+
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Hotwire (Turbo)](https://turbo.hotwired.dev/)
+- [Hotwire (Stimulus)](https://stimulus.hotwired.dev/)
+- [Tiptap](https://tiptap.dev/)
+- [ViewComponent](https://viewcomponent.org/)
+
+### 静的型付け
+
+- [Steep](https://github.com/soutaro/steep)
+- [rbs-inline](https://github.com/soutaro/rbs-inline)
+
+### データベース
+
+- [SQLite](https://www.sqlite.org/)
+
+### その他
+
+- [Propshaft](https://github.com/rails/propshaft)
+- [Puma](https://puma.io/)
+- [Kamal](https://kamal-deploy.org/)
 
 ## セットアップ
 
