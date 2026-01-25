@@ -1,0 +1,4 @@
+class PostPresenter
+  # @rbs (content: String, limit: Integer) -> String
+  def self.beginning_of_content: (content: String, limit: Integer) -> String
+end
