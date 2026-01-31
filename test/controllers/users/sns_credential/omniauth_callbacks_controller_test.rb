@@ -231,4 +231,52 @@ class Users::SnsCredential::OmniauthCallbacksControllerTest < ActionDispatch::In
     assert_redirected_to login_path
     assert_match(/認証に失敗しました/, flash[:alert])
   end
+
+  # =====================================
+  # auth_enabled設定による制御
+  # =====================================
+
+  test "auth_enabledがfalseの場合はGoogle認証が利用できない" do
+    OmniAuth.config.mock_auth[:google_oauth2] = build_auth_hash
+
+    with_auth_disabled do
+      assert_no_difference [ "User.count", "User::SnsCredential.count", "User::PendingSnsCredential.count" ] do
+        post sns_credential_google_oauth2_omniauth_callback_path
+      end
+
+      assert_redirected_to login_path
+      assert_equal "この認証方法は現在利用できません", flash[:alert]
+    end
+  end
+
+  test "auth_enabledがfalseの場合はログイン済みユーザーのアカウント連携もできない" do
+    # ログイン
+    post login_path, params: {
+      database_authentication: {
+        email: "db_auth@example.com",
+        password: "password123"
+      }
+    }
+
+    OmniAuth.config.mock_auth[:google_oauth2] = build_auth_hash
+
+    with_auth_disabled do
+      assert_no_difference "User::SnsCredential.count" do
+        post sns_credential_google_oauth2_omniauth_callback_path
+      end
+
+      assert_redirected_to login_path
+      assert_equal "この認証方法は現在利用できません", flash[:alert]
+    end
+  end
+
+  private
+
+  def with_auth_disabled
+    original = Rails.configuration.auth_enabled
+    Rails.configuration.auth_enabled = false
+    yield
+  ensure
+    Rails.configuration.auth_enabled = original
+  end
 end

@@ -10,7 +10,9 @@
           <span class="text-notice-inline">認証済み: </span>
           <span><%= @user.database_authentication.email %></span>
         <% else %>
-          <%= link_to "メールアドレスを登録", new_confirmation_confirmation_path %>
+          <% if Rails.configuration.auth_enabled %>
+            <%= link_to "メールアドレスを登録", new_confirmation_confirmation_path %>
+          <% end %>
         <% end %>
       </dd>
 

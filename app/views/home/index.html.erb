@@ -9,6 +9,8 @@
 <% else %>
   <div class="auth-links">
     <%= link_to "ログイン", login_path %>
-    <%= link_to "新規登録", new_confirmation_confirmation_path %>
+    <% if Rails.configuration.auth_enabled %>
+      <%= link_to "新規登録", new_confirmation_confirmation_path %>
+    <% end %>
   </div>
 <% end %>
