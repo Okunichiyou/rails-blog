@@ -1,5 +1,6 @@
 class Users::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   skip_before_action :verify_authenticity_token, only: %i[google_oauth2]
+  before_action :require_auth_enabled!
 
   def google_oauth2
     if current_user
@@ -24,6 +25,12 @@ class Users::SnsCredential::OmniauthCallbacksController < Devise::OmniauthCallba
   end
 
   private
+
+  def require_auth_enabled!
+    return if Rails.configuration.auth_enabled
+
+    redirect_to login_path, alert: "この認証方法は現在利用できません"
+  end
 
   def handle_account_linking(provider)
     auth = request.env["omniauth.auth"]

@@ -1,8 +1,10 @@
 <div class="flex justify-center gap-4 pb-20 md:pb-0">
-  <%# デスクトップ: 左側に固定表示されるいいねボタン %>
-  <aside class="hidden md:block sticky top-24 self-start">
-    <%= render Domain::Post::LikeButtonComponent.new(post: @post, current_user: current_user, id: "desktop") %>
-  </aside>
+  <%- if Rails.configuration.auth_enabled %>
+    <%# デスクトップ: 左側に固定表示されるいいねボタン %>
+    <aside class="hidden md:block sticky top-24 self-start">
+      <%= render Domain::Post::LikeButtonComponent.new(post: @post, current_user: current_user, id: "desktop") %>
+    </aside>
+  <% end %>
 
   <%= render Ui::PanelComponent.new(size: :large) do |panel| %>
     <%- panel.with_panel_content do %>
