@@ -17,16 +17,16 @@
 
 ### フロントエンド
 
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Hotwire (Turbo)](https://turbo.hotwired.dev/)
 - [Hotwire (Stimulus)](https://stimulus.hotwired.dev/)
+- [Hotwire (Turbo)](https://turbo.hotwired.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
 - [Tiptap](https://tiptap.dev/)
 - [ViewComponent](https://viewcomponent.org/)
 
 ### 静的型付け
 
-- [Steep](https://github.com/soutaro/steep)
 - [rbs-inline](https://github.com/soutaro/rbs-inline)
+- [Steep](https://github.com/soutaro/steep)
 
 ### データベース
 
@@ -34,9 +34,10 @@
 
 ### その他
 
+- [Herb](https://herb-tools.dev/)
+- [Kamal](https://kamal-deploy.org/)
 - [Propshaft](https://github.com/rails/propshaft)
 - [Puma](https://puma.io/)
-- [Kamal](https://kamal-deploy.org/)
 
 ## セットアップ
 
