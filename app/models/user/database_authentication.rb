@@ -1,5 +1,5 @@
 class User::DatabaseAuthentication < ApplicationRecord
   belongs_to :user
 
-  devise :database_authenticatable, :validatable
+  devise :database_authenticatable, :validatable, :lockable
 end

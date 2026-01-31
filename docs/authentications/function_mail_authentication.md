@@ -26,6 +26,8 @@ erDiagram
       INTEGER user_id FK "NOT NULL"
       STRING email UK "NOT NULL"
       STRING encrypted_password "NOT NULL"
+      INTEGER failed_attempts "NOT NULL, DEFAULT 0"
+      DATETIME locked_at
       DATETIME created_at "NOT NULL"
       DATETIME updated_at "NOT NULL"
   }
@@ -99,12 +101,24 @@ sequenceDiagram
     User->>Browser: メールアドレス・パスワード入力
     Browser->>App: POST /users/sign_in
     App->>DB: user_database_authenticationsテーブルから認証情報取得
-    App->>App: メールアドレス・パスワード検証
-    alt 認証成功
-        App->>App: セッション作成
-        App-->>Browser: ログイン成功・リダイレクト
-    else 認証失敗
-        App-->>Browser: エラーメッセージ表示
+    App->>App: アカウントロック状態確認
+    alt アカウントロック中
+        App-->>Browser: アカウントロック中エラーメッセージ表示
+    else アカウント正常
+        App->>App: メールアドレス・パスワード検証
+        alt 認証成功
+            App->>DB: failed_attemptsを0にリセット
+            App->>App: セッション作成
+            App-->>Browser: ログイン成功・リダイレクト
+        else 認証失敗
+            App->>DB: failed_attemptsをインクリメント
+            alt failed_attempts >= 5
+                App->>DB: locked_atを現在時刻に設定
+                App-->>Browser: アカウントロックエラーメッセージ表示
+            else failed_attempts < 5
+                App-->>Browser: 認証失敗エラーメッセージ表示
+            end
+        end
     end
 ```
 
@@ -120,7 +134,7 @@ sequenceDiagram
 
 - メールアドレス未登録 → `user_database_authentications`テーブルにレコード不存在
 - パスワード不一致 → `encrypted_password`との照合失敗
-- アカウントロック → 連続ログイン失敗（実装予定）
+- アカウントロック → 連続ログイン失敗によりアカウントがロック状態
 
 ### 確認メール関連のエラー
 
@@ -132,6 +146,12 @@ sequenceDiagram
 ### パスワード要件
 
 - 最小6文字以上
+
+### アカウントロック
+
+- ロック条件：ログイン失敗が5回連続した場合
+- アンロック条件：ロックから1時間経過で自動アンロック
+- アンロック戦略：`:time`（時間経過による自動アンロックのみ、メールによるアンロックは無し）
 
 ### 確認トークン
 
