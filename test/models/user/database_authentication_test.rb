@@ -253,6 +253,10 @@ class User::DatabaseAuthenticationTest < ActiveSupport::TestCase
     assert User::DatabaseAuthentication.devise_modules.include?(:validatable)
   end
 
+  test "lockableモジュールが含まれている" do
+    assert User::DatabaseAuthentication.devise_modules.include?(:lockable)
+  end
+
   # =====================================
   # データベース制約テスト
   # =====================================
