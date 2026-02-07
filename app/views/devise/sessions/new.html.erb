@@ -3,6 +3,22 @@
     <%- panel.with_panel_content do %>
       <h1 class="mb-6">ログイン</h1>
 
+      <%- unless Rails.configuration.auth_enabled %>
+        <%= render Ui::FlashComponent.new(flash_type: :warn,) do |flash| %>
+          <%- flash.with_flash_content do %>
+            <p>現在、ユーザー登録機能は提供されていません</p>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% flash.each do |type, message| %>
+        <%= render Ui::FlashComponent.new(flash_type: type.to_sym) do |c| %>
+          <%- c.with_flash_content do %>
+            <%= message %>
+          <% end %>
+        <% end %>
+      <% end %>
+
       <div class="flex flex-col md:flex-row gap-6">
         <!-- 左側: SNSログイン -->
         <div class="flex-1 flex flex-col justify-center items-center">
