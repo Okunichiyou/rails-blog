@@ -60,15 +60,19 @@ bundle install
 npm install
 ```
 
-### 3. 設定ファイルのコピー
+### 3. 環境変数の設定
+
+Google OAuth認証を使用する場合は、以下の環境変数を設定してください。
 
 ```bash
-cp -n config/samples/*.yml config/
+cp -n .envrc.sample .envrc
 ```
 
-その後、各設定ファイルを編集して自分の認証情報を設定してください。
+`.envrc`を編集して認証情報を設定後、direnvで読み込みます。
 
-- `config/google_auth.yml`
+```bash
+direnv allow
+```
 
 ### 4. データベースのセットアップ
 
