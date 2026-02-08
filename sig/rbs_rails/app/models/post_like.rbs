@@ -1,12 +1,14 @@
-class PostLike < ::ApplicationRecord
-  module GeneratedAttributeMethods
+# resolve-type-names: false
+
+class ::PostLike < ::ApplicationRecord
+  module ::PostLike::GeneratedAttributeMethods
     def id: () -> ::Integer
 
     def id=: (::Integer) -> ::Integer
 
     def id?: () -> bool
 
-    def id_changed?: () -> bool
+    def id_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def id_change: () -> [ ::Integer?, ::Integer? ]
 
@@ -14,7 +16,7 @@ class PostLike < ::ApplicationRecord
 
     def id_was: () -> ::Integer?
 
-    def id_previously_changed?: () -> bool
+    def id_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def id_previous_change: () -> ::Array[::Integer?]?
 
@@ -36,13 +38,17 @@ class PostLike < ::ApplicationRecord
 
     def clear_id_change: () -> void
 
+    def id_before_type_cast: () -> ::Integer
+
+    def id_for_database: () -> ::Integer
+
     def created_at: () -> ::ActiveSupport::TimeWithZone
 
     def created_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
 
     def created_at?: () -> bool
 
-    def created_at_changed?: () -> bool
+    def created_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def created_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -50,7 +56,7 @@ class PostLike < ::ApplicationRecord
 
     def created_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-    def created_at_previously_changed?: () -> bool
+    def created_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def created_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -72,13 +78,17 @@ class PostLike < ::ApplicationRecord
 
     def clear_created_at_change: () -> void
 
+    def created_at_before_type_cast: () -> ::Time
+
+    def created_at_for_database: () -> ::Time
+
     def post_id: () -> ::Integer
 
     def post_id=: (::Integer) -> ::Integer
 
     def post_id?: () -> bool
 
-    def post_id_changed?: () -> bool
+    def post_id_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def post_id_change: () -> [ ::Integer?, ::Integer? ]
 
@@ -86,7 +96,7 @@ class PostLike < ::ApplicationRecord
 
     def post_id_was: () -> ::Integer?
 
-    def post_id_previously_changed?: () -> bool
+    def post_id_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def post_id_previous_change: () -> ::Array[::Integer?]?
 
@@ -108,13 +118,17 @@ class PostLike < ::ApplicationRecord
 
     def clear_post_id_change: () -> void
 
+    def post_id_before_type_cast: () -> ::Integer
+
+    def post_id_for_database: () -> ::Integer
+
     def updated_at: () -> ::ActiveSupport::TimeWithZone
 
     def updated_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
 
     def updated_at?: () -> bool
 
-    def updated_at_changed?: () -> bool
+    def updated_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def updated_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -122,7 +136,7 @@ class PostLike < ::ApplicationRecord
 
     def updated_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-    def updated_at_previously_changed?: () -> bool
+    def updated_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def updated_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -144,13 +158,17 @@ class PostLike < ::ApplicationRecord
 
     def clear_updated_at_change: () -> void
 
+    def updated_at_before_type_cast: () -> ::Time
+
+    def updated_at_for_database: () -> ::Time
+
     def user_id: () -> ::Integer
 
     def user_id=: (::Integer) -> ::Integer
 
     def user_id?: () -> bool
 
-    def user_id_changed?: () -> bool
+    def user_id_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def user_id_change: () -> [ ::Integer?, ::Integer? ]
 
@@ -158,7 +176,7 @@ class PostLike < ::ApplicationRecord
 
     def user_id_was: () -> ::Integer?
 
-    def user_id_previously_changed?: () -> bool
+    def user_id_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def user_id_previous_change: () -> ::Array[::Integer?]?
 
@@ -179,27 +197,92 @@ class PostLike < ::ApplicationRecord
     def restore_user_id!: () -> void
 
     def clear_user_id_change: () -> void
+
+    def user_id_before_type_cast: () -> ::Integer
+
+    def user_id_for_database: () -> ::Integer
   end
 
-  module GeneratedAssociationMethods
+  module ::PostLike::GeneratedAliasAttributeMethods
+    include ::PostLike::GeneratedAttributeMethods
+
+    alias id_value id
+
+    alias id_value= id=
+
+    alias id_value? id?
+
+    alias id_value_changed? id_changed?
+
+    alias id_value_change id_change
+
+    alias id_value_will_change! id_will_change!
+
+    alias id_value_was id_was
+
+    alias id_value_previously_changed? id_previously_changed?
+
+    alias id_value_previous_change id_previous_change
+
+    alias id_value_previously_was id_previously_was
+
+    alias id_value_before_last_save id_before_last_save
+
+    alias id_value_change_to_be_saved id_change_to_be_saved
+
+    alias id_value_in_database id_in_database
+
+    alias saved_change_to_id_value saved_change_to_id
+
+    alias saved_change_to_id_value? saved_change_to_id?
+
+    alias will_save_change_to_id_value? will_save_change_to_id?
+
+    alias restore_id_value! restore_id!
+
+    alias clear_id_value_change clear_id_change
+
+    alias id_value_before_type_cast id_before_type_cast
+
+    alias id_value_for_database id_for_database
   end
 
-  module GeneratedRelationMethods
+  module ::PostLike::GeneratedAssociationMethods
   end
 
-  class ActiveRecord_Relation < ::ActiveRecord::Relation
-    include ::PostLike::GeneratedRelationMethods
-    include ::_ActiveRecord_Relation[::PostLike, ::Integer]
+  module ::PostLike::GeneratedRelationMethods
+  end
+
+  class ::PostLike::ActiveRecord_Relation < ::ActiveRecord::Relation
     include ::Enumerable[::PostLike]
-  end
-
-  class ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
     include ::PostLike::GeneratedRelationMethods
-    include ::_ActiveRecord_Relation[::PostLike, ::Integer]
+    include ::ActiveRecord::Relation::Methods[::PostLike, ::Integer]
   end
-  extend ::_ActiveRecord_Relation_ClassMethods[::PostLike, ::PostLike::ActiveRecord_Relation, ::Integer]
 
-  include GeneratedAttributeMethods
+  class ::PostLike::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+    include ::Enumerable[::PostLike]
+    include ::PostLike::GeneratedRelationMethods
+    include ::ActiveRecord::Relation::Methods[::PostLike, ::Integer]
+
+    def build: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::PostLike
+             | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::PostLike]
+    def create: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::PostLike
+              | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::PostLike]
+    def create!: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::PostLike
+               | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::PostLike]
+    def reload: () -> ::Array[::PostLike]
+
+    def replace: (::Array[::PostLike]) -> void
+    def delete: (*::PostLike | ::Integer) -> ::Array[::PostLike]
+    def destroy: (*::PostLike | ::Integer) -> ::Array[::PostLike]
+    def <<: (*::PostLike | ::Array[::PostLike]) -> self
+    def prepend: (*::PostLike | ::Array[::PostLike]) -> self
+  end
+  extend ::ActiveRecord::Base::ClassMethods[::PostLike, ::PostLike::ActiveRecord_Relation, ::Integer]
+
+  include ::PostLike::GeneratedAttributeMethods
+
+  include ::PostLike::GeneratedAliasAttributeMethods
 
   def user: () -> ::User
   def user=: (::User?) -> ::User?
@@ -214,5 +297,5 @@ class PostLike < ::ApplicationRecord
   def create_post: (untyped) -> ::Post
   def create_post!: (untyped) -> ::Post
 
-  include GeneratedAssociationMethods
+  include ::PostLike::GeneratedAssociationMethods
 end

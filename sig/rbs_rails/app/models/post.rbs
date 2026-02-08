@@ -1,12 +1,14 @@
-class Post < ::ApplicationRecord
-  module GeneratedAttributeMethods
+# resolve-type-names: false
+
+class ::Post < ::ApplicationRecord
+  module ::Post::GeneratedAttributeMethods
     def id: () -> ::Integer
 
     def id=: (::Integer) -> ::Integer
 
     def id?: () -> bool
 
-    def id_changed?: () -> bool
+    def id_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def id_change: () -> [ ::Integer?, ::Integer? ]
 
@@ -14,7 +16,7 @@ class Post < ::ApplicationRecord
 
     def id_was: () -> ::Integer?
 
-    def id_previously_changed?: () -> bool
+    def id_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def id_previous_change: () -> ::Array[::Integer?]?
 
@@ -36,13 +38,17 @@ class Post < ::ApplicationRecord
 
     def clear_id_change: () -> void
 
-    def content: () -> ::String?
+    def id_before_type_cast: () -> ::Integer
 
-    def content=: (::String?) -> ::String?
+    def id_for_database: () -> ::Integer
+
+    def content: () -> ::String
+
+    def content=: (::String) -> ::String
 
     def content?: () -> bool
 
-    def content_changed?: () -> bool
+    def content_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
     def content_change: () -> [ ::String?, ::String? ]
 
@@ -50,7 +56,7 @@ class Post < ::ApplicationRecord
 
     def content_was: () -> ::String?
 
-    def content_previously_changed?: () -> bool
+    def content_previously_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
     def content_previous_change: () -> ::Array[::String?]?
 
@@ -72,13 +78,17 @@ class Post < ::ApplicationRecord
 
     def clear_content_change: () -> void
 
+    def content_before_type_cast: () -> ::String
+
+    def content_for_database: () -> ::String
+
     def created_at: () -> ::ActiveSupport::TimeWithZone
 
     def created_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
 
     def created_at?: () -> bool
 
-    def created_at_changed?: () -> bool
+    def created_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def created_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -86,7 +96,7 @@ class Post < ::ApplicationRecord
 
     def created_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-    def created_at_previously_changed?: () -> bool
+    def created_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def created_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -108,13 +118,17 @@ class Post < ::ApplicationRecord
 
     def clear_created_at_change: () -> void
 
+    def created_at_before_type_cast: () -> ::Time
+
+    def created_at_for_database: () -> ::Time
+
     def first_published_at: () -> ::ActiveSupport::TimeWithZone
 
     def first_published_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
 
     def first_published_at?: () -> bool
 
-    def first_published_at_changed?: () -> bool
+    def first_published_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def first_published_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -122,7 +136,7 @@ class Post < ::ApplicationRecord
 
     def first_published_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-    def first_published_at_previously_changed?: () -> bool
+    def first_published_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def first_published_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -144,13 +158,17 @@ class Post < ::ApplicationRecord
 
     def clear_first_published_at_change: () -> void
 
+    def first_published_at_before_type_cast: () -> ::Time
+
+    def first_published_at_for_database: () -> ::Time
+
     def last_published_at: () -> ::ActiveSupport::TimeWithZone
 
     def last_published_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
 
     def last_published_at?: () -> bool
 
-    def last_published_at_changed?: () -> bool
+    def last_published_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def last_published_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -158,7 +176,7 @@ class Post < ::ApplicationRecord
 
     def last_published_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-    def last_published_at_previously_changed?: () -> bool
+    def last_published_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def last_published_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -180,13 +198,17 @@ class Post < ::ApplicationRecord
 
     def clear_last_published_at_change: () -> void
 
+    def last_published_at_before_type_cast: () -> ::Time
+
+    def last_published_at_for_database: () -> ::Time
+
     def title: () -> ::String
 
     def title=: (::String) -> ::String
 
     def title?: () -> bool
 
-    def title_changed?: () -> bool
+    def title_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
     def title_change: () -> [ ::String?, ::String? ]
 
@@ -194,7 +216,7 @@ class Post < ::ApplicationRecord
 
     def title_was: () -> ::String?
 
-    def title_previously_changed?: () -> bool
+    def title_previously_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
     def title_previous_change: () -> ::Array[::String?]?
 
@@ -216,13 +238,17 @@ class Post < ::ApplicationRecord
 
     def clear_title_change: () -> void
 
+    def title_before_type_cast: () -> ::String
+
+    def title_for_database: () -> ::String
+
     def updated_at: () -> ::ActiveSupport::TimeWithZone
 
     def updated_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
 
     def updated_at?: () -> bool
 
-    def updated_at_changed?: () -> bool
+    def updated_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def updated_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -230,7 +256,7 @@ class Post < ::ApplicationRecord
 
     def updated_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-    def updated_at_previously_changed?: () -> bool
+    def updated_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def updated_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -252,13 +278,17 @@ class Post < ::ApplicationRecord
 
     def clear_updated_at_change: () -> void
 
+    def updated_at_before_type_cast: () -> ::Time
+
+    def updated_at_for_database: () -> ::Time
+
     def user_id: () -> ::Integer
 
     def user_id=: (::Integer) -> ::Integer
 
     def user_id?: () -> bool
 
-    def user_id_changed?: () -> bool
+    def user_id_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def user_id_change: () -> [ ::Integer?, ::Integer? ]
 
@@ -266,7 +296,7 @@ class Post < ::ApplicationRecord
 
     def user_id_was: () -> ::Integer?
 
-    def user_id_previously_changed?: () -> bool
+    def user_id_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def user_id_previous_change: () -> ::Array[::Integer?]?
 
@@ -288,13 +318,17 @@ class Post < ::ApplicationRecord
 
     def clear_user_id_change: () -> void
 
+    def user_id_before_type_cast: () -> ::Integer
+
+    def user_id_for_database: () -> ::Integer
+
     def view_count: () -> ::Integer
 
     def view_count=: (::Integer) -> ::Integer
 
     def view_count?: () -> bool
 
-    def view_count_changed?: () -> bool
+    def view_count_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def view_count_change: () -> [ ::Integer?, ::Integer? ]
 
@@ -302,7 +336,7 @@ class Post < ::ApplicationRecord
 
     def view_count_was: () -> ::Integer?
 
-    def view_count_previously_changed?: () -> bool
+    def view_count_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def view_count_previous_change: () -> ::Array[::Integer?]?
 
@@ -323,27 +357,92 @@ class Post < ::ApplicationRecord
     def restore_view_count!: () -> void
 
     def clear_view_count_change: () -> void
+
+    def view_count_before_type_cast: () -> ::Integer
+
+    def view_count_for_database: () -> ::Integer
   end
 
-  module GeneratedAssociationMethods
+  module ::Post::GeneratedAliasAttributeMethods
+    include ::Post::GeneratedAttributeMethods
+
+    alias id_value id
+
+    alias id_value= id=
+
+    alias id_value? id?
+
+    alias id_value_changed? id_changed?
+
+    alias id_value_change id_change
+
+    alias id_value_will_change! id_will_change!
+
+    alias id_value_was id_was
+
+    alias id_value_previously_changed? id_previously_changed?
+
+    alias id_value_previous_change id_previous_change
+
+    alias id_value_previously_was id_previously_was
+
+    alias id_value_before_last_save id_before_last_save
+
+    alias id_value_change_to_be_saved id_change_to_be_saved
+
+    alias id_value_in_database id_in_database
+
+    alias saved_change_to_id_value saved_change_to_id
+
+    alias saved_change_to_id_value? saved_change_to_id?
+
+    alias will_save_change_to_id_value? will_save_change_to_id?
+
+    alias restore_id_value! restore_id!
+
+    alias clear_id_value_change clear_id_change
+
+    alias id_value_before_type_cast id_before_type_cast
+
+    alias id_value_for_database id_for_database
   end
 
-  module GeneratedRelationMethods
+  module ::Post::GeneratedAssociationMethods
   end
 
-  class ActiveRecord_Relation < ::ActiveRecord::Relation
-    include ::Post::GeneratedRelationMethods
-    include ::_ActiveRecord_Relation[::Post, ::Integer]
+  module ::Post::GeneratedRelationMethods
+  end
+
+  class ::Post::ActiveRecord_Relation < ::ActiveRecord::Relation
     include ::Enumerable[::Post]
-  end
-
-  class ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
     include ::Post::GeneratedRelationMethods
-    include ::_ActiveRecord_Relation[::Post, ::Integer]
+    include ::ActiveRecord::Relation::Methods[::Post, ::Integer]
   end
-  extend ::_ActiveRecord_Relation_ClassMethods[::Post, ::Post::ActiveRecord_Relation, ::Integer]
 
-  include GeneratedAttributeMethods
+  class ::Post::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+    include ::Enumerable[::Post]
+    include ::Post::GeneratedRelationMethods
+    include ::ActiveRecord::Relation::Methods[::Post, ::Integer]
+
+    def build: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::Post
+             | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::Post]
+    def create: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::Post
+              | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::Post]
+    def create!: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::Post
+               | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::Post]
+    def reload: () -> ::Array[::Post]
+
+    def replace: (::Array[::Post]) -> void
+    def delete: (*::Post | ::Integer) -> ::Array[::Post]
+    def destroy: (*::Post | ::Integer) -> ::Array[::Post]
+    def <<: (*::Post | ::Array[::Post]) -> self
+    def prepend: (*::Post | ::Array[::Post]) -> self
+  end
+  extend ::ActiveRecord::Base::ClassMethods[::Post, ::Post::ActiveRecord_Relation, ::Integer]
+
+  include ::Post::GeneratedAttributeMethods
+
+  include ::Post::GeneratedAliasAttributeMethods
   def post_likes: () -> ::PostLike::ActiveRecord_Associations_CollectionProxy
   def post_likes=: (::PostLike::ActiveRecord_Associations_CollectionProxy | ::Array[::PostLike]) -> (::PostLike::ActiveRecord_Associations_CollectionProxy | ::Array[::PostLike])
   def post_like_ids: () -> ::Array[::Integer]
@@ -352,11 +451,12 @@ class Post < ::ApplicationRecord
   def liked_by_users=: (::User::ActiveRecord_Associations_CollectionProxy | ::Array[::User]) -> (::User::ActiveRecord_Associations_CollectionProxy | ::Array[::User])
   def liked_by_user_ids: () -> ::Array[::Integer]
   def liked_by_user_ids=: (::Array[::Integer]) -> ::Array[::Integer]
+
   def draft: () -> ::PostDraft?
   def draft=: (::PostDraft?) -> ::PostDraft?
   def build_draft: (?untyped) -> ::PostDraft
-  def create_draft: (untyped) -> ::PostDraft
-  def create_draft!: (untyped) -> ::PostDraft
+  def create_draft: (?untyped) -> ::PostDraft
+  def create_draft!: (?untyped) -> ::PostDraft
   def reload_draft: () -> ::PostDraft?
   def user: () -> ::User
   def user=: (::User?) -> ::User?
@@ -365,5 +465,11 @@ class Post < ::ApplicationRecord
   def create_user: (untyped) -> ::User
   def create_user!: (untyped) -> ::User
 
-  include GeneratedAssociationMethods
+  include ::Post::GeneratedAssociationMethods
+end
+
+class ::PostLike::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+end
+
+class ::User::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
 end

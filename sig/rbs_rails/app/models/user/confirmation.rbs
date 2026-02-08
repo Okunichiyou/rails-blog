@@ -1,13 +1,15 @@
-class User < ::ApplicationRecord
-  class Confirmation < ::ApplicationRecord
-    module GeneratedAttributeMethods
+# resolve-type-names: false
+
+class ::User < ::ApplicationRecord
+  class ::User::Confirmation < ::ApplicationRecord
+    module ::User::Confirmation::GeneratedAttributeMethods
       def id: () -> ::Integer
 
       def id=: (::Integer) -> ::Integer
 
       def id?: () -> bool
 
-      def id_changed?: () -> bool
+      def id_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
       def id_change: () -> [ ::Integer?, ::Integer? ]
 
@@ -15,7 +17,7 @@ class User < ::ApplicationRecord
 
       def id_was: () -> ::Integer?
 
-      def id_previously_changed?: () -> bool
+      def id_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
       def id_previous_change: () -> ::Array[::Integer?]?
 
@@ -37,13 +39,17 @@ class User < ::ApplicationRecord
 
       def clear_id_change: () -> void
 
+      def id_before_type_cast: () -> ::Integer
+
+      def id_for_database: () -> ::Integer
+
       def confirmation_sent_at: () -> ::ActiveSupport::TimeWithZone?
 
       def confirmation_sent_at=: (::ActiveSupport::TimeWithZone?) -> ::ActiveSupport::TimeWithZone?
 
       def confirmation_sent_at?: () -> bool
 
-      def confirmation_sent_at_changed?: () -> bool
+      def confirmation_sent_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
       def confirmation_sent_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -51,7 +57,7 @@ class User < ::ApplicationRecord
 
       def confirmation_sent_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-      def confirmation_sent_at_previously_changed?: () -> bool
+      def confirmation_sent_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
       def confirmation_sent_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -73,13 +79,17 @@ class User < ::ApplicationRecord
 
       def clear_confirmation_sent_at_change: () -> void
 
+      def confirmation_sent_at_before_type_cast: () -> ::Time?
+
+      def confirmation_sent_at_for_database: () -> ::Time?
+
       def confirmation_token: () -> ::String
 
       def confirmation_token=: (::String) -> ::String
 
       def confirmation_token?: () -> bool
 
-      def confirmation_token_changed?: () -> bool
+      def confirmation_token_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
       def confirmation_token_change: () -> [ ::String?, ::String? ]
 
@@ -87,7 +97,7 @@ class User < ::ApplicationRecord
 
       def confirmation_token_was: () -> ::String?
 
-      def confirmation_token_previously_changed?: () -> bool
+      def confirmation_token_previously_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
       def confirmation_token_previous_change: () -> ::Array[::String?]?
 
@@ -109,13 +119,17 @@ class User < ::ApplicationRecord
 
       def clear_confirmation_token_change: () -> void
 
+      def confirmation_token_before_type_cast: () -> ::String
+
+      def confirmation_token_for_database: () -> ::String
+
       def confirmed_at: () -> ::ActiveSupport::TimeWithZone?
 
       def confirmed_at=: (::ActiveSupport::TimeWithZone?) -> ::ActiveSupport::TimeWithZone?
 
       def confirmed_at?: () -> bool
 
-      def confirmed_at_changed?: () -> bool
+      def confirmed_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
       def confirmed_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -123,7 +137,7 @@ class User < ::ApplicationRecord
 
       def confirmed_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-      def confirmed_at_previously_changed?: () -> bool
+      def confirmed_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
       def confirmed_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -145,13 +159,17 @@ class User < ::ApplicationRecord
 
       def clear_confirmed_at_change: () -> void
 
+      def confirmed_at_before_type_cast: () -> ::Time?
+
+      def confirmed_at_for_database: () -> ::Time?
+
       def created_at: () -> ::ActiveSupport::TimeWithZone
 
       def created_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
 
       def created_at?: () -> bool
 
-      def created_at_changed?: () -> bool
+      def created_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
       def created_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -159,7 +177,7 @@ class User < ::ApplicationRecord
 
       def created_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-      def created_at_previously_changed?: () -> bool
+      def created_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
       def created_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -181,13 +199,17 @@ class User < ::ApplicationRecord
 
       def clear_created_at_change: () -> void
 
+      def created_at_before_type_cast: () -> ::Time
+
+      def created_at_for_database: () -> ::Time
+
       def email: () -> ::String?
 
       def email=: (::String?) -> ::String?
 
       def email?: () -> bool
 
-      def email_changed?: () -> bool
+      def email_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
       def email_change: () -> [ ::String?, ::String? ]
 
@@ -195,7 +217,7 @@ class User < ::ApplicationRecord
 
       def email_was: () -> ::String?
 
-      def email_previously_changed?: () -> bool
+      def email_previously_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
       def email_previous_change: () -> ::Array[::String?]?
 
@@ -217,13 +239,17 @@ class User < ::ApplicationRecord
 
       def clear_email_change: () -> void
 
+      def email_before_type_cast: () -> ::String?
+
+      def email_for_database: () -> ::String?
+
       def unconfirmed_email: () -> ::String?
 
       def unconfirmed_email=: (::String?) -> ::String?
 
       def unconfirmed_email?: () -> bool
 
-      def unconfirmed_email_changed?: () -> bool
+      def unconfirmed_email_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
       def unconfirmed_email_change: () -> [ ::String?, ::String? ]
 
@@ -231,7 +257,7 @@ class User < ::ApplicationRecord
 
       def unconfirmed_email_was: () -> ::String?
 
-      def unconfirmed_email_previously_changed?: () -> bool
+      def unconfirmed_email_previously_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
       def unconfirmed_email_previous_change: () -> ::Array[::String?]?
 
@@ -253,13 +279,17 @@ class User < ::ApplicationRecord
 
       def clear_unconfirmed_email_change: () -> void
 
+      def unconfirmed_email_before_type_cast: () -> ::String?
+
+      def unconfirmed_email_for_database: () -> ::String?
+
       def updated_at: () -> ::ActiveSupport::TimeWithZone
 
       def updated_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
 
       def updated_at?: () -> bool
 
-      def updated_at_changed?: () -> bool
+      def updated_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
       def updated_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -267,7 +297,7 @@ class User < ::ApplicationRecord
 
       def updated_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-      def updated_at_previously_changed?: () -> bool
+      def updated_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
       def updated_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -288,28 +318,93 @@ class User < ::ApplicationRecord
       def restore_updated_at!: () -> void
 
       def clear_updated_at_change: () -> void
+
+      def updated_at_before_type_cast: () -> ::Time
+
+      def updated_at_for_database: () -> ::Time
     end
 
-    module GeneratedAssociationMethods
+    module ::User::Confirmation::GeneratedAliasAttributeMethods
+      include ::User::Confirmation::GeneratedAttributeMethods
+
+      alias id_value id
+
+      alias id_value= id=
+
+      alias id_value? id?
+
+      alias id_value_changed? id_changed?
+
+      alias id_value_change id_change
+
+      alias id_value_will_change! id_will_change!
+
+      alias id_value_was id_was
+
+      alias id_value_previously_changed? id_previously_changed?
+
+      alias id_value_previous_change id_previous_change
+
+      alias id_value_previously_was id_previously_was
+
+      alias id_value_before_last_save id_before_last_save
+
+      alias id_value_change_to_be_saved id_change_to_be_saved
+
+      alias id_value_in_database id_in_database
+
+      alias saved_change_to_id_value saved_change_to_id
+
+      alias saved_change_to_id_value? saved_change_to_id?
+
+      alias will_save_change_to_id_value? will_save_change_to_id?
+
+      alias restore_id_value! restore_id!
+
+      alias clear_id_value_change clear_id_change
+
+      alias id_value_before_type_cast id_before_type_cast
+
+      alias id_value_for_database id_for_database
     end
 
-    module GeneratedRelationMethods
+    module ::User::Confirmation::GeneratedAssociationMethods
     end
 
-    class ActiveRecord_Relation < ::ActiveRecord::Relation
-      include ::User::Confirmation::GeneratedRelationMethods
-      include ::_ActiveRecord_Relation[::User::Confirmation, ::Integer]
+    module ::User::Confirmation::GeneratedRelationMethods
+    end
+
+    class ::User::Confirmation::ActiveRecord_Relation < ::ActiveRecord::Relation
       include ::Enumerable[::User::Confirmation]
-    end
-
-    class ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
       include ::User::Confirmation::GeneratedRelationMethods
-      include ::_ActiveRecord_Relation[::User::Confirmation, ::Integer]
+      include ::ActiveRecord::Relation::Methods[::User::Confirmation, ::Integer]
     end
-    extend ::_ActiveRecord_Relation_ClassMethods[::User::Confirmation, ::User::Confirmation::ActiveRecord_Relation, ::Integer]
 
-    include GeneratedAttributeMethods
+    class ::User::Confirmation::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+      include ::Enumerable[::User::Confirmation]
+      include ::User::Confirmation::GeneratedRelationMethods
+      include ::ActiveRecord::Relation::Methods[::User::Confirmation, ::Integer]
 
-    include GeneratedAssociationMethods
+      def build: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::User::Confirmation
+               | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::User::Confirmation]
+      def create: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::User::Confirmation
+                | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::User::Confirmation]
+      def create!: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::User::Confirmation
+                 | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::User::Confirmation]
+      def reload: () -> ::Array[::User::Confirmation]
+
+      def replace: (::Array[::User::Confirmation]) -> void
+      def delete: (*::User::Confirmation | ::Integer) -> ::Array[::User::Confirmation]
+      def destroy: (*::User::Confirmation | ::Integer) -> ::Array[::User::Confirmation]
+      def <<: (*::User::Confirmation | ::Array[::User::Confirmation]) -> self
+      def prepend: (*::User::Confirmation | ::Array[::User::Confirmation]) -> self
+    end
+    extend ::ActiveRecord::Base::ClassMethods[::User::Confirmation, ::User::Confirmation::ActiveRecord_Relation, ::Integer]
+
+    include ::User::Confirmation::GeneratedAttributeMethods
+
+    include ::User::Confirmation::GeneratedAliasAttributeMethods
+
+    include ::User::Confirmation::GeneratedAssociationMethods
   end
 end

@@ -1,12 +1,14 @@
-class PostDraft < ::ApplicationRecord
-  module GeneratedAttributeMethods
+# resolve-type-names: false
+
+class ::PostDraft < ::ApplicationRecord
+  module ::PostDraft::GeneratedAttributeMethods
     def id: () -> ::Integer
 
     def id=: (::Integer) -> ::Integer
 
     def id?: () -> bool
 
-    def id_changed?: () -> bool
+    def id_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def id_change: () -> [ ::Integer?, ::Integer? ]
 
@@ -14,7 +16,7 @@ class PostDraft < ::ApplicationRecord
 
     def id_was: () -> ::Integer?
 
-    def id_previously_changed?: () -> bool
+    def id_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def id_previous_change: () -> ::Array[::Integer?]?
 
@@ -36,13 +38,17 @@ class PostDraft < ::ApplicationRecord
 
     def clear_id_change: () -> void
 
-    def content: () -> ::String?
+    def id_before_type_cast: () -> ::Integer
 
-    def content=: (::String?) -> ::String?
+    def id_for_database: () -> ::Integer
+
+    def content: () -> ::String
+
+    def content=: (::String) -> ::String
 
     def content?: () -> bool
 
-    def content_changed?: () -> bool
+    def content_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
     def content_change: () -> [ ::String?, ::String? ]
 
@@ -50,7 +56,7 @@ class PostDraft < ::ApplicationRecord
 
     def content_was: () -> ::String?
 
-    def content_previously_changed?: () -> bool
+    def content_previously_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
     def content_previous_change: () -> ::Array[::String?]?
 
@@ -72,13 +78,17 @@ class PostDraft < ::ApplicationRecord
 
     def clear_content_change: () -> void
 
+    def content_before_type_cast: () -> ::String
+
+    def content_for_database: () -> ::String
+
     def created_at: () -> ::ActiveSupport::TimeWithZone
 
     def created_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
 
     def created_at?: () -> bool
 
-    def created_at_changed?: () -> bool
+    def created_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def created_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -86,7 +96,7 @@ class PostDraft < ::ApplicationRecord
 
     def created_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-    def created_at_previously_changed?: () -> bool
+    def created_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def created_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -108,13 +118,17 @@ class PostDraft < ::ApplicationRecord
 
     def clear_created_at_change: () -> void
 
+    def created_at_before_type_cast: () -> ::Time
+
+    def created_at_for_database: () -> ::Time
+
     def post_id: () -> ::Integer?
 
     def post_id=: (::Integer?) -> ::Integer?
 
     def post_id?: () -> bool
 
-    def post_id_changed?: () -> bool
+    def post_id_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def post_id_change: () -> [ ::Integer?, ::Integer? ]
 
@@ -122,7 +136,7 @@ class PostDraft < ::ApplicationRecord
 
     def post_id_was: () -> ::Integer?
 
-    def post_id_previously_changed?: () -> bool
+    def post_id_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def post_id_previous_change: () -> ::Array[::Integer?]?
 
@@ -144,13 +158,17 @@ class PostDraft < ::ApplicationRecord
 
     def clear_post_id_change: () -> void
 
+    def post_id_before_type_cast: () -> ::Integer?
+
+    def post_id_for_database: () -> ::Integer?
+
     def title: () -> ::String
 
     def title=: (::String) -> ::String
 
     def title?: () -> bool
 
-    def title_changed?: () -> bool
+    def title_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
     def title_change: () -> [ ::String?, ::String? ]
 
@@ -158,7 +176,7 @@ class PostDraft < ::ApplicationRecord
 
     def title_was: () -> ::String?
 
-    def title_previously_changed?: () -> bool
+    def title_previously_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
     def title_previous_change: () -> ::Array[::String?]?
 
@@ -180,13 +198,17 @@ class PostDraft < ::ApplicationRecord
 
     def clear_title_change: () -> void
 
+    def title_before_type_cast: () -> ::String
+
+    def title_for_database: () -> ::String
+
     def updated_at: () -> ::ActiveSupport::TimeWithZone
 
     def updated_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
 
     def updated_at?: () -> bool
 
-    def updated_at_changed?: () -> bool
+    def updated_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def updated_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -194,7 +216,7 @@ class PostDraft < ::ApplicationRecord
 
     def updated_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-    def updated_at_previously_changed?: () -> bool
+    def updated_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
     def updated_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -216,13 +238,17 @@ class PostDraft < ::ApplicationRecord
 
     def clear_updated_at_change: () -> void
 
+    def updated_at_before_type_cast: () -> ::Time
+
+    def updated_at_for_database: () -> ::Time
+
     def user_id: () -> ::Integer
 
     def user_id=: (::Integer) -> ::Integer
 
     def user_id?: () -> bool
 
-    def user_id_changed?: () -> bool
+    def user_id_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def user_id_change: () -> [ ::Integer?, ::Integer? ]
 
@@ -230,7 +256,7 @@ class PostDraft < ::ApplicationRecord
 
     def user_id_was: () -> ::Integer?
 
-    def user_id_previously_changed?: () -> bool
+    def user_id_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
     def user_id_previous_change: () -> ::Array[::Integer?]?
 
@@ -251,27 +277,92 @@ class PostDraft < ::ApplicationRecord
     def restore_user_id!: () -> void
 
     def clear_user_id_change: () -> void
+
+    def user_id_before_type_cast: () -> ::Integer
+
+    def user_id_for_database: () -> ::Integer
   end
 
-  module GeneratedAssociationMethods
+  module ::PostDraft::GeneratedAliasAttributeMethods
+    include ::PostDraft::GeneratedAttributeMethods
+
+    alias id_value id
+
+    alias id_value= id=
+
+    alias id_value? id?
+
+    alias id_value_changed? id_changed?
+
+    alias id_value_change id_change
+
+    alias id_value_will_change! id_will_change!
+
+    alias id_value_was id_was
+
+    alias id_value_previously_changed? id_previously_changed?
+
+    alias id_value_previous_change id_previous_change
+
+    alias id_value_previously_was id_previously_was
+
+    alias id_value_before_last_save id_before_last_save
+
+    alias id_value_change_to_be_saved id_change_to_be_saved
+
+    alias id_value_in_database id_in_database
+
+    alias saved_change_to_id_value saved_change_to_id
+
+    alias saved_change_to_id_value? saved_change_to_id?
+
+    alias will_save_change_to_id_value? will_save_change_to_id?
+
+    alias restore_id_value! restore_id!
+
+    alias clear_id_value_change clear_id_change
+
+    alias id_value_before_type_cast id_before_type_cast
+
+    alias id_value_for_database id_for_database
   end
 
-  module GeneratedRelationMethods
+  module ::PostDraft::GeneratedAssociationMethods
   end
 
-  class ActiveRecord_Relation < ::ActiveRecord::Relation
-    include ::PostDraft::GeneratedRelationMethods
-    include ::_ActiveRecord_Relation[::PostDraft, ::Integer]
+  module ::PostDraft::GeneratedRelationMethods
+  end
+
+  class ::PostDraft::ActiveRecord_Relation < ::ActiveRecord::Relation
     include ::Enumerable[::PostDraft]
-  end
-
-  class ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
     include ::PostDraft::GeneratedRelationMethods
-    include ::_ActiveRecord_Relation[::PostDraft, ::Integer]
+    include ::ActiveRecord::Relation::Methods[::PostDraft, ::Integer]
   end
-  extend ::_ActiveRecord_Relation_ClassMethods[::PostDraft, ::PostDraft::ActiveRecord_Relation, ::Integer]
 
-  include GeneratedAttributeMethods
+  class ::PostDraft::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+    include ::Enumerable[::PostDraft]
+    include ::PostDraft::GeneratedRelationMethods
+    include ::ActiveRecord::Relation::Methods[::PostDraft, ::Integer]
+
+    def build: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::PostDraft
+             | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::PostDraft]
+    def create: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::PostDraft
+              | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::PostDraft]
+    def create!: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::PostDraft
+               | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::PostDraft]
+    def reload: () -> ::Array[::PostDraft]
+
+    def replace: (::Array[::PostDraft]) -> void
+    def delete: (*::PostDraft | ::Integer) -> ::Array[::PostDraft]
+    def destroy: (*::PostDraft | ::Integer) -> ::Array[::PostDraft]
+    def <<: (*::PostDraft | ::Array[::PostDraft]) -> self
+    def prepend: (*::PostDraft | ::Array[::PostDraft]) -> self
+  end
+  extend ::ActiveRecord::Base::ClassMethods[::PostDraft, ::PostDraft::ActiveRecord_Relation, ::Integer]
+
+  include ::PostDraft::GeneratedAttributeMethods
+
+  include ::PostDraft::GeneratedAliasAttributeMethods
 
   def user: () -> ::User
   def user=: (::User?) -> ::User?
@@ -286,5 +377,5 @@ class PostDraft < ::ApplicationRecord
   def create_post: (untyped) -> ::Post
   def create_post!: (untyped) -> ::Post
 
-  include GeneratedAssociationMethods
+  include ::PostDraft::GeneratedAssociationMethods
 end
