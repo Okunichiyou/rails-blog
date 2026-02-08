@@ -47,3 +47,7 @@ node_modules/
 
 # Ignore mcp files
 .serena/
+
+# Terraform
+terraform/**/.terraform/
+terraform/**/.envrc
