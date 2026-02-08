@@ -1,0 +1,9 @@
+development:
+  client_id: <%= ENV.fetch("GOOGLE_AUTH_CLIENT_ID", "") %>
+  client_secret: <%= ENV.fetch("GOOGLE_AUTH_CLIENT_SECRET", "") %>
+production:
+  client_id: <%= ENV.fetch("GOOGLE_AUTH_CLIENT_ID") { Rails.application.credentials.dig(:google_auth, :client_id) } %>
+  client_secret: <%= ENV.fetch("GOOGLE_AUTH_CLIENT_SECRET") { Rails.application.credentials.dig(:google_auth, :client_secret) } %>
+test:
+  client_id: test_id
+  client_secret: test_secret
