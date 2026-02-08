@@ -1,13 +1,15 @@
-class User < ::ApplicationRecord
-  class DatabaseAuthentication < ::ApplicationRecord
-    module GeneratedAttributeMethods
+# resolve-type-names: false
+
+class ::User < ::ApplicationRecord
+  class ::User::DatabaseAuthentication < ::ApplicationRecord
+    module ::User::DatabaseAuthentication::GeneratedAttributeMethods
       def id: () -> ::Integer
 
       def id=: (::Integer) -> ::Integer
 
       def id?: () -> bool
 
-      def id_changed?: () -> bool
+      def id_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
       def id_change: () -> [ ::Integer?, ::Integer? ]
 
@@ -15,7 +17,7 @@ class User < ::ApplicationRecord
 
       def id_was: () -> ::Integer?
 
-      def id_previously_changed?: () -> bool
+      def id_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
       def id_previous_change: () -> ::Array[::Integer?]?
 
@@ -37,13 +39,17 @@ class User < ::ApplicationRecord
 
       def clear_id_change: () -> void
 
+      def id_before_type_cast: () -> ::Integer
+
+      def id_for_database: () -> ::Integer
+
       def created_at: () -> ::ActiveSupport::TimeWithZone
 
       def created_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
 
       def created_at?: () -> bool
 
-      def created_at_changed?: () -> bool
+      def created_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
       def created_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -51,7 +57,7 @@ class User < ::ApplicationRecord
 
       def created_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-      def created_at_previously_changed?: () -> bool
+      def created_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
       def created_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -73,13 +79,17 @@ class User < ::ApplicationRecord
 
       def clear_created_at_change: () -> void
 
+      def created_at_before_type_cast: () -> ::Time
+
+      def created_at_for_database: () -> ::Time
+
       def email: () -> ::String
 
       def email=: (::String) -> ::String
 
       def email?: () -> bool
 
-      def email_changed?: () -> bool
+      def email_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
       def email_change: () -> [ ::String?, ::String? ]
 
@@ -87,7 +97,7 @@ class User < ::ApplicationRecord
 
       def email_was: () -> ::String?
 
-      def email_previously_changed?: () -> bool
+      def email_previously_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
       def email_previous_change: () -> ::Array[::String?]?
 
@@ -109,13 +119,17 @@ class User < ::ApplicationRecord
 
       def clear_email_change: () -> void
 
+      def email_before_type_cast: () -> ::String
+
+      def email_for_database: () -> ::String
+
       def encrypted_password: () -> ::String
 
       def encrypted_password=: (::String) -> ::String
 
       def encrypted_password?: () -> bool
 
-      def encrypted_password_changed?: () -> bool
+      def encrypted_password_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
       def encrypted_password_change: () -> [ ::String?, ::String? ]
 
@@ -123,7 +137,7 @@ class User < ::ApplicationRecord
 
       def encrypted_password_was: () -> ::String?
 
-      def encrypted_password_previously_changed?: () -> bool
+      def encrypted_password_previously_changed?: (?from: ::String?, ?to: ::String?) -> bool
 
       def encrypted_password_previous_change: () -> ::Array[::String?]?
 
@@ -145,13 +159,17 @@ class User < ::ApplicationRecord
 
       def clear_encrypted_password_change: () -> void
 
+      def encrypted_password_before_type_cast: () -> ::String
+
+      def encrypted_password_for_database: () -> ::String
+
       def updated_at: () -> ::ActiveSupport::TimeWithZone
 
       def updated_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
 
       def updated_at?: () -> bool
 
-      def updated_at_changed?: () -> bool
+      def updated_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
       def updated_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
 
@@ -159,7 +177,7 @@ class User < ::ApplicationRecord
 
       def updated_at_was: () -> ::ActiveSupport::TimeWithZone?
 
-      def updated_at_previously_changed?: () -> bool
+      def updated_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
 
       def updated_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
 
@@ -181,13 +199,17 @@ class User < ::ApplicationRecord
 
       def clear_updated_at_change: () -> void
 
+      def updated_at_before_type_cast: () -> ::Time
+
+      def updated_at_for_database: () -> ::Time
+
       def user_id: () -> ::Integer
 
       def user_id=: (::Integer) -> ::Integer
 
       def user_id?: () -> bool
 
-      def user_id_changed?: () -> bool
+      def user_id_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
       def user_id_change: () -> [ ::Integer?, ::Integer? ]
 
@@ -195,7 +217,7 @@ class User < ::ApplicationRecord
 
       def user_id_was: () -> ::Integer?
 
-      def user_id_previously_changed?: () -> bool
+      def user_id_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
 
       def user_id_previous_change: () -> ::Array[::Integer?]?
 
@@ -216,27 +238,172 @@ class User < ::ApplicationRecord
       def restore_user_id!: () -> void
 
       def clear_user_id_change: () -> void
+
+      def user_id_before_type_cast: () -> ::Integer
+
+      def user_id_for_database: () -> ::Integer
+
+      def failed_attempts: () -> ::Integer
+
+      def failed_attempts=: (::Integer) -> ::Integer
+
+      def failed_attempts?: () -> bool
+
+      def failed_attempts_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
+
+      def failed_attempts_change: () -> [ ::Integer?, ::Integer? ]
+
+      def failed_attempts_will_change!: () -> void
+
+      def failed_attempts_was: () -> ::Integer?
+
+      def failed_attempts_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
+
+      def failed_attempts_previous_change: () -> ::Array[::Integer?]?
+
+      def failed_attempts_previously_was: () -> ::Integer?
+
+      def failed_attempts_before_last_save: () -> ::Integer?
+
+      def failed_attempts_change_to_be_saved: () -> ::Array[::Integer?]?
+
+      def failed_attempts_in_database: () -> ::Integer?
+
+      def saved_change_to_failed_attempts: () -> ::Array[::Integer?]?
+
+      def saved_change_to_failed_attempts?: () -> bool
+
+      def will_save_change_to_failed_attempts?: () -> bool
+
+      def restore_failed_attempts!: () -> void
+
+      def clear_failed_attempts_change: () -> void
+
+      def failed_attempts_before_type_cast: () -> ::Integer
+
+      def failed_attempts_for_database: () -> ::Integer
+
+      def locked_at: () -> ::ActiveSupport::TimeWithZone?
+
+      def locked_at=: (::ActiveSupport::TimeWithZone?) -> ::ActiveSupport::TimeWithZone?
+
+      def locked_at?: () -> bool
+
+      def locked_at_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
+
+      def locked_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
+
+      def locked_at_will_change!: () -> void
+
+      def locked_at_was: () -> ::ActiveSupport::TimeWithZone?
+
+      def locked_at_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
+
+      def locked_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+      def locked_at_previously_was: () -> ::ActiveSupport::TimeWithZone?
+
+      def locked_at_before_last_save: () -> ::ActiveSupport::TimeWithZone?
+
+      def locked_at_change_to_be_saved: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+      def locked_at_in_database: () -> ::ActiveSupport::TimeWithZone?
+
+      def saved_change_to_locked_at: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+      def saved_change_to_locked_at?: () -> bool
+
+      def will_save_change_to_locked_at?: () -> bool
+
+      def restore_locked_at!: () -> void
+
+      def clear_locked_at_change: () -> void
+
+      def locked_at_before_type_cast: () -> ::Time?
+
+      def locked_at_for_database: () -> ::Time?
     end
 
-    module GeneratedAssociationMethods
+    module ::User::DatabaseAuthentication::GeneratedAliasAttributeMethods
+      include ::User::DatabaseAuthentication::GeneratedAttributeMethods
+
+      alias id_value id
+
+      alias id_value= id=
+
+      alias id_value? id?
+
+      alias id_value_changed? id_changed?
+
+      alias id_value_change id_change
+
+      alias id_value_will_change! id_will_change!
+
+      alias id_value_was id_was
+
+      alias id_value_previously_changed? id_previously_changed?
+
+      alias id_value_previous_change id_previous_change
+
+      alias id_value_previously_was id_previously_was
+
+      alias id_value_before_last_save id_before_last_save
+
+      alias id_value_change_to_be_saved id_change_to_be_saved
+
+      alias id_value_in_database id_in_database
+
+      alias saved_change_to_id_value saved_change_to_id
+
+      alias saved_change_to_id_value? saved_change_to_id?
+
+      alias will_save_change_to_id_value? will_save_change_to_id?
+
+      alias restore_id_value! restore_id!
+
+      alias clear_id_value_change clear_id_change
+
+      alias id_value_before_type_cast id_before_type_cast
+
+      alias id_value_for_database id_for_database
     end
 
-    module GeneratedRelationMethods
+    module ::User::DatabaseAuthentication::GeneratedAssociationMethods
     end
 
-    class ActiveRecord_Relation < ::ActiveRecord::Relation
-      include ::User::DatabaseAuthentication::GeneratedRelationMethods
-      include ::_ActiveRecord_Relation[::User::DatabaseAuthentication, ::Integer]
+    module ::User::DatabaseAuthentication::GeneratedRelationMethods
+    end
+
+    class ::User::DatabaseAuthentication::ActiveRecord_Relation < ::ActiveRecord::Relation
       include ::Enumerable[::User::DatabaseAuthentication]
-    end
-
-    class ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
       include ::User::DatabaseAuthentication::GeneratedRelationMethods
-      include ::_ActiveRecord_Relation[::User::DatabaseAuthentication, ::Integer]
+      include ::ActiveRecord::Relation::Methods[::User::DatabaseAuthentication, ::Integer]
     end
-    extend ::_ActiveRecord_Relation_ClassMethods[::User::DatabaseAuthentication, ::User::DatabaseAuthentication::ActiveRecord_Relation, ::Integer]
 
-    include GeneratedAttributeMethods
+    class ::User::DatabaseAuthentication::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+      include ::Enumerable[::User::DatabaseAuthentication]
+      include ::User::DatabaseAuthentication::GeneratedRelationMethods
+      include ::ActiveRecord::Relation::Methods[::User::DatabaseAuthentication, ::Integer]
+
+      def build: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::User::DatabaseAuthentication
+               | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::User::DatabaseAuthentication]
+      def create: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::User::DatabaseAuthentication
+                | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::User::DatabaseAuthentication]
+      def create!: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::User::DatabaseAuthentication
+                 | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::User::DatabaseAuthentication]
+      def reload: () -> ::Array[::User::DatabaseAuthentication]
+
+      def replace: (::Array[::User::DatabaseAuthentication]) -> void
+      def delete: (*::User::DatabaseAuthentication | ::Integer) -> ::Array[::User::DatabaseAuthentication]
+      def destroy: (*::User::DatabaseAuthentication | ::Integer) -> ::Array[::User::DatabaseAuthentication]
+      def <<: (*::User::DatabaseAuthentication | ::Array[::User::DatabaseAuthentication]) -> self
+      def prepend: (*::User::DatabaseAuthentication | ::Array[::User::DatabaseAuthentication]) -> self
+    end
+    extend ::ActiveRecord::Base::ClassMethods[::User::DatabaseAuthentication, ::User::DatabaseAuthentication::ActiveRecord_Relation, ::Integer]
+
+    include ::User::DatabaseAuthentication::GeneratedAttributeMethods
+
+    include ::User::DatabaseAuthentication::GeneratedAliasAttributeMethods
 
     def user: () -> ::User
     def user=: (::User?) -> ::User?
@@ -245,6 +412,6 @@ class User < ::ApplicationRecord
     def create_user: (untyped) -> ::User
     def create_user!: (untyped) -> ::User
 
-    include GeneratedAssociationMethods
+    include ::User::DatabaseAuthentication::GeneratedAssociationMethods
   end
 end

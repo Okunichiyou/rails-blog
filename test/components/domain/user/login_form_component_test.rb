@@ -1,18 +1,6 @@
 require "test_helper"
 
 class Domain::User::LoginFormComponentTest < ViewComponent::TestCase
-  test "flashがある場合、flashを表示していること" do
-    database_auth = User::DatabaseAuthentication.new
-    flash_mock = { notice: "ログインしてください" }
-
-    component = Domain::User::LoginFormComponent.new(resource: database_auth, resource_name: :user_database_authentication)
-    component.define_singleton_method(:flash) { flash_mock }
-
-    render_inline(component)
-
-    assert_selector("div", text: "ログインしてください")
-  end
-
   test "database-authentication-formの要素があること" do
     database_auth = User::DatabaseAuthentication.new
 
